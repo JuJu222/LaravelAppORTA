@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DonorController;
+use App\Http\Controllers\NeedController;
 use App\Http\Controllers\RecipientController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -31,13 +33,29 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::middleware('role:1')->group(function () {
-
+        Route::resource('recipients', RecipientController::class)->except([
+            'index', 'show'
+        ]);
+        Route::resource('donors', DonorController::class)->except([
+            'show', 'edit', 'update'
+        ]);
+        Route::resource('needs', NeedController::class);
     });
 
     Route::middleware('role:1,2')->group(function () {
-
+        Route::resource('recipients', RecipientController::class)->only([
+            'index'
+        ]);
+        Route::resource('donors', DonorController::class)->only([
+            'show', 'edit', 'update'
+        ]);
     });
-    Route::resource('recipients', RecipientController::class);
+
+    Route::middleware('role:1,2,3')->group(function () {
+        Route::resource('recipients', RecipientController::class)->only([
+            'show'
+        ]);
+    });
 });
 
 require __DIR__.'/auth.php';
