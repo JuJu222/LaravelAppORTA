@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RecipientController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,5 +28,16 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth'])->group(function () {
+    Route::middleware('role:1')->group(function () {
+
+    });
+
+    Route::middleware('role:1,2')->group(function () {
+
+    });
+    Route::resource('recipients', RecipientController::class);
+});
 
 require __DIR__.'/auth.php';
