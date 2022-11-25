@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DisabilityController;
 use App\Http\Controllers\DonorController;
 use App\Http\Controllers\NeedController;
 use App\Http\Controllers\RecipientController;
@@ -55,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('recipients', RecipientController::class)->only([
             'show'
         ]);
+        Route::resource('disabilities', DisabilityController::class);
     });
 });
 
