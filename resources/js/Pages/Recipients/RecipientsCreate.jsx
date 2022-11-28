@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Inertia} from "@inertiajs/inertia";
 
-export default function DisabilityCreate(props) {
+export default function DisabilitiesCreate(props) {
     const [values, setValues] = useState({
     })
 
@@ -16,20 +16,20 @@ export default function DisabilityCreate(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        Inertia.put(route('disabilities.update', props.disability.id), values)
+        Inertia.post(route('disabilities.store'), values)
     }
 
     return (
         <form onSubmit={handleSubmit}>
             <div className="mb-6">
                 <label htmlFor="disability" className="block mb-2 text-sm font-medium text-gray-900 ">Disability</label>
-                <input type="text" id="disability" name="disability" onChange={handleChange} defaultValue={props.disability.disability}
+                <input type="text" id="disability" name="disability" onChange={handleChange}
                        className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
                        placeholder="Disability" required />
             </div>
             <div className="mb-6">
                 <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
-                <input type="text" id="description" name="description" onChange={handleChange} defaultValue={props.disability.description}
+                <input type="text" id="description" name="description" onChange={handleChange}
                        className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
                        placeholder="Description" required />
             </div>

@@ -19,7 +19,7 @@ class DisabilityController extends Controller
     {
         $disabilities = Disability::query()->get();
 
-        return Inertia::render('Disability/Disability', compact('disabilities'));
+        return Inertia::render('Disabilities/Disabilities', compact('disabilities'));
     }
 
     /**
@@ -29,7 +29,7 @@ class DisabilityController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Disability/DisabilityCreate');
+        return Inertia::render('Disabilities/DisabilitiesCreate');
     }
 
     /**
@@ -69,7 +69,7 @@ class DisabilityController extends Controller
     {
         $disability = Disability::query()->find($id);
 
-        return Inertia::render('Disability/DisabilityEdit', compact('disability'));
+        return Inertia::render('Disabilities/DisabilitiesEdit', compact('disability'));
     }
 
     /**
@@ -97,6 +97,8 @@ class DisabilityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Disability::query()->find($id)->delete();
+
+        return Redirect::route('disabilities.index');
     }
 }

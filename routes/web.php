@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DisabilityController;
 use App\Http\Controllers\DonorController;
+use App\Http\Controllers\NeedCategoryController;
 use App\Http\Controllers\NeedController;
 use App\Http\Controllers\RecipientController;
 use Illuminate\Foundation\Application;
@@ -57,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
             'show'
         ]);
         Route::resource('disabilities', DisabilityController::class);
+        Route::resource('need_categories', NeedCategoryController::class);
     });
 });
 

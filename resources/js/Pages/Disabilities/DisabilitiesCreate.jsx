@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Inertia} from "@inertiajs/inertia";
 
-export default function DisabilityCreate(props) {
+export default function DisabilitiesCreate(props) {
     const [values, setValues] = useState({
     })
 

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Recipient;
+use App\Models\NeedCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
-class RecipientController extends Controller
+class NeedCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class RecipientController extends Controller
      */
     public function index()
     {
-        $recipients = Recipient::query()->get();
+        $needCategories = NeedCategory::query()->get();
 
-        return Inertia::render('Recipients/Recipients', compact('recipients'));
+        return Inertia::render('NeedCategories/NeedCategories', compact('needCategories'));
     }
 
     /**
@@ -28,7 +28,7 @@ class RecipientController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Recipients/RecipientsCreate');
+        return Inertia::render('NeedCategories/NeedCategoriesCreate');
     }
 
     /**
@@ -39,27 +39,11 @@ class RecipientController extends Controller
      */
     public function store(Request $request)
     {
-        Recipient::query()->create([
-            'name' => $request->input('name'),
-            'nik' => $request->input('nik'),
-            'gender' => $request->input('gender'),
-            'birthplace' => $request->input('birthplace'),
-            'birthdate' => $request->input('birthdate'),
-            'school' => $request->input('school'),
-            'class' => $request->input('class'),
-            'siblings' => $request->input('siblings'),
-            'child_no' => $request->input('child_no'),
-            'address' => $request->input('address'),
-            'city' => $request->input('city'),
-            'phone' => $request->input('phone'),
-            'parent_id' => $request->input('parent_id'),
-            'birth_certificate' => $request->input('birth_certificate'),
-            'kartu_keluarga' => $request->input('kartu_keluarga'),
-            'note' => $request->input('note'),
-            'is_active' => $request->input('is_active'),
+        NeedCategory::query()->create([
+            'category' => $request->input('category'),
         ]);
 
-        return Redirect::route('recipients.index');
+        return Redirect::route('need_categories.index');
     }
 
     /**
@@ -70,7 +54,9 @@ class RecipientController extends Controller
      */
     public function show($id)
     {
-        //
+        $needCategory = NeedCategory::query()->find($id);
+
+        return Inertia::render('NeedCategories/NeedCategoriesEdit', compact('needCategory'));
     }
 
     /**
@@ -81,7 +67,9 @@ class RecipientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $needCategory = NeedCategory::query()->find($id);
+
+        return Inertia::render('NeedCategories/NeedCategoriesEdit', compact('needCategory'));
     }
 
     /**
@@ -93,7 +81,11 @@ class RecipientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        NeedCategory::query()->find($id)->update([
+            'category' => $request->input('category'),
+        ]);
+
+        return Redirect::route('need_categories.index');
     }
 
     /**
@@ -104,6 +96,8 @@ class RecipientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        NeedCategory::query()->find($id)->delete();
+
+        return Redirect::route('need_categories.index');
     }
 }

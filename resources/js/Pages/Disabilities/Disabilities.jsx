@@ -1,11 +1,14 @@
 import React from 'react';
 import {Inertia} from "@inertiajs/inertia";
 
-export default function Disability(props) {
+export default function Disabilities(props) {
 
-    function handleDelete(e) {
-        e.stopPropagation();
-        // Inertia.delete(route("user.manajemen.destroy", user.id));
+    function handleCreate() {
+        Inertia.get(route("disabilities.create"));
+    }
+
+    function handleDelete(id) {
+        Inertia.delete(route("disabilities.destroy", id));
     }
 
     function handleEdit(id) {
@@ -71,7 +74,7 @@ export default function Disability(props) {
                                 </td>
                                 <td>
                                     <div className="flex items-center justify-center text-center">
-                                        <button onClick={(e) => handleDelete(e)}
+                                        <button onClick={(e) => handleDelete(disability.id)}
                                                 className="text-sm leading-none text-white py-3 px-5 bg-red-700 rounded transition hover:bg-red-800 focus:outline-none">Hapus
                                         </button>
                                     </div>
@@ -82,6 +85,7 @@ export default function Disability(props) {
                     )}
                     </tbody>
                 </table>
+                <button className="mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs" onClick={handleCreate}>Create</button>
             </div>
         </>
     );
