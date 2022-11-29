@@ -1,5 +1,7 @@
 import React from 'react';
 import {Inertia} from "@inertiajs/inertia";
+import Authenticated from "@/Layouts/AuthenticatedLayout";
+import {Link} from "@inertiajs/inertia-react";
 
 export default function Recipients(props) {
 
@@ -16,7 +18,11 @@ export default function Recipients(props) {
     }
 
     return (
-        <>
+        <Authenticated
+            auth={props.auth}
+            errors={props.errors}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Recipients</h2>}
+        >
             <div className='overflow-auto'>
                 <table className="w-full whitespace-nowrap">
                     <tbody>
@@ -57,6 +63,13 @@ export default function Recipients(props) {
                                 </td>
                                 <td>
                                     <div className="flex items-center justify-center text-center">
+                                        <Link href={route('recipients.show', recipient.id)}
+                                                className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition">Lihat
+                                        </Link>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className="flex items-center justify-center text-center">
                                         <button onClick={(e) => handleEdit(recipient.id)}
                                                 className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition">Ubah
                                         </button>
@@ -75,8 +88,11 @@ export default function Recipients(props) {
                     )}
                     </tbody>
                 </table>
-                <button className="mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs" onClick={handleCreate}>Create</button>
+                <button
+                    className="mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs"
+                    onClick={handleCreate}>Create
+                </button>
             </div>
-        </>
+        </Authenticated>
     );
 }

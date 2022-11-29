@@ -24,6 +24,18 @@ export default function Authenticated({ auth, header, children }) {
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
                                 </NavLink>
+                                <NavLink href={route('need_categories.index')} active={route().current('need_categories.index')}>
+                                    Need Categories
+                                </NavLink>
+                                <NavLink href={route('disabilities.index')} active={route().current('disabilities.index')}>
+                                    Disabilities
+                                </NavLink>
+                                <NavLink href={route('recipients.index')} active={route().current('recipients.index')}>
+                                    Recipients
+                                </NavLink>
+                                <NavLink href={route('donors.index')} active={route().current('donors.index')}>
+                                    Donors
+                                </NavLink>
                             </div>
                         </div>
 
@@ -36,7 +48,7 @@ export default function Authenticated({ auth, header, children }) {
                                                 type="button"
                                                 className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
-                                                {auth.user.name}
+                                                {auth.user.username}
 
                                                 <svg
                                                     className="ml-2 -mr-0.5 h-4 w-4"
@@ -93,6 +105,18 @@ export default function Authenticated({ auth, header, children }) {
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('need_categories.index')} active={route().current('need_categories.index')}>
+                            Need Categories
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('disabilities.index')} active={route().current('disabilities.index')}>
+                            Disabilities
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('recipients.index')} active={route().current('recipients.index')}>
+                            Recipients
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('donors.index')} active={route().current('donors.index')}>
+                            Donors
                         </ResponsiveNavLink>
                     </div>
 

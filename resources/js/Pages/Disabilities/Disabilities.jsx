@@ -1,5 +1,6 @@
 import React from 'react';
 import {Inertia} from "@inertiajs/inertia";
+import Authenticated from "@/Layouts/AuthenticatedLayout";
 
 export default function Disabilities(props) {
 
@@ -16,7 +17,11 @@ export default function Disabilities(props) {
     }
 
     return (
-        <>
+        <Authenticated
+            auth={props.auth}
+            errors={props.errors}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Disabilities</h2>}
+        >
             <div className='overflow-auto'>
                 <table className="w-full whitespace-nowrap">
                     <tbody>
@@ -87,6 +92,6 @@ export default function Disabilities(props) {
                 </table>
                 <button className="mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs" onClick={handleCreate}>Create</button>
             </div>
-        </>
+        </Authenticated>
     );
 }

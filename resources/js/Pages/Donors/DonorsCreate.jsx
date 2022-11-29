@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Inertia} from "@inertiajs/inertia";
 
-export default function DisabilitiesCreate(props) {
+export default function DonorsCreate(props) {
     const [values, setValues] = useState({
     })
 
@@ -16,7 +16,7 @@ export default function DisabilitiesCreate(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        Inertia.post(route('recipients.store'), values)
+        Inertia.post(route('donors.store'), values)
     }
 
     return (
@@ -41,50 +41,26 @@ export default function DisabilitiesCreate(props) {
                            placeholder="Description" />
                 </div>
                 <div className="mb-6">
-                    <label htmlFor="nik" className="block mb-2 text-sm font-medium text-gray-900 ">NIK</label>
-                    <input type="text" id="nik" name="nik" onChange={handleChange}
+                    <label htmlFor="name_alias" className="block mb-2 text-sm font-medium text-gray-900 ">Name Alias</label>
+                    <input type="text" id="name_alias" name="name_alias" onChange={handleChange}
                            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
                            placeholder="Description" />
                 </div>
                 <div className="mb-6">
-                    <label htmlFor="gender" className="block mb-2 text-sm font-medium text-gray-900 ">Gender</label>
-                    <input type="text" id="gender" name="gender" onChange={handleChange}
+                    <label htmlFor="ktp" className="block mb-2 text-sm font-medium text-gray-900 ">KTP</label>
+                    <input type="text" id="ktp" name="ktp" onChange={handleChange}
                            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
                            placeholder="Description" />
                 </div>
                 <div className="mb-6">
-                    <label htmlFor="birthplace" className="block mb-2 text-sm font-medium text-gray-900 ">Birthplace</label>
-                    <input type="text" id="birthplace" name="birthplace" onChange={handleChange}
+                    <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 ">Phone</label>
+                    <input type="text" id="phone" name="phone" onChange={handleChange}
                            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
                            placeholder="Description" />
                 </div>
                 <div className="mb-6">
-                    <label htmlFor="birthdate" className="block mb-2 text-sm font-medium text-gray-900 ">Birthdate</label>
-                    <input type="date" id="birthdate" name="birthdate" onChange={handleChange}
-                           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
-                           placeholder="Description" />
-                </div>
-                <div className="mb-6">
-                    <label htmlFor="school" className="block mb-2 text-sm font-medium text-gray-900 ">School</label>
-                    <input type="text" id="school" name="school" onChange={handleChange}
-                           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
-                           placeholder="Description" />
-                </div>
-                <div className="mb-6">
-                    <label htmlFor="class" className="block mb-2 text-sm font-medium text-gray-900 ">Class</label>
-                    <input type="text" id="class" name="class" onChange={handleChange}
-                           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
-                           placeholder="Description" />
-                </div>
-                <div className="mb-6">
-                    <label htmlFor="siblings" className="block mb-2 text-sm font-medium text-gray-900 ">Siblings</label>
-                    <input type="text" id="siblings" name="siblings" onChange={handleChange}
-                           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
-                           placeholder="Description" />
-                </div>
-                <div className="mb-6">
-                    <label htmlFor="child_no" className="block mb-2 text-sm font-medium text-gray-900 ">Child No</label>
-                    <input type="text" id="child_no" name="child_no" onChange={handleChange}
+                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
+                    <input type="text" id="email" name="email" onChange={handleChange}
                            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
                            placeholder="Description" />
                 </div>
@@ -101,38 +77,14 @@ export default function DisabilitiesCreate(props) {
                            placeholder="Description" />
                 </div>
                 <div className="mb-6">
-                    <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 ">Phone</label>
-                    <input type="text" id="phone" name="phone" onChange={handleChange}
-                           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
-                           placeholder="Description" />
-                </div>
-                <div className="mb-6">
-                    <label htmlFor="parent_id" className="block mb-2 text-sm font-medium text-gray-900 ">Parent ID</label>
-                    <input type="text" id="parent_id" name="parent_id" onChange={handleChange}
-                           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
-                           placeholder="Description" />
-                </div>
-                <div className="mb-6">
-                    <label htmlFor="birth_certificate" className="block mb-2 text-sm font-medium text-gray-900 ">Birth Certificate</label>
-                    <input type="text" id="birth_certificate" name="birth_certificate" onChange={handleChange}
-                           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
-                           placeholder="Description" />
-                </div>
-                <div className="mb-6">
-                    <label htmlFor="kartu_keluarga" className="block mb-2 text-sm font-medium text-gray-900 ">Kartu Keluarga</label>
-                    <input type="text" id="kartu_keluarga" name="kartu_keluarga" onChange={handleChange}
-                           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
-                           placeholder="Description" />
-                </div>
-                <div className="mb-6">
                     <label htmlFor="note" className="block mb-2 text-sm font-medium text-gray-900 ">Note</label>
                     <input type="text" id="note" name="note" onChange={handleChange}
                            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
                            placeholder="Description" />
                 </div>
                 <div className="mb-6">
-                    <label htmlFor="is_active" className="block mb-2 text-sm font-medium text-gray-900 ">Is Active</label>
-                    <input type="text" id="is_active" name="is_active" onChange={handleChange}
+                    <label htmlFor="photo" className="block mb-2 text-sm font-medium text-gray-900 ">Photo</label>
+                    <input type="text" id="photo" name="photo" onChange={handleChange}
                            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400"
                            placeholder="Description" />
                 </div>

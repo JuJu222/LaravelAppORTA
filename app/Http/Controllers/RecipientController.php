@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recipient;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -39,7 +40,7 @@ class RecipientController extends Controller
      */
     public function store(Request $request)
     {
-        Recipient::query()->create([
+        $recipient = Recipient::query()->create([
             'name' => $request->input('name'),
             'nik' => $request->input('nik'),
             'gender' => $request->input('gender'),
@@ -59,6 +60,13 @@ class RecipientController extends Controller
             'is_active' => $request->input('is_active'),
         ]);
 
+        User::query()->create([
+            'username' => $request->input('username'),
+            'user_id' => $recipient->id,
+            'role_id' => 3,
+            'password' => bcrypt($request->input('password')),
+        ]);
+
         return Redirect::route('recipients.index');
     }
 
@@ -70,7 +78,9 @@ class RecipientController extends Controller
      */
     public function show($id)
     {
-        //
+        $recipient = Recipient::query()->find($id);
+
+        return Inertia::render('Recipients/RecipientsShow', compact('recipient'));
     }
 
     /**
@@ -81,7 +91,11 @@ class RecipientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $recipient = Recipient::query()->find($id);
+        $user = User::query()->where('role_id', 3)
+                    ->where('user_id', $id)->first();
+
+        return Inertia::render('Recipients/RecipientsEdit', compact('recipient', 'user'));
     }
 
     /**
@@ -93,7 +107,31 @@ class RecipientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Recipient::query()->find($id)->update([
+            'name' => $request->input('name'),
+            'nik' => $request->input('nik'),
+            'gender' => $request->input('gender'),
+            'birthplace' => $request->input('birthplace'),
+            'birthdate' => $request->input('birthdate'),
+            'school' => $request->input('school'),
+            'class' => $request->input('class'),
+            'siblings' => $request->input('siblings'),
+            'child_no' => $request->input('child_no'),
+            'address' => $request->input('address'),
+            'city' => $request->input('city'),
+            'phone' => $request->input('phone'),
+            'parent_id' => $request->input('parent_id'),
+            'birth_certificate' => $request->input('birth_certificate'),
+            'kartu_keluarga' => $request->input('kartu_keluarga'),
+            'note' => $request->input('note'),
+            'is_active' => $request->input('is_active'),
+        ]);
+        User::query()->where('role_id', 3)->where('user_id', $id)->update([
+            'username' => $request->input('username'),
+            'password' => bcrypt($request->input('password')),
+        ]);
+
+        return Redirect::route('recipients.index');
     }
 
     /**
@@ -104,6 +142,9 @@ class RecipientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Recipient::query()->find($id)->delete();
+        User::query()->where('role_id', 3)->where('user_id', $id)->delete();
+
+        return Redirect::route('recipients.index');
     }
 }
