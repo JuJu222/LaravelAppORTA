@@ -59,6 +59,9 @@ Route::middleware(['auth'])->group(function () {
         ]);
         Route::resource('disabilities', DisabilityController::class);
         Route::resource('need_categories', NeedCategoryController::class);
+        Route::get('/home', function () {
+            return Inertia::render('Home');
+        });
     });
 });
 
