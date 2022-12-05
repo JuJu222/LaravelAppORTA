@@ -4,7 +4,7 @@ import {Head, Link} from '@inertiajs/inertia-react';
 
 export default function RecipientCard({meal}) {
     return (
-        <Link href={route('recipients.show', 1)}>
+        <Link className='flex justify-center' href={route('recipients.show', 1)}>
             <div className="max-w-sm rounded-lg overflow-hidden shadow-lg hover:scale-[102%] transition bg-red">
                 <img className="w-full" src="/img/anak.png" alt="Sunset in the mountains" />
                 <div className="px-3 pt-1">
