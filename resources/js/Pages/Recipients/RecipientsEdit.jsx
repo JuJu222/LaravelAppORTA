@@ -163,7 +163,7 @@ export default function RecipientsEdit(props) {
                     </div>
                 </div>
                 <button type="submit"
-                        className="text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center">Submit
+                        className="text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-medium rounded-lg text-sm px-5 py-3 text-center">Submit
                 </button>
             </form>
         </Authenticated>
