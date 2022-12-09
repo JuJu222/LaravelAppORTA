@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
+import RecipientCardAdmin from "@/Components/RecipientCardAdmin";
 
 export default function DisabilitiesCreate(props) {
-    const [values, setValues] = useState({
-    })
+    const [values, setValues] = useState({})
+    const [filteredParents, setFilteredParents] = useState(props.parents)
+    const [selectedParents, setSelectedParents] = useState([])
 
     function handleChange(e) {
         const key = e.target.name;
@@ -15,9 +17,27 @@ export default function DisabilitiesCreate(props) {
         }))
     }
 
+    function handleFilterParents(e) {
+        setFilteredParents(props.parents.filter(parent => parent.name.toLowerCase().includes(e.target.value.toLowerCase())))
+    }
+
     function handleSubmit(e) {
         e.preventDefault()
         Inertia.post(route('recipients.store'), values)
+    }
+
+    function handleSelectParent(parent) {
+        let parentExists = false;
+
+        for (const selectedParent of selectedParents) {
+            if (selectedParent.id === parent.id) {
+                parentExists = true;
+            }
+        }
+
+        if (!parentExists) {
+            setSelectedParents(prevState => [...prevState, parent])
+        }
     }
 
     return (
@@ -27,6 +47,39 @@ export default function DisabilitiesCreate(props) {
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Tambah Penerima Dana</h2>}
         >
             <form onSubmit={handleSubmit}>
+                <div>
+                    <h2 className='font-semibold text-lg mb-2'>Pilih Orang Tua</h2>
+                    <div className="mb-6">
+                        <input type="text" id="username" name="username" onChange={handleFilterParents}
+                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                               placeholder="Cari orang tua" />
+                        <div className='mt-2 max-h-40 overflow-auto px-1'>
+                            {filteredParents.map((parent, i) =>
+                                <div className='hover:bg-gray-100 transition px-3 py-3 mb-1 text-xs cursor-pointer shadow' onClick={(e) => handleSelectParent(parent)}>{parent.name}</div>
+                            )}
+                        </div>
+                    </div>
+                    <h3 className='font-semibold text-md mb-2'>Orang Tua yang Telah Dipilih</h3>
+                    <div className="grid gap-x-6 md:grid-cols-2">
+                        {selectedParents.map((parent, i) =>
+                            <>
+                                <div className="mb-6">
+                                    <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 ">Orang Tua 1</label>
+                                    <input type="text" id="username" name="username" onChange={handleChange}
+                                           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                           placeholder="Disability" />
+                                </div>
+                                <div className="mb-6">
+                                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
+                                    <input type="text" id="password" name="password" onChange={handleChange}
+                                           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                           placeholder="Description" />
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </div>
+                <h2 className='font-semibold text-lg mb-2'>Isi Data Penerima Dana</h2>
                 <div className="grid gap-x-6 md:grid-cols-2">
                     <div className="mb-6">
                         <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 ">Username</label>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ParentModel;
 use App\Models\Recipient;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,7 +30,9 @@ class RecipientController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Recipients/RecipientsCreate');
+        $parents = ParentModel::query()->get();
+
+        return Inertia::render('Recipients/RecipientsCreate', compact('parents'));
     }
 
     /**
