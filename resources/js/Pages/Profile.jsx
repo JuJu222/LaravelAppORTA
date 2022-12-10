@@ -10,7 +10,7 @@ export default function Profile(props) {
             <div className='w-full px-6'>
                 <div className='max-w-6xl mx-auto'>
                     <Link href={route('logout')} method="post" as="button"
-                            className="text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-medium rounded-lg text-sm px-5 py-3 text-center">Logout
+                            className="text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Logout
                     </Link>
                 </div>
             </div>

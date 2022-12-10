@@ -4,6 +4,7 @@ use App\Http\Controllers\DisabilityController;
 use App\Http\Controllers\DonorController;
 use App\Http\Controllers\NeedCategoryController;
 use App\Http\Controllers\NeedController;
+use App\Http\Controllers\ParentController;
 use App\Http\Controllers\RecipientController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +60,7 @@ Route::middleware(['auth'])->group(function () {
         ]);
         Route::resource('disabilities', DisabilityController::class);
         Route::resource('need_categories', NeedCategoryController::class);
+        Route::resource('parents', ParentController::class);
         Route::get('/home', function () {
             return Inertia::render('Home');
         });

@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             ParentSeeder::class,
-            RecipientSeeder::class
+            RecipientSeeder::class,
+            RelationshipSeeder::class
         ]);
     }
 }

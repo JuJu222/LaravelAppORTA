@@ -27,7 +27,6 @@ return new class extends Migration
             $table->text('address');
             $table->string('city');
             $table->string('phone');
-            $table->foreignId('parent_id');
             $table->string('birth_certificate');
             $table->string('kartu_keluarga');
             $table->text('note');

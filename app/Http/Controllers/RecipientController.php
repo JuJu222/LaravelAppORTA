@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ParentModel;
 use App\Models\Recipient;
+use App\Models\Relationship;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -31,8 +32,9 @@ class RecipientController extends Controller
     public function create()
     {
         $parents = ParentModel::query()->get();
+        $relationships = Relationship::query()->get();
 
-        return Inertia::render('Recipients/RecipientsCreate', compact('parents'));
+        return Inertia::render('Recipients/RecipientsCreate', compact('parents', 'relationships'));
     }
 
     /**
@@ -56,12 +58,15 @@ class RecipientController extends Controller
             'address' => $request->input('address'),
             'city' => $request->input('city'),
             'phone' => $request->input('phone'),
-            'parent_id' => $request->input('parent_id'),
             'birth_certificate' => $request->input('birth_certificate'),
             'kartu_keluarga' => $request->input('kartu_keluarga'),
             'note' => $request->input('note'),
             'is_active' => $request->input('is_active'),
         ]);
+
+        foreach ($request->parents as $parent) {
+            $recipient->parents()->attach($parent['id'], ['relationship_id' => $parent['relationship_id']]);
+        }
 
         User::query()->create([
             'username' => $request->input('username'),

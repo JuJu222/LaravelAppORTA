@@ -28,4 +28,10 @@ class Recipient extends Model
         'note',
         'is_active',
     ];
+
+
+    public function parents()
+    {
+        return $this->belongsToMany(ParentModel::class, 'recipients_parents', 'recipient_id', 'parent_id')->withPivot(['relationship_id']);
+    }
 }
