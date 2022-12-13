@@ -1,8 +1,7 @@
 import React from 'react';
-import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link } from '@inertiajs/inertia-react';
 
-export default function BottomNavbar() {
+export default function NeedCard() {
     return (
         <nav id="bottom-navigation" className="block fixed inset-x-0 bottom-0 z-10 bg-red shadow">
             <div id="tabs" className="flex justify-between">

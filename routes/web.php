@@ -6,6 +6,7 @@ use App\Http\Controllers\NeedCategoryController;
 use App\Http\Controllers\NeedController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\RecipientController;
+use App\Models\Recipient;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -62,7 +63,9 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('need_categories', NeedCategoryController::class);
         Route::resource('parents', ParentController::class);
         Route::get('/home', function () {
-            return Inertia::render('Home');
+            $recipients = Recipient::query()->with(['parents', 'disabilities'])->get();
+
+            return Inertia::render('Home', compact('recipients'));
         });
         Route::get('/profile', function () {
             return Inertia::render('Profile');

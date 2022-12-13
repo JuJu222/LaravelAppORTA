@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Disability;
+use App\Models\NeedCategory;
 use App\Models\ParentModel;
 use App\Models\Recipient;
 use App\Models\Relationship;
@@ -32,9 +34,10 @@ class RecipientController extends Controller
     public function create()
     {
         $parents = ParentModel::query()->get();
+        $disabilities = Disability::query()->get();
         $relationships = Relationship::query()->get();
 
-        return Inertia::render('Recipients/RecipientsCreate', compact('parents', 'relationships'));
+        return Inertia::render('Recipients/RecipientsCreate', compact('parents', 'relationships', 'disabilities'));
     }
 
     /**
@@ -68,6 +71,13 @@ class RecipientController extends Controller
             $recipient->parents()->attach($parent['id'], ['relationship_id' => $parent['relationship_id']]);
         }
 
+        foreach ($request->disabilities as $disability) {
+            $recipient->disabilities()->attach($disability['id'], [
+                'amount' => $disability['amount'],
+                'due_date' => $disability['due_date'],
+            ]);
+        }
+
         User::query()->create([
             'username' => $request->input('username'),
             'user_id' => $recipient->id,
@@ -86,9 +96,14 @@ class RecipientController extends Controller
      */
     public function show($id)
     {
-        $recipient = Recipient::query()->find($id);
+        $recipient = Recipient::query()->with(['parents', 'disabilities'])->find($id);
+        $recipients = Recipient::query()->with(['parents', 'disabilities'])->limit(3)->get();
 
-        return Inertia::render('Recipients/RecipientsShow', compact('recipient'));
+        foreach ($recipient->disabilities as $disability) {
+            $disability['collected'] = 90000;
+        }
+
+        return Inertia::render('Recipients/RecipientsShow', compact('recipient', 'recipients'));
     }
 
     /**
