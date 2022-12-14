@@ -5,7 +5,10 @@ import RecipientCardAdmin from "@/Components/RecipientCardAdmin";
 import {Link} from "@inertiajs/inertia-react";
 
 export default function DisabilitiesCreate(props) {
-    const [values, setValues] = useState({})
+    const [values, setValues] = useState({
+        gender: 'laki-laki',
+        is_active: 1
+    })
 
     const [filteredParents, setFilteredParents] = useState(props.parents)
     const [selectedParents, setSelectedParents] = useState([])
@@ -15,11 +18,20 @@ export default function DisabilitiesCreate(props) {
 
     function handleChange(e) {
         const key = e.target.name;
-        const value = e.target.value
-        setValues(values => ({
-            ...values,
-            [key]: value,
-        }))
+
+        if (e.target.files !== null) {
+            const file = e.target.files[0]
+            setValues(values => ({
+                ...values,
+                [key]: file
+            }))
+        } else {
+            const value = e.target.value
+            setValues(values => ({
+                ...values,
+                [key]: value,
+            }))
+        }
     }
 
     function handleFilterParents(e) {
@@ -260,9 +272,24 @@ export default function DisabilitiesCreate(props) {
                     </div>
                     <div className="mb-6">
                         <label htmlFor="gender" className="block mb-2 text-sm font-medium text-gray-900 ">Gender</label>
-                        <input type="text" id="gender" name="gender" onChange={handleChange}
-                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Description" />
+                        <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-300 sm:flex">
+                            <li className="w-full border-b border-gray-300 sm:border-b-0 sm:border-r">
+                                <div className="flex items-center pl-3">
+                                    <input id="gender_laki_laki" type="radio" value="laki-laki" name="gender" onChange={handleChange} checked
+                                           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2" />
+                                    <label htmlFor="gender_laki_laki"
+                                           className="py-2.5 ml-2 w-full text-sm font-medium text-gray-900">Laki-Laki</label>
+                                </div>
+                            </li>
+                            <li className="w-full">
+                                <div className="flex items-center pl-3">
+                                    <input id="gender_perempuan" type="radio" value="perempuan" name="gender" onChange={handleChange}
+                                           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2" />
+                                    <label htmlFor="gender_perempuan"
+                                           className="py-2.5 ml-2 w-full text-sm font-medium text-gray-900">Perempuan</label>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                     <div className="mb-6">
                         <label htmlFor="birthplace" className="block mb-2 text-sm font-medium text-gray-900 ">Birthplace</label>
@@ -326,7 +353,7 @@ export default function DisabilitiesCreate(props) {
                     </div>
                     <div className="mb-6">
                         <label htmlFor="kartu_keluarga" className="block mb-2 text-sm font-medium text-gray-900 ">Kartu Keluarga</label>
-                        <input type="text" id="kartu_keluarga" name="kartu_keluarga" onChange={handleChange}
+                        <input type="file" id="kartu_keluarga" name="kartu_keluarga" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                placeholder="Description" />
                     </div>
@@ -338,10 +365,26 @@ export default function DisabilitiesCreate(props) {
                     </div>
                     <div className="mb-6">
                         <label htmlFor="is_active" className="block mb-2 text-sm font-medium text-gray-900 ">Is Active</label>
-                        <input type="text" id="is_active" name="is_active" onChange={handleChange}
-                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Description" />
+                        <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-300 sm:flex">
+                            <li className="w-full border-b border-gray-300 sm:border-b-0 sm:border-r">
+                                <div className="flex items-center pl-3">
+                                    <input id="is_active_aktif" type="radio" value="1" name="is_active" onChange={handleChange} checked
+                                           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2" />
+                                    <label htmlFor="is_active_aktif"
+                                           className="py-2.5 ml-2 w-full text-sm font-medium text-gray-900">Aktif</label>
+                                </div>
+                            </li>
+                            <li className="w-full">
+                                <div className="flex items-center pl-3">
+                                    <input id="is_active_tidak_aktif" type="radio" value="0" name="is_active" onChange={handleChange}
+                                           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2" />
+                                    <label htmlFor="is_active_tidak_aktif"
+                                           className="py-2.5 ml-2 w-full text-sm font-medium text-gray-900">Tidak Aktif</label>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
+
                 </div>
                 <button type="submit"
                         className="text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Submit

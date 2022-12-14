@@ -27,8 +27,8 @@ return new class extends Migration
             $table->text('address');
             $table->string('city');
             $table->string('phone');
-            $table->string('birth_certificate');
-            $table->string('kartu_keluarga');
+            $table->string('birth_certificate')->nullable();
+            $table->string('kartu_keluarga')->nullable();
             $table->text('note');
             $table->boolean('is_active');
             $table->timestamps();

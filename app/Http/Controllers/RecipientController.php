@@ -8,6 +8,7 @@ use App\Models\ParentModel;
 use App\Models\Recipient;
 use App\Models\Relationship;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -62,10 +63,21 @@ class RecipientController extends Controller
             'city' => $request->input('city'),
             'phone' => $request->input('phone'),
             'birth_certificate' => $request->input('birth_certificate'),
-            'kartu_keluarga' => $request->input('kartu_keluarga'),
             'note' => $request->input('note'),
             'is_active' => $request->input('is_active'),
         ]);
+
+        if ($request->hasfile('kartu_keluarga')) {
+            $this->validate($request, [
+                'photo' => 'mimes:jpeg,png,bmp,tiff',
+            ]);
+            $file = $request->file('kartu_keluarga');
+            $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path() . '/img/recipients/kartu_keluarga/', $name);
+            $recipient->update([
+                'kartu_keluarga' => $name,
+            ]);
+        }
 
         foreach ($request->parents as $parent) {
             $recipient->parents()->attach($parent['id'], ['relationship_id' => $parent['relationship_id']]);
