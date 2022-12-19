@@ -34,15 +34,26 @@ class RecipientController extends Controller
      */
     public function create()
     {
-        $parents = ParentModel::query()->get();
-        $disabilities = Disability::query()->get();
-        $relationships = Relationship::query()->get();
-
-        return Inertia::render('Recipients/RecipientsCreate', compact('parents', 'relationships', 'disabilities'));
+        return Inertia::render('Recipients/RecipientsCreate');
     }
 
-    public function createParents() {
+    public function addParents($id) {
+        $recipient = Recipient::query()->find($id);
+        $parents = ParentModel::query()->get();
+        $relationships = Relationship::query()->get();
+        $selectedParents = $recipient->parents;
 
+        return Inertia::render('Recipients/RecipientsAddParents',
+            compact('recipient', 'parents', 'relationships', 'selectedParents'));
+    }
+
+    public function addDisabilities($id) {
+        $recipient = Recipient::query()->find($id);
+        $disabilities = Disability::query()->get();
+        $selectedDisabilities = $recipient->disabilities;
+
+        return Inertia::render('Recipients/RecipientsAddDisabilities',
+            compact('recipient', 'disabilities', 'selectedDisabilities'));
     }
 
     /**
@@ -83,23 +94,39 @@ class RecipientController extends Controller
             ]);
         }
 
-        foreach ($request->parents as $parent) {
-            $recipient->parents()->attach($parent['id'], ['relationship_id' => $parent['relationship_id']]);
-        }
-
-        foreach ($request->disabilities as $disability) {
-            $recipient->disabilities()->attach($disability['id'], [
-                'amount' => $disability['amount'],
-                'due_date' => $disability['due_date'],
-            ]);
-        }
-
         User::query()->create([
             'username' => $request->input('username'),
             'user_id' => $recipient->id,
             'role_id' => 3,
             'password' => bcrypt($request->input('password')),
         ]);
+
+        return Redirect::route('recipients.parents.add', $recipient->id);
+    }
+
+    public function storeParents(Request $request, $id)
+    {
+        $recipient = Recipient::query()->find($id);
+        $recipient->parents()->detach();
+
+        foreach ($request->parents as $parent) {
+            $recipient->parents()->attach($parent['id'], ['relationship_id' => $parent['pivot']['relationship_id']]);
+        }
+
+        return Redirect::route('recipients.disabilities.add', $recipient->id);
+    }
+
+    public function storeDisabilities(Request $request, $id)
+    {
+        $recipient = Recipient::query()->find($id);
+        $recipient->disabilities()->detach();
+
+        foreach ($request->disabilities as $disability) {
+            $recipient->disabilities()->attach($disability['id'], [
+                'amount' => $disability['pivot']['amount'],
+                'due_date' => $disability['pivot']['due_date'],
+            ]);
+        }
 
         return Redirect::route('recipients.index');
     }

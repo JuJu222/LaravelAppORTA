@@ -37,6 +37,10 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::middleware('role:1')->group(function () {
+        Route::get('/recipients/{id}/parents', [RecipientController::class, 'addParents'])->name('recipients.parents.add');
+        Route::get('/recipients/{id}/disabilities', [RecipientController::class, 'addDisabilities'])->name('recipients.disabilities.add');
+        Route::post('/recipients/{id}/parents', [RecipientController::class, 'storeParents'])->name('recipients.parents.store');
+        Route::post('/recipients/{id}/disabilities', [RecipientController::class, 'storeDisabilities'])->name('recipients.disabilities.store');
         Route::resource('recipients', RecipientController::class)->except([
             'index', 'show'
         ]);
