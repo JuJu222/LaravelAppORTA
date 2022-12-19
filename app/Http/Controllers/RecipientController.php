@@ -41,6 +41,10 @@ class RecipientController extends Controller
         return Inertia::render('Recipients/RecipientsCreate', compact('parents', 'relationships', 'disabilities'));
     }
 
+    public function createParents() {
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *
