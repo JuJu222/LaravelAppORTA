@@ -12,7 +12,7 @@ export default function RecipientCard({recipient}) {
     }
 
     return (
-        <Link className='flex justify-center' href={route('recipients.show', 1)}>
+        <Link className='flex justify-center' href={route('recipients.show', recipient.id)}>
             <div className="max-w-sm rounded-lg overflow-hidden shadow-lg hover:scale-[102%] transition bg-white">
                 <img className="w-full" src="/img/anak.png" alt="Sunset in the mountains" />
                 <div className="px-3 pt-1">
@@ -20,10 +20,10 @@ export default function RecipientCard({recipient}) {
                     <p className="text-gray-700 text-xs text-red">6 tahun</p>
                 </div>
                 <div className="px-3 pt-1">
-                    <span
-                        className="inline-block bg-pink rounded-full px-2 py-1 text-xs font-semibold text-white mr-2 mb-2">Autisme</span>
-                    <span
-                        className="inline-block bg-pink rounded-full px-2 py-1 text-xs font-semibold text-white mr-2 mb-2">Dyslexia</span>
+                    {recipient.disabilities.map((disability, i) =>
+                        <span
+                            className="inline-block bg-pink rounded-full px-2 py-1 text-xs font-semibold text-white mr-2 mb-2">{disability.disability}</span>
+                    )}
                 </div>
                 <div className='px-3 pb-2 flex gap-2'>
                     <Link href={route("recipients.edit", recipient.id)} className="w-1/2 bg-white transition duration-150 ease-in-out focus:outline-none hover:bg-gray-100 rounded text-black px-6 py-2 text-xs border flex justify-center items-center">

@@ -16,41 +16,41 @@ class NeedSeeder extends Seeder
     public function run()
     {
         DB::table('needs')->insert([
-            'disability_id' => 1,
+            'need_category_id' => 1,
             'recipient_id' => 1,
             'amount' => 100000,
             'due_date' => date('2022-9-5'),
         ]);
 
         DB::table('needs')->insert([
-            'disability_id' => 1,
+            'need_category_id' => 1,
             'recipient_id' => 2,
             'amount' => 100000,
             'due_date' => date('2022-9-5'),
         ]);
 
         DB::table('needs')->insert([
-            'disability_id' => 1,
+            'need_category_id' => 1,
             'recipient_id' => 3,
             'amount' => 100000,
             'due_date' => date('2022-9-5'),
         ]);
 
         DB::table('needs')->insert([
-            'disability_id' => 2,
+            'need_category_id' => 2,
             'recipient_id' => 4,
             'amount' => 100000,
             'due_date' => date('2022-9-5'),
         ]);
 
         DB::table('needs')->insert([
-            'disability_id' => 1,
+            'need_category_id' => 1,
             'recipient_id' => 5,
             'amount' => 100000,
             'due_date' => date('2022-9-5'),
         ]);
         DB::table('needs')->insert([
-            'disability_id' => 2,
+            'need_category_id' => 2,
             'recipient_id' => 5,
             'amount' => 200000,
             'due_date' => date('2022-9-5'),

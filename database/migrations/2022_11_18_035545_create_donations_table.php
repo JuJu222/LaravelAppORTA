@@ -23,10 +23,6 @@ return new class extends Migration
             $table->string('transfer_receipt');
             $table->date('accepted_date');
             $table->foreignId('accepted_by_admin_id')->nullable();
-            $table->date('delivered_date');
-            $table->string('delivered_photo');
-            $table->text('delivered_message');
-            $table->text('donor_response');
             $table->timestamps();
 
             $table->foreign('donor_id')

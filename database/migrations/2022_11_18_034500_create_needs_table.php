@@ -15,14 +15,17 @@ return new class extends Migration
     {
         Schema::create('needs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('disability_id');
+            $table->foreignId('need_category_id');
             $table->foreignId('recipient_id');
             $table->bigInteger('amount');
             $table->date('due_date');
+            $table->date('delivered_date')->nullable();
+            $table->string('delivered_photo')->nullable();
+            $table->text('delivered_message')->nullable();
             $table->timestamps();
 
-            $table->foreign('disability_id')
-                ->references('id')->on('disabilities')
+            $table->foreign('need_category_id')
+                ->references('id')->on('need_categories')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->foreign('recipient_id')

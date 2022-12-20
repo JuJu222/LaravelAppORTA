@@ -37,6 +37,12 @@ class Recipient extends Model
 
     public function disabilities()
     {
-        return $this->belongsToMany(Disability::class, 'needs', 'recipient_id', 'disability_id')->withPivot(['amount', 'due_date']);
+        return $this->belongsToMany(Disability::class, 'disabilities_recipients', 'recipient_id', 'disability_id');
+    }
+
+    public function needs()
+    {
+        return $this->belongsToMany(NeedCategory::class, 'needs', 'recipient_id',
+            'need_category_id')->withPivot(['id', 'amount', 'due_date', 'delivered_date', 'delivered_photo', 'delivered_message']);
     }
 }

@@ -16,11 +16,11 @@ class NeedCategorySeeder extends Seeder
     public function run()
     {
         DB::table('need_categories')->insert([
-            'category' => 'Dyslexia',
+            'category' => 'Biaya Sekolah SD',
         ]);
 
         DB::table('need_categories')->insert([
-            'category' => 'Autisme',
+            'category' => 'Operasi Mata',
         ]);
     }
 }

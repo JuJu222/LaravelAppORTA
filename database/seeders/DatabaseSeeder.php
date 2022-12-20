@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Recipient;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +25,8 @@ class DatabaseSeeder extends Seeder
             RecipientSeeder::class,
             RelationshipSeeder::class,
             NeedSeeder::class,
-            RecipientParentSeeder::class
+            RecipientParentSeeder::class,
+            RecipientDisabilitySeeder::class
         ]);
     }
 }

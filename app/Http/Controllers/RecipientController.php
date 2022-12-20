@@ -22,7 +22,7 @@ class RecipientController extends Controller
      */
     public function index()
     {
-        $recipients = Recipient::query()->get();
+        $recipients = Recipient::query()->with(['disabilities'])->get();
 
         return Inertia::render('Recipients/Recipients', compact('recipients'));
     }
@@ -54,6 +54,25 @@ class RecipientController extends Controller
 
         return Inertia::render('Recipients/RecipientsAddDisabilities',
             compact('recipient', 'disabilities', 'selectedDisabilities'));
+    }
+
+    public function addNeeds($id) {
+        $recipient = Recipient::query()->find($id);
+        $needs = NeedCategory::query()->get();
+        $selectedNeeds = $recipient->needs;
+
+        return Inertia::render('Recipients/RecipientsAddNeeds',
+            compact('recipient', 'needs', 'selectedNeeds'));
+    }
+
+    public function addDonation($recipientID, $needID) {
+        $recipient = Recipient::query()->with(['parents', 'disabilities', 'needs'])->find($recipientID);
+        $need = $recipient->needs()->where('needs.id', $needID)->first();
+
+        $need['collected'] = 90000;
+
+        return Inertia::render('Recipients/RecipientsDonate',
+            compact('recipient', 'need'));
     }
 
     /**
@@ -131,6 +150,36 @@ class RecipientController extends Controller
         return Redirect::route('recipients.index');
     }
 
+    public function storeNeeds(Request $request, $id)
+    {
+        $recipient = Recipient::query()->find($id);
+        $recipient->needs()->detach();
+
+        foreach ($request->needs as $need) {
+            $recipient->needs()->attach($need['id'], [
+                'amount' => $need['pivot']['amount'],
+                'due_date' => $need['pivot']['due_date'],
+            ]);
+        }
+
+        return Redirect::route('recipients.index');
+    }
+
+    public function storeDonation(Request $request, $recipientID, $needID)
+    {
+        $recipient = Recipient::query()->find($recipientID);
+        $recipient->needs()->attach();
+
+        foreach ($request->needs as $need) {
+            $recipient->needs()->attach($need['id'], [
+                'amount' => $need['pivot']['amount'],
+                'due_date' => $need['pivot']['due_date'],
+            ]);
+        }
+
+        return Redirect::route('recipients.index');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -139,11 +188,11 @@ class RecipientController extends Controller
      */
     public function show($id)
     {
-        $recipient = Recipient::query()->with(['parents', 'disabilities'])->find($id);
+        $recipient = Recipient::query()->with(['parents', 'disabilities', 'needs'])->find($id);
         $recipients = Recipient::query()->with(['parents', 'disabilities'])->limit(3)->get();
 
-        foreach ($recipient->disabilities as $disability) {
-            $disability['collected'] = 90000;
+        foreach ($recipient->needs as $need) {
+            $need['collected'] = 90000;
         }
 
         return Inertia::render('Recipients/RecipientsShow', compact('recipient', 'recipients'));
