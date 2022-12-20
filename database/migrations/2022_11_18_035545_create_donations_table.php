@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('bank_account');
             $table->date('transfer_date');
             $table->string('transfer_receipt');
-            $table->date('accepted_date');
+            $table->date('accepted_date')->nullable();
             $table->foreignId('accepted_by_admin_id')->nullable();
             $table->timestamps();
 
