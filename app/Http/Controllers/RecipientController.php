@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Disability;
+use App\Models\Donor;
 use App\Models\NeedCategory;
 use App\Models\ParentModel;
 use App\Models\Recipient;
@@ -10,6 +11,7 @@ use App\Models\Relationship;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -167,17 +169,15 @@ class RecipientController extends Controller
 
     public function storeDonation(Request $request, $recipientID, $needID)
     {
-        $recipient = Recipient::query()->find($recipientID);
-        $recipient->needs()->attach();
+        $donor = Donor::query()->where('user_id', Auth::id())->first();
+        $donor->donations()->attach($needID, [
+            'amount' => 0,
+            'bank_account' => '',
+            'transfer_date' => date('2022-9-5'),
+            'transfer_receipt' => '',
+        ]);
 
-        foreach ($request->needs as $need) {
-            $recipient->needs()->attach($need['id'], [
-                'amount' => $need['pivot']['amount'],
-                'due_date' => $need['pivot']['due_date'],
-            ]);
-        }
-
-        return Redirect::route('recipients.index');
+        return Redirect::route('recipients.show', $recipientID);
     }
 
     /**

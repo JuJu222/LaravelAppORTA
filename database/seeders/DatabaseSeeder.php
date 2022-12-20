@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             NeedCategorySeeder::class,
             DisabilitySeeder::class,
             RecipientSeeder::class,
+            DonorSeeder::class,
             RelationshipSeeder::class,
             NeedSeeder::class,
             RecipientParentSeeder::class,
