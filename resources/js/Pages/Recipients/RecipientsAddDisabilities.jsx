@@ -62,7 +62,7 @@ export default function DisabilitiesCreate(props) {
                         <input type="text" id="username" name="username" onChange={handleFilterDisabilities}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                placeholder="Cari wali anak" />
-                        <div className='mt-2 h-40 overflow-auto px-1'>
+                        <div className='mt-2 max-h-[20rem] overflow-auto px-1'>
                             {filteredDisabilities.map((disability, i) =>
                                 <div className='hover:bg-gray-100 transition rounded-lg px-3 py-3 mb-1 text-xs cursor-pointer shadow flex justify-between' onClick={(e) => handleSelectDisability(disability)}>
                                     <div>
@@ -83,7 +83,7 @@ export default function DisabilitiesCreate(props) {
                         </Link>
                     </div>
                     <h3 className='font-semibold text-md mb-2'>Disabilitas yang Telah Dipilih</h3>
-                    <div className='mt-2 h-40 overflow-auto px-1'>
+                    <div className='mt-2 max-h-[20rem] overflow-auto px-1'>
                         {selectedDisabilities.length === 0 ? (
                             <p className="font-medium text-gray-500 text-center leading-none my-12">Belum Ada Disabilitas yang Dipilih!</p>
                         ) : (
@@ -93,22 +93,20 @@ export default function DisabilitiesCreate(props) {
                                         <div className='w-1/3'>
                                             {disability.disability}
                                         </div>
-                                        <div>
-                                            <div className='flex items-center mb-2'>
-                                                <div className='mx-auto flex items-center gap-3'>
-                                                    <label htmlFor="amount" className="block mb-2 text-sm font-medium text-gray-900 ">Amount</label>
-                                                    <input type="number" id="amount" name="amount" onChange={(e) => handleInputAmount(e, i)}
-                                                           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                                           placeholder="Amount" defaultValue={disability.pivot.amount} />
-                                                </div>
+                                        <div className='flex items-center'>
+                                            <div className='mx-auto flex items-center gap-3'>
+                                                <label htmlFor="amount" className="block mb-2 text-sm font-medium text-gray-900 ">Amount</label>
+                                                <input type="number" id="amount" name="amount" onChange={(e) => handleInputAmount(e, i)}
+                                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                                       placeholder="Amount" defaultValue={disability.pivot.amount} />
                                             </div>
-                                            <div className='flex items-center'>
-                                                <div className='mx-auto flex items-center gap-3'>
-                                                    <label htmlFor="due_date" className="block mb-2 text-sm font-medium text-gray-900 ">Batas Waktu</label>
-                                                    <input type="date" id="due_date" name="due_date" onChange={(e) => handleInputDueDate(e, i)}
-                                                           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                                           placeholder="Due Date" defaultValue={disability.pivot.date} />
-                                                </div>
+                                        </div>
+                                        <div className='flex items-center'>
+                                            <div className='mx-auto flex items-center gap-3'>
+                                                <label htmlFor="due_date" className="block mb-2 text-sm font-medium text-gray-900 ">Batas Waktu</label>
+                                                <input type="date" id="due_date" name="due_date" onChange={(e) => handleInputDueDate(e, i)}
+                                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                                       placeholder="Due Date" defaultValue={disability.pivot.date} />
                                             </div>
                                         </div>
                                         <div className='w-1/3 flex justify-end'>

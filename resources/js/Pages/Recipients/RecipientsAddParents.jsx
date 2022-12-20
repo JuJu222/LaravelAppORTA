@@ -56,7 +56,7 @@ export default function RecipientsAddParents(props) {
                         <input type="text" id="username" name="username" onChange={handleFilterParents}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                placeholder="Cari wali anak" />
-                        <div className='mt-2 h-40 overflow-auto px-1'>
+                        <div className='mt-2 max-h-[20rem] overflow-auto px-1'>
                             {filteredParents.map((parent, i) =>
                                 <div className='hover:bg-gray-100 transition rounded-lg px-3 py-3 mb-1 text-xs cursor-pointer shadow flex justify-between' onClick={(e) => handleSelectParent(parent)}>
                                     <div>
@@ -77,7 +77,7 @@ export default function RecipientsAddParents(props) {
                         </Link>
                     </div>
                     <h3 className='font-semibold text-md mb-2'>Wali Anak yang Telah Dipilih</h3>
-                    <div className='mt-2 h-40 overflow-auto px-1'>
+                    <div className='mt-2 max-h-[20rem] overflow-auto px-1'>
                         {selectedParents.length === 0 ? (
                             <p className="font-medium text-gray-500 text-center leading-none my-12">Belum Ada Wali Anak yang Dipilih!</p>
                         ) : (
