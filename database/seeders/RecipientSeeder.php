@@ -16,6 +16,7 @@ class RecipientSeeder extends Seeder
     public function run()
     {
         DB::table('recipients')->insert([
+            'user_id' => 2,
             'name' => 'Recipient 1',
             'nik' => '',
             'gender' => 'laki-laki',
@@ -35,6 +36,7 @@ class RecipientSeeder extends Seeder
         ]);
 
         DB::table('recipients')->insert([
+            'user_id' => 3,
             'name' => 'Recipient 2',
             'nik' => '',
             'gender' => 'laki-laki',
@@ -54,6 +56,7 @@ class RecipientSeeder extends Seeder
         ]);
 
         DB::table('recipients')->insert([
+            'user_id' => 4,
             'name' => 'Recipient 3',
             'nik' => '',
             'gender' => 'laki-laki',
@@ -73,6 +76,7 @@ class RecipientSeeder extends Seeder
         ]);
 
         DB::table('recipients')->insert([
+            'user_id' => 5,
             'name' => 'Recipient 4',
             'nik' => '',
             'gender' => 'laki-laki',
@@ -92,6 +96,7 @@ class RecipientSeeder extends Seeder
         ]);
 
         DB::table('recipients')->insert([
+            'user_id' => 6,
             'name' => 'Recipient 5',
             'nik' => '',
             'gender' => 'laki-laki',
