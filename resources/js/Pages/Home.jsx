@@ -9,10 +9,10 @@ import RecipientCardAdmin from "@/Components/RecipientCardAdmin";
 export default function Home(props) {
     return (
         <div className='pb-20'>
-            <div className='bg-red w-full px-6'>
+            <div className='bg-red w-full px-4'>
                 <div className='max-w-6xl mx-auto'>
                     <div className='flex items-center gap-5'>
-                        <ApplicationLogo className="block h-9 w-auto"></ApplicationLogo>
+                        <ApplicationLogo white={true} className="block h-9 w-auto"></ApplicationLogo>
                         <div className="w-full">
                             <div className="relative">
                                 <svg
@@ -44,14 +44,18 @@ export default function Home(props) {
                     ) : (
                         ''
                     )}
-                    <div>
-                        <h2>Halo, Justin Jap</h2>
-                        <p>Anda telah berhasil membantu anak-anak sebanyak <h6>6 Kali</h6></p>
-                        <p>Anda telah berhasil membantu anak-anak sebanyak <h6>6 Kali</h6></p>
+                    <div className='flex justify-between items-end mt-5'>
+                        <div className='h-fit my-auto pb-5'>
+                            <h2 className='text-2xl text-white font-bold'>Halo, Justin Jap</h2>
+                            <p className='text-white text-sm mt-2'>Anda telah berhasil membantu anak-anak sebanyak <h6>6 Kali</h6></p>
+                        </div>
+                        <div>
+                            <img src="/img/home_element1.png" alt="" className='max-h-[20rem]'/>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className='w-full h-1/3 px-6'>
+            <div className='w-full h-1/3 px-4'>
                 <div className='max-w-6xl mx-auto'>
                     <div>
                         <h2>Yuk, mari kita bantu anak-anak! Klik salah satu anak untuk membantu</h2>

@@ -14,7 +14,7 @@ export default function RecipientsShow(props) {
                     <img className='h-52 w-full object-cover' src="/img/anak.png" alt=""/>
                 </div>
             </div>
-            <div className='w-full px-6'>
+            <div className='w-full px-4'>
                 <div className='max-w-6xl mx-auto mt-4'>
                     <div className='md:flex md:flex-row md:gap-5'>
                         <div className='hidden md:block'>

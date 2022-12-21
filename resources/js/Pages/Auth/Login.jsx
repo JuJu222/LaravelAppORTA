@@ -34,9 +34,14 @@ export default function Login({ status, canResetPassword }) {
         <GuestLayout>
             <Head title="Log in" />
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+            <div>
+                <img src="/img/login_element1.png" alt="" className='w-80 mx-auto'/>
+                <h1 className='text-3xl font-bold text-red mt-6'>Masuk</h1>
+            </div>
 
-            <form onSubmit={submit}>
+            {status && <div className="mb-4 font-medium text-sm text-green-600 mt-6">{status}</div>}
+
+            <form onSubmit={submit} className='mt-6'>
                 <div>
                     <InputLabel forInput="username" value="Username" />
 
