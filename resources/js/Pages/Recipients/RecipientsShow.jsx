@@ -22,7 +22,7 @@ export default function RecipientsShow(props) {
                         </div>
                         <div className='grow md:pt-4'>
                             <div className='flex flex-row justify-between'>
-                                <h2 className='text-red text-2xl font-bold'>Justinna Wadana</h2>
+                                <h2 className='text-red text-2xl font-bold'>{props.recipient.name}</h2>
                                 <h3 className='text-red text-2xl'>8 tahun</h3>
                             </div>
                             <div className="py-2">

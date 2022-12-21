@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@inertiajs/inertia-react';
+import {Link} from '@inertiajs/inertia-react';
 
 export default function NeedCard({need, recipientID, button}) {
     const formatter = new Intl.NumberFormat('de-DE');
@@ -12,7 +12,12 @@ export default function NeedCard({need, recipientID, button}) {
                     <p className='text-red text-sm'>Sampai <b>13 Februari 2023</b></p>
                     <div className='border border-red rounded-lg p-4 mt-1'>
                         <p className='text-red text-sm'>Donasi tersedia</p>
-                        <h4 className='text-red text-xl font-bold'>{'Rp' + formatter.format(need.pivot.amount - need.collected)}</h4>
+                        <h4 className='text-red text-xl font-bold'>{need.pivot.amount - need.collected <= 0 ? (
+                                'Dana Terpenuhi'
+                            ) : (
+                                'Rp' + formatter.format(need.pivot.amount - need.collected)
+                            )}
+                        </h4>
                         <h4 className='text-red text-xs'><b>{'Rp' +
                             formatter.format(need.collected)}</b> terkumpul dari <b>Rp{
                             formatter.format(need.pivot.amount)}</b></h4>
@@ -22,7 +27,8 @@ export default function NeedCard({need, recipientID, button}) {
                     <p className='text-red'>Kebutuhan Donasi</p>
                     <h3 className='font-bold text-2xl text-red text-center w-40'>{need.category}</h3>
                     {button ? (
-                        <Link href={route('recipients.donate.add', [recipientID, need.pivot.id])} className='flex items-center mt-1'>
+                        <Link href={route('recipients.donate.add', [recipientID, need.pivot.id])}
+                              className='flex items-center mt-1'>
                             <button
                                 className='bg-red text-white text-sm px-5 py-3 rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>
                                 Bantu Sekarang

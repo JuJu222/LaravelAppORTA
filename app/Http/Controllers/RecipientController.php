@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Disability;
+use App\Models\Donation;
 use App\Models\Donor;
 use App\Models\NeedCategory;
+use App\Models\Needs;
 use App\Models\ParentModel;
 use App\Models\Recipient;
 use App\Models\Relationship;
@@ -171,7 +173,7 @@ class RecipientController extends Controller
     {
         $donor = Donor::query()->where('user_id', Auth::id())->first();
         $donor->donations()->attach($needID, [
-            'amount' => 0,
+            'amount' => $request->amount,
             'bank_account' => '',
             'transfer_date' => date('2022-9-5'),
             'transfer_receipt' => '',
@@ -192,7 +194,7 @@ class RecipientController extends Controller
         $recipients = Recipient::query()->with(['parents', 'disabilities'])->limit(3)->get();
 
         foreach ($recipient->needs as $need) {
-            $need['collected'] = 90000;
+            $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)->sum('amount');
         }
 
         return Inertia::render('Recipients/RecipientsShow', compact('recipient', 'recipients'));
