@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('recipient_id');
             $table->foreignId('disability_id');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->timestamps();
 
             $table->foreign('recipient_id')

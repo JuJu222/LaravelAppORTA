@@ -36,18 +36,6 @@ export default function DisabilitiesCreate(props) {
         setSelectedDisabilities(selectedDisabilities.filter(disability => disability.id !== id));
     }
 
-    function handleInputAmount(e, i) {
-        let arr = selectedDisabilities
-        selectedDisabilities[i]['pivot']['amount'] = e.target.value
-        setSelectedDisabilities(arr);
-    }
-
-    function handleInputDueDate(e, i) {
-        let arr = selectedDisabilities
-        selectedDisabilities[i]['pivot']['due_date'] = e.target.value
-        setSelectedDisabilities(arr);
-    }
-
 
     return (
         <Authenticated
@@ -89,27 +77,11 @@ export default function DisabilitiesCreate(props) {
                         ) : (
                             selectedDisabilities.map((disability, i) =>
                                 <>
-                                    <div className='px-3 py-3 mb-1 rounded-lg text-sm shadow flex items-center'>
-                                        <div className='w-1/3'>
+                                    <div className='px-3 py-3 mb-1 rounded-lg text-sm shadow flex items-center justify-between'>
+                                        <div>
                                             {disability.disability}
                                         </div>
-                                        <div className='flex items-center'>
-                                            <div className='mx-auto flex items-center gap-3'>
-                                                <label htmlFor="amount" className="block mb-2 text-sm font-medium text-gray-900 ">Amount</label>
-                                                <input type="number" id="amount" name="amount" onChange={(e) => handleInputAmount(e, i)}
-                                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                                       placeholder="Amount" defaultValue={disability.pivot.amount} />
-                                            </div>
-                                        </div>
-                                        <div className='flex items-center'>
-                                            <div className='mx-auto flex items-center gap-3'>
-                                                <label htmlFor="due_date" className="block mb-2 text-sm font-medium text-gray-900 ">Batas Waktu</label>
-                                                <input type="date" id="due_date" name="due_date" onChange={(e) => handleInputDueDate(e, i)}
-                                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                                       placeholder="Due Date" defaultValue={disability.pivot.date} />
-                                            </div>
-                                        </div>
-                                        <div className='w-1/3 flex justify-end'>
+                                        <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                                                  className="bi bi-x cursor-pointer" viewBox="0 0 16 16" onClick={(e) => handleRemoveDisability(disability.id)}>
                                                 <path

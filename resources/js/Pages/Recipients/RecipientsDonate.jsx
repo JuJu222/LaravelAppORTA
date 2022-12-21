@@ -30,7 +30,7 @@ export default function RecipientsDonate(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        Inertia.post(route('recipients.donate.store', [props.recipient.id, props.need.id]), values)
+        Inertia.post(route('recipients.donate.store', [props.recipient.id, props.need.pivot.id]), values)
     }
 
     return (

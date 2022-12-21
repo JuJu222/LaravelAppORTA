@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('email');
             $table->text('address');
             $table->string('city');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->string('photo');
             $table->timestamps();
 

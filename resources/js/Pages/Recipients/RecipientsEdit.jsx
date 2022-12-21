@@ -18,7 +18,6 @@ export default function RecipientsEdit(props) {
         address: props.recipient.address,
         city: props.recipient.city,
         phone: props.recipient.phone,
-        parent_id: props.recipient.parent_id,
         birth_certificate: props.recipient.birth_certificate,
         kartu_keluarga: props.recipient.kartu_keluarga,
         note: props.recipient.note,
@@ -128,12 +127,6 @@ export default function RecipientsEdit(props) {
                     <div className="mb-6">
                         <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 ">Phone</label>
                         <input type="text" id="phone" name="phone" onChange={handleChange} defaultValue={props.recipient.phone}
-                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Description" />
-                    </div>
-                    <div className="mb-6">
-                        <label htmlFor="parent_id" className="block mb-2 text-sm font-medium text-gray-900 ">Parent ID</label>
-                        <input type="text" id="parent_id" name="parent_id" onChange={handleChange} defaultValue={props.recipient.parent_id}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                placeholder="Description" />
                     </div>

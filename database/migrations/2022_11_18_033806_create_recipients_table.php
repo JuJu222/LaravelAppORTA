@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('birth_certificate')->nullable();
             $table->string('kartu_keluarga')->nullable();
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->boolean('is_active');
             $table->timestamps();
 

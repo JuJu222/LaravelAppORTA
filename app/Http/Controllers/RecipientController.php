@@ -73,7 +73,7 @@ class RecipientController extends Controller
         $recipient = Recipient::query()->with(['parents', 'disabilities', 'needs'])->find($recipientID);
         $need = $recipient->needs()->where('needs.id', $needID)->first();
 
-        $need['collected'] = 90000;
+        $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)->sum('amount');
 
         return Inertia::render('Recipients/RecipientsDonate',
             compact('recipient', 'need'));
@@ -87,7 +87,14 @@ class RecipientController extends Controller
      */
     public function store(Request $request)
     {
+        $user = User::query()->create([
+            'username' => $request->input('username'),
+            'role_id' => 3,
+            'password' => bcrypt($request->input('password')),
+        ]);
+
         $recipient = Recipient::query()->create([
+            'user_id' => $user->id,
             'name' => $request->input('name'),
             'nik' => $request->input('nik'),
             'gender' => $request->input('gender'),
@@ -117,13 +124,6 @@ class RecipientController extends Controller
             ]);
         }
 
-        User::query()->create([
-            'username' => $request->input('username'),
-            'user_id' => $recipient->id,
-            'role_id' => 3,
-            'password' => bcrypt($request->input('password')),
-        ]);
-
         return Redirect::route('recipients.parents.add', $recipient->id);
     }
 
@@ -145,10 +145,7 @@ class RecipientController extends Controller
         $recipient->disabilities()->detach();
 
         foreach ($request->disabilities as $disability) {
-            $recipient->disabilities()->attach($disability['id'], [
-                'amount' => $disability['pivot']['amount'],
-                'due_date' => $disability['pivot']['due_date'],
-            ]);
+            $recipient->disabilities()->attach($disability['id']);
         }
 
         return Redirect::route('recipients.index');
@@ -209,8 +206,7 @@ class RecipientController extends Controller
     public function edit($id)
     {
         $recipient = Recipient::query()->find($id);
-        $user = User::query()->where('role_id', 3)
-                    ->where('user_id', $id)->first();
+        $user = $recipient->user;
 
         return Inertia::render('Recipients/RecipientsEdit', compact('recipient', 'user'));
     }
@@ -237,7 +233,6 @@ class RecipientController extends Controller
             'address' => $request->input('address'),
             'city' => $request->input('city'),
             'phone' => $request->input('phone'),
-            'parent_id' => $request->input('parent_id'),
             'birth_certificate' => $request->input('birth_certificate'),
             'kartu_keluarga' => $request->input('kartu_keluarga'),
             'note' => $request->input('note'),

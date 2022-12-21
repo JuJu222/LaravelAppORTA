@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('jabatan');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')
