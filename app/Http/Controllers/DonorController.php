@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Donor;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -40,24 +41,42 @@ class DonorController extends Controller
      */
     public function store(Request $request)
     {
+        $user = User::query()->create([
+            'username' => $request->input('username'),
+            'role_id' => 2,
+            'password' => bcrypt($request->input('password')),
+        ]);
+
         $donor = Donor::query()->create([
+            'user_id' => $user->id,
             'name' => $request->input('name'),
-            'name_alias' => $request->input('name_alias'),
             'ktp' => $request->input('ktp'),
             'phone' => $request->input('phone'),
             'email' => $request->input('email'),
             'address' => $request->input('address'),
             'city' => $request->input('city'),
             'note' => $request->input('note'),
-            'photo' => $request->input('photo'),
         ]);
 
-        User::query()->create([
-            'username' => $request->input('username'),
-            'user_id' => $donor->id,
-            'role_id' => 2,
-            'password' => bcrypt($request->input('password')),
-        ]);
+        if ($request->has('name_alias')) {
+            if ($request->input('name_alias') != '') {
+                $donor->update([
+                    'name_alias' => $request->input('name_alias'),
+                ]);
+            }
+        }
+
+        if ($request->hasfile('photo')) {
+            $this->validate($request, [
+                'photo' => 'mimes:jpeg,png,bmp,tiff',
+            ]);
+            $file = $request->file('photo');
+            $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path() . '/img/donors/photo/', $name);
+            $donor->update([
+                'photo' => $name,
+            ]);
+        }
 
         return Redirect::route('donors.index');
     }

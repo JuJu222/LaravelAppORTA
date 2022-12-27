@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('address');
             $table->string('city');
             $table->text('note')->nullable();
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')
