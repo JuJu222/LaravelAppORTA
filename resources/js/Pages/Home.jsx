@@ -40,7 +40,7 @@ export default function Home(props) {
                     </div>
                     {props.auth.user.role_id === 1 ? (
                         <Link href='/dashboard' as="button"
-                              className="mt-4 text-red w-full transition bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Dashboard Admin</Link>
+                              className="mt-4 text-red w-full transition bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Dasbor Admin</Link>
                     ) : (
                         ''
                     )}

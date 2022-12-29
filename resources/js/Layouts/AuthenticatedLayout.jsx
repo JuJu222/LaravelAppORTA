@@ -21,20 +21,20 @@ export default function Authenticated({ auth, header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-white">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
+                                <NavLink href={route('dashboard')} active={window.location.href.includes(route('dashboard'))}>
+                                    Dasbor
                                 </NavLink>
-                                <NavLink href={route('need_categories.index')} active={route().current('need_categories.index')}>
-                                    Need Categories
+                                <NavLink href={route('need_categories.index')} active={window.location.href.includes(route('need_categories.index'))}>
+                                    Keperluan
                                 </NavLink>
-                                <NavLink href={route('disabilities.index')} active={route().current('disabilities.index')}>
-                                    Disabilities
+                                <NavLink href={route('disabilities.index')} active={window.location.href.includes(route('disabilities.index'))}>
+                                    Disabilitas
                                 </NavLink>
-                                <NavLink href={route('recipients.index')} active={route().current('recipients.index')}>
-                                    Recipients
+                                <NavLink href={route('recipients.index')} active={window.location.href.includes(route('recipients.index'))}>
+                                    Penerima Dana
                                 </NavLink>
-                                <NavLink href={route('donors.index')} active={route().current('donors.index')}>
-                                    Donors
+                                <NavLink href={route('donors.index')} active={window.location.href.includes(route('donors.index'))}>
+                                    Donor
                                 </NavLink>
                             </div>
                         </div>
@@ -103,20 +103,20 @@ export default function Authenticated({ auth, header, children }) {
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Dashboard
+                        <ResponsiveNavLink href={route('dashboard')} active={window.location.href.includes(route('dashboard'))}>
+                            Dasbor
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('need_categories.index')} active={route().current('need_categories.index')}>
-                            Need Categories
+                        <ResponsiveNavLink href={route('need_categories.index')} active={window.location.href.includes(route('need_categories.index'))}>
+                            Keperluan
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('disabilities.index')} active={route().current('disabilities.index')}>
-                            Disabilities
+                        <ResponsiveNavLink href={route('disabilities.index')} active={window.location.href.includes(route('disabilities.index'))}>
+                            Disabilitas
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('recipients.index')} active={route().current('recipients.index')}>
-                            Recipients
+                        <ResponsiveNavLink href={route('recipients.index')} active={window.location.href.includes(route('recipients.index'))}>
+                            Penerima Dana
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('donors.index')} active={route().current('donors.index')}>
-                            Donors
+                        <ResponsiveNavLink href={route('donors.index')} active={window.location.href.includes(route('donors.index'))}>
+                            Donor
                         </ResponsiveNavLink>
                     </div>
 
