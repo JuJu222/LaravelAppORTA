@@ -24,6 +24,9 @@ export default function Authenticated({ auth, header, children }) {
                                 <NavLink href={route('dashboard')} active={window.location.href.includes(route('dashboard'))}>
                                     Dasbor
                                 </NavLink>
+                                <NavLink href={route('donations.index')} active={window.location.href.includes(route('donations.index'))}>
+                                    Dasbor
+                                </NavLink>
                                 <NavLink href={route('need_categories.index')} active={window.location.href.includes(route('need_categories.index'))}>
                                     Keperluan
                                 </NavLink>
