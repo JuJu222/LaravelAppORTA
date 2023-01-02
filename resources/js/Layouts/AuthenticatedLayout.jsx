@@ -25,7 +25,7 @@ export default function Authenticated({ auth, header, children }) {
                                     Dasbor
                                 </NavLink>
                                 <NavLink href={route('donations.index')} active={window.location.href.includes(route('donations.index'))}>
-                                    Dasbor
+                                    Donasi
                                 </NavLink>
                                 <NavLink href={route('need_categories.index')} active={window.location.href.includes(route('need_categories.index'))}>
                                     Keperluan
@@ -108,6 +108,9 @@ export default function Authenticated({ auth, header, children }) {
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href={route('dashboard')} active={window.location.href.includes(route('dashboard'))}>
                             Dasbor
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('donations.index')} active={window.location.href.includes(route('donations.index'))}>
+                            Donasi
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('need_categories.index')} active={window.location.href.includes(route('need_categories.index'))}>
                             Keperluan

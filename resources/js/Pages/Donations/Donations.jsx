@@ -3,25 +3,17 @@ import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Link} from "@inertiajs/inertia-react";
 
-export default function Donors(props) {
-
-    function handleCreate() {
-        Inertia.get(route("donors.create"));
-    }
+export default function Donations(props) {
 
     function handleDelete(id) {
         Inertia.delete(route("donors.destroy", id));
-    }
-
-    function handleEdit(id) {
-        Inertia.get(route("donors.edit", id));
     }
 
     return (
         <Authenticated
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Donor</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Donasi</h2>}
         >
             <div className="w-full sm:px-6 xl:px-0">
                 <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
@@ -45,7 +37,7 @@ export default function Donors(props) {
                         </tr>
                         </thead>
                         <tbody className="w-full">
-                        {props.donors.map((donor, i) =>
+                        {props.donations.map((donation, i) =>
                             <tr className="h-20 text-sm leading-none text-gray-800 bg-white border-b border-t border-gray-100">
                                 <td className="pl-4">
                                     <p className="text-sm font-medium leading-none text-gray-800">{i + 1}</p>
@@ -56,19 +48,19 @@ export default function Donors(props) {
                                             <div className="w-10 h-10">
                                                 <img className="w-full h-full rounded object-cover" src="/img/anak.png" />
                                             </div>
-                                            <p className="font-medium ml-4">{donor.name}</p>
+                                            <p className="font-medium ml-4">{donation.name}</p>
                                         </div>
                                     </div>
                                 </td>
                                 <td className="pl-12 pr-4">
                                     <div className='flex gap-4 justify-end'>
-                                        <Link href={route("disabilities.edit", donor.id)} className="flex items-center justify-center text-center">
+                                        <Link href={route("disabilities.edit", donation.id)} className="flex items-center justify-center text-center">
                                             <button
                                                 className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition">Ubah
                                             </button>
                                         </Link>
                                         <div className="flex items-center justify-center text-center">
-                                            <button onClick={(e) => handleDelete(donor.id)}
+                                            <button onClick={(e) => handleDelete(donation.id)}
                                                     className="text-sm leading-none text-white py-3 px-5 bg-red rounded transition hover:bg-red_hover focus:outline-none">Hapus
                                             </button>
                                         </div>

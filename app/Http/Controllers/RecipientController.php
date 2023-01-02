@@ -6,7 +6,7 @@ use App\Models\Disability;
 use App\Models\Donation;
 use App\Models\Donor;
 use App\Models\NeedCategory;
-use App\Models\Needs;
+use App\Models\Need;
 use App\Models\ParentModel;
 use App\Models\Recipient;
 use App\Models\Relationship;
