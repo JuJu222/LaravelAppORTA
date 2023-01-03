@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DisabilityController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonorController;
@@ -53,8 +54,11 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('donors', DonorController::class)->except([
             'show', 'edit', 'update'
         ]);
+        Route::resource('admins', AdminController::class);
         Route::resource('needs', NeedController::class);
         Route::get('/donations', [DonationController::class, 'index'])->name('donations.index');
+        Route::post('/donations/{id}/accept', [DonationController::class, 'accept'])->name('donations.accept');
+        Route::post('/donations/{id}/reject', [DonationController::class, 'reject'])->name('donations.reject');
     });
 
     Route::middleware('role:1,2')->group(function () {

@@ -191,7 +191,8 @@ class RecipientController extends Controller
         $recipients = Recipient::query()->with(['parents', 'disabilities'])->limit(3)->get();
 
         foreach ($recipient->needs as $need) {
-            $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)->sum('amount');
+            $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)
+                ->whereNotNull('accepted_date')->sum('amount');
         }
 
         return Inertia::render('Recipients/RecipientsShow', compact('recipient', 'recipients'));

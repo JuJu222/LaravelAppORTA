@@ -39,6 +39,9 @@ export default function Authenticated({ auth, header, children }) {
                                 <NavLink href={route('donors.index')} active={window.location.href.includes(route('donors.index'))}>
                                     Donor
                                 </NavLink>
+                                <NavLink href={route('admins.index')} active={window.location.href.includes(route('admins.index'))}>
+                                    Admin
+                                </NavLink>
                             </div>
                         </div>
 
@@ -123,6 +126,9 @@ export default function Authenticated({ auth, header, children }) {
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('donors.index')} active={window.location.href.includes(route('donors.index'))}>
                             Donor
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('admins.index')} active={window.location.href.includes(route('admins.index'))}>
+                            Admin
                         </ResponsiveNavLink>
                     </div>
 

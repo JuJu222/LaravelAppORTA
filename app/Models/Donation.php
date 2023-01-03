@@ -9,6 +9,17 @@ class Donation extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'donor_id',
+        'need_id',
+        'amount',
+        'bank_account',
+        'transfer_date',
+        'transfer_receipt',
+        'accepted_date',
+        'accepted_by_admin_id',
+    ];
+
     public function donor() {
         return $this->belongsTo(Donor::class, 'donor_id');
     }

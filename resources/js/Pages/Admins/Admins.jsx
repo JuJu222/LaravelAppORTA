@@ -3,17 +3,17 @@ import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Link} from "@inertiajs/inertia-react";
 
-export default function Disabilities(props) {
+export default function Admins(props) {
 
     function handleDelete(id) {
-        Inertia.delete(route("disabilities.destroy", id));
+        Inertia.delete(route("admins.destroy", id));
     }
 
     return (
         <Authenticated
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Disabilitas</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Admin</h2>}
         >
             <div className="w-full sm:px-6 xl:px-0">
                 <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
@@ -33,33 +33,28 @@ export default function Disabilities(props) {
                         <thead>
                         <tr className="h-16 w-full text-sm leading-none text-gray-800">
                             <th className="font-bold text-left pl-4">No.</th>
-                            <th className="font-bold text-left pl-12">Disabilitas</th>
-                            <th className="font-bold text-left pl-12">Deskripsi</th>
+                            <th className="font-bold text-left pl-12">Penerima</th>
                         </tr>
                         </thead>
                         <tbody className="w-full">
-                        {props.disabilities.map((disability, i) =>
+                        {props.admins.map((admin, i) =>
                             <tr className="h-20 text-sm leading-none text-gray-800 bg-white border-b border-t border-gray-100">
                                 <td className="pl-4">
                                     <p className="text-sm font-medium leading-none text-gray-800">{i + 1}</p>
                                 </td>
                                 <td className="pl-12">
                                     <div className="flex items-center">
-                                        <div>
-                                            <p className="font-medium">{disability.disability}</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td className="pl-12 w-full">
-                                    <div className="flex items-center">
-                                        <div>
-                                            <p className="font-medium">{disability.description}</p>
+                                        <div className='flex items-center'>
+                                            <div className="w-10 h-10">
+                                                <img className="w-full h-full rounded object-cover" src="/img/anak.png" />
+                                            </div>
+                                            <p className="font-medium ml-4">{admin.name}</p>
                                         </div>
                                     </div>
                                 </td>
                                 <td className="pl-12 pr-4">
                                     <div className='flex gap-4 justify-end'>
-                                        <Link href={route("disabilities.edit", disability.id)} className="flex items-center justify-center text-center">
+                                        <Link href={route("admins.edit", admin.id)} className="flex items-center justify-center text-center">
                                             <button
                                                 className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -71,7 +66,7 @@ export default function Disabilities(props) {
                                             </button>
                                         </Link>
                                         <div className="flex items-center justify-center text-center">
-                                            <button onClick={(e) => handleDelete(disability.id)}
+                                            <button onClick={(e) => handleDelete(admin.id)}
                                                     className="text-sm leading-none text-white py-3 px-5 bg-red rounded transition hover:bg-red_hover focus:outline-none">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                      fill="currentColor" className="bi bi-trash3-fill"
