@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('donors', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
             $table->string('name');
             $table->string('name_alias')->nullable();
             $table->string('ktp');
@@ -22,9 +23,14 @@ return new class extends Migration
             $table->string('email');
             $table->text('address');
             $table->string('city');
-            $table->text('note');
-            $table->string('photo');
+            $table->text('note')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

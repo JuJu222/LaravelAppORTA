@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('recipients', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
             $table->string('name');
             $table->string('nik');
             $table->enum('gender', ['laki-laki', 'perempuan']);
@@ -27,12 +28,16 @@ return new class extends Migration
             $table->text('address');
             $table->string('city');
             $table->string('phone');
-            $table->foreignId('parent_id');
-            $table->string('birth_certificate');
-            $table->string('kartu_keluarga');
-            $table->text('note');
+            $table->string('birth_certificate')->nullable();
+            $table->string('kartu_keluarga')->nullable();
+            $table->text('note')->nullable();
             $table->boolean('is_active');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
