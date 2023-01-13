@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\DisabilityController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonorController;
@@ -77,14 +78,13 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('disabilities', DisabilityController::class);
         Route::resource('need_categories', NeedCategoryController::class);
         Route::resource('parents', ParentController::class);
-        Route::get('/home', function () {
+        Route::get('/beranda', function () {
             $recipients = Recipient::query()->with(['parents', 'disabilities'])->get();
 
             return Inertia::render('Home', compact('recipients'));
-        });
-        Route::get('/profile', function () {
-            return Inertia::render('Profile');
-        });
+        })->name('home');
+        Route::get('/donasi', [Controller::class, 'donations']);
+        Route::get('/profil', [Controller::class, 'profile']);
     });
 });
 

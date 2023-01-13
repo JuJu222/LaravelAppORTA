@@ -9,7 +9,7 @@ import RecipientCardAdmin from "@/Components/RecipientCardAdmin";
 export default function Home(props) {
     return (
         <div className='pb-20'>
-            <div className='bg-red w-full px-4'>
+            <div className='bg-red w-full px-4 pt-4'>
                 <div className='max-w-6xl mx-auto'>
                     <div className='flex items-center gap-5'>
                         <ApplicationLogo white={true} className="block h-9 w-auto"></ApplicationLogo>
