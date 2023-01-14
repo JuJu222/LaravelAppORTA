@@ -3,7 +3,6 @@ import {Link} from '@inertiajs/inertia-react';
 
 export default function NeedCard({need, recipientID, button}) {
     const formatter = new Intl.NumberFormat('de-DE');
-    console.log(need)
 
     return (
         <div className='mt-2 shadow-lg bg-white rounded-lg p-5 md:block'>

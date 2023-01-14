@@ -78,11 +78,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('disabilities', DisabilityController::class);
         Route::resource('need_categories', NeedCategoryController::class);
         Route::resource('parents', ParentController::class);
-        Route::get('/beranda', function () {
-            $recipients = Recipient::query()->with(['parents', 'disabilities'])->get();
-
-            return Inertia::render('Home', compact('recipients'));
-        })->name('home');
+        Route::get('/beranda', [Controller::class, 'home'])->name('home');
         Route::get('/donasi', [Controller::class, 'donations']);
         Route::get('/profil', [Controller::class, 'profile']);
     });
