@@ -42,7 +42,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function admin() {
+        return $this->hasOne(Admin::class);
+    }
+
     public function donor() {
         return $this->hasOne(Donor::class);
+    }
+
+    public function recipient() {
+        return $this->hasOne(Recipient::class);
     }
 }

@@ -32,8 +32,19 @@ export default function RecipientsShow(props) {
                                 )}
                             </div>
                             <div>
+                                <div className="grid grid-cols-1 divide-y">
+                                    <div>
+                                        <h4 className='text-red text-lg font-bold'>Informasi Penerima Dana</h4>
+                                        <h2>Name: {props.recipient.name}</h2>
+                                        <h2>NIK: {props.recipient.nik}</h2>
+                                    </div>
+                                    <div>
+                                        <h4 className='text-red text-lg font-bold'>Informasi Penerima Dana</h4>
+                                        <h2>Name: {props.recipient.name}</h2>
+                                        <h2>NIK: {props.recipient.nik}</h2>
+                                    </div>
+                                </div>
                                 <h4 className='text-red text-lg font-bold'>Informasi Penerima Dana</h4>
-                                <div className="grid gap-x-6 md:grid-cols-2">
                                     <h2>Name: {props.recipient.name}</h2>
                                     <h2>NIK: {props.recipient.nik}</h2>
                                     <h2>Gender: {props.recipient.gender}</h2>
@@ -50,7 +61,6 @@ export default function RecipientsShow(props) {
                                     <h2>Kartu Keluarga: {props.recipient.kartu_keluarga}</h2>
                                     <h2>Note: {props.recipient.note}</h2>
                                     <h2>Is Active: {props.recipient.is_active}</h2>
-                                </div>
                             </div>
                             <Link href={route('recipients.needs.add', props.recipient.id)}
                                   className='block text-center mt-4 w-full bg-red text-white text-sm px-5 py-3 rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>

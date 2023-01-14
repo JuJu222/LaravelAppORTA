@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Donation;
 use App\Models\Donor;
 use App\Models\Recipient;
+use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -19,7 +21,16 @@ class Controller extends BaseController
     function home() {
         $recipients = Recipient::query()->with(['parents', 'disabilities'])->get();
 
-        return Inertia::render('Home', compact('recipients'));
+        if (Auth::user()->role_id === 1) {
+            $admin = Admin::query()->where('user_id', Auth::id())->first();
+            return Inertia::render('Home', compact('recipients', 'admin'));
+        } else if (Auth::user()->role_id === 2) {
+            $donor = Donor::query()->where('user_id', Auth::id())->first();
+            return Inertia::render('Home', compact('recipients', 'donor'));
+        } else {
+            $recipient = Recipient::query()->where('user_id', Auth::id())->first();
+            return Inertia::render('Home', compact('recipients', 'recipient'));
+        }
     }
 
     function donations() {
@@ -31,11 +42,14 @@ class Controller extends BaseController
     }
 
     function profile() {
-        if (Auth::user()->role_id === 2) {
-            $donor = Donor::query()->where('user_id', Auth::id());
+        if (Auth::user()->role_id === 1) {
+            $admin = Admin::query()->where('user_id', Auth::id())->first();
+            return Inertia::render('Profile', compact('admin'));
+        } else if (Auth::user()->role_id === 2) {
+            $donor = Donor::query()->where('user_id', Auth::id())->first();
             return Inertia::render('Profile', compact('donor'));
         } else {
-            $recipient = Recipient::query()->where('user_id', Auth::id());
+            $recipient = Recipient::query()->where('user_id', Auth::id())->first();
             return Inertia::render('Profile', compact('recipient'));
         }
     }

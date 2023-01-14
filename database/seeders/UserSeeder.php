@@ -22,6 +22,12 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
+            'username' => 'donor',
+            'role_id' => 2,
+            'password' => bcrypt('donor'),
+        ]);
+
+        DB::table('users')->insert([
             'username' => 'recipient_1',
             'role_id' => 1,
             'password' => bcrypt('admin'),

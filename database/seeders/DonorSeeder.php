@@ -16,16 +16,16 @@ class DonorSeeder extends Seeder
     public function run()
     {
         DB::table('donors')->insert([
-            'user_id' => 1,
-            'name' => 'Admin Donor 5',
-            'name_alias' => '',
-            'ktp' => '222',
-            'email' => '',
-            'address' => '',
-            'city' => '',
-            'phone' => '',
-            'photo' => '',
-            'note' => '',
+            'user_id' => 2,
+            'name' => 'Donor 1',
+            'name_alias' => 'Alias',
+            'ktp' => 'KTP',
+            'email' => 'donor@gmail.com',
+            'address' => 'Jl. Donor Address',
+            'city' => 'Surabaya',
+            'phone' => '031281231',
+            'photo' => 'foto',
+            'note' => 'catatan',
         ]);
     }
 }
