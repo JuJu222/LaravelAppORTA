@@ -28,47 +28,45 @@ export default function RecipientsShow(props) {
                             <div className="py-2">
                                 {props.recipient.disabilities.map((disability, i) =>
                                     <span
-                                        className="inline-block bg-pink rounded-full px-2 py-1 text-xs font-semibold text-white mr-2 mb-2">{disability.disability}</span>
+                                        className="inline-block rounded-full px-2 py-0.5 text-xs font-semibold border border-black mr-2 mb-2">{disability.disability}</span>
                                 )}
                             </div>
                             <div>
-                                <div className="grid grid-cols-1 divide-y">
-                                    <div>
-                                        <h4 className='text-red text-lg font-bold'>Informasi Penerima Dana</h4>
-                                        <h2>Name: {props.recipient.name}</h2>
-                                        <h2>NIK: {props.recipient.nik}</h2>
+                                <div className="grid grid-cols-1 divide-y gap-3">
+                                    <div className='grid grid-cols-1 gap-1'>
+                                        <h4 className='text-red text-lg font-bold'>Informasi Pribadi</h4>
+                                        <p className='text-xs'>Name: {props.recipient.name}</p>
+                                        <p className='text-xs'>NIK: {props.recipient.nik}</p>
+                                        <p className='text-xs'>Gender: {props.recipient.gender}</p>
+                                        <p className='text-xs'>Birthplace: {props.recipient.birthplace}</p>
+                                        <p className='text-xs'>Birthdate: {props.recipient.birthdate}</p>
+                                        <p className='text-xs'>Address: {props.recipient.address}</p>
+                                        <p className='text-xs'>City: {props.recipient.city}</p>
+                                        <p className='text-xs'>Phone: {props.recipient.phone}</p>
+                                        <p className='text-xs'>Birth Certificate: {props.recipient.birth_certificate}</p>
+                                        <p className='text-xs'>Kartu Keluarga: {props.recipient.kartu_keluarga}</p>
+                                        <p className='text-xs'>Catatan: {props.recipient.note}</p>
                                     </div>
-                                    <div>
-                                        <h4 className='text-red text-lg font-bold'>Informasi Penerima Dana</h4>
-                                        <h2>Name: {props.recipient.name}</h2>
-                                        <h2>NIK: {props.recipient.nik}</h2>
+                                    <div className='grid grid-cols-1 gap-1'>
+                                        <h4 className='text-red text-lg font-bold'>Informasi Keluarga</h4>
+                                        <p className='text-xs'>Siblings: {props.recipient.siblings}</p>
+                                        <p className='text-xs'>Child No: {props.recipient.child_no}</p>
+                                    </div>
+                                    <div className='grid grid-cols-1 gap-1'>
+                                        <h4 className='text-red text-lg font-bold'>Informasi Pendidikan</h4>
+                                        <p className='text-xs'>School: {props.recipient.school}</p>
+                                        <p className='text-xs'>Class: {props.recipient.class}</p>
                                     </div>
                                 </div>
-                                <h4 className='text-red text-lg font-bold'>Informasi Penerima Dana</h4>
-                                    <h2>Name: {props.recipient.name}</h2>
-                                    <h2>NIK: {props.recipient.nik}</h2>
-                                    <h2>Gender: {props.recipient.gender}</h2>
-                                    <h2>Birthplace: {props.recipient.birthplace}</h2>
-                                    <h2>Birthdate: {props.recipient.birthdate}</h2>
-                                    <h2>School: {props.recipient.school}</h2>
-                                    <h2>Class: {props.recipient.class}</h2>
-                                    <h2>Siblings: {props.recipient.siblings}</h2>
-                                    <h2>Child No: {props.recipient.child_no}</h2>
-                                    <h2>Address: {props.recipient.address}</h2>
-                                    <h2>City: {props.recipient.city}</h2>
-                                    <h2>Phone: {props.recipient.phone}</h2>
-                                    <h2>Birth Certificate: {props.recipient.birth_certificate}</h2>
-                                    <h2>Kartu Keluarga: {props.recipient.kartu_keluarga}</h2>
-                                    <h2>Note: {props.recipient.note}</h2>
-                                    <h2>Is Active: {props.recipient.is_active}</h2>
                             </div>
-                            <Link href={route('recipients.needs.add', props.recipient.id)}
-                                  className='block text-center mt-4 w-full bg-red text-white text-sm px-5 py-3 rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>
-                                Tambah Keperluan
-                            </Link>
+                            {/*<Link href={route('recipients.needs.add', props.recipient.id)}*/}
+                            {/*      className='block text-center mt-4 w-full bg-red text-white text-sm px-5 py-3 rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>*/}
+                            {/*    Tambah Keperluan*/}
+                            {/*</Link>*/}
                         </div>
                     </div>
-                    <div>
+                    <div className='max-w-6xl mx-auto mt-4'>
+                        <h4 className='text-red text-lg font-bold'>Pilihan Donasi</h4>
                         {props.recipient.needs.map((need, i) =>
                             <NeedCard need={need} recipientID={props.recipient.id} button={true}/>
                         )}
