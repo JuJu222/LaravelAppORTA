@@ -8,7 +8,11 @@ export default function Profile(props) {
     let initials;
 
     if (props.admin) {
-        initials = props.admin.name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase()
+        return (
+            <Link href={route('logout')} method="post" as="button"
+                  className="mt-3 text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Keluar
+            </Link>
+        )
     } else if (props.donor) {
         initials = props.donor.name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase()
 

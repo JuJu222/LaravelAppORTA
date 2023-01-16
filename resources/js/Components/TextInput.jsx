@@ -25,7 +25,7 @@ export default function TextInput({
                 name={name}
                 value={value}
                 className={
-                    `border-red focus:border-pink focus:ring focus:ring-pink focus:ring-opacity-50 rounded-md shadow-sm ` +
+                    `border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400` +
                     className
                 }
                 ref={input}
