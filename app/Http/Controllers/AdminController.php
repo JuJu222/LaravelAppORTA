@@ -47,6 +47,7 @@ class AdminController extends Controller
         ]);
 
         Admin::query()->create([
+            'user_id' => $user->id,
             'name' => $request->input('name'),
             'phone' => $request->input('phone'),
             'email' => $request->input('email'),
@@ -114,9 +115,9 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        Admin::query()->find($id)->delete();
-        User::query()->where('role_id', 1)->where('user_id', $id)->delete();
+        $admin = Admin::query()->find($id);
+        User::query()->find($admin->user_id)->delete();
 
-        return Redirect::route('admins.index');
+        return Redirect::back();
     }
 }

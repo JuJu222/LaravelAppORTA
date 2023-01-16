@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 
-export default function DisabilitiesCreate(props) {
+export default function NeedCategoriesCreate(props) {
     const [values, setValues] = useState({
     })
 

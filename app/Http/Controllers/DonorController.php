@@ -145,9 +145,9 @@ class DonorController extends Controller
      */
     public function destroy($id)
     {
-        Donor::query()->find($id)->delete();
-        User::query()->where('role_id', 2)->where('user_id', $id)->delete();
+        $donor = Donor::query()->find($id);
+        User::query()->find($donor->user_id)->delete();
 
-        return Redirect::route('donors.index');
+        return Redirect::back();
     }
 }
