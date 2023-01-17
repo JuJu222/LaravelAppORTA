@@ -24,7 +24,6 @@ class DonorSeeder extends Seeder
             'address' => 'Jl. Donor Address',
             'city' => 'Surabaya',
             'phone' => '031281231',
-            'photo' => 'foto',
             'note' => 'catatan',
         ]);
     }

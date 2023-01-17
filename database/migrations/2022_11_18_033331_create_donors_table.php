@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('city');
             $table->text('note')->nullable();
             $table->string('photo')->nullable();
+            $table->boolean('verified')->default(false);
             $table->timestamps();
 
             $table->foreign('user_id')

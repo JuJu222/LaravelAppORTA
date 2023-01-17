@@ -6,6 +6,7 @@ use App\Models\Donor;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -147,6 +148,41 @@ class DonorController extends Controller
     {
         $donor = Donor::query()->find($id);
         User::query()->find($donor->user_id)->delete();
+
+        return Redirect::back();
+    }
+
+    public function notVerified()
+    {
+        if (Auth::user()->role_id != 2) {
+            return back();
+        }
+
+        $donor = Donor::query()->where('user_id', Auth::id())->first();
+
+        return Inertia::render('Donors/DonorsNotVerified', compact('donor'));
+    }
+
+    public function accept($id)
+    {
+        $donor = Donor::query()->find($id);
+
+        if (!$donor->verified) {
+            $donor->update([
+                'verified' => true,
+            ]);
+        }
+
+        return Redirect::back();
+    }
+
+    public function reject($id)
+    {
+        $donor = Donor::query()->find($id);
+
+        if (!$donor->verified) {
+            $donor->delete();
+        }
 
         return Redirect::back();
     }

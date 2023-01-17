@@ -57,6 +57,8 @@ Route::middleware(['auth'])->group(function () {
             Route::resource('donors', DonorController::class)->except([
                 'show', 'edit', 'update'
             ]);
+            Route::post('/donors/{id}/accept', [DonorController::class, 'accept'])->name('donors.accept');
+            Route::post('/donors/{id}/reject', [DonorController::class, 'reject'])->name('donors.reject');
             Route::resource('admins', AdminController::class);
             Route::resource('needs', NeedController::class);
             Route::get('/donations', [DonationController::class, 'index'])->name('donations.index');
@@ -85,6 +87,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/donasi', [Controller::class, 'donations']);
         Route::get('/profil', [Controller::class, 'profile']);
     });
+
+    Route::get('/donor/verifikasi', [DonorController::class, 'notVerified'])->name('donor.unverified');
 });
 
 require __DIR__.'/auth.php';

@@ -20,6 +20,7 @@ class Donor extends Model
         'city',
         'note',
         'photo',
+        'verified',
     ];
 
     public function donations()

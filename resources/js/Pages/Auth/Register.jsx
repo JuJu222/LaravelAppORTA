@@ -13,13 +13,11 @@ export default function Register() {
         password_confirmation: '',
         name: '',
         name_alias: '',
-        ktp: null,
         phone: '',
         email: '',
         address: '',
         city: '',
         note: '',
-        photo: null,
     });
 
     useEffect(() => {
@@ -29,7 +27,12 @@ export default function Register() {
     }, []);
 
     const onHandleChange = (event) => {
-        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+        if (event.target.type !== 'file') {
+            setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+        } else {
+            setData(event.target.name, event.target.files[0]);
+        }
+        console.log(data)
     };
 
     const submit = (e) => {
@@ -45,7 +48,7 @@ export default function Register() {
             <form onSubmit={submit}>
                 <div className="grid gap-x-6 md:grid-cols-2">
                     <div className="mt-4">
-                        <InputLabel forInput="username" value="Username" />
+                        <InputLabel forInput="username" value="Username *" />
 
                         <TextInput
                             type="text"
@@ -61,7 +64,20 @@ export default function Register() {
                     </div>
 
                     <div className="mt-4">
-                        <InputLabel forInput="password" value="Password" />
+                        <InputLabel forInput="name" value="Nama *" />
+
+                        <TextInput
+                            type="text"
+                            name="name"
+                            value={data.name}
+                            className="mt-1 block w-full"
+                            handleChange={onHandleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className="mt-4">
+                        <InputLabel forInput="password" value="Password *" />
 
                         <TextInput
                             type="password"
@@ -77,7 +93,7 @@ export default function Register() {
                     </div>
 
                     <div className="mt-4">
-                        <InputLabel forInput="password_confirmation" value="Confirm Password" />
+                        <InputLabel forInput="password_confirmation" value="Confirm Password *" />
 
                         <TextInput
                             type="password"
@@ -92,19 +108,6 @@ export default function Register() {
                     </div>
 
                     <div className="mt-4">
-                        <InputLabel forInput="name" value="Nama" />
-
-                        <TextInput
-                            type="text"
-                            name="name"
-                            value={data.name}
-                            className="mt-1 block w-full"
-                            handleChange={onHandleChange}
-                            required
-                        />
-                    </div>
-
-                    <div className="mt-4">
                         <InputLabel forInput="name_alias" value="Nama Alias" />
 
                         <TextInput
@@ -113,12 +116,11 @@ export default function Register() {
                             value={data.name_alias}
                             className="mt-1 block w-full"
                             handleChange={onHandleChange}
-                            required
                         />
                     </div>
 
                     <div className="mt-4">
-                        <InputLabel forInput="phone" value="Nomor Telepon" />
+                        <InputLabel forInput="phone" value="Nomor Telepon *" />
 
                         <TextInput
                             type="tel"
@@ -131,7 +133,7 @@ export default function Register() {
                     </div>
 
                     <div className="mt-4">
-                        <InputLabel forInput="name_alias" value="Email" />
+                        <InputLabel forInput="name_alias" value="Email *" />
 
                         <TextInput
                             type="email"
@@ -144,7 +146,7 @@ export default function Register() {
                     </div>
 
                     <div className="mt-4">
-                        <InputLabel forInput="city" value="Kota" />
+                        <InputLabel forInput="city" value="Kota *" />
 
                         <TextInput
                             type="text"
@@ -158,7 +160,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel forInput="address" value="Alamat" />
+                    <InputLabel forInput="address" value="Alamat *" />
 
                     <TextInput
                         type="text"
@@ -171,12 +173,11 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel forInput="ktp" value="Foto KTP" />
+                    <InputLabel forInput="ktp" value="Foto KTP *" />
 
                     <TextInput
                         type="file"
                         name="ktp"
-                        value={data.ktp}
                         className="mt-1 block w-full px-4 py-4"
                         handleChange={onHandleChange}
                         required
@@ -189,17 +190,15 @@ export default function Register() {
                     <TextInput
                         type="file"
                         name="photo"
-                        value={data.photo}
                         className="mt-1 block w-full px-4 py-4"
                         handleChange={onHandleChange}
-                        required
                     />
                 </div>
 
                 <div className="mt-4">
                     <InputLabel forInput="note" value="Catatan" />
 
-                    <textarea name="note" className='border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400'>
+                    <textarea name="note" onChange={onHandleChange} className='border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400'>
                         </textarea>
                 </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class RoleMiddleware
 {
@@ -21,7 +22,15 @@ class RoleMiddleware
 
         foreach($roles as $role) {
             if($user->role_id == $role) {
-                return $next($request);
+                if ($user->role_id == 2) {
+                    if ($user->donor->verified) {
+                        return $next($request);
+                    } else {
+                        return Redirect::route('donor.unverified');
+                    }
+                } else {
+                    return $next($request);
+                }
             }
         }
 

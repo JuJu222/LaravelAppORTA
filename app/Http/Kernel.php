@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\DonorIsVerified;
 use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 

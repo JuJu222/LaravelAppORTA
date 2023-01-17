@@ -47,38 +47,34 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $this->validate($request, [
+            'ktp' => 'mimes:jpeg,png,bmp,tiff',
+        ]);
+        $file = $request->file('ktp');
+        $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path() . '/img/donors/ktp/', $name);
+
         $donor = Donor::query()->create([
             'user_id' => $user->id,
             'name' => $request->name,
-            'name_alias' => $request->name_alias == '' ? $request->name_alias : null,
+            'name_alias' => $request->name_alias !== '' ? $request->name_alias : null,
             'phone' => $request->phone,
             'email' => $request->email,
             'address' => $request->address,
             'city' => $request->city,
             'note' => $request->note,
+            'ktp' => $name
         ]);
-
-        if ($request->hasfile('ktp')) {
-            $this->validate($request, [
-                'photo' => 'mimes:jpeg,png,bmp,tiff',
-            ]);
-            $file = $request->file('ktp');
-            $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path() . '/img/donors/ktp/', $name);
-            $donor->update([
-                'kartu_keluarga' => $name,
-            ]);
-        }
 
         if ($request->hasfile('photo')) {
             $this->validate($request, [
                 'photo' => 'mimes:jpeg,png,bmp,tiff',
             ]);
-            $file = $request->file('kartu_keluarga');
+            $file = $request->file('photo');
             $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
             $file->move(public_path() . '/img/donors/photo/', $name);
             $donor->update([
-                'kartu_keluarga' => $name,
+                'photo' => $name,
             ]);
         }
 
