@@ -67,7 +67,7 @@ export default function Profile(props) {
                             </div>
                         </div>
                         <Link href={route('logout')} method="post" as="button"
-                              className="mt-3 text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Keluar
+                              className="mt-3 text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-4 text-center">Keluar
                         </Link>
                     </div>
                 </div>

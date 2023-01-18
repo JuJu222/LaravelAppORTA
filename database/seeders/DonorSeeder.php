@@ -25,6 +25,7 @@ class DonorSeeder extends Seeder
             'city' => 'Surabaya',
             'phone' => '031281231',
             'note' => 'catatan',
+            'verified' => true,
         ]);
     }
 }

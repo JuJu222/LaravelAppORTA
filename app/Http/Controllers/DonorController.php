@@ -160,6 +160,10 @@ class DonorController extends Controller
 
         $donor = Donor::query()->where('user_id', Auth::id())->first();
 
+        if ($donor->verified) {
+            return back();
+        }
+
         return Inertia::render('Donors/DonorsNotVerified', compact('donor'));
     }
 

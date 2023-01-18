@@ -73,7 +73,8 @@ class RecipientController extends Controller
         $recipient = Recipient::query()->with(['parents', 'disabilities', 'needs'])->find($recipientID);
         $need = $recipient->needs()->where('needs.id', $needID)->first();
 
-        $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)->sum('amount');
+        $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)
+            ->whereNotNull('accepted_date')->sum('amount');
 
         return Inertia::render('Recipients/RecipientsDonate',
             compact('recipient', 'need'));
@@ -168,15 +169,16 @@ class RecipientController extends Controller
 
     public function storeDonation(Request $request, $recipientID, $needID)
     {
+        $recipient = Recipient::query()->find($recipientID);
         $donor = Donor::query()->where('user_id', Auth::id())->first();
-        $donor->donations()->attach($needID, [
+        $donation = $donor->donations()->attach($needID, [
             'amount' => $request->amount,
-            'bank_account' => '',
+            'bank_account' => $request->bank_account,
             'transfer_date' => date('2022-9-5'),
             'transfer_receipt' => '',
         ]);
 
-        return Redirect::route('recipients.show', $recipientID);
+        return Inertia::render('ThankYou', compact('donor', 'donation', 'recipient'));
     }
 
     /**

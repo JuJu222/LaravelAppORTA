@@ -49,8 +49,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/recipients/{id}/needs', [RecipientController::class, 'addNeeds'])->name('recipients.needs.add');
             Route::post('/recipients/{id}/needs', [RecipientController::class, 'storeNeeds'])->name('recipients.needs.store');
             Route::get('/recipients/{id}/needs', [RecipientController::class, 'addNeeds'])->name('recipients.needs.add');
-            Route::get('/recipients/{recipientID}/donate/{needID}', [RecipientController::class, 'addDonation'])->name('recipients.donate.add');
-            Route::post('/recipients/{recipientID}/donate/{needID}', [RecipientController::class, 'storeDonation'])->name('recipients.donate.store');
             Route::resource('recipients', RecipientController::class)->except([
                 'index', 'show'
             ]);
@@ -77,6 +75,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('donors', DonorController::class)->only([
             'show', 'edit', 'update'
         ]);
+        Route::get('/recipients/{recipientID}/donate/{needID}', [RecipientController::class, 'addDonation'])->name('recipients.donate.add');
+        Route::post('/recipients/{recipientID}/donate/{needID}', [RecipientController::class, 'storeDonation'])->name('recipients.donate.store');
     });
 
     Route::middleware('role:1,2,3')->group(function () {
