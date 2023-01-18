@@ -44,7 +44,7 @@ export default function Home(props) {
                         <div className='flex justify-between items-end mt-5'>
                             <div className='h-fit my-auto pb-5'>
                                 <h2 className='text-2xl text-white font-bold'>Halo, {props.admin.name}</h2>
-                                <p className='text-white text-sm mt-2'>Anda telah berhasil membantu anak-anak sebanyak <h6>6 Kali</h6></p>
+                                <p className='text-white text-sm mt-2'>Anda sedang login sebagai Admin</p>
                             </div>
                             <div>
                                 <img src="/img/home_element1.png" alt="" className='max-h-[20rem]'/>
@@ -102,7 +102,11 @@ export default function Home(props) {
                         <div className='flex justify-between items-end mt-5'>
                             <div className='h-fit my-auto pb-4'>
                                 <h2 className='text-2xl text-white font-bold'>Halo, {props.donor.name}</h2>
-                                <p className='text-white text-sm mt-2'>Anda telah berhasil membantu anak-anak sebanyak <h6>6 Kali</h6></p>
+                                {props.donor.donation_count > 0 ? (
+                                    <p className='text-white text-sm mt-2'>Anda telah berhasil membantu anak-anak sebanyak <h6>{props.donor.donation_count} Kali</h6></p>
+                                ) : (
+                                    <p className='text-white text-sm mt-2'>Ayo bantu anak-anak kami dengan donasi anda!</p>
+                                )}
                             </div>
                             <div>
                                 <img src="/img/home_element1.png" alt="" className='max-h-[20rem]'/>

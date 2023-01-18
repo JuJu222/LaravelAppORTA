@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Need extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'need_category_id',
+        'recipient_id',
+        'amount',
+        'due_date',
+        'delivered_date',
+        'delivered_photo',
+        'delivered_message',
+    ];
 
     public function needCategory() {
         return $this->belongsTo(NeedCategory::class, 'need_category_id');

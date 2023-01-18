@@ -7,7 +7,7 @@ import BottomNavbar from "@/Components/BottomNavbar";
 import NeedCard from "@/Components/NeedCard";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 
-export default function ThankYou(props) {
+export default function DonorThankYou(props) {
     const formatter = new Intl.NumberFormat('de-DE');
 
     return (
@@ -32,7 +32,7 @@ export default function ThankYou(props) {
                         <p className='text-sm leading-relaxed'>Donasi anda adalah bentuk <b>kemanusiaan</b> serta <b>cinta anda</b>, dan akan dialokasikan dengan sesuai.</p>
                     </div>
                     <div className='max-w-6xl mx-auto mt-4'>
-                        <p className='text-sm text-center leading-relaxed'><b className='text-lg'>Anda</b> telah membantu <b className='text-red text-lg'>{props.donor.name}</b> sebesar</p>
+                        <p className='text-sm text-center leading-relaxed'><b className='text-lg'>Anda</b> telah membantu <b className='text-red text-lg'>{props.recipient.name}</b> sebesar</p>
                     </div>
                     <div className='max-w-6xl mx-auto mt-4'>
                         <div className='rounded-xl shadow-md w-2/3 mx-auto py-8'>
@@ -50,7 +50,7 @@ export default function ThankYou(props) {
                     <div className='max-w-6xl mx-auto mt-4'>
                         <p className='text-sm leading-relaxed'>Penerima donasi juga dapat mengucapkan terima kasih yang dapat dilihat di halaman donasi.</p>
                     </div>
-                    <Link href={route('home')} method="post"
+                    <Link href={route('home')}
                           className="mt-5 block text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-4 text-center">Kembali ke Beranda
                     </Link>
                 </div>

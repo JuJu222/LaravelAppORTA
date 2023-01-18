@@ -77,6 +77,7 @@ Route::middleware(['auth'])->group(function () {
         ]);
         Route::get('/recipients/{recipientID}/donate/{needID}', [RecipientController::class, 'addDonation'])->name('recipients.donate.add');
         Route::post('/recipients/{recipientID}/donate/{needID}', [RecipientController::class, 'storeDonation'])->name('recipients.donate.store');
+        Route::get('/needs/{id}/message', [RecipientController::class, 'showMessage'])->name('needs.show.message');
     });
 
     Route::middleware('role:1,2,3')->group(function () {

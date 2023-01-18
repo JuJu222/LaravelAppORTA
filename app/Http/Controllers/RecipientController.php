@@ -171,14 +171,24 @@ class RecipientController extends Controller
     {
         $recipient = Recipient::query()->find($recipientID);
         $donor = Donor::query()->where('user_id', Auth::id())->first();
-        $donation = $donor->donations()->attach($needID, [
+
+        $this->validate($request, [
+            'transfer_receipt' => 'mimes:jpeg,png,bmp,tiff',
+        ]);
+        $file = $request->file('transfer_receipt');
+        $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path() . '/img/donations/transfer_receipt/', $name);
+
+        $donation = Donation::query()->create([
+            'donor_id' => $donor->id,
+            'need_id' => $needID,
             'amount' => $request->amount,
             'bank_account' => $request->bank_account,
             'transfer_date' => date('2022-9-5'),
-            'transfer_receipt' => '',
+            'transfer_receipt' => $name,
         ]);
 
-        return Inertia::render('ThankYou', compact('donor', 'donation', 'recipient'));
+        return Inertia::render('DonorThankYou', compact('donor', 'donation', 'recipient'));
     }
 
     /**
@@ -261,5 +271,17 @@ class RecipientController extends Controller
         User::query()->where('role_id', 3)->where('user_id', $id)->delete();
 
         return Redirect::route('recipients.index');
+    }
+
+    public function showMessage($id)
+    {
+        $donor = Donor::query()->where('user_id', Auth::id())->first();
+        $donation = Donation::query()->find($id);
+        $need = Need::query()->where('id', $donation->need_id)->with('needCategory')->first();
+        $need['collected'] = Donation::query()->where('need_id', $donation->need_id)
+            ->whereNotNull('accepted_date')->sum('amount');
+        $recipient = Recipient::query()->find($need->recipient_id);
+
+        return Inertia::render('RecipientsMessage', compact('donor', 'need', 'recipient', 'donation'));
     }
 }

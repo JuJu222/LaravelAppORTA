@@ -26,6 +26,8 @@ class Controller extends BaseController
             return Inertia::render('Home', compact('recipients', 'admin'));
         } else if (Auth::user()->role_id === 2) {
             $donor = Donor::query()->where('user_id', Auth::id())->first();
+            $donor['donation_count'] = Donation::query()->where('donor_id', $donor->id)
+                ->whereNotNull('accepted_date')->count();
             return Inertia::render('Home', compact('recipients', 'donor'));
         } else {
             $recipient = Recipient::query()->where('user_id', Auth::id())->first();

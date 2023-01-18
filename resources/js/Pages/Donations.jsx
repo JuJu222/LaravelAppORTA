@@ -28,22 +28,31 @@ export default function Donations(props) {
                 <div className='max-w-6xl mx-auto'>
                     <div className="flex flex-col gap-5">
                         {props.donations.map((donation, i) =>
-                            <div className='flex justify-center'>
+                            <Link href={route('needs.show.message', donation.id)} className='flex justify-center'>
                                 <div className="max-w-sm flex rounded-lg overflow-hidden shadow-lg hover:scale-[102%] transition bg-white">
                                     <img className="w-1/4 object-cover" src="/img/anak.png" alt="Sunset in the mountains" />
-                                    <div className="px-3 py-3">
-                                        <p className="text-gray-700 text-xs">Anda telah membantu {donation.need.recipient.name} sebanyak</p>
-                                        <div className='flex gap-1 items-center pt-2 pb-3'>
-                                            <h4 className="font-bold text-red">{'Rp' + formatter.format(donation.amount)}</h4>
-                                            <p className='text-xs text-black'>untuk {donation.need.need_category.category}</p>
+                                    <div>
+                                        <div className="px-3 py-3">
+                                            <p className="text-gray-700 text-xs">Anda telah membantu {donation.need.recipient.name} sebanyak</p>
+                                            <div className='flex gap-1 items-center pt-2 pb-3'>
+                                                <h4 className="font-bold text-red">{'Rp' + formatter.format(donation.amount)}</h4>
+                                                <p className='text-xs text-black'>untuk {donation.need.need_category.category}</p>
+                                            </div>
+                                            <div className='flex gap-1 items-center'>
+                                                <p className="text-gray-700 text-xs">Status: </p>
+                                                <p className='text-xs text-red font-bold'>{donation.accepted_date ? 'Terverifikasi (' + donation.accepted_date + ')' : 'Belum Diverifikasi'}</p>
+                                            </div>
                                         </div>
-                                        <div className='flex gap-1 items-center'>
-                                            <p className="text-gray-700 text-xs">Status: </p>
-                                            <p className='text-xs text-red font-bold'>Terverifikasi ({donation.accepted_date ? donation.accepted_date : 'Belum Diverifikasi'})</p>
-                                        </div>
+                                        {donation.accepted_date ? (
+                                            <div className='bg-red w-full px-3 py-1'>
+                                                <p className='text-white text-sm text-center font-bold'>Lihat Pesan Penerima Dana</p>
+                                            </div>
+                                        ) : (
+                                            ''
+                                        )}
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         )}
                     </div>
                 </div>
