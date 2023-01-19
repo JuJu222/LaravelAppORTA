@@ -201,6 +201,10 @@ class RecipientController extends Controller
     {
         $recipient = Recipient::query()->with(['parents', 'disabilities', 'needs'])->find($id);
         $recipients = Recipient::query()->with(['parents', 'disabilities'])->limit(3)->get();
+        $donations = Donation::query()->whereHas('need', function ($query) use ($id) {
+            return $query->where('recipient_id', '=', $id);
+        })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
+
         foreach ($recipient->parents as $parent) {
             $parent['relationship'] = Relationship::query()->find($parent->pivot->relationship_id)->relationship;
         }
@@ -209,7 +213,7 @@ class RecipientController extends Controller
                 ->whereNotNull('accepted_date')->sum('amount');
         }
 
-        return Inertia::render('Recipients/RecipientsShow', compact('recipient', 'recipients'));
+        return Inertia::render('Recipients/RecipientsShow', compact('recipient', 'recipients', 'donations'));
     }
 
     /**

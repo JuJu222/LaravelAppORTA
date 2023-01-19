@@ -7,6 +7,9 @@ import BottomNavbar from "@/Components/BottomNavbar";
 import NeedCard from "@/Components/NeedCard";
 
 export default function RecipientsShow(props) {
+    const formatter = new Intl.NumberFormat('de-DE');
+    const options = { year: 'numeric', month: 'long', day: 'numeric' }
+
     return (
         <div className='pb-20'>
             <div className='w-full md:hidden'>
@@ -77,8 +80,33 @@ export default function RecipientsShow(props) {
                             {props.recipient.parents.map((parent, i) =>
                                 <div className='grid grid-cols-1 gap-1'>
                                     <h4 className='text-red text-base font-bold'>Informasi Keluarga</h4>
-                                    <p className='text-xs'>Siblings: {props.recipient.siblings}</p>
-                                    <p className='text-xs'>Child No: {props.recipient.child_no}</p>
+                                    <p className='text-xs'>Ibu dari Justina</p>
+                                    <p className='text-xs'>Disabilitas: Pincang Glaukoma Diabetes</p>
+                                    <p className='text-xs'>Tempat Lahir: Surabaya Jawa Timur</p>
+                                    <p className='text-xs'>Tanggal Lahir: Surabaya Jawa Timur</p>
+                                    <p className='text-xs'>Pekerjaan: Surabaya Jawa Timur</p>
+                                    <p className='text-xs'>Alamat Tinggal: {parent.name}</p>
+                                    <p className='text-xs'>Nomor Telepon: {parent.name}</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div className='max-w-6xl mx-auto mt-4'>
+                        <div className='flex justify-between items-center'>
+                            <h4 className='text-red text-lg font-bold'>Riwayat Donasi</h4>
+                            <h5 className='text-red text-md'>1902 Donasi</h5>
+                        </div>
+                        <div>
+                            {props.donations.map((donation, i) =>
+                                <div className='shadow-lg rounded-lg p-4 flex gap-4'>
+                                    <div className="w-10 h-10">
+                                        <img className="w-full h-full rounded object-cover" src={donation.donor.photo ? '/img/donors/photo/' + donation.donor.photo : '/img/avatar-default.png'} />
+                                    </div>
+                                    <div>
+                                        <h4 className='text-red text-base font-bold'>{donation.donor.name}</h4>
+                                        <p className='text-xs'>Berdonasi Sebesar <b>{'Rp' + formatter.format(donation.amount)}</b></p>
+                                        <p className='text-[0.65rem]'>{new Date(donation.transfer_date).toLocaleDateString("id-ID", options)}</p>
+                                    </div>
                                 </div>
                             )}
                         </div>
