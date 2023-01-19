@@ -32,7 +32,7 @@ export default function RecipientsShow(props) {
                                 )}
                             </div>
                             <div>
-                                <div className="grid grid-cols-1 divide-y gap-3">
+                                <div className="grid grid-cols-1 divide-y gap-3 border border-black rounded-lg p-4">
                                     <div className='grid grid-cols-1 gap-1'>
                                         <h4 className='text-red text-lg font-bold'>Informasi Pribadi</h4>
                                         <p className='text-xs'>Name: {props.recipient.name}</p>
@@ -70,6 +70,18 @@ export default function RecipientsShow(props) {
                         {props.recipient.needs.map((need, i) =>
                             <NeedCard need={need} recipientID={props.recipient.id} button={true}/>
                         )}
+                    </div>
+                    <div className='max-w-6xl mx-auto mt-4'>
+                        <h4 className='text-red text-lg font-bold'>Wali atau Orang Tua</h4>
+                        <div className="grid grid-cols-1 divide-y gap-3 border border-black rounded-lg p-4">
+                            {props.recipient.parents.map((parent, i) =>
+                                <div className='grid grid-cols-1 gap-1'>
+                                    <h4 className='text-red text-base font-bold'>Informasi Keluarga</h4>
+                                    <p className='text-xs'>Siblings: {props.recipient.siblings}</p>
+                                    <p className='text-xs'>Child No: {props.recipient.child_no}</p>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

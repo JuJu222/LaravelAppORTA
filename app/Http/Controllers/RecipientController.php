@@ -201,7 +201,9 @@ class RecipientController extends Controller
     {
         $recipient = Recipient::query()->with(['parents', 'disabilities', 'needs'])->find($id);
         $recipients = Recipient::query()->with(['parents', 'disabilities'])->limit(3)->get();
-
+        foreach ($recipient->parents as $parent) {
+            $parent['relationship'] = Relationship::query()->find($parent->pivot->relationship_id)->relationship;
+        }
         foreach ($recipient->needs as $need) {
             $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)
                 ->whereNotNull('accepted_date')->sum('amount');
