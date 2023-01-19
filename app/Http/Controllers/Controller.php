@@ -30,17 +30,35 @@ class Controller extends BaseController
                 ->whereNotNull('accepted_date')->count();
             return Inertia::render('Home', compact('recipients', 'donor'));
         } else {
-            $recipient = Recipient::query()->where('user_id', Auth::id())->first();
+            $recipient = Recipient::query()->where('user_id', Auth::id())->with('needs')->first();
+            foreach ($recipient->needs as $need) {
+                $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)
+                    ->whereNotNull('accepted_date')->sum('amount');
+            }
             return Inertia::render('Home', compact('recipients', 'recipient'));
         }
     }
 
     function donations() {
-        $donations = Donation::query()->whereHas('need', function ($query) {
-            return $query->where('donor_id', '=', Auth::user()->donor->id);
-        })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
+        if (Auth::user()->role_id === 1) {
+            $donations = Donation::query()->whereHas('need', function ($query) {
+                return $query->where('donor_id', '=', Auth::user()->donor->id);
+            })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
 
-        return Inertia::render('Donations', compact('donations'));
+            return Inertia::render('Donations', compact('donations'));
+        } else if (Auth::user()->role_id === 2) {
+            $donations = Donation::query()->whereHas('need', function ($query) {
+                return $query->where('donor_id', '=', Auth::user()->donor->id);
+            })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
+
+            return Inertia::render('Donations', compact('donations'));
+        } else {
+            $donations = Donation::query()->whereHas('need', function ($query) {
+                return $query->where('recipient_id', '=', Auth::user()->recipient->id);
+            })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
+            
+            return Inertia::render('Donations', compact('donations'));
+        }
     }
 
     function profile() {
