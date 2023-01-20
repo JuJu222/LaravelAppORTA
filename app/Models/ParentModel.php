@@ -20,4 +20,9 @@ class ParentModel extends Model
         'phone',
         'ktp_image',
     ];
+
+    public function disabilities()
+    {
+        return $this->belongsToMany(Disability::class, 'disabilities_parents', 'parent_id', 'disability_id');
+    }
 }

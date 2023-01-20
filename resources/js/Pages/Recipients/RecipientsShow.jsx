@@ -38,27 +38,26 @@ export default function RecipientsShow(props) {
                                 <div className="grid grid-cols-1 divide-y gap-3 border border-black rounded-lg p-4">
                                     <div className='grid grid-cols-1 gap-1'>
                                         <h4 className='text-red text-lg font-bold'>Informasi Pribadi</h4>
-                                        <p className='text-xs'>Name: {props.recipient.name}</p>
                                         <p className='text-xs'>NIK: {props.recipient.nik}</p>
-                                        <p className='text-xs'>Gender: {props.recipient.gender}</p>
-                                        <p className='text-xs'>Birthplace: {props.recipient.birthplace}</p>
-                                        <p className='text-xs'>Birthdate: {props.recipient.birthdate}</p>
-                                        <p className='text-xs'>Address: {props.recipient.address}</p>
-                                        <p className='text-xs'>City: {props.recipient.city}</p>
-                                        <p className='text-xs'>Phone: {props.recipient.phone}</p>
+                                        <p className='text-xs'>Jenis Kelamin: {props.recipient.gender}</p>
+                                        <p className='text-xs'>Tempat Lahir: {props.recipient.birthplace}</p>
+                                        <p className='text-xs'>Tanggal Lahir: {new Date(props.recipient.birthdate).toLocaleDateString("id-ID", options)}</p>
+                                        <p className='text-xs'>Alamat: {props.recipient.address}</p>
+                                        <p className='text-xs'>Kota: {props.recipient.city}</p>
+                                        <p className='text-xs'>Nomor Telepon: {props.recipient.phone}</p>
                                         <p className='text-xs'>Birth Certificate: {props.recipient.birth_certificate}</p>
                                         <p className='text-xs'>Kartu Keluarga: {props.recipient.kartu_keluarga}</p>
                                         <p className='text-xs'>Catatan: {props.recipient.note}</p>
                                     </div>
                                     <div className='grid grid-cols-1 gap-1'>
                                         <h4 className='text-red text-lg font-bold'>Informasi Keluarga</h4>
-                                        <p className='text-xs'>Siblings: {props.recipient.siblings}</p>
-                                        <p className='text-xs'>Child No: {props.recipient.child_no}</p>
+                                        <p className='text-xs'>Jumlah Saudara: {props.recipient.siblings}</p>
+                                        <p className='text-xs'>Anak ke: {props.recipient.child_no}</p>
                                     </div>
                                     <div className='grid grid-cols-1 gap-1'>
                                         <h4 className='text-red text-lg font-bold'>Informasi Pendidikan</h4>
-                                        <p className='text-xs'>School: {props.recipient.school}</p>
-                                        <p className='text-xs'>Class: {props.recipient.class}</p>
+                                        <p className='text-xs'>Nama Sekolah: {props.recipient.school}</p>
+                                        <p className='text-xs'>Kelas: {props.recipient.class}</p>
                                     </div>
                                 </div>
                             </div>
@@ -76,17 +75,25 @@ export default function RecipientsShow(props) {
                     </div>
                     <div className='max-w-6xl mx-auto mt-4'>
                         <h4 className='text-red text-lg font-bold'>Wali atau Orang Tua</h4>
-                        <div className="grid grid-cols-1 divide-y gap-3 border border-black rounded-lg p-4">
+                        <div className="grid grid-cols-1 divide-y gap-3 border border-black rounded-lg px-4 pb-4">
                             {props.recipient.parents.map((parent, i) =>
                                 <div className='grid grid-cols-1 gap-1'>
-                                    <h4 className='text-red text-base font-bold'>Informasi Keluarga</h4>
-                                    <p className='text-xs'>Ibu dari Justina</p>
-                                    <p className='text-xs'>Disabilitas: Pincang Glaukoma Diabetes</p>
-                                    <p className='text-xs'>Tempat Lahir: Surabaya Jawa Timur</p>
-                                    <p className='text-xs'>Tanggal Lahir: Surabaya Jawa Timur</p>
-                                    <p className='text-xs'>Pekerjaan: Surabaya Jawa Timur</p>
-                                    <p className='text-xs'>Alamat Tinggal: {parent.name}</p>
-                                    <p className='text-xs'>Nomor Telepon: {parent.name}</p>
+                                    <h4 className='text-red text-base font-bold mt-2'>{parent.name}</h4>
+                                    <p className='text-xs'>{parent.relationship} dari {props.recipient.name}</p>
+                                    <p className='text-xs'>Disabilitas:&nbsp;
+                                        {parent.disabilities.map((disability, i) =>
+                                            i === parent.disabilities.length - 1 ? (
+                                                disability.disability
+                                            ) : (
+                                                disability.disability + ', '
+                                            )
+                                        )}
+                                    </p>
+                                    <p className='text-xs'>Tempat Lahir: {parent.birthplace}</p>
+                                    <p className='text-xs'>Tanggal Lahir: {new Date(parent.birthdate).toLocaleDateString("id-ID", options)}</p>
+                                    <p className='text-xs'>Pekerjaan: {parent.occupation}</p>
+                                    <p className='text-xs'>Alamat Tinggal: {parent.address}</p>
+                                    <p className='text-xs'>Nomor Telepon: {parent.phone}</p>
                                 </div>
                             )}
                         </div>
@@ -94,19 +101,25 @@ export default function RecipientsShow(props) {
                     <div className='max-w-6xl mx-auto mt-4'>
                         <div className='flex justify-between items-center'>
                             <h4 className='text-red text-lg font-bold'>Riwayat Donasi</h4>
-                            <h5 className='text-red text-md'>1902 Donasi</h5>
+                            <h5 className='text-red text-md'>{props.donations.length} Donasi</h5>
                         </div>
                         <div>
-                            {props.donations.map((donation, i) =>
-                                <div className='shadow-lg rounded-lg p-4 flex gap-4'>
-                                    <div className="w-10 h-10">
-                                        <img className="w-full h-full rounded object-cover" src={donation.donor.photo ? '/img/donors/photo/' + donation.donor.photo : '/img/avatar-default.png'} />
+                            {props.donations.length > 0 ? (
+                                props.donations.map((donation, i) =>
+                                    <div className='shadow-lg rounded-lg p-4 flex gap-4'>
+                                        <div className="w-10 h-10">
+                                            <img className="w-full h-full rounded object-cover" src={donation.donor.photo ? '/img/donors/photo/' + donation.donor.photo : '/img/avatar-default.png'} />
+                                        </div>
+                                        <div>
+                                            <h4 className='text-red text-base font-bold'>{donation.donor.name}</h4>
+                                            <p className='text-xs'>Berdonasi Sebesar <b>{'Rp' + formatter.format(donation.amount)}</b></p>
+                                            <p className='text-[0.65rem]'>{new Date(donation.transfer_date).toLocaleDateString("id-ID", options)}</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h4 className='text-red text-base font-bold'>{donation.donor.name}</h4>
-                                        <p className='text-xs'>Berdonasi Sebesar <b>{'Rp' + formatter.format(donation.amount)}</b></p>
-                                        <p className='text-[0.65rem]'>{new Date(donation.transfer_date).toLocaleDateString("id-ID", options)}</p>
-                                    </div>
+                                )
+                            ) : (
+                                <div className='p-4 py-8 text-center text-gray-500'>
+                                    <h4>Belum ada Donasi!</h4>
                                 </div>
                             )}
                         </div>

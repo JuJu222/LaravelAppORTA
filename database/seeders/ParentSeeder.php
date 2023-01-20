@@ -17,12 +17,12 @@ class ParentSeeder extends Seeder
     {
         DB::table('parents')->insert([
             'name' => 'Parent 1',
-            'nik' => '',
-            'birthplace' => '',
+            'nik' => '023183812',
+            'birthplace' => 'Surabaya',
             'birthdate' => date('2022-9-5'),
-            'occupation' => '',
-            'address' => '',
-            'phone' => '',
+            'occupation' => 'Ibu Rumah Tangga',
+            'address' => 'Jl. Ahmad Yani',
+            'phone' => '082131393218',
             'ktp_image' => '',
         ]);
 

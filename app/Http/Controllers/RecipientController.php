@@ -199,9 +199,9 @@ class RecipientController extends Controller
      */
     public function show($id)
     {
-        $recipient = Recipient::query()->with(['parents', 'disabilities', 'needs'])->find($id);
+        $recipient = Recipient::query()->with(['parents.disabilities', 'disabilities', 'needs'])->find($id);
         $recipients = Recipient::query()->with(['parents', 'disabilities'])->limit(3)->get();
-        $donations = Donation::query()->whereHas('need', function ($query) use ($id) {
+        $donations = Donation::query()->whereNotNull('accepted_date')->whereHas('need', function ($query) use ($id) {
             return $query->where('recipient_id', '=', $id);
         })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
 

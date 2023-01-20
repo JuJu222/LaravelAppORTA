@@ -1,76 +1,125 @@
-import React, {useState} from 'react';
-import { Link, Head } from '@inertiajs/inertia-react';
-
-export default function Welcome(props) {
-    const [show, setShow] = useState(false);
-
+import React, { useState } from "react";
+import {Link} from "@inertiajs/inertia-react";
+function IndexPage() {
+    const [menu, setMenu] = useState(false);
     return (
         <>
-            <Head title="Welcome" />
-            <nav className="w-full border-b">
-                <div className="py-5 md:py-0 container mx-auto px-6 flex items-center justify-between">
-                    <div aria-label="Home. logo" role="img">
-                        <img className="w-12 md:w-auto" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/centre_aligned_simple-Svg1.svg" alt="logo" />
-                    </div>
-                    <div>
-                        <button onClick={() => setShow(!show)} className={`${show ? 'hidden' : ''} sm:block md:hidden text-gray-500 hover:text-gray-700 focus:text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500`}>
-                            <svg aria-haspopup="true" aria-label="open Main Menu" xmlns="http://www.w3.org/2000/svg" className="md:hidden icon icon-tabler icon-tabler-menu" width={24} height={24} viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <line x1={4} y1={8} x2={20} y2={8} />
-                                <line x1={4} y1={16} x2={20} y2={16} />
-                            </svg>
-                        </button>
-                        <div id="menu" className={` ${show ? '' : 'hidden'} md:block lg:block `}>
-                            <button onClick={() => setShow(!show)} className={`block md:hidden lg:hidden text-gray-500 hover:text-gray-700 focus:text-gray-700 fixed focus:outline-none focus:ring-2 focus:ring-gray-500 z-30 top-0 mt-6`}>
-                                <svg aria-label="close main menu" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                    <line x1={18} y1={6} x2={6} y2={18} />
-                                    <line x1={6} y1={6} x2={18} y2={18} />
-                                </svg>
+            <div className="relative w-full h-full pb-10">
+                <div className="hidden md:block">
+                    <img className="absolute bg-cover bg-center w-full h-full inset-0" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/Hero%2008.png" alt />
+                </div>
+                <nav className="lg:hidden relative z-50">
+                    <div className="flex py-2 justify-between items-center px-4">
+                        <div>
+                            <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/large_typography_with_gradient_and_glass_effect_Svg1.svg" alt="logo" />
+                        </div>
+                        <div className="visible flex items-center">
+                            <button id="open" onClick={() => setMenu(!menu)} className={` ${menu ? 'hidden' : ''} focus:outline-none focus:ring-2 focus:ring-black`}>
+                                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/large_typography_with_gradient_and_glass_effect_Svg2.svg" alt="menu" />
                             </button>
-                            <ul className="flex text-3xl md:text-base items-center py-10 md:flex flex-col md:flex-row justify-center fixed md:relative top-0 bottom-0 left-0 right-0 bg-white md:bg-transparent z-20">
-                                <li className="text-gray-700 hover:text-gray-900 cursor-pointer text-base lg:text-lg pt-10 md:pt-0">
-                                    <a href="javascript: void(0)">Feature</a>
+                            <ul id="list" className={` ${menu ? '' : 'hidden'} p-2 border-r bg-white absolute rounded top-0 left-0 right-0 shadow mt-24`}>
+                                <li className="flex cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                    <a href="javascript: void(0)" className="ml-2 focus:outline-none focus:ring-2 focus:ring-black">
+                                        <span className="font-bold">Home</span>
+                                    </a>
                                 </li>
-                                <li className="text-gray-700 hover:text-gray-900 cursor-pointer text-base lg:text-lg pt-10 md:pt-0 md:ml-5 lg:ml-10">
-                                    <a href="javascript: void(0)">Marketplace</a>
+                                <li className="flex cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none" onclick="dropdownHandler(this)">
+                                    <a href="javascript: void(0)" className="ml-2 focus:outline-none focus:ring-2 focus:ring-black">
+                                        <span className="font-bold">About Us</span>
+                                    </a>
                                 </li>
-                                <li className="text-gray-700 hover:text-gray-900 cursor-pointer text-base lg:text-lg pt-10 md:pt-0 md:ml-5 lg:ml-10">
-                                    <a href="javascript: void(0)">Company</a>
+                                <li className="flex cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+                                    <a href="javascript: void(0)" className="ml-2 focus:outline-none focus:ring-2 focus:ring-black">
+                                        <span className="font-bold">Pricing</span>
+                                    </a>
                                 </li>
-                                <li className="text-gray-700 hover:text-gray-900 cursor-pointer text-base lg:text-lg pt-10 md:pt-0 md:ml-5 lg:ml-10">
-                                    <a href="javascript: void(0)">Features</a>
+                                <li className="flex cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none" onclick="dropdownHandler(this)">
+                                    <a href="javascript: void(0)" className="ml-2 focus:outline-none focus:ring-2 focus:ring-black">
+                                        <span className="font-bold">Resources</span>
+                                    </a>
                                 </li>
-                                <li className="text-gray-700 hover:text-gray-900 cursor-pointer text-base lg:text-lg pt-10 md:pt-0 md:ml-5 lg:ml-10">
-                                    <a href="javascript: void(0)">Contact</a>
+                                <li className="flex cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-4 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none" onclick="dropdownHandler(this)">
+                                    <a href="javascript: void(0)" className="ml-2 focus:outline-none focus:ring-2 focus:ring-black">
+                                        <span className="font-bold">Sign In</span>
+                                    </a>
                                 </li>
                             </ul>
+                            <div className="xl:hidden">
+                                <button id="close" className={` ${menu ? '' : 'hidden'} close-m-menu focus:ring-2 focus:ring-black focus:outline-none`} onClick={() => setMenu(!menu)}>
+                                    <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/large_typography_with_gradient_and_glass_effect_Svg3.svg" alt="close" />
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <Link href={route('login')} className="focus:outline-none lg:text-lg lg:font-bold focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 hidden md:block bg-transparent transition duration-150 ease-in-out hover:bg-gray-200 rounded border border-indigo-700 text-indigo-700 px-4 sm:px-8 py-1 sm:py-3 text-sm">Sign In</Link>
-                </div>
-            </nav>
-            <div className='lg:px-32'>
-                <div className='flex py-12 sm:py-24 gap-10'>
-                    <div className='w-1/2'>
-                        <img className='mx-auto' src="https://www.jd.id/news/wp-content/uploads/2020/07/kids-play-outdoors.jpg" alt=""/>
-                    </div>
-                    <div className="w-1/2 flex flex-col items-center">
-                        <div className="lg:flex justify-center items-center flex-col  mb-5 sm:mb-10">
-                            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center text-gray-800 font-black leading-7 md:leading-10">
-                                The Freedom to Create the
-                                <span className="text-indigo-700">Websites</span>
-                                You Want
-                            </h1>
-                            <p className="mt-5 sm:mt-10 text-gray-400 font-normal text-center text-sm sm:text-lg">A professonal website drives sales. Create a beautiful website to impress and engage new customers and establish your business online </p>
+                </nav>
+                <nav className="f-f-l relative z-10">
+                    <div className="relative z-10 mx-auto container hidden w-full px-4 xl:px-0 lg:flex justify-between items-center py-11">
+                        <div>
+                            <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/large_typography_with_gradient_and_glass_effect_Svg4.svg" alt="logo" />
                         </div>
-                        <div className="flex justify-center items-center">
-                            <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-indigo-700 py-2 sm:py-4 text-sm">Get Started</button>
-                            <button className="ml-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 bg-transparent transition duration-150 ease-in-out hover:border-indigo-600 lg:text-xl lg:font-bold  hover:text-indigo-600 rounded border border-indigo-700 text-indigo-700 px-4 sm:px-10 py-2 sm:py-4 text-sm">Live Demo</button>
+                        <div className="flex items-center text-white text-base font-medium">
+                            <ul className="flex items-center pr-3 xl:pr-12">
+                                <li className="cursor-pointer hover:text-gray-300 ease-in">
+                                    <a href="javascript:void(0)" className="focus:outline-none focus:ring-2 focus:ring-white">Home</a>
+                                </li>
+                                <li className="pl-3 lg:pl-5 xl:pl-8 cursor-pointer hover:text-gray-300 ease-in">
+                                    <a href="javascript:void(0)" className="focus:outline-none focus:ring-2 focus:ring-white">About Us</a>
+                                </li>
+                                <li className="pl-3 lg:pl-5 xl:pl-8 cursor-pointer hover:text-gray-300 ease-in">
+                                    <a href="javascript:void(0)" className="focus:outline-none focus:ring-2 focus:ring-white">Pricing</a>
+                                </li>
+                                <li className="pl-3 lg:pl-5 xl:pl-8 cursor-pointer hover:text-gray-300 ease-in">
+                                    <a href="javascript:void(0)" className="focus:outline-none focus:ring-2 focus:ring-white">Resources</a>
+                                </li>
+                            </ul>
+                            <Link href={route('login')} className="focus:outline-none lg:text-lg lg:font-bold focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 hidden md:block bg-transparent transition duration-150 ease-in-out hover:bg-gray-200 rounded border border-indigo-700 text-indigo-700 px-4 sm:px-8 py-1 sm:py-3 text-sm">Sign In</Link>
+                            <button className="px-6 py-3 bg-indigo-400 hover:bg-indigo-500 text-white text-base font-medium rounded-lg flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700">
+                                Sign In
+                                <img className="ml-4" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/large_typography_with_gradient_and_glass_effect_Svg5.svg" alt="arrow" />
+                            </button>
                         </div>
                     </div>
+                </nav>
+                <div className="relative px-4 xl:px-0 container mx-auto md:flex items-center gap-8">
+                    <div className="text-color w-full md:w-1/3 pt-16 lg:pt-32 xl:pt-12">
+                        <h1 className="text-4xl md:text-4xl lg:text-6xl w-11/12 lg:w-11/12 xl:w-full xl:text-6xl text-gray-900 font-extrabold f-f-l">Build, review and ship with ease</h1>
+                        <div className="f-f-r text-base lg:text-base pb-20 sm:pb-0 pt-10 xl:pt-6">
+                            <h2>The next big thing starts here. Start building with Prodify and be the first to market with a product that is ready to take on the competition and delight your customers</h2>
+                        </div>
+                        <div className="lg:flex">
+                            <button className="hidden md:block hover:opacity-90 text-base w-full xl:text-base xl:w-6/12 mt-4 xl:mt-8 f-f-r py-4  bg-indigo-700 text-white font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 rounded-lg">Start building now</button>
+                            <button className="hidden md:block hover:opacity-90 text-base w-full xl:text-base xl:w-4/12 lg:ml-2 xl:ml-2 mt-4 xl:mt-8 f-f-r py-4  bg-indigo-200 text-indigo-600 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 rounded-lg">Try it out</button>
+                        </div>
+                    </div>
+                    <img className="w-full mt-8 md:mt-0 object-fill md:w-2/3 md:-ml-4 lg:-ml-4 xl:ml-0" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/Graphic.png" alt="sample page" role="img" />
+                    <button className="md:hidden hover:opacity-90 text-base w-full xl:text-base xl:w-6/12 mt-4 xl:mt-8 f-f-r py-4  bg-indigo-700 text-white font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 rounded-lg">Start building now</button>
+                    <button className="md:hidden hover:opacity-90 text-base w-full xl:text-base xl:w-4/12 xl:ml-2 mt-4 xl:mt-8 f-f-r py-4  bg-indigo-200 text-indigo-600 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 rounded-lg">Try it out</button>
                 </div>
             </div>
+
+
+            <style>{`
+        .top-100 {
+            animation: slideDown .5s ease-in-out;
+        }
+
+        @keyframes slideDown {
+            0% {
+                top: -50%;
+            }
+
+            100% {
+                top: 0;
+            }
+        }
+
+        * {
+            outline: none !important;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-tap-highlight-color: transparent;
+        } `}</style>
         </>
     );
 }
+
+export default IndexPage;
