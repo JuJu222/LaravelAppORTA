@@ -121,7 +121,7 @@ export default function Home(props) {
                         <div>
                             <h2 className='text-red font-bold mt-2'>Yuk, mari kita bantu anak-anak!</h2>
                             <p className='text-xs'>Klik salah satu anak untuk membantu</p>
-                            <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-5">
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
                                 {props.recipients.map((recipient, i) =>
                                     <RecipientCard recipient={recipient}></RecipientCard>
                                 )}
@@ -184,7 +184,7 @@ export default function Home(props) {
                         <div>
                             <h2 className='text-red font-bold mt-2'>Yuk, mari kita bantu anak-anak!</h2>
                             <p className='text-xs'>Klik salah satu anak untuk membantu</p>
-                            <div className="mt-4 grid md:grid-cols-3 gap-5">
+                            <div className="grid grid-cols-1 gap-5">
                                 {props.recipient.needs.map((need, i) =>
                                     <RecipientNeedCard need={need} recipientID={props.recipient.id} button={true}/>
                                 )}

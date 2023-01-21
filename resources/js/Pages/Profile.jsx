@@ -33,35 +33,35 @@ export default function Profile(props) {
                 <div className='w-full h-1/3 px-4 pt-4'>
                     <div className='max-w-6xl mx-auto'>
                         <div className="grid grid-cols-1 divide-y">
-                            <div className='py-3'>
+                            <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Nama</h5>
                                 <p className='text-center text-sm'>{props.donor.name ? props.donor.name : '-'}</p>
                             </div>
-                            <div className='py-3'>
+                            <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Nama Alias</h5>
                                 <p className='text-center text-sm'>{props.donor.name_alias ? props.donor.name_alias : '-'}</p>
                             </div>
-                            <div className='py-3'>
+                            <div className='py-5'>
                                 <h5 className='font-bold text-xs'>KTP</h5>
                                 <p className='text-center text-sm'>{props.donor.ktp ? props.donor.ktp : '-'}</p>
                             </div>
-                            <div className='py-3'>
+                            <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Nomor Telepon</h5>
                                 <p className='text-center text-sm'>{props.donor.phone ? props.donor.phone : '-'}</p>
                             </div>
-                            <div className='py-3'>
+                            <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Email</h5>
                                 <p className='text-center text-sm'>{props.donor.email ? props.donor.email : '-'}</p>
                             </div>
-                            <div className='py-3'>
+                            <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Kota</h5>
                                 <p className='text-center text-sm'>{props.donor.city ? props.donor.city : '-'}</p>
                             </div>
-                            <div className='py-3'>
+                            <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Alamat</h5>
                                 <p className='text-center text-sm'>{props.donor.address ? props.donor.address : '-'}</p>
                             </div>
-                            <div className='py-3'>
+                            <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Catatan</h5>
                                 <p className='text-center text-sm'>{props.donor.note ? props.donor.note : '-'}</p>
                             </div>
@@ -94,35 +94,35 @@ export default function Profile(props) {
                 <div className='w-full h-1/3 px-4 pt-4'>
                     <div className='max-w-6xl mx-auto'>
                         <div className="grid grid-cols-1 divide-y">
-                            <div className='py-3'>
+                            <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Nama</h5>
                                 <p className='text-center text-sm'>{props.recipient.name ? props.recipient.name : '-'}</p>
                             </div>
-                            {/*<div className='py-3'>*/}
+                            {/*<div className='py-5'>*/}
                             {/*    <h5 className='font-bold text-xs'>Nama Alias</h5>*/}
                             {/*    <p className='text-center text-sm'>{props.donor.name_alias ? props.donor.name_alias : '-'}</p>*/}
                             {/*</div>*/}
-                            {/*<div className='py-3'>*/}
+                            {/*<div className='py-5'>*/}
                             {/*    <h5 className='font-bold text-xs'>KTP</h5>*/}
                             {/*    <p className='text-center text-sm'>{props.donor.ktp ? props.donor.ktp : '-'}</p>*/}
                             {/*</div>*/}
-                            {/*<div className='py-3'>*/}
+                            {/*<div className='py-5'>*/}
                             {/*    <h5 className='font-bold text-xs'>Nomor Telepon</h5>*/}
                             {/*    <p className='text-center text-sm'>{props.donor.phone ? props.donor.phone : '-'}</p>*/}
                             {/*</div>*/}
-                            {/*<div className='py-3'>*/}
+                            {/*<div className='py-5'>*/}
                             {/*    <h5 className='font-bold text-xs'>Email</h5>*/}
                             {/*    <p className='text-center text-sm'>{props.donor.email ? props.donor.email : '-'}</p>*/}
                             {/*</div>*/}
-                            {/*<div className='py-3'>*/}
+                            {/*<div className='py-5'>*/}
                             {/*    <h5 className='font-bold text-xs'>Kota</h5>*/}
                             {/*    <p className='text-center text-sm'>{props.donor.city ? props.donor.city : '-'}</p>*/}
                             {/*</div>*/}
-                            {/*<div className='py-3'>*/}
+                            {/*<div className='py-5'>*/}
                             {/*    <h5 className='font-bold text-xs'>Alamat</h5>*/}
                             {/*    <p className='text-center text-sm'>{props.donor.address ? props.donor.address : '-'}</p>*/}
                             {/*</div>*/}
-                            {/*<div className='py-3'>*/}
+                            {/*<div className='py-5'>*/}
                             {/*    <h5 className='font-bold text-xs'>Catatan</h5>*/}
                             {/*    <p className='text-center text-sm'>{props.donor.note ? props.donor.note : '-'}</p>*/}
                             {/*</div>*/}

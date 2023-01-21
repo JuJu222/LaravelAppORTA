@@ -16,8 +16,9 @@ module.exports = {
             },
             colors: {
                 red:"#ED1802",
-                red_hover:"#bd0d00",
-                pink:"#FD8578"
+                red_hover:"#ea5f51",
+                pink:"#FD8578",
+                light_pink:"#ffb9b2"
             }
         },
     },

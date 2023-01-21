@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Donation;
 use App\Models\Donor;
+use App\Models\Recipient;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,5 +46,23 @@ class DonationController extends Controller
         }
 
         return Redirect::back();
+    }
+
+    public function showVerification($id)
+    {
+        $donation = Donation::query()->with(['donor', 'need.needCategory', 'need.recipient'])->find($id);
+        $recipient = Recipient::query()->with(['parents', 'disabilities', 'needs'])->find($donation->need->recipient->id);
+        $need = $recipient->needs()->where('needs.id', $donation->need->id)->first();
+        $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)
+            ->whereNotNull('accepted_date')->sum('amount');
+
+        return Inertia::render('Donations/DonationsVerify', compact('donation', 'need'));
+    }
+
+    public function verify($id)
+    {
+        $donations = Donation::query()->with(['donor', 'need.needCategory', 'need.recipient'])->get();
+
+        return Inertia::render('Donations/Donations', compact('donations'));
     }
 }

@@ -13,7 +13,7 @@ export default function DisabilitiesCreate(props) {
     function handleChange(e) {
         const key = e.target.name;
 
-        if (e.target.files !== null) {
+        if (e.target.type === 'file') {
             const file = e.target.files[0]
             setValues(values => ({
                 ...values,

@@ -281,13 +281,32 @@ class RecipientController extends Controller
 
     public function showMessage($id)
     {
-        $donor = Donor::query()->where('user_id', Auth::id())->first();
-        $donation = Donation::query()->find($id);
-        $need = Need::query()->where('id', $donation->need_id)->with('needCategory')->first();
-        $need['collected'] = Donation::query()->where('need_id', $donation->need_id)
-            ->whereNotNull('accepted_date')->sum('amount');
-        $recipient = Recipient::query()->find($need->recipient_id);
+        if (Auth::user()->role_id === 2) {
+            $donor = Donor::query()->where('user_id', Auth::id())->first();
+            $donation = Donation::query()->find($id);
+            $need = Need::query()->where('id', $donation->need_id)->with('needCategory')->first();
+            $need['collected'] = Donation::query()->where('need_id', $donation->need_id)
+                ->whereNotNull('accepted_date')->sum('amount');
+            $recipient = Recipient::query()->find($need->recipient_id);
 
-        return Inertia::render('RecipientsMessage', compact('donor', 'need', 'recipient', 'donation'));
+            return Inertia::render('RecipientsMessage', compact('donor', 'need', 'recipient', 'donation'));
+        } else {
+            $recipient = Recipient::query()->where('user_id', Auth::id())->first();
+            $need = $recipient->needs()->where('needs.id', $id)->first();
+            $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)
+                ->whereNotNull('accepted_date')->sum('amount');
+
+            return Inertia::render('Needs/NeedsMessage', compact('recipient', 'need'));
+        }
+    }
+
+    public function postMessage(Request $request, $id)
+    {
+        $need = Need::query()->find($id);
+        $need->update([
+           'delivered_message' => $request->delivered_message
+        ]);
+
+        return Redirect::route('home');
     }
 }

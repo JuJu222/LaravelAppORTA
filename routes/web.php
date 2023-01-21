@@ -77,16 +77,19 @@ Route::middleware(['auth'])->group(function () {
         ]);
         Route::get('/recipients/{recipientID}/donate/{needID}', [RecipientController::class, 'addDonation'])->name('recipients.donate.add');
         Route::post('/recipients/{recipientID}/donate/{needID}', [RecipientController::class, 'storeDonation'])->name('recipients.donate.store');
-        Route::get('/needs/{id}/message', [RecipientController::class, 'showMessage'])->name('needs.show.message');
     });
 
     Route::middleware('role:1,2,3')->group(function () {
         Route::resource('recipients', RecipientController::class)->only([
             'show'
         ]);
+        Route::get('/donasi/{id}/verifikasi', [DonationController::class, 'showVerification'])->name('donation.verification.show');
+        Route::post('/donasi/{id}/verifikasi', [DonationController::class, 'verify'])->name('donation.verification.verify');
         Route::get('/beranda', [Controller::class, 'home'])->name('home');
         Route::get('/donasi', [Controller::class, 'donations']);
         Route::get('/profil', [Controller::class, 'profile']);
+        Route::get('/needs/{id}/message', [RecipientController::class, 'showMessage'])->name('needs.message.show');
+        Route::post('/needs/{id}/message', [RecipientController::class, 'postMessage'])->name('needs.message.post');
     });
 
     Route::get('/donor/verifikasi', [DonorController::class, 'notVerified'])->name('donor.unverified');
