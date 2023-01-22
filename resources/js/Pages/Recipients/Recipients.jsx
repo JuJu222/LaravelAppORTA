@@ -5,21 +5,18 @@ import {Link} from "@inertiajs/inertia-react";
 import RecipientCardAdmin from "@/Components/RecipientCardAdmin";
 
 export default function Recipients(props) {
-    const [filteredProducts, setFilteredProducts] = useState([]);
-    const [searchValue, setSearchValue] = useState('');
+    const [filteredItems, setFilteredItems] = useState(props.recipients);
+    const [filter, setFilter] = useState('');
 
-    // your search event handler
     function search (searchTerm) {
-        // update search value
-        setSearchValue(searchTerm);
+        setFilter(searchTerm);
 
         const filtered = getValues("products").filter(
-            product =>
-                product.description.toLowerCase().indexOf(searchTerm) > -1,
+            product => product.description.toLowerCase().indexOf(searchTerm) > -1,
         );
+        
 
-        // set filtered products in state
-        setFilteredProducts(filtered);
+        setFilteredItems(filtered);
     }
 
     function handleDelete(id) {
