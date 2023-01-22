@@ -8,15 +8,17 @@ export default function Recipients(props) {
     const [filteredItems, setFilteredItems] = useState(props.recipients);
     const [filter, setFilter] = useState('');
 
-    function search (searchTerm) {
-        setFilter(searchTerm);
-
-        const filtered = getValues("products").filter(
-            product => product.description.toLowerCase().indexOf(searchTerm) > -1,
-        );
-        
-
-        setFilteredItems(filtered);
+    function handleFilter(e) {
+        const results = props.recipients.filter(item => {
+            if (e.target.value === '') {
+                return true
+            } else {
+                // return item.name.toLowerCase().includes(e.target.value.toLowerCase()) || item.birthdate.toLowerCase().includes(e.target.value.toLowerCase());
+                return item.name.toLowerCase().includes(e.target.value.toLowerCase());
+            }
+        })
+        setFilter(e.target.value);
+        setFilteredItems(results);
     }
 
     function handleDelete(id) {
@@ -32,9 +34,9 @@ export default function Recipients(props) {
             <div className="w-full sm:px-6 xl:px-0">
                 <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
                     <div className="flex items-center justify-between">
-                        <input type="text" id="username" name="username"
+                        <input type="text" id="username" name="username" onChange={handleFilter}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Cari wali anak" />
+                               placeholder="Cari penerima dana" />
                         <Link href={route("recipients.create")}>
                             <button className="inline-flex ml-4 sm:mt-0 items-start justify-start px-5 py-2.5 bg-red hover:bg-red_hover transition focus:outline-none rounded">
                                 <p className="text-xl font-medium leading-none text-white">+</p>
@@ -54,7 +56,7 @@ export default function Recipients(props) {
                         </tr>
                         </thead>
                         <tbody className="w-full">
-                        {props.recipients.map((recipient, i) =>
+                        {filteredItems.map((recipient, i) =>
                             <tr className="h-20 text-sm leading-none text-gray-800 bg-white border-b border-t border-gray-100">
                                 <td className="pl-4">
                                     <p className="text-sm font-medium leading-none text-gray-800">{i + 1}</p>
@@ -72,7 +74,7 @@ export default function Recipients(props) {
                                 <td className="pl-12">
                                     <div className="flex items-center">
                                         <div>
-                                            <p className="font-medium">{recipient.name}</p>
+                                            <p className="font-medium">{recipient.birthdate}</p>
                                         </div>
                                     </div>
                                 </td>
