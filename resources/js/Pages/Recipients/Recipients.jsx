@@ -98,7 +98,18 @@ export default function Recipients(props) {
                                 </td>
                                 <td className="pl-12 pr-4">
                                     <div className='flex gap-4 justify-end'>
-                                        <Link href={route("disabilities.edit", recipient.id)} className="flex items-center justify-center text-center">
+                                        <Link href={route("recipients.show", recipient.id)} className="flex items-center justify-center text-center">
+                                            <button
+                                                className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" className="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                    <path
+                                                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                </svg>
+                                            </button>
+                                        </Link>
+                                        <Link href={route("recipients.edit", recipient.id)} className="flex items-center justify-center text-center">
                                             <button
                                                 className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

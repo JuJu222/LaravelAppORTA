@@ -214,7 +214,7 @@ export default function DisabilitiesCreate(props) {
                                required={true} />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="photos" className="block mb-2 text-sm font-medium text-gray-900 ">Foto Pendamping *</label>
+                        <label htmlFor="photos" className="block mb-2 text-sm font-medium text-gray-900 ">Foto Pendamping</label>
                         {values.photos &&
                             <div className='p-2 w-full h-40 border border-gray-300 rounded-lg mb-2 flex'>
                                 {values.photos.length === undefined ? (
@@ -228,7 +228,7 @@ export default function DisabilitiesCreate(props) {
                         }
                         <input type="file" id="photos" name="photos" onChange={handleChange} multiple
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               required={true} />
+                               required={false} />
                     </div>
                 </div>
                 <button type="submit"

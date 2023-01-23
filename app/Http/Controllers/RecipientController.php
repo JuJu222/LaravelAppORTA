@@ -8,6 +8,7 @@ use App\Models\Donor;
 use App\Models\NeedCategory;
 use App\Models\Need;
 use App\Models\ParentModel;
+use App\Models\Photo;
 use App\Models\Recipient;
 use App\Models\Relationship;
 use App\Models\User;
@@ -117,9 +118,11 @@ class RecipientController extends Controller
                 'birth_certificate' => 'mimes:jpeg,png,bmp,tiff',
             ]);
             $file = $request->file('birth_certificate');
-            $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
+            $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
             $file->move(public_path() . '/img/recipients/birth_certificate/', $name);
-            Pho
+            $recipient->update([
+                'birth_certificate' => $name,
+            ]);
         }
 
         if ($request->hasfile('kartu_keluarga')) {
@@ -127,7 +130,7 @@ class RecipientController extends Controller
                 'kartu_keluarga' => 'mimes:jpeg,png,bmp,tiff',
             ]);
             $file = $request->file('kartu_keluarga');
-            $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
+            $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
             $file->move(public_path() . '/img/recipients/kartu_keluarga/', $name);
             $recipient->update([
                 'kartu_keluarga' => $name,
@@ -139,11 +142,45 @@ class RecipientController extends Controller
                 'primary_photo' => 'mimes:jpeg,png,bmp,tiff',
             ]);
             $file = $request->file('primary_photo');
-            $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path() . '/img/recipients/kartu_keluarga/', $name);
-            $recipient->update([
-                'kartu_keluarga' => $name,
+            $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+            $file->move(public_path() . '/img/recipients/photos/', $name);
+            Photo::query()->create([
+                'title' => '',
+                'photo_url' => $name,
+                'photo_type_id' => 1,
+                'recipient_id' => $recipient->id,
             ]);
+        }
+
+        if ($request->hasFile('photos')) {
+            if (is_array($request->file('photos'))) {
+                foreach ($request->file('photos') as $file) {
+//                    $this->validate($request, [
+//                        'photos.*' => 'mimes:jpeg,png,bmp,tiff',
+//                    ]);
+                    $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+                    $file->move(public_path() . '/img/recipients/photos/', $name);
+                    Photo::query()->create([
+                        'title' => '',
+                        'photo_url' => $name,
+                        'photo_type_id' => 2,
+                        'recipient_id' => $recipient->id,
+                    ]);
+                }
+            } else {
+                $this->validate($request, [
+                    'photos' => 'mimes:jpeg,png,bmp,tiff',
+                ]);
+                $file = $request->file('photos');
+                $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+                $file->move(public_path() . '/img/recipients/photos/', $name);
+                Photo::query()->create([
+                    'title' => '',
+                    'photo_url' => $name,
+                    'photo_type_id' => 2,
+                    'recipient_id' => $recipient->id,
+                ]);
+            }
         }
 
         return Redirect::route('recipients.parents.add', $recipient->id);
@@ -197,7 +234,7 @@ class RecipientController extends Controller
             'transfer_receipt' => 'mimes:jpeg,png,bmp,tiff',
         ]);
         $file = $request->file('transfer_receipt');
-        $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
+        $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
         $file->move(public_path() . '/img/donations/transfer_receipt/', $name);
 
         $donation = Donation::query()->create([
@@ -220,7 +257,7 @@ class RecipientController extends Controller
      */
     public function show($id)
     {
-        $recipient = Recipient::query()->with(['parents.disabilities', 'disabilities', 'needs'])->find($id);
+        $recipient = Recipient::query()->with(['parents.disabilities', 'disabilities', 'needs', 'photos.type'])->find($id);
         $recipients = Recipient::query()->with(['parents', 'disabilities'])->limit(3)->get();
         $donations = Donation::query()->whereNotNull('accepted_date')->whereHas('need', function ($query) use ($id) {
             return $query->where('recipient_id', '=', $id);

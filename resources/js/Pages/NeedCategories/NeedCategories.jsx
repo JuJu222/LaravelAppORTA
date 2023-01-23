@@ -18,7 +18,7 @@ export default function NeedCategories(props) {
         <Authenticated
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Keperluan</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Kebutuhan</h2>}
         >
             {/*<div className="w-full sm:px-6">*/}
             {/*    <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">*/}
@@ -123,7 +123,7 @@ export default function NeedCategories(props) {
                         <thead>
                         <tr className="h-16 w-full text-sm leading-none text-gray-800">
                             <th className="font-bold text-left pl-4">No.</th>
-                            <th className="font-bold text-left pl-12">Keperluan</th>
+                            <th className="font-bold text-left pl-12">Kebutuhan</th>
                         </tr>
                         </thead>
                         <tbody className="w-full">

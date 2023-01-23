@@ -51,7 +51,7 @@ class RegisteredUserController extends Controller
             'ktp' => 'mimes:jpeg,png,bmp,tiff',
         ]);
         $file = $request->file('ktp');
-        $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
+        $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
         $file->move(public_path() . '/img/donors/ktp/', $name);
 
         $donor = Donor::query()->create([
@@ -71,7 +71,7 @@ class RegisteredUserController extends Controller
                 'photo' => 'mimes:jpeg,png,bmp,tiff',
             ]);
             $file = $request->file('photo');
-            $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
+            $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
             $file->move(public_path() . '/img/donors/photo/', $name);
             $donor->update([
                 'photo' => $name,

@@ -36,7 +36,7 @@ export default function Donations(props) {
                             <th className="font-bold text-left pl-12">Tanggal Transfer</th>
                             <th className="font-bold text-left pl-12">Donor</th>
                             <th className="font-bold text-left pl-12">Penerima</th>
-                            <th className="font-bold text-left pl-12">Keperluan</th>
+                            <th className="font-bold text-left pl-12">Kebutuhan</th>
                             <th className="font-bold text-left pl-12">Jumlah</th>
                             <th className="font-bold text-left pl-12">Tanggal Verifikasi</th>
                         </tr>

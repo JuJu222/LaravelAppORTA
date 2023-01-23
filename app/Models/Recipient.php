@@ -49,4 +49,9 @@ class Recipient extends Model
         return $this->belongsToMany(NeedCategory::class, 'needs', 'recipient_id',
             'need_category_id')->withPivot(['id', 'amount', 'due_date', 'delivered_date', 'delivered_photo', 'delivered_message']);
     }
+
+    public function photos()
+    {
+        return $this->hasMany(Photo::class);
+    }
 }

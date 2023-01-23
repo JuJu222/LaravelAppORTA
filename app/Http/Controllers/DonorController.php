@@ -72,7 +72,7 @@ class DonorController extends Controller
                 'photo' => 'mimes:jpeg,png,bmp,tiff',
             ]);
             $file = $request->file('photo');
-            $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
+            $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
             $file->move(public_path() . '/img/donors/photo/', $name);
             $donor->update([
                 'photo' => $name,
