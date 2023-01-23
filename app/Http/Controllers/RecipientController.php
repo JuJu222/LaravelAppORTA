@@ -108,16 +108,37 @@ class RecipientController extends Controller
             'address' => $request->input('address'),
             'city' => $request->input('city'),
             'phone' => $request->input('phone'),
-            'birth_certificate' => $request->input('birth_certificate'),
-            'note' => $request->input('note'),
+            'note' => $request->input('note') == '' ? $request->input('note') : null,
             'is_active' => $request->input('is_active'),
         ]);
 
+        if ($request->hasfile('birth_certificate')) {
+            $this->validate($request, [
+                'birth_certificate' => 'mimes:jpeg,png,bmp,tiff',
+            ]);
+            $file = $request->file('birth_certificate');
+            $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path() . '/img/recipients/birth_certificate/', $name);
+            Pho
+        }
+
         if ($request->hasfile('kartu_keluarga')) {
             $this->validate($request, [
-                'photo' => 'mimes:jpeg,png,bmp,tiff',
+                'kartu_keluarga' => 'mimes:jpeg,png,bmp,tiff',
             ]);
             $file = $request->file('kartu_keluarga');
+            $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path() . '/img/recipients/kartu_keluarga/', $name);
+            $recipient->update([
+                'kartu_keluarga' => $name,
+            ]);
+        }
+
+        if ($request->hasfile('primary_photo')) {
+            $this->validate($request, [
+                'primary_photo' => 'mimes:jpeg,png,bmp,tiff',
+            ]);
+            $file = $request->file('primary_photo');
             $name = Carbon::now()->format('Ymd-His') . '.' . $file->getClientOriginalExtension();
             $file->move(public_path() . '/img/recipients/kartu_keluarga/', $name);
             $recipient->update([
