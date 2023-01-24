@@ -109,7 +109,7 @@ class RecipientController extends Controller
             'address' => $request->input('address'),
             'city' => $request->input('city'),
             'phone' => $request->input('phone'),
-            'note' => $request->input('note') == '' ? $request->input('note') : null,
+            'note' => $request->input('note') !== '' ? $request->input('note') : null,
             'is_active' => $request->input('is_active'),
         ]);
 

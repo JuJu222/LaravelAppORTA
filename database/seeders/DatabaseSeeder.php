@@ -30,7 +30,8 @@ class DatabaseSeeder extends Seeder
             RecipientParentSeeder::class,
             RecipientDisabilitySeeder::class,
             ParentDisabilitySeeder::class,
-            PhotoTypeSeeder::class
+            PhotoTypeSeeder::class,
+            PhotoSeeder::class
         ]);
     }
 }

@@ -99,6 +99,6 @@ class DisabilityController extends Controller
     {
         Disability::query()->find($id)->delete();
 
-        return Redirect::route('disabilities.index');
+        return Redirect::back();
     }
 }

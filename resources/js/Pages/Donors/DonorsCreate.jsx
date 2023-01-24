@@ -36,7 +36,7 @@ export default function DonorsCreate(props) {
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Tambah Donor</h2>}
         >
             <form onSubmit={handleSubmit}>
-                <h2 className='font-semibold text-lg mb-2'>Isi Data Donor</h2>
+                <h2 className='font-semibold text-lg mb-2'>Data Donor</h2>
                 <div className="grid gap-x-6 md:grid-cols-2">
                     <div className="mb-6">
                         <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 ">Username</label>

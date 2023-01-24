@@ -48,7 +48,7 @@ export default function Donations(props) {
                                             </div>
                                             {donation.accepted_date ? (
                                                 <div className='bg-red w-full px-3 py-1'>
-                                                    <p className='text-white text-sm text-center font-bold'>Lihat Pesan Penerima Dana</p>
+                                                    <p className='text-white text-sm text-center font-bold'>Lihat Pesan Anak</p>
                                                 </div>
                                             ) : (
                                                 ''

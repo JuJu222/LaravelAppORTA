@@ -6,7 +6,10 @@ import RecipientCardAdmin from "@/Components/RecipientCardAdmin";
 
 export default function Recipients(props) {
     const [filteredItems, setFilteredItems] = useState(props.recipients);
-    const [filter, setFilter] = useState('');
+
+    React.useEffect(() => {
+        setFilteredItems(props.recipients);
+    }, [props.recipients])
 
     function handleFilter(e) {
         const results = props.recipients.filter(item => {
@@ -17,7 +20,6 @@ export default function Recipients(props) {
                 return item.name.toLowerCase().includes(e.target.value.toLowerCase());
             }
         })
-        setFilter(e.target.value);
         setFilteredItems(results);
     }
 
@@ -29,14 +31,14 @@ export default function Recipients(props) {
         <Authenticated
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Atur Penerima Dana</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Atur Anak</h2>}
         >
             <div className="w-full sm:px-6 xl:px-0">
                 <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
                     <div className="flex items-center justify-between">
                         <input type="text" id="username" name="username" onChange={handleFilter}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Cari penerima dana" />
+                               placeholder="Cari anak" />
                         <Link href={route("recipients.create")}>
                             <button className="inline-flex ml-4 sm:mt-0 items-start justify-start px-5 py-2.5 bg-red hover:bg-red_hover transition focus:outline-none rounded">
                                 <p className="text-xl font-medium leading-none text-white">+</p>
@@ -97,7 +99,7 @@ export default function Recipients(props) {
                                     </div>
                                 </td>
                                 <td className="pl-12 pr-4">
-                                    <div className='flex gap-4 justify-end'>
+                                    <div className='flex gap-2 justify-end'>
                                         <Link href={route("recipients.show", recipient.id)} className="flex items-center justify-center text-center">
                                             <button
                                                 className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition">

@@ -140,7 +140,7 @@ export default function NeedCategories(props) {
                                     </div>
                                 </td>
                                 <td className="pl-12 pr-4">
-                                    <div className='flex gap-4 justify-end'>
+                                    <div className='flex gap-2 justify-end'>
                                         <Link href={route("need_categories.edit", needCategory.id)} className="flex items-center justify-center text-center">
                                             <button
                                                     className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition">

@@ -88,7 +88,7 @@ export default function Donations(props) {
                                     </div>
                                 </td>
                                 <td className="pl-12 pr-4">
-                                    <div className='flex gap-4 justify-end'>
+                                    <div className='flex gap-2 justify-end'>
                                         <div onClick={(e) => handleAccept(donation.id)} className="flex items-center justify-center text-center">
                                             <button
                                                 className="text-sm leading-none text-white py-3 px-5 bg-green-600 rounded hover:bg-green-700 focus:outline-none transition">

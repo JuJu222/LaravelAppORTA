@@ -41,7 +41,7 @@ export default function Home(props) {
                                 </div>
                             </div>
                         </div>
-                        <Link href={route('dashboard')} as="button"
+                        <Link href={route('donations.index')} as="button"
                               className="mt-4 text-red w-full transition bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Dasbor Admin</Link>
                         <div className='flex justify-between items-end mt-5'>
                             <div className='h-fit my-auto pb-5'>

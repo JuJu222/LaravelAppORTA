@@ -21,9 +21,9 @@ export default function Authenticated({ auth, header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-white">
-                                <NavLink href={route('dashboard')} active={window.location.href.includes(route('dashboard'))}>
-                                    Dasbor
-                                </NavLink>
+                                {/*<NavLink href={route('dashboard')} active={window.location.href.includes(route('dashboard'))}>*/}
+                                {/*    Dasbor*/}
+                                {/*</NavLink>*/}
                                 <NavLink href={route('donations.index')} active={window.location.href.includes(route('donations.index'))}>
                                     Donasi
                                 </NavLink>
@@ -34,7 +34,7 @@ export default function Authenticated({ auth, header, children }) {
                                     Disabilitas
                                 </NavLink>
                                 <NavLink href={route('recipients.index')} active={window.location.href.includes(route('recipients.index'))}>
-                                    Penerima Dana
+                                    Anak
                                 </NavLink>
                                 <NavLink href={route('donors.index')} active={window.location.href.includes(route('donors.index'))}>
                                     Donor
@@ -109,9 +109,9 @@ export default function Authenticated({ auth, header, children }) {
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={window.location.href.includes(route('dashboard'))}>
-                            Dasbor
-                        </ResponsiveNavLink>
+                        {/*<ResponsiveNavLink href={route('dashboard')} active={window.location.href.includes(route('dashboard'))}>*/}
+                        {/*    Dasbor*/}
+                        {/*</ResponsiveNavLink>*/}
                         <ResponsiveNavLink href={route('donations.index')} active={window.location.href.includes(route('donations.index'))}>
                             Donasi
                         </ResponsiveNavLink>
@@ -122,7 +122,7 @@ export default function Authenticated({ auth, header, children }) {
                             Disabilitas
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('recipients.index')} active={window.location.href.includes(route('recipients.index'))}>
-                            Penerima Dana
+                            Anak
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('donors.index')} active={window.location.href.includes(route('donors.index'))}>
                             Donor

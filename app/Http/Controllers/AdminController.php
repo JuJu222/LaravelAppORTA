@@ -66,7 +66,9 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        $admin = Admin::query()->with('user')->find($id);
+
+        return Inertia::render('Admins/AdminsShow', compact('admin'));
     }
 
     /**
@@ -77,10 +79,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $admin = Admin::query()->find($id);
-        $user = User::query()->find($admin->user_id);
+        $admin = Admin::query()->with('user')->find($id);
 
-        return Inertia::render('Admins/AdminsEdit', compact('admin', 'user'));
+        return Inertia::render('Admins/AdminsEdit', compact('admin'));
     }
 
     /**
@@ -92,17 +93,25 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Admin::query()->find($id)->update([
+        $admin = Admin::query()->find($id);
+        $admin->update([
             'name' => $request->input('name'),
             'phone' => $request->input('phone'),
             'email' => $request->input('email'),
             'jabatan' => $request->input('jabatan'),
-            'note' => $request->input('note'),
+            'note' => $request->input('note') !== '' ? $request->input('note') : null,
         ]);
-        User::query()->where('role_id', 1)->where('user_id', $id)->update([
-            'username' => $request->input('username'),
-            'password' => bcrypt($request->input('password')),
-        ]);
+
+        if ($request->password == '') {
+            User::query()->find($admin->user_id)->update([
+                'username' => $request->input('username'),
+            ]);
+        } else {
+            User::query()->find($admin->user_id)->update([
+                'username' => $request->input('username'),
+                'password' => bcrypt($request->input('password')),
+            ]);
+        }
 
         return Redirect::route('admins.index');
     }
