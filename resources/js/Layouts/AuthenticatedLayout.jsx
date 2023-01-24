@@ -30,9 +30,6 @@ export default function Authenticated({ auth, header, children }) {
                                 <NavLink href={route('need_categories.index')} active={window.location.href.includes(route('need_categories.index'))}>
                                     Kebutuhan
                                 </NavLink>
-                                <NavLink href={route('disabilities.index')} active={window.location.href.includes(route('disabilities.index'))}>
-                                    Disabilitas
-                                </NavLink>
                                 <NavLink href={route('recipients.index')} active={window.location.href.includes(route('recipients.index'))}>
                                     Anak
                                 </NavLink>
@@ -117,9 +114,6 @@ export default function Authenticated({ auth, header, children }) {
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('need_categories.index')} active={window.location.href.includes(route('need_categories.index'))}>
                             Kebutuhan
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('disabilities.index')} active={window.location.href.includes(route('disabilities.index'))}>
-                            Disabilitas
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('recipients.index')} active={window.location.href.includes(route('recipients.index'))}>
                             Anak

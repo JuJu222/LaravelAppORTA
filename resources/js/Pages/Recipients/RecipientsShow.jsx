@@ -85,12 +85,12 @@ export default function RecipientsShow(props) {
                                                     </Link>
                                                     <Link href={route("recipients.disabilities.add", props.recipient.id)} className="flex items-center justify-center text-center w-full">
                                                         <button className="w-full h-full text-sm leading-none font-bold text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition flex justify-center items-center">
-                                                            Tambah/Atur Disabilitas
+                                                            Atur Disabilitas
                                                         </button>
                                                     </Link>
                                                     <Link href={route("recipients.parents.add", props.recipient.id)} className="flex items-center justify-center text-center w-full">
                                                         <button className="w-full h-full text-sm leading-none font-bold text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition flex justify-center items-center">
-                                                            Tambah/Atur Wali
+                                                            Atur Wali
                                                         </button>
                                                     </Link>
                                                     <div className="flex items-center justify-center text-center w-full">
@@ -108,7 +108,7 @@ export default function RecipientsShow(props) {
                                                 <div className='mt-2 w-full'>
                                                     <Link href={route("recipients.needs.add", props.recipient.id)} className="flex items-center justify-center text-center w-full">
                                                         <button className="w-full h-full font-bold text-sm leading-none text-white py-3 px-5 bg-red rounded transition hover:bg-red_hover focus:outline-none flex justify-center items-center">
-                                                            Tambah/Atur Kebutuhan
+                                                            Atur Kebutuhan
                                                         </button>
                                                     </Link>
                                                 </div>
@@ -286,12 +286,12 @@ export default function RecipientsShow(props) {
                                             </Link>
                                             <Link href={route("recipients.disabilities.add", props.recipient.id)} className="flex items-center justify-center text-center w-full">
                                                 <button className="w-full h-full text-sm leading-none font-bold text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition flex justify-center items-center">
-                                                    Tambah/Atur Disabilitas
+                                                    Atur Disabilitas
                                                 </button>
                                             </Link>
                                             <Link href={route("recipients.parents.add", props.recipient.id)} className="flex items-center justify-center text-center w-full">
                                                 <button className="w-full h-full text-sm leading-none font-bold text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition flex justify-center items-center">
-                                                    Tambah/Atur Wali
+                                                    Atur Wali
                                                 </button>
                                             </Link>
                                             <div className="flex items-center justify-center text-center w-full">
@@ -309,7 +309,7 @@ export default function RecipientsShow(props) {
                                         <div className='mt-2 w-full'>
                                             <Link href={route("recipients.needs.add", props.recipient.id)} className="flex items-center justify-center text-center w-full">
                                                 <button className="w-full h-full font-bold text-sm leading-none text-white py-3 px-5 bg-red rounded transition hover:bg-red_hover focus:outline-none flex justify-center items-center">
-                                                    Tambah/Atur Kebutuhan
+                                                    Atur Kebutuhan
                                                 </button>
                                             </Link>
                                         </div>
