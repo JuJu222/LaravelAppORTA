@@ -23,6 +23,13 @@ export default function DisabilitiesCreate(props) {
         note: props.recipient.note,
         is_active: props.recipient.is_active,
     })
+    let secondaryExists = false;
+
+    for (const photo of props.recipient.photos) {
+        if (photo.type.type === 'secondary') {
+            secondaryExists = true;
+        }
+    }
 
     function handleChange(e) {
         const key = e.target.name;
@@ -54,7 +61,7 @@ export default function DisabilitiesCreate(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        Inertia.put(route('recipients.update', props.recipient.id), values)
+        Inertia.post(route('recipients.update', props.recipient.id), values)
     }
 
     return (
@@ -75,11 +82,10 @@ export default function DisabilitiesCreate(props) {
                                required={true}/>
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Password
-                            *</label>
+                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
                         <input type="text" id="password" name="password" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               required={true}/>
+                               />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama *</label>
@@ -205,7 +211,7 @@ export default function DisabilitiesCreate(props) {
                         )}
                         <input type="file" id="birth_certificate" name="birth_certificate" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               required={true}/>
+                               />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="kartu_keluarga" className="block mb-2 text-sm font-medium text-gray-900 ">Kartu
@@ -221,7 +227,7 @@ export default function DisabilitiesCreate(props) {
                         )}
                         <input type="file" id="kartu_keluarga" name="kartu_keluarga" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               required={true}/>
+                               />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="note" className="block mb-2 text-sm font-medium text-gray-900 ">Note</label>
@@ -276,7 +282,7 @@ export default function DisabilitiesCreate(props) {
                         )}
                         <input type="file" id="primary_photo" name="primary_photo" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               required={true}/>
+                               />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="photos" className="block mb-2 text-sm font-medium text-gray-900 ">Foto
@@ -293,16 +299,18 @@ export default function DisabilitiesCreate(props) {
                                 )}
                             </div>
                         ) : (
-                            <div className='p-2 w-full h-40 border border-gray-300 rounded-lg mb-2 flex'>
-                                {props.recipient.photos.map((photo, i) => {
-                                    if (photo.type.type === 'secondary') {
-                                        return (
-                                            <img className='object-contain w-full h-full'
-                                                 src={'/img/recipients/photos/' + photo.photo_url}/>
-                                        )
-                                    }
-                                })}
-                            </div>
+                            secondaryExists && (
+                                <div className='p-2 w-full h-40 border border-gray-300 rounded-lg mb-2 flex'>
+                                    {props.recipient.photos.map((photo, i) => {
+                                        if (photo.type.type === 'secondary') {
+                                            return (
+                                                <img className='object-contain w-full h-full'
+                                                     src={'/img/recipients/photos/' + photo.photo_url}/>
+                                            )
+                                        }
+                                    })}
+                                </div>
+                            )
                         )}
                         <input type="file" id="photos" name="photos" onChange={handleChange} multiple
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
