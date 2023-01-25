@@ -174,7 +174,7 @@ export default function Register() {
 
                 <div className="mt-4">
                     <InputLabel forInput="ktp" value="Foto KTP *" />
-
+                    {data.ktp &&  <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(data.ktp)} /> }
                     <TextInput
                         type="file"
                         name="ktp"
@@ -186,7 +186,7 @@ export default function Register() {
 
                 <div className="mt-4">
                     <InputLabel forInput="photo" value="Foto Profil" />
-
+                    {data.photo &&  <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(data.photo)} /> }
                     <TextInput
                         type="file"
                         name="photo"

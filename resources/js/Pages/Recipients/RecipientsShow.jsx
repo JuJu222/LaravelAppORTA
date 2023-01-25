@@ -201,7 +201,7 @@ export default function RecipientsShow(props) {
                                                              src={donation.donor.photo ? '/img/donors/photo/' + donation.donor.photo : '/img/avatar-default.png'}/>
                                                     </div>
                                                     <div>
-                                                        <h4 className='text-red text-base font-bold'>{donation.donor.name}</h4>
+                                                        <h4 className='text-red text-base font-bold'>{donation.donor.name_alias ? donation.donor.name_alias : donation.donor.name}</h4>
                                                         <p className='text-xs'>Berdonasi
                                                             Sebesar <b>{'Rp' + formatter.format(donation.amount)}</b></p>
                                                         <p className='text-[0.65rem]'>{new Date(donation.transfer_date).toLocaleDateString("id-ID", options)}</p>
@@ -402,7 +402,7 @@ export default function RecipientsShow(props) {
                                                      src={donation.donor.photo ? '/img/donors/photo/' + donation.donor.photo : '/img/avatar-default.png'}/>
                                             </div>
                                             <div>
-                                                <h4 className='text-red text-base font-bold'>{donation.donor.name}</h4>
+                                                <h4 className='text-red text-base font-bold'>{donation.donor.name_alias ? donation.donor.name_alias : donation.donor.name}</h4>
                                                 <p className='text-xs'>Berdonasi
                                                     Sebesar <b>{'Rp' + formatter.format(donation.amount)}</b></p>
                                                 <p className='text-[0.65rem]'>{new Date(donation.transfer_date).toLocaleDateString("id-ID", options)}</p>

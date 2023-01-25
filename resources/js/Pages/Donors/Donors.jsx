@@ -1,9 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Link} from "@inertiajs/inertia-react";
 
 export default function Donors(props) {
+    const [filteredItems, setFilteredItems] = useState(props.donors);
+
+    React.useEffect(() => {
+        setFilteredItems(props.donors);
+    }, [props.donors])
+
+    function handleFilter(e) {
+        const results = props.donors.filter(item => {
+            if (e.target.value === '') {
+                return true
+            } else {
+                // return item.name.toLowerCase().includes(e.target.value.toLowerCase()) || item.birthdate.toLowerCase().includes(e.target.value.toLowerCase());
+                return item.name.toLowerCase().includes(e.target.value.toLowerCase());
+            }
+        })
+        setFilteredItems(results);
+    }
 
     function handleDelete(id) {
         Inertia.delete(route("donors.destroy", id));
@@ -26,7 +43,7 @@ export default function Donors(props) {
             <div className="w-full sm:px-6 xl:px-0">
                 <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
                     <div className="flex items-center justify-between">
-                        <input type="text" id="username" name="username"
+                        <input type="text" id="filter" name="filter" onChange={handleFilter}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                placeholder="Cari wali anak" />
                         <Link href={route("donors.create")}>
@@ -46,7 +63,7 @@ export default function Donors(props) {
                         </tr>
                         </thead>
                         <tbody className="w-full">
-                        {props.donors.map((donor, i) =>
+                        {filteredItems.map((donor, i) =>
                             <tr className="h-20 text-sm leading-none text-gray-800 bg-white border-b border-t border-gray-100">
                                 <td className="pl-4">
                                     <p className="text-sm font-medium leading-none text-gray-800">{i + 1}</p>
