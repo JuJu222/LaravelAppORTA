@@ -282,7 +282,7 @@ class RecipientController extends Controller
      */
     public function edit($id)
     {
-        $recipient = Recipient::query()->find($id);
+        $recipient = Recipient::query()->with('photos.type')->find($id);
         $user = $recipient->user;
 
         return Inertia::render('Recipients/RecipientsEdit', compact('recipient', 'user'));
@@ -331,10 +331,10 @@ class RecipientController extends Controller
      */
     public function destroy($id)
     {
-        Recipient::query()->find($id)->delete();
-        User::query()->where('role_id', 3)->where('user_id', $id)->delete();
+        $recipient = Recipient::query()->find($id);
+        User::query()->find($recipient->user_id)->delete();
 
-        return Redirect::route('recipients.index');
+        return Redirect::back();
     }
 
     public function showMessage($id)

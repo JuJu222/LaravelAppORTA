@@ -16,7 +16,9 @@ class ParentController extends Controller
      */
     public function index()
     {
-        //
+        $parents = ParentModel::query()->get();
+
+        return Inertia::render('Parents/Parents', compact('parents'));
     }
 
     /**
