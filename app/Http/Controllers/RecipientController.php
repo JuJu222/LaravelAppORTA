@@ -446,7 +446,25 @@ class RecipientController extends Controller
     public function destroy($id)
     {
         $recipient = Recipient::query()->find($id);
+
+        foreach ($recipient->photos as $photo) {
+            $photo = Photo::query()->find($photo->id);
+
+            File::delete(public_path('/img/recipients/photos/' . $photo->photo_url));
+            $photo->delete();
+        }
+
         User::query()->find($recipient->user_id)->delete();
+
+        if ($recipient->birth_certificate) {
+            File::delete(public_path('/img/recipients/birth_certificate/' . $recipient->birth_certificate));
+        }
+
+        if ($recipient->kartu_keluarga) {
+            File::delete(public_path('/img/recipients/kartu_keluarga/' . $recipient->kartu_keluarga));
+        }
+
+        $recipient->delete();
 
         return Redirect::back();
     }
