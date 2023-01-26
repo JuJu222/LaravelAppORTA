@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -112,8 +113,7 @@ class DonorController extends Controller
     public function edit($id)
     {
         $donor = Donor::query()->find($id);
-        $user = User::query()->where('role_id', 2)
-            ->where('user_id', $id)->first();
+        $user = User::query()->find($donor->user_id)->first();
 
         return Inertia::render('Donors/DonorsEdit', compact('donor', 'user'));
     }
@@ -155,7 +155,18 @@ class DonorController extends Controller
     public function destroy($id)
     {
         $donor = Donor::query()->find($id);
+
         User::query()->find($donor->user_id)->delete();
+
+        if ($donor->ktp) {
+            File::delete(public_path('/img/donors/ktp/' . $donor->ktp));
+        }
+
+        if ($donor->photo) {
+            File::delete(public_path('/img/donors/photo/' . $donor->photo));
+        }
+
+        $donor->delete();
 
         return Redirect::back();
     }

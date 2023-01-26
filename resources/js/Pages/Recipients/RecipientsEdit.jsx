@@ -20,7 +20,7 @@ export default function DisabilitiesCreate(props) {
         address: props.recipient.address,
         city: props.recipient.city,
         phone: props.recipient.phone,
-        note: props.recipient.note,
+        note: props.recipient.note ? props.recipient.note : '',
         is_active: props.recipient.is_active,
     })
     let secondaryExists = false;

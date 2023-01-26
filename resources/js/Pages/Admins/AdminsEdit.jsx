@@ -10,7 +10,7 @@ export default function AdminsEdit(props) {
         email: props.admin.email,
         phone: props.admin.phone,
         jabatan: props.admin.jabatan,
-        note: props.admin.note,
+        note: props.admin.note ? props.admin.note : '',
     })
 
     function handleChange(e) {
