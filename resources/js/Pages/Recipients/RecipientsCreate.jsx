@@ -180,10 +180,28 @@ export default function DisabilitiesCreate(props) {
                                required={true} />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="note" className="block mb-2 text-sm font-medium text-gray-900 ">Note</label>
-                        <input type="text" id="note" name="note" onChange={handleChange}
+                        <label htmlFor="primary_photo" className="block mb-2 text-sm font-medium text-gray-900 ">Foto Utama *</label>
+                        {values.primary_photo &&  <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(values.primary_photo)} /> }
+                        <input type="file" id="primary_photo" name="primary_photo" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               />
+                               required={true} />
+                    </div>
+                    <div className="mb-6">
+                        <label htmlFor="photos" className="block mb-2 text-sm font-medium text-gray-900 ">Foto Pendamping</label>
+                        {values.photos &&
+                            <div className='p-2 w-full h-40 border border-gray-300 rounded-lg mb-2 flex'>
+                                {values.photos.length === undefined ? (
+                                    <img className='object-contain w-full h-full' src={URL.createObjectURL(values.photos)} />
+                                ) : (
+                                    Array.from(values.photos).map(img =>
+                                        <img className='object-contain w-full h-full' src={URL.createObjectURL(img)} />
+                                    )
+                                )}
+                            </div>
+                        }
+                        <input type="file" id="photos" name="photos" onChange={handleChange} multiple
+                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                               required={false} />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="is_active" className="block mb-2 text-sm font-medium text-gray-900 ">Status *</label>
@@ -207,28 +225,10 @@ export default function DisabilitiesCreate(props) {
                         </ul>
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="primary_photo" className="block mb-2 text-sm font-medium text-gray-900 ">Foto Utama *</label>
-                        {values.primary_photo &&  <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(values.primary_photo)} /> }
-                        <input type="file" id="primary_photo" name="primary_photo" onChange={handleChange}
-                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               required={true} />
-                    </div>
-                    <div className="mb-6">
-                        <label htmlFor="photos" className="block mb-2 text-sm font-medium text-gray-900 ">Foto Pendamping</label>
-                        {values.photos &&
-                            <div className='p-2 w-full h-40 border border-gray-300 rounded-lg mb-2 flex'>
-                                {values.photos.length === undefined ? (
-                                    <img className='object-contain w-full h-full' src={URL.createObjectURL(values.photos)} />
-                                ) : (
-                                    Array.from(values.photos).map(img =>
-                                        <img className='object-contain w-full h-full' src={URL.createObjectURL(img)} />
-                                    )
-                                )}
-                            </div>
-                        }
-                        <input type="file" id="photos" name="photos" onChange={handleChange} multiple
-                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               required={false} />
+                        <label htmlFor="note"
+                               className="block mb-2 text-sm font-medium text-gray-900 ">Catatan</label>
+                        <textarea name="note" onChange={handleChange} className='border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400'
+                        />
                     </div>
                 </div>
                 <button type="submit"

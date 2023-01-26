@@ -63,12 +63,6 @@ export default function DonorsCreate(props) {
                                required={true} />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="ktp" className="block mb-2 text-sm font-medium text-gray-900 ">Foto KTP *</label>
-                        <input type="text" id="ktp" name="ktp" onChange={handleChange}
-                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               required={true} />
-                    </div>
-                    <div className="mb-6">
                         <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 ">Nomor Telepon *</label>
                         <input type="text" id="phone" name="phone" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
@@ -93,8 +87,9 @@ export default function DonorsCreate(props) {
                                required={true} />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="note" className="block mb-2 text-sm font-medium text-gray-900 ">Catatan</label>
-                        <input type="text" id="note" name="note" onChange={handleChange}
+                        <label htmlFor="ktp" className="block mb-2 text-sm font-medium text-gray-900 ">Foto KTP *</label>
+                        {values.ktp &&  <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(values.ktp)} /> }
+                        <input type="file" id="ktp" name="ktp" onChange={handleChange} required={true}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                />
                     </div>
@@ -103,7 +98,13 @@ export default function DonorsCreate(props) {
                         {values.photo &&  <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(values.photo)} /> }
                         <input type="file" id="photo" name="photo" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               />
+                        />
+                    </div>
+                    <div className="mb-6">
+                        <label htmlFor="note"
+                               className="block mb-2 text-sm font-medium text-gray-900 ">Catatan</label>
+                        <textarea name="note" onChange={handleChange} className='border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400'
+                        />
                     </div>
                 </div>
                 <button type="submit"
