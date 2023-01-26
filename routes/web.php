@@ -37,7 +37,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::middleware('role:1')->group(function () {
 //        Route::prefix('admin')->name('admin.')->group(function () {
-        Route::prefix('admin')->group(function () {
+//        Route::prefix('admin')->group(function () {
             Route::get('/dashboard', function () {
                 return Inertia::render('Dashboard');
             })->middleware(['auth', 'verified'])->name('dashboard');
@@ -61,13 +61,14 @@ Route::middleware(['auth'])->group(function () {
             Route::resource('admins', AdminController::class);
             Route::resource('needs', NeedController::class);
             Route::get('/donations', [DonationController::class, 'index'])->name('donations.index');
+            Route::get('/donations/create', [DonationController::class, 'index'])->name('donations.create');
             Route::post('/donations/{id}/accept', [DonationController::class, 'accept'])->name('donations.accept');
             Route::post('/donations/{id}/reject', [DonationController::class, 'reject'])->name('donations.reject');
             Route::resource('disabilities', DisabilityController::class);
             Route::resource('need_categories', NeedCategoryController::class);
             Route::resource('parents', ParentController::class);
         });
-    });
+//    });
 
     Route::middleware('role:1,2')->group(function () {
         Route::resource('recipients', RecipientController::class)->only([
