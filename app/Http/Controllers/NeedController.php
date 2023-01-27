@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Need;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class NeedController extends Controller
 {
@@ -13,7 +15,9 @@ class NeedController extends Controller
      */
     public function index()
     {
-        //
+        $needs = Need::query()->with(['needCategory', 'recipient', 'donations'])->get();
+
+        return Inertia::render('Needs/Needs', compact('needs'));
     }
 
     /**

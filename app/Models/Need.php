@@ -25,4 +25,8 @@ class Need extends Model
     public function recipient() {
         return $this->belongsTo(Recipient::class, 'recipient_id');
     }
+
+    public function donations() {
+        return $this->hasMany(Donation::class, 'need_id');
+    }
 }
