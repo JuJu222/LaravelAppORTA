@@ -23,6 +23,11 @@ class Donor extends Model
         'verified',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function donations()
     {
         return $this->belongsToMany(Need::class, 'donations', 'donor_id', 'need_id')

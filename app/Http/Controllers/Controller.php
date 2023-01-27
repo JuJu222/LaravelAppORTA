@@ -19,7 +19,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     function home() {
-        $recipients = Recipient::query()->with(['parents', 'disabilities'])->get();
+        $recipients = Recipient::query()->with(['parents', 'disabilities', 'photos.type'])->get();
 
         if (Auth::user()->role_id === 1) {
             $admin = Admin::query()->where('user_id', Auth::id())->first();
@@ -56,7 +56,7 @@ class Controller extends BaseController
             $donations = Donation::query()->whereHas('need', function ($query) {
                 return $query->where('recipient_id', '=', Auth::user()->recipient->id);
             })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
-            
+
             return Inertia::render('Donations', compact('donations'));
         }
     }

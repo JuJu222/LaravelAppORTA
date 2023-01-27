@@ -85,31 +85,22 @@ export default function Donations(props) {
                     <div className='max-w-6xl mx-auto'>
                         <div className="flex flex-col gap-5">
                             {props.donations.map((donation, i) =>
-                                <Link href={route('donation.verification.show', donation.id)} className='flex justify-center'>
-                                    <div className="w-full flex rounded-lg overflow-hidden shadow-lg hover:scale-[102%] transition bg-white">
-                                        <img className="w-20 object-cover" src={donation.donor.photo ? '/img/donors/photo/' + donation.donor.photo : '/img/avatar-default.png'} />
-                                        <div className='w-full'>
-                                            <div className="px-3 py-3">
-                                                <p className="text-gray-700 text-xs">{donation.donor.name} telah mendonasikan sebanyak</p>
-                                                <div className='flex gap-1 items-center pt-2 pb-3'>
-                                                    <h4 className="font-bold text-red">{'Rp' + formatter.format(donation.amount)},-</h4>
-                                                    <p className='text-xs text-black'>untuk {donation.need.need_category.category}</p>
-                                                </div>
-                                                <div className='flex gap-1 items-center'>
-                                                    <p className="text-gray-700 text-xs">Status: </p>
-                                                    <p className='text-xs text-red font-bold'>{donation.accepted_date ? 'Terverifikasi (' + donation.accepted_date + ')' : 'Belum Diverifikasi'}</p>
-                                                </div>
+                                <div className="w-full flex rounded-lg overflow-hidden shadow-lg transition bg-white">
+                                    <img className="w-20 object-cover" src={donation.donor.photo ? '/img/donors/photo/' + donation.donor.photo : '/img/avatar-default.png'} />
+                                    <div className='w-full'>
+                                        <div className="px-3 py-3">
+                                            <p className="text-gray-700 text-xs">{donation.donor.name} telah mendonasikan sebanyak</p>
+                                            <div className='flex gap-1 items-center pt-2 pb-3'>
+                                                <h4 className="font-bold text-red">{'Rp' + formatter.format(donation.amount)},-</h4>
+                                                <p className='text-xs text-black'>untuk {donation.need.need_category.category}</p>
                                             </div>
-                                            {!donation.accepted_date ? (
-                                                <div className='bg-red w-full px-3 py-1'>
-                                                    <p className='text-white text-sm text-center font-bold'>Verifikasi Donasi</p>
-                                                </div>
-                                            ) : (
-                                                ''
-                                            )}
+                                            <div className='flex gap-1 items-center'>
+                                                <p className="text-gray-700 text-xs">Status: </p>
+                                                <p className='text-xs text-red font-bold'>{donation.accepted_date ? 'Terverifikasi (' + donation.accepted_date + ')' : 'Belum Diverifikasi'}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                             )}
                         </div>
                     </div>

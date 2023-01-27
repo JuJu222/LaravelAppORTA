@@ -98,7 +98,7 @@ export default function Login({ status, canResetPassword }) {
                     </Link>
 
                     <PrimaryButton className="ml-4" processing={processing}>
-                        Log in
+                        Masuk
                     </PrimaryButton>
                 </div>
             </form>

@@ -19,7 +19,7 @@ export default function Home(props) {
                             <div className="w-full">
                                 <div className="relative">
                                     <svg
-                                        className="absolute z-20 cursor-pointer top-[18px] left-4"
+                                        className="absolute z-20 cursor-pointer top-[14px] left-4"
                                         width={16}
                                         height={16}
                                         viewBox="0 0 16 16"
@@ -32,11 +32,11 @@ export default function Home(props) {
                                         />
                                     </svg>
                                     <input
-                                        className="relative text-sm leading-none text-gray-600 bg-white  rounded  w-full px-10 py-4 outline-none"
+                                        className="relative text-sm leading-none text-gray-600 bg-white rounded-full w-full px-10 py-3 border-none outline-none ring-none focus:ring-red focus:border-red"
                                         type="text"
                                         name
                                         id
-                                        placeholder="Search"
+                                        placeholder="Cari nama anak"
                                     />
                                 </div>
                             </div>
@@ -57,8 +57,9 @@ export default function Home(props) {
                 <div className='w-full h-1/3 px-4'>
                     <div className='max-w-6xl mx-auto'>
                         <div>
-                            <h2>Yuk, mari kita bantu anak-anak! Klik salah satu anak untuk membantu</h2>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
+                            <h2 className='text-red font-bold mt-2'>Yuk, mari kita bantu anak-anak!</h2>
+                            <p className='text-xs mt-1'>Klik salah satu anak untuk membantu</p>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
                                 {props.recipients.map((recipient, i) =>
                                     <RecipientCard recipient={recipient}></RecipientCard>
                                 )}
@@ -79,7 +80,7 @@ export default function Home(props) {
                             <div className="w-full">
                                 <div className="relative">
                                     <svg
-                                        className="absolute z-20 cursor-pointer top-[18px] left-4"
+                                        className="absolute z-20 cursor-pointer top-[14px] left-4"
                                         width={16}
                                         height={16}
                                         viewBox="0 0 16 16"
@@ -92,11 +93,11 @@ export default function Home(props) {
                                         />
                                     </svg>
                                     <input
-                                        className="relative text-sm leading-none text-gray-600 bg-white  rounded  w-full px-10 py-4 outline-none"
+                                        className="relative text-sm leading-none text-gray-600 bg-white rounded-full w-full px-10 py-3 border-none outline-none ring-none focus:ring-red focus:border-red"
                                         type="text"
                                         name
                                         id
-                                        placeholder="Search"
+                                        placeholder="Cari nama anak"
                                     />
                                 </div>
                             </div>
@@ -120,8 +121,8 @@ export default function Home(props) {
                     <div className='max-w-6xl mx-auto'>
                         <div>
                             <h2 className='text-red font-bold mt-2'>Yuk, mari kita bantu anak-anak!</h2>
-                            <p className='text-xs'>Klik salah satu anak untuk membantu</p>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
+                            <p className='text-xs mt-1'>Klik salah satu anak untuk membantu</p>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
                                 {props.recipients.map((recipient, i) =>
                                     <RecipientCard recipient={recipient}></RecipientCard>
                                 )}
@@ -142,7 +143,7 @@ export default function Home(props) {
                             <div className="w-full">
                                 <div className="relative">
                                     <svg
-                                        className="absolute z-20 cursor-pointer top-[18px] left-4"
+                                        className="absolute z-20 cursor-pointer top-[14px] left-4"
                                         width={16}
                                         height={16}
                                         viewBox="0 0 16 16"
@@ -155,11 +156,11 @@ export default function Home(props) {
                                         />
                                     </svg>
                                     <input
-                                        className="relative text-sm leading-none text-gray-600 bg-white  rounded  w-full px-10 py-4 outline-none"
+                                        className="relative text-sm leading-none text-gray-600 bg-white rounded-full w-full px-10 py-3 border-none outline-none ring-none focus:ring-red focus:border-red"
                                         type="text"
                                         name
                                         id
-                                        placeholder="Search"
+                                        placeholder="Cari nama anak"
                                     />
                                 </div>
                             </div>
@@ -183,8 +184,8 @@ export default function Home(props) {
                     <div className='max-w-6xl mx-auto'>
                         <div>
                             <h2 className='text-red font-bold mt-2'>Yuk, mari kita bantu anak-anak!</h2>
-                            <p className='text-xs'>Klik salah satu anak untuk membantu</p>
-                            <div className="grid grid-cols-1 gap-5">
+                            <p className='text-xs mt-1'>Klik salah satu anak untuk membantu</p>
+                            <div className="grid grid-cols-1 gap-5 mt-4">
                                 {props.recipient.needs.map((need, i) =>
                                     <RecipientNeedCard need={need} recipientID={props.recipient.id} button={true}/>
                                 )}

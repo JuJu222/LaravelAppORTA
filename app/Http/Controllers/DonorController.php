@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Donation;
 use App\Models\Donor;
 use App\Models\User;
 use Carbon\Carbon;
@@ -99,9 +100,12 @@ class DonorController extends Controller
      */
     public function show($id)
     {
-        $donor = Donor::query()->find($id);
+        $donor = Donor::query()->with('user')->find($id);
+        $donations = Donation::query()->whereHas('need', function ($query) use ($donor) {
+            return $query->where('donor_id', '=', $donor->id);
+        })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
 
-        return Inertia::render('Donors/DonorsShow', compact('donor'));
+        return Inertia::render('Donors/DonorsShow', compact('donor', 'donations'));
     }
 
     /**
