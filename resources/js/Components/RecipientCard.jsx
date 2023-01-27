@@ -3,8 +3,13 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, Link} from '@inertiajs/inertia-react';
 
 export default function RecipientCard({recipient}) {
-    const options = {year: 'numeric', month: 'long', day: 'numeric'}
-    const birthdate = new Date(props.recipient.birthdate).toLocaleDateString("id-ID", options)
+    const today = new Date();
+    const birthDate = new Date(recipient.birthdate);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
 
     return (
         <Link className='flex justify-center' href={route('recipients.show', recipient.id)}>
@@ -18,7 +23,7 @@ export default function RecipientCard({recipient}) {
                 })}
                 <div className="px-3 pt-1">
                     <div className="font-bold text-base text-red">{recipient.name}</div>
-                    <p className="text-gray-700 text-xs">6 tahun</p>
+                    <p className="text-gray-700 text-xs">{age} tahun</p>
                 </div>
                 <div className="px-3 pt-1 pb-2">
                     {recipient.disabilities.map((disability, i) =>
