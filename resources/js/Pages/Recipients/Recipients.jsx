@@ -48,7 +48,7 @@ export default function Recipients(props) {
                     <div className='flex gap-4 mt-2 w-full'>
                         <Link href={route('parents.index')} className="flex items-center justify-center text-center w-full">
                             <button className="w-full h-full text-sm leading-none font-bold text-white py-3 px-5 bg-red rounded hover:bg-red_hover focus:outline-none transition flex justify-center items-center">
-                                Atur Orang Tua
+                                Atur Wali atau Orang Tua
                             </button>
                         </Link>
                         <Link href={route('disabilities.index')} className="flex items-center justify-center text-center w-full">

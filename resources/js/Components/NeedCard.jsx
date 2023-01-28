@@ -3,6 +3,7 @@ import {Link} from '@inertiajs/inertia-react';
 
 export default function NeedCard({need, recipientID, button}) {
     const formatter = new Intl.NumberFormat('de-DE');
+    const options = {year: 'numeric', month: 'long', day: 'numeric'}
 
     return (
         <div className='mt-2 shadow-lg bg-white rounded-lg p-4 md:block'>
@@ -10,7 +11,7 @@ export default function NeedCard({need, recipientID, button}) {
                 <div className='flex flex-col flex-grow'>
                     <div className='mt-1'>
                         <p className='text-red font-bold text-lg'>{need.category}</p>
-                        <p className='text-xs mt-1'>Sampai <b>13 Februari 2023</b></p>
+                        <p className='text-xs mt-1'>Sampai <b>{new Date(need.pivot.due_date).toLocaleDateString("id-ID", options)}</b></p>
                         <p className='text-xs mt-1'>Donasi Tersisa: <b>
                             {need.pivot.amount - need.collected <= 0 ? (
                                 'Dana Terpenuhi'

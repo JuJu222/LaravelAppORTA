@@ -493,7 +493,17 @@ class RecipientController extends Controller
     public function postMessage(Request $request, $id)
     {
         $need = Need::query()->find($id);
+
+        $this->validate($request, [
+            'delivered_photo' => 'mimes:jpeg,png,bmp,tiff',
+        ]);
+        $file = $request->file('delivered_photo');
+        $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+        $file->move(public_path() . '/img/recipients/delivered_photo/', $name);
+
         $need->update([
+           'delivered_date' => $request->delivered_message,
+           'delivered_photo' => $name,
            'delivered_message' => $request->delivered_message
         ]);
 

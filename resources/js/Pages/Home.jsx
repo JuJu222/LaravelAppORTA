@@ -9,6 +9,7 @@ import NeedCard from "@/Components/NeedCard";
 import RecipientNeedCard from "@/Components/RecipientNeedCard";
 
 export default function Home(props) {
+    //TODO filter
     if (props.admin) {
         return (
             <div className='pb-20'>
@@ -183,9 +184,9 @@ export default function Home(props) {
                 <div className='w-full h-1/3 px-4'>
                     <div className='max-w-6xl mx-auto'>
                         <div>
-                            <h2 className='text-red font-bold mt-2'>Yuk, mari kita bantu anak-anak!</h2>
-                            <p className='text-xs mt-1'>Klik salah satu anak untuk membantu</p>
-                            <div className="grid grid-cols-1 gap-5 mt-4">
+                            <h2 className='text-red font-bold mt-2'>Cek kebutuhan donasi anda di sini!</h2>
+                            <p className='text-xs mt-1'>Jangan lupa untuk mengkonfirmasi penerimaan dana donasi</p>
+                            <div className="grid grid-cols-1 gap-3">
                                 {props.recipient.needs.map((need, i) =>
                                     <RecipientNeedCard need={need} recipientID={props.recipient.id} button={true}/>
                                 )}

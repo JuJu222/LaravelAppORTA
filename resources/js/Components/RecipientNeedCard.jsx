@@ -3,6 +3,7 @@ import {Link} from '@inertiajs/inertia-react';
 
 export default function RecipientNeedCard({need, recipientID, button}) {
     const formatter = new Intl.NumberFormat('de-DE');
+    const options = {year: 'numeric', month: 'long', day: 'numeric'}
 
     return (
         <div className='mt-2 shadow-lg bg-white rounded-lg p-4 md:block'>
@@ -10,7 +11,7 @@ export default function RecipientNeedCard({need, recipientID, button}) {
                 <div className='flex flex-col flex-grow'>
                     <div className='mt-1'>
                         <p className='text-red font-bold text-lg'>{need.category}</p>
-                        <p className='text-xs mt-1'>Sampai <b>13 Februari 2023</b></p>
+                        <p className='text-xs mt-1'>Sampai <b>{new Date(need.pivot.due_date).toLocaleDateString("id-ID", options)}</b></p>
                         <p className='text-xs mt-1'>Donasi Tersisa: <b>
                             {need.pivot.amount - need.collected <= 0 ? (
                                 'Dana Terpenuhi'
@@ -33,29 +34,29 @@ export default function RecipientNeedCard({need, recipientID, button}) {
                         <span>Rp{formatter.format(need.pivot.amount)}</span>
                     </div>
                 </div>
-                <div>
-                    {button ? (
-                        need.delivered_date ? (
-                            <Link href={route('needs.message.post', need.pivot.id)}
-                                  className='flex items-center mt-1 ml-3'>
-                                <button
-                                    className='bg-red text-white text-xs px-5 py-3 rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>
-                                    Beri Ucapan
-                                </button>
-                            </Link>
-                        ) : (
-                            <Link href={route('needs.message.post', need.pivot.id)}
-                                  className='flex items-center mt-1 ml-3'>
-                                <button
-                                    className='bg-red text-white text-xs px-5 py-3 rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>
-                                    Lihat Ucapan
-                                </button>
-                            </Link>
-                        )
+            </div>
+            <div>
+                {button ? (
+                    need.pivot.delivered_date ? (
+                        <Link href={route('needs.message.post', need.pivot.id)}
+                              className='flex items-center mt-1'>
+                            <button
+                                className='bg-red text-white text-xs px-5 py-3 w-full rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>
+                                Lihat Ucapan Terima Kasih
+                            </button>
+                        </Link>
                     ) : (
-                        ''
-                    )}
-                </div>
+                        <Link href={route('needs.message.post', need.pivot.id)}
+                              className='flex items-center mt-1'>
+                            <button
+                                className='bg-red text-white text-xs px-5 py-3 w-full rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>
+                                Konfirmasi Penerimaan Dana
+                            </button>
+                        </Link>
+                    )
+                ) : (
+                    ''
+                )}
             </div>
         </div>
     );

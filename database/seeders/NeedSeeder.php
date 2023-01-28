@@ -23,6 +23,13 @@ class NeedSeeder extends Seeder
         ]);
 
         DB::table('needs')->insert([
+            'need_category_id' => 2,
+            'recipient_id' => 1,
+            'amount' => 200000,
+            'due_date' => date('2022-9-5'),
+        ]);
+
+        DB::table('needs')->insert([
             'need_category_id' => 1,
             'recipient_id' => 2,
             'amount' => 100000,
