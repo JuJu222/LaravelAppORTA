@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Need;
+use App\Models\NeedCategory;
+use App\Models\Recipient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class NeedController extends Controller
@@ -27,7 +30,10 @@ class NeedController extends Controller
      */
     public function create()
     {
-        //
+        $recipients = Recipient::query()->get();
+        $needCategories = NeedCategory::query()->get();
+
+        return Inertia::render('Needs/NeedsCreate', compact('recipients', 'needCategories'));
     }
 
     /**
@@ -38,7 +44,14 @@ class NeedController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Need::query()->create([
+            'recipient_id' => $request->recipient_id,
+            'need_category_id' => $request->need_category_id,
+            'amount' => $request->amount,
+            'due_date' => $request->due_date,
+        ]);
+
+        return Redirect::route('needs.index');
     }
 
     /**

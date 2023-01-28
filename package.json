@@ -22,6 +22,7 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
-        "react-drag-drop-files": "^2.3.8"
+        "react-drag-drop-files": "^2.3.8",
+        "react-select": "^5.7.0"
     }
 }
