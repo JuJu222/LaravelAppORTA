@@ -14,7 +14,7 @@ export default function RecipientsShow(props) {
         Inertia.delete(route("recipients.destroy", id));
     }
 
-    if (props.auth.user.role_id === 1) {
+    if (props.auth.user.role_id == 1) {
         return (
             <Authenticated
                 auth={props.auth}
@@ -69,7 +69,7 @@ export default function RecipientsShow(props) {
                                             <h2 className='text-red text-2xl font-bold'>{props.recipient.name}</h2>
                                             <h3 className='text-red text-2xl'>8 tahun</h3>
                                         </div>
-                                        {props.auth.user.role_id === 1 &&
+                                        {props.auth.user.role_id == 1 &&
                                             <>
                                                 <div className='flex gap-4 mt-2 w-full'>
                                                     <Link href={route("recipients.edit", props.recipient.id)} className="flex items-center justify-center text-center w-full">
@@ -270,7 +270,7 @@ export default function RecipientsShow(props) {
                                     <h2 className='text-red text-2xl font-bold'>{props.recipient.name}</h2>
                                     <h3 className='text-red text-2xl'>8 tahun</h3>
                                 </div>
-                                {props.auth.user.role_id === 1 &&
+                                {props.auth.user.role_id == 1 &&
                                     <>
                                         <div className='flex gap-4 mt-2 w-full'>
                                             <Link href={route("recipients.edit", props.recipient.id)} className="flex items-center justify-center text-center w-full">

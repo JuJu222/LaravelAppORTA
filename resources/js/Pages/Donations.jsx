@@ -7,9 +7,9 @@ import RecipientNeedCard from "@/Components/RecipientNeedCard";
 
 export default function Donations(props) {
     const formatter = new Intl.NumberFormat('de-DE');
-    if (props.auth.user.role_id === 1) {
+    if (props.auth.user.role_id == 1) {
 
-    } else if (props.auth.user.role_id === 2) {
+    } else if (props.auth.user.role_id == 2) {
         return (
             <div className='pb-20'>
                 <div className='bg-red w-full px-4 pt-4'>

@@ -471,7 +471,7 @@ class RecipientController extends Controller
 
     public function showMessage($id)
     {
-        if (Auth::user()->role_id === 2) {
+        if (Auth::user()->role_id == 2) {
             $donor = Donor::query()->where('user_id', Auth::id())->first();
             $donation = Donation::query()->find($id);
             $need = Need::query()->where('id', $donation->need_id)->with('needCategory')->first();

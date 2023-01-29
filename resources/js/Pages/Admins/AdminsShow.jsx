@@ -36,7 +36,7 @@ export default function AdminsShow(props) {
                                     <div className='flex flex-row justify-between'>
                                         <h2 className='text-red text-2xl font-bold'>{props.admin.name}</h2>
                                     </div>
-                                    {props.auth.user.role_id === 1 &&
+                                    {props.auth.user.role_id == 1 &&
                                         <>
                                             <div className='flex gap-4 mt-2 w-full'>
                                                 <Link href={route("admins.edit", props.admin.id)} className="flex items-center justify-center text-center w-full">
@@ -68,7 +68,7 @@ export default function AdminsShow(props) {
                                         <div className="grid grid-cols-1 divide-y gap-3 border border-black rounded-lg p-4 mt-4">
                                             <div className='grid grid-cols-1 gap-1'>
                                                 <h4 className='text-red text-lg font-bold'>Informasi Admin</h4>
-                                                {props.auth.user.role_id === 1 &&
+                                                {props.auth.user.role_id == 1 &&
                                                     <p className='text-xs'>Username: {props.admin.user.username}</p>
                                                 }
                                                 <p className='text-xs'>Nama: {props.admin.name ? props.admin.name : '-'}</p>

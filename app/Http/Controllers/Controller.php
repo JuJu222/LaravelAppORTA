@@ -21,10 +21,10 @@ class Controller extends BaseController
     function home() {
         $recipients = Recipient::query()->with(['parents', 'disabilities', 'photos.type'])->get();
 
-        if (Auth::user()->role_id === 1) {
+        if (Auth::user()->role_id == 1) {
             $admin = Admin::query()->where('user_id', Auth::id())->first();
             return Inertia::render('Home', compact('recipients', 'admin'));
-        } else if (Auth::user()->role_id === 2) {
+        } else if (Auth::user()->role_id == 2) {
             $donor = Donor::query()->where('user_id', Auth::id())->first();
             $donor['donation_count'] = Donation::query()->where('donor_id', $donor->id)
                 ->whereNotNull('accepted_date')->count();
@@ -40,13 +40,13 @@ class Controller extends BaseController
     }
 
     function donations() {
-        if (Auth::user()->role_id === 1) {
+        if (Auth::user()->role_id == 1) {
             $donations = Donation::query()->whereHas('need', function ($query) {
                 return $query->where('donor_id', '=', Auth::user()->donor->id);
             })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
 
             return Inertia::render('Donations', compact('donations'));
-        } else if (Auth::user()->role_id === 2) {
+        } else if (Auth::user()->role_id == 2) {
             $donations = Donation::query()->whereHas('need', function ($query) {
                 return $query->where('donor_id', '=', Auth::user()->donor->id);
             })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
@@ -62,10 +62,10 @@ class Controller extends BaseController
     }
 
     function profile() {
-        if (Auth::user()->role_id === 1) {
+        if (Auth::user()->role_id == 1) {
             $admin = Admin::query()->where('user_id', Auth::id())->first();
             return Inertia::render('Profile', compact('admin'));
-        } else if (Auth::user()->role_id === 2) {
+        } else if (Auth::user()->role_id == 2) {
             $donor = Donor::query()->where('user_id', Auth::id())->first();
             return Inertia::render('Profile', compact('donor'));
         } else {
