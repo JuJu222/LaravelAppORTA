@@ -502,7 +502,7 @@ class RecipientController extends Controller
         $file->move(public_path() . '/img/recipients/delivered_photo/', $name);
 
         $need->update([
-           'delivered_date' => $request->delivered_message,
+           'delivered_date' => $request->delivered_date,
            'delivered_photo' => $name,
            'delivered_message' => $request->delivered_message
         ]);

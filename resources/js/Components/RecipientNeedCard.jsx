@@ -41,7 +41,7 @@ export default function RecipientNeedCard({need, recipientID, button}) {
                         <Link href={route('needs.message.post', need.pivot.id)}
                               className='flex items-center mt-1'>
                             <button
-                                className='bg-red text-white text-xs px-5 py-3 w-full rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>
+                                className='bg-gray-50 text-red text-xs px-5 py-3 w-full rounded-2xl font-bold shadow hover:bg-white transition'>
                                 Lihat Ucapan Terima Kasih
                             </button>
                         </Link>

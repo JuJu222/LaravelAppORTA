@@ -11,6 +11,8 @@ import {Inertia} from "@inertiajs/inertia";
 
 export default function Home(props) {
     const [values, setValues] = useState({
+        delivered_date: '',
+        delivered_message: ''
     })
 
     function handleChange(e) {
@@ -66,36 +68,46 @@ export default function Home(props) {
                                 <NeedCard need={props.need} recipientID={props.recipient.id} button={false}/>
                                 {props.need.pivot.delivered_message ? (
                                     <>
-                                        <h5 className='block mt-6 mb-2 text-sm font-medium text-gray-900 '>Ucapan Anda yang Tersimpan:</h5>
-                                        <p className='text-sm leading-relaxed'>{props.need.pivot.delivered_message}</p>
+                                        <div className='mb-6'>
+                                            <h5 className='block mt-6 mb-2 text-sm font-medium text-gray-900 '>Tanggal Penerimaan Dana:</h5>
+                                            <p className='text-sm leading-relaxed font-bold'>{props.need.pivot.delivered_date}</p>
+                                        </div>
+                                        <div className='mb-6'>
+                                            <h5 className='block mt-6 mb-2 text-sm font-medium text-gray-900 '>Foto Bukti Penerimaan Dana:</h5>
+                                            <img className='p-2 w-full h-60 object-contain border border-gray-300 rounded-lg mb-2' src={'/img/recipients/delivered_photo/' + props.need.pivot.delivered_photo} />
+                                        </div>
+                                        <div className='mb-6'>
+                                            <h5 className='block mt-6 mb-2 text-sm font-medium text-gray-900 '>Ucapan Terima Kasih Anda:</h5>
+                                            <p className='text-sm leading-relaxed font-bold'>{props.need.pivot.delivered_message}</p>
+                                        </div>
                                     </>
                                 ) : (
-                                    ''
+                                    <form onSubmit={handleSubmit} className='mt-6'>
+                                        <div className="mb-6">
+                                            <label htmlFor="delivered_date" className="block mb-2 text-sm font-medium text-gray-900 ">Tanggal Penerimaan Dana *</label>
+                                            <input type="date" id="delivered_date" name="delivered_date" onChange={handleChange}
+                                                   className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                                   required={true} />
+                                        </div>
+                                        <div className="mb-6">
+                                            <label htmlFor="delivered_photo" className="block mb-2 text-sm font-medium text-gray-900 ">Foto Bukti Penerimaan Dana *</label>
+                                            {values.delivered_photo &&  <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(values.delivered_photo)} /> }
+                                            <input type="file" id="delivered_photo" name="delivered_photo" onChange={handleChange}
+                                                   className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                                   required={true} />
+                                        </div>
+                                        <div className="mb-6">
+                                            <label htmlFor="delivered_message"
+                                                   className="block mb-2 text-sm font-medium text-gray-900 ">Ucapan Terima Kasih *</label>
+                                            <textarea id="delivered_message" name="delivered_message" onChange={handleChange}
+                                                      className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                                      required={true}/>
+                                        </div>
+                                        <button type="submit"
+                                                className="text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Submit
+                                        </button>
+                                    </form>
                                 )}
-                                <form onSubmit={handleSubmit} className='mt-6'>
-                                    <div className="mb-6">
-                                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama *</label>
-                                        <input type="text" id="name" name="name" onChange={handleChange}
-                                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                               required={true} />
-                                    </div>
-                                    <div className="mb-6">
-                                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama *</label>
-                                        <input type="text" id="name" name="name" onChange={handleChange}
-                                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                               required={true} />
-                                    </div>
-                                    <div className="mb-6">
-                                        <label htmlFor="delivered_message"
-                                               className="block mb-2 text-sm font-medium text-gray-900 ">Ucapan Terima Kasih *</label>
-                                        <textarea id="delivered_message" name="delivered_message" onChange={handleChange}
-                                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                               required={true}/>
-                                    </div>
-                                    <button type="submit"
-                                            className="text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Submit
-                                    </button>
-                                </form>
                             </div>
                         </div>
                     </div>
