@@ -7,10 +7,12 @@ import Select from "react-select";
 
 export default function AdminsCreate(props) {
     const [values, setValues] = useState({
-        amount: '',
-        due_date: '',
-        delivered_date: '',
-        delivered_message: '',
+        need_category_id: props.need.need_category_id,
+        recipient_id: props.need.recipient_id,
+        amount: props.need.amount,
+        due_date: props.need.due_date,
+        delivered_date: props.need.delivered_date ? props.need.delivered_date : '',
+        delivered_message: props.need.delivered_message ? props.need.delivered_message : '',
     })
     let recipientOptions = [];
     let needCategoryOptions = [];
@@ -87,6 +89,13 @@ export default function AdminsCreate(props) {
                                         primary: 'red',
                                     },
                                 })}
+                                defaultValue={() => {
+                                    for (const [i, recipient] of props.recipients.entries()) {
+                                        if (recipient.id === props.need.recipient_id) {
+                                            return recipientOptions[i]
+                                        }
+                                    }
+                                }}
                         />
                     </div>
                     <div className="mb-6">
@@ -109,35 +118,49 @@ export default function AdminsCreate(props) {
                                     primary: 'red',
                                 },
                             })}
+                            defaultValue={() => {
+                                for (const [i, needCategory] of props.needCategories.entries()) {
+                                    if (needCategory.id === props.need.need_category_id) {
+                                        return needCategoryOptions[i]
+                                    }
+                                }
+                            }}
                         />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="amount" className="block mb-2 text-sm font-medium text-gray-900 ">Jumlah Dana *</label>
-                        <input type="number" id="amount" name="amount" onChange={handleChange} required={true}
+                        <input type="number" id="amount" name="amount" onChange={handleChange} required={true} defaultValue={props.need.amount}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                         />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="due_date" className="block mb-2 text-sm font-medium text-gray-900 ">Batas Waktu *</label>
-                        <input type="date" id="due_date" name="due_date" onChange={handleChange} required={true}
+                        <input type="date" id="due_date" name="due_date" onChange={handleChange} required={true} defaultValue={props.need.due_date}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                         />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="delivered_date" className="block mb-2 text-sm font-medium text-gray-900 ">Tanggal Penerimaan Dana</label>
-                        <input type="date" id="delivered_date" name="delivered_date" onChange={handleChange}
+                        <input type="date" id="delivered_date" name="delivered_date" onChange={handleChange} defaultValue={props.need.delivered_date}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                         />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="delivered_message"
                                className="block mb-2 text-sm font-medium text-gray-900 ">Ucapan Terima Kasih</label>
-                        <textarea name="delivered_message" onChange={handleChange} className='border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400'
+                        <textarea name="delivered_message" onChange={handleChange} defaultValue={props.need.delivered_message} className='border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400'
                         />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="delivered_photo" className="block mb-2 text-sm font-medium text-gray-900 ">Foto Bukti Penerimaan Dana</label>
-                        {values.delivered_photo &&  <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(values.delivered_photo)} /> }
+                        {values.delivered_photo ? (
+                            <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(values.delivered_photo)} />
+                        ) : (
+                            props.need.delivered_photo && (
+                                <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
+                                     src={'/img/recipients/delivered_photo/' + props.need.delivered_photo}/>
+                            )
+                        )}
                         <input type="file" id="delivered_photo" name="delivered_photo" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                         />

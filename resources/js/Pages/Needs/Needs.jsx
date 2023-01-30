@@ -122,7 +122,7 @@ export default function NeedCategories(props) {
                                                 </svg>
                                             </button>
                                         </Link>
-                                        <Link href={route("need_categories.edit", need.id)}
+                                        <Link href={route("needs.edit", need.id)}
                                               className="flex items-center justify-center text-center">
                                             <button
                                                 className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition">

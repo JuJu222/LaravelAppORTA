@@ -203,18 +203,40 @@ export default function RecipientsShow(props) {
                                     <div>
                                         {props.donations.length > 0 ? (
                                             props.donations.map((donation, i) =>
-                                                <div className='shadow-lg rounded-lg p-4 flex gap-4'>
-                                                    <div className="w-10 h-10">
-                                                        <img className="w-full h-full rounded object-cover"
-                                                             src={donation.donor.photo ? '/img/donors/photo/' + donation.donor.photo : '/img/avatar-default.png'}/>
-                                                    </div>
-                                                    <div>
-                                                        <h4 className='text-red text-base font-bold'>{donation.donor.name_alias ? donation.donor.name_alias : donation.donor.name}</h4>
-                                                        <p className='text-xs'>Mendonasikan
-                                                            Sebesar <b>{'Rp' + formatter.format(donation.amount)}</b></p>
-                                                        <p className='text-[0.65rem]'>{new Date(donation.transfer_date).toLocaleDateString("id-ID", options)}</p>
-                                                    </div>
-                                                </div>
+                                                <>
+                                                    {props.auth.user.role_id === 1 ? (
+                                                        <div className='shadow-lg rounded-lg p-4 flex gap-4'>
+                                                            <div className="w-10 h-10">
+                                                                <img className="w-full h-full rounded object-cover"
+                                                                     src={donation.donor.photo ? '/img/donors/photo/' + donation.donor.photo : '/img/avatar-default.png'}/>
+                                                            </div>
+                                                            <div>
+                                                                <h4 className='text-red text-base font-bold'>{donation.donor.name_alias ? donation.donor.name_alias : donation.donor.name}</h4>
+                                                                <p className='text-xs'>Mendonasikan
+                                                                    Sebesar <b>{'Rp' + formatter.format(donation.amount)}</b></p>
+                                                                <p className='text-[0.65rem]'>{new Date(donation.transfer_date).toLocaleDateString("id-ID", options)}</p>
+                                                                {donation.accepted_date ? (
+                                                                    <p className="bg-green-600 text-white px-3 py-1.5 rounded-lg text-center text-[0.65rem] whitespace-nowrap w-fit">{donation.accepted_date}</p>
+                                                                ) : (
+                                                                    <p className="bg-red_dark text-white px-3 py-1.5 rounded-lg text-center text-[0.65rem] whitespace-nowrap w-fit">Belum Diverifikasi</p>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        <div className='shadow-lg rounded-lg p-4 flex gap-4'>
+                                                            <div className="w-10 h-10">
+                                                                <img className="w-full h-full rounded object-cover"
+                                                                     src={donation.donor.photo ? '/img/donors/photo/' + donation.donor.photo : '/img/avatar-default.png'}/>
+                                                            </div>
+                                                            <div>
+                                                                <h4 className='text-red text-base font-bold'>{donation.donor.name_alias ? donation.donor.name_alias : donation.donor.name}</h4>
+                                                                <p className='text-xs'>Mendonasikan
+                                                                    Sebesar <b>{'Rp' + formatter.format(donation.amount)}</b></p>
+                                                                <p className='text-[0.65rem]'>{new Date(donation.transfer_date).toLocaleDateString("id-ID", options)}</p>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </>
                                             )
                                         ) : (
                                             <div className='p-4 py-8 text-center text-gray-500'>
@@ -404,18 +426,40 @@ export default function RecipientsShow(props) {
                             <div>
                                 {props.donations.length > 0 ? (
                                     props.donations.map((donation, i) =>
-                                        <div className='shadow-lg rounded-lg p-4 flex gap-4'>
-                                            <div className="w-10 h-10">
-                                                <img className="w-full h-full rounded object-cover"
-                                                     src={donation.donor.photo ? '/img/donors/photo/' + donation.donor.photo : '/img/avatar-default.png'}/>
-                                            </div>
-                                            <div>
-                                                <h4 className='text-red text-base font-bold'>{donation.donor.name_alias ? donation.donor.name_alias : donation.donor.name}</h4>
-                                                <p className='text-xs'>Mendonasikan
-                                                    Sebesar <b>{'Rp' + formatter.format(donation.amount)}</b></p>
-                                                <p className='text-[0.65rem]'>{new Date(donation.transfer_date).toLocaleDateString("id-ID", options)}</p>
-                                            </div>
-                                        </div>
+                                        <>
+                                            {props.auth.user.role_id === 1 ? (
+                                                <div className='shadow-lg rounded-lg p-4 flex gap-4'>
+                                                    <div className="w-10 h-10">
+                                                        <img className="w-full h-full rounded object-cover"
+                                                             src={donation.donor.photo ? '/img/donors/photo/' + donation.donor.photo : '/img/avatar-default.png'}/>
+                                                    </div>
+                                                    <div>
+                                                        <h4 className='text-red text-base font-bold'>{donation.donor.name_alias ? donation.donor.name_alias : donation.donor.name}</h4>
+                                                        <p className='text-xs'>Mendonasikan
+                                                            Sebesar <b>{'Rp' + formatter.format(donation.amount)}</b></p>
+                                                        <p className='text-[0.65rem]'>{new Date(donation.transfer_date).toLocaleDateString("id-ID", options)}</p>
+                                                        {donation.accepted_date ? (
+                                                            <p className="bg-green-600 text-white px-3 py-1.5 rounded-lg text-center text-[0.65rem] whitespace-nowrap w-fit">{donation.accepted_date}</p>
+                                                        ) : (
+                                                            <p className="bg-red_dark text-white px-3 py-1.5 rounded-lg text-center text-[0.65rem] whitespace-nowrap w-fit">Belum Diverifikasi</p>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <div className='shadow-lg rounded-lg p-4 flex gap-4'>
+                                                    <div className="w-10 h-10">
+                                                        <img className="w-full h-full rounded object-cover"
+                                                             src={donation.donor.photo ? '/img/donors/photo/' + donation.donor.photo : '/img/avatar-default.png'}/>
+                                                    </div>
+                                                    <div>
+                                                        <h4 className='text-red text-base font-bold'>{donation.donor.name_alias ? donation.donor.name_alias : donation.donor.name}</h4>
+                                                        <p className='text-xs'>Mendonasikan
+                                                            Sebesar <b>{'Rp' + formatter.format(donation.amount)}</b></p>
+                                                        <p className='text-[0.65rem]'>{new Date(donation.transfer_date).toLocaleDateString("id-ID", options)}</p>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </>
                                     )
                                 ) : (
                                     <div className='p-4 py-8 text-center text-gray-500'>

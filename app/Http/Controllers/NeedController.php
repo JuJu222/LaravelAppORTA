@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Need;
 use App\Models\NeedCategory;
 use App\Models\Recipient;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
@@ -45,12 +46,26 @@ class NeedController extends Controller
      */
     public function store(Request $request)
     {
-        Need::query()->create([
+        $need = Need::query()->create([
             'recipient_id' => $request->recipient_id,
             'need_category_id' => $request->need_category_id,
             'amount' => $request->amount,
             'due_date' => $request->due_date,
+            'delivered_date' => $request->delivered_date !== '' ? $request->delivered_date : null,
+            'delivered_message' => $request->delivered_message !== '' ? $request->delivered_message : null,
         ]);
+
+        if ($request->hasfile('delivered_photo')) {
+            $this->validate($request, [
+                'delivered_photo' => 'mimes:jpeg,png,bmp,tiff',
+            ]);
+            $file = $request->file('delivered_photo');
+            $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+            $file->move(public_path() . '/img/recipients/delivered_photo/', $name);
+            $need->update([
+                'delivered_photo' => $name,
+            ]);
+        }
 
         return Redirect::route('needs.index');
     }
@@ -76,7 +91,11 @@ class NeedController extends Controller
      */
     public function edit($id)
     {
-        //
+        $need = Need::query()->find($id);
+        $recipients = Recipient::query()->get();
+        $needCategories = NeedCategory::query()->get();
+
+        return Inertia::render('Needs/NeedsEdit', compact('need', 'recipients', 'needCategories'));
     }
 
     /**

@@ -260,9 +260,15 @@ class RecipientController extends Controller
     {
         $recipient = Recipient::query()->with(['parents.disabilities', 'disabilities', 'needs', 'photos.type'])->find($id);
         $recipients = Recipient::query()->with(['parents', 'disabilities'])->limit(3)->get();
-        $donations = Donation::query()->whereNotNull('accepted_date')->whereHas('need', function ($query) use ($id) {
-            return $query->where('recipient_id', '=', $id);
-        })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
+        if (Auth::user()->role_id == 1) {
+            $donations = Donation::query()->whereHas('need', function ($query) use ($id) {
+                return $query->where('recipient_id', '=', $id);
+            })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
+        } else {
+            $donations = Donation::query()->whereNotNull('accepted_date')->whereHas('need', function ($query) use ($id) {
+                return $query->where('recipient_id', '=', $id);
+            })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
+        }
 
         foreach ($recipient->parents as $parent) {
             $parent['relationship'] = Relationship::query()->find($parent->pivot->relationship_id)->relationship;

@@ -105,7 +105,11 @@ export default function Donations(props) {
                                 <td className="pl-12">
                                     <div className="flex items-center">
                                         <div>
-                                            <p className="font-medium">{donation.accepted_date ? donation.accepted_date : 'Belum Diverifikasi'}</p>
+                                            {donation.accepted_date ? (
+                                                <p className="bg-green-600 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">{donation.accepted_date}</p>
+                                            ) : (
+                                                <p className="bg-red_dark text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Belum Diverifikasi</p>
+                                            )}
                                         </div>
                                     </div>
                                 </td>
