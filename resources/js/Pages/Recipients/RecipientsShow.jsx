@@ -10,6 +10,14 @@ export default function RecipientsShow(props) {
     const formatter = new Intl.NumberFormat('de-DE');
     const options = {year: 'numeric', month: 'long', day: 'numeric'}
 
+    const today = new Date();
+    const birthDate = new Date(props.recipient.birthdate);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
     function handleDelete(id) {
         Inertia.delete(route("recipients.destroy", id));
     }
@@ -67,7 +75,7 @@ export default function RecipientsShow(props) {
                                     <div className='grow md:pt-4'>
                                         <div className='flex flex-row justify-between'>
                                             <h2 className='text-red text-2xl font-bold'>{props.recipient.name}</h2>
-                                            <h3 className='text-red text-2xl'>8 tahun</h3>
+                                            <h3 className='text-red text-2xl'>{age} tahun</h3>
                                         </div>
                                         {props.auth.user.role_id == 1 &&
                                             <>
@@ -268,7 +276,7 @@ export default function RecipientsShow(props) {
                             <div className='grow md:pt-4'>
                                 <div className='flex flex-row justify-between'>
                                     <h2 className='text-red text-2xl font-bold'>{props.recipient.name}</h2>
-                                    <h3 className='text-red text-2xl'>8 tahun</h3>
+                                    <h3 className='text-red text-2xl'>{age} tahun</h3>
                                 </div>
                                 {props.auth.user.role_id == 1 &&
                                     <>

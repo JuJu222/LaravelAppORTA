@@ -6,6 +6,7 @@ use App\Models\Need;
 use App\Models\NeedCategory;
 use App\Models\Recipient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -62,7 +63,9 @@ class NeedController extends Controller
      */
     public function show($id)
     {
-        //
+        $need = Need::query()->with(['donations', 'recipient', 'needCategory'])->find($id);
+
+        return Inertia::render('Needs/NeedsShow', compact('need'));
     }
 
     /**
@@ -96,6 +99,14 @@ class NeedController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $need = Need::query()->find($id);
+
+        if ($need->delivered_photo) {
+            File::delete(public_path('/img/recipients/delivered_photo/' . $need->delivered_photo));
+        }
+
+        $need->delete();
+
+        return Redirect::route('needs.index');
     }
 }

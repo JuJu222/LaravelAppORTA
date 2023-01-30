@@ -466,7 +466,7 @@ class RecipientController extends Controller
 
         $recipient->delete();
 
-        return Redirect::back();
+        return Redirect::route('recipients.index');
     }
 
     public function showMessage($id)

@@ -172,7 +172,7 @@ class DonorController extends Controller
 
         $donor->delete();
 
-        return Redirect::back();
+        return Redirect::route('donors.index');
     }
 
     public function notVerified()

@@ -125,8 +125,10 @@ class AdminController extends Controller
     public function destroy($id)
     {
         $admin = Admin::query()->find($id);
-        User::query()->find($admin->user_id)->delete();
 
-        return Redirect::back();
+        User::query()->find($admin->user_id)->delete();
+        $admin->delete();
+
+        return Redirect::route('admins.index');
     }
 }

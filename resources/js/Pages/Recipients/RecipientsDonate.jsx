@@ -10,6 +10,14 @@ export default function RecipientsDonate(props) {
     const [values, setValues] = useState({
     })
 
+    const today = new Date();
+    const birthDate = new Date(props.recipient.birthdate);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
     function handleChange(e) {
         const key = e.target.name;
 
@@ -48,13 +56,13 @@ export default function RecipientsDonate(props) {
                         </div>
                         <div className='grow md:pt-4'>
                             <div className='flex flex-row justify-between'>
-                                <h2 className='text-red text-2xl font-bold'>Justinna Wadana</h2>
-                                <h3 className='text-red text-2xl'>8 tahun</h3>
+                                <h2 className='text-red text-2xl font-bold'>{props.recipient.name}</h2>
+                                <h3 className='text-red text-2xl'>{age} tahun</h3>
                             </div>
                             <div className="py-2">
                                 {props.recipient.disabilities.map((disability, i) =>
                                     <span
-                                        className="inline-block bg-pink rounded-full px-2 py-1 text-xs font-semibold text-white mr-2 mb-2">{disability.disability}</span>
+                                        className="inline-block rounded-full px-2 py-0.5 text-xs font-semibold border border-black mr-2 mb-2">{disability.disability}</span>
                                 )}
                             </div>
                             <NeedCard need={props.need} recipientID={props.recipient.id} button={false}/>

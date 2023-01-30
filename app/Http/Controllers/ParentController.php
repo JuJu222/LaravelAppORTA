@@ -95,6 +95,6 @@ class ParentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Redirect::route('parents.index');
     }
 }

@@ -106,7 +106,11 @@ export default function Recipients(props) {
                                 <td className="pl-12">
                                     <div className="flex items-center">
                                         <div>
-                                            <p className="font-medium">{recipient.is_active === 1 ? 'Aktif' : 'Tidak Aktif'}</p>
+                                            {recipient.is_active === 1 ? (
+                                                <p className="bg-green-600 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Aktif</p>
+                                            ) : (
+                                                <p className="bg-red_dark text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Tidak Aktif</p>
+                                            )}
                                         </div>
                                     </div>
                                 </td>

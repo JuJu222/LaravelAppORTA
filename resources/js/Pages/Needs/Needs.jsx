@@ -8,11 +8,11 @@ export default function NeedCategories(props) {
     const options = {year: 'numeric', month: 'long', day: 'numeric'}
 
     function handleCreate() {
-        Inertia.get(route("need_categories.create"));
+        Inertia.get(route("needs.create"));
     }
 
     function handleDelete(id) {
-        Inertia.delete(route("need_categories.destroy", id));
+        Inertia.delete(route("needs.destroy", id));
     }
 
     return (
@@ -87,7 +87,7 @@ export default function NeedCategories(props) {
                                 <td className="pl-12">
                                     <div className="flex items-center">
                                         <div>
-                                            <p className="font-medium">{need.due_date}</p>
+                                            <p className="font-medium">{new Date(need.due_date).toLocaleDateString("id-ID", options)}</p>
                                         </div>
                                     </div>
                                 </td>
@@ -102,16 +102,16 @@ export default function NeedCategories(props) {
                                     <div className="flex items-center">
                                         <div>
                                             {need.delivered_date ? (
-                                                <p className="bg-red_dark text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Belum Dikonfirmasi</p>
-                                            ) : (
                                                 <p className="bg-green-600 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Sudah Dikonfirmasi</p>
+                                            ) : (
+                                                <p className="bg-red_dark text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Belum Dikonfirmasi</p>
                                             )}
                                         </div>
                                     </div>
                                 </td>
                                 <td className="pl-12 pr-4">
                                     <div className='flex gap-2 justify-end'>
-                                        <Link href={route("recipients.show", need.id)} className="flex items-center justify-center text-center">
+                                        <Link href={route("needs.show", need.id)} className="flex items-center justify-center text-center">
                                             <button
                                                 className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
