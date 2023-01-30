@@ -66,7 +66,7 @@ export default function Home(props) {
                         <div className="grid grid-cols-1 gap-5">
                             <div className='grow md:pt-4'>
                                 <NeedCard need={props.need} recipientID={props.recipient.id} button={false}/>
-                                {props.need.pivot.delivered_message ? (
+                                {props.need.pivot.delivered_date ? (
                                     <>
                                         <div className='mb-6'>
                                             <h5 className='block mt-6 mb-2 text-sm font-medium text-gray-900 '>Tanggal Penerimaan Dana:</h5>
