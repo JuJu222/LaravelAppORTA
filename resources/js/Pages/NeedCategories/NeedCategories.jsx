@@ -58,7 +58,7 @@ export default function NeedCategories(props) {
                                     <div className='flex gap-2 justify-end'>
                                         <Link href={route("need_categories.edit", needCategory.id)} className="flex items-center justify-center text-center">
                                             <button
-                                                    className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition">
+                                                    className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-50 focus:outline-none transition">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                      fill="currentColor" className="bi bi-pencil-fill"
                                                      viewBox="0 0 16 16">

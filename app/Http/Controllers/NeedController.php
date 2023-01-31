@@ -78,7 +78,7 @@ class NeedController extends Controller
      */
     public function show($id)
     {
-        $need = Need::query()->with(['donations', 'recipient', 'needCategory'])->find($id);
+        $need = Need::query()->with(['donations.donor', 'recipient', 'needCategory'])->find($id);
 
         return Inertia::render('Needs/NeedsShow', compact('need'));
     }

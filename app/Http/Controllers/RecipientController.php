@@ -243,6 +243,7 @@ class RecipientController extends Controller
             'need_id' => $needID,
             'amount' => $request->amount,
             'bank_account' => $request->bank_account,
+            //TODO ganti transfer_date
             'transfer_date' => date('2022-9-5'),
             'transfer_receipt' => $name,
         ]);

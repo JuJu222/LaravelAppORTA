@@ -5,7 +5,7 @@ import {Link} from "@inertiajs/inertia-react";
 import BottomNavbar from "@/Components/BottomNavbar";
 import NeedCard from "@/Components/NeedCard";
 
-export default function NeedsShow(props) {
+export default function DonationsShow(props) {
     const formatter = new Intl.NumberFormat('de-DE');
     const options = {year: 'numeric', month: 'long', day: 'numeric'}
 
@@ -26,12 +26,12 @@ export default function NeedsShow(props) {
                             <div className='md:flex md:flex-row md:gap-5'>
                                 <div className='grow md:pt-4'>
                                     <div className='flex flex-row justify-between'>
-                                        <h2 className='text-red text-2xl font-bold'>{props.need.recipient.name} - {props.need.need_category.category}</h2>
+                                        <h2 className='text-red text-2xl font-bold'>{new Date(props.donation.transfer_date).toLocaleDateString("id-ID", options)} | {props.donation.donor.name} -> {props.donation.need.recipient.name} ({props.donation.need.need_category.category})</h2>
                                     </div>
                                     {props.auth.user.role_id == 1 &&
                                         <>
                                             <div className='flex gap-4 mt-2 w-full'>
-                                                <Link href={route("needs.edit", props.need.id)} className="flex items-center justify-center text-center w-full">
+                                                <Link href={route("donations.edit", props.donation.id)} className="flex items-center justify-center text-center w-full">
                                                     <button
                                                         className="w-full h-full text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-50 focus:outline-none transition flex justify-center items-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -43,7 +43,7 @@ export default function NeedsShow(props) {
                                                     </button>
                                                 </Link>
                                                 <div className="flex items-center justify-center text-center w-full">
-                                                    <button onClick={(e) => handleDelete(props.need.id)}
+                                                    <button onClick={(e) => handleDelete(props.donation.id)}
                                                             className="w-full h-full text-sm leading-none text-white py-3 px-5 bg-red rounded transition hover:bg-red_hover focus:outline-none flex justify-center items-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                              fill="currentColor" className="bi bi-trash3-fill"
@@ -53,31 +53,51 @@ export default function NeedsShow(props) {
                                                         </svg>
                                                     </button>
                                                 </div>
+                                                <div onClick={(e) => handleAccept(donation.id)} className="flex items-center justify-center text-center w-full">
+                                                    <button
+                                                        className="w-full h-full text-sm leading-none text-white py-3 px-5 bg-green-600 rounded hover:bg-green-500 focus:outline-none transition flex items-center justify-center text-center   ">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                             fill="currentColor" className="bi bi-check-lg" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                                <div className="flex items-center justify-center text-center w-full">
+                                                    <button onClick={(e) => handleReject(donation.id)}
+                                                            className="w-full h-full text-sm leading-none text-white py-3 px-5 bg-red rounded transition hover:bg-red_hover focus:outline-none flex items-center justify-center text-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                             fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                                        </svg>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </>
                                     }
                                     <div>
                                         <div className="grid grid-cols-1 divide-y gap-3 border border-black rounded-lg p-4 mt-4">
                                             <div className='grid grid-cols-1 gap-1'>
-                                                <h4 className='text-red text-lg font-bold'>Informasi Kebutuhan Anak</h4>
-                                                <p className='text-xs'>Nama Anak: <b>{props.need.recipient.name ? props.need.recipient.name : '-'}</b></p>
-                                                <p className='text-xs'>Kebutuhan: <b>{props.need.recipient.name ? props.need.recipient.name : '-'}</b></p>
-                                                <p className='text-xs'>Target Donasi: <b>{props.need.recipient.name ? props.need.recipient.name : '-'}</b></p>
-                                                <p className='text-xs'>Batas Waktu: <b>{props.need.due_date ? new Date(props.need.due_date).toLocaleDateString("id-ID", options) : '-'}</b></p>
+                                                <h4 className='text-red text-lg font-bold'>Informasi Donasi</h4>
+                                                <p className='text-xs'>Kebutuhan: <b>{props.donation.need.need_category.category ? props.donation.need.need_category.category : '-'}</b></p>
+                                                <p className='text-xs'>Nama Anak: <b>{props.donation.need.recipient.name ? props.donation.need.recipient.name : '-'}</b></p>
+                                                <p className='text-xs'>Kebutuhan: <b>{props.donation.donor.name ? props.donation.donor.name : '-'}</b></p>
+                                                <p className='text-xs'>Target Donasi: <b>{props.donation.donor.name ? props.donation.donor.name : '-'}</b></p>
                                             </div>
-                                            {props.need.delivered_date ? (
+                                            {props.donation.accepted_date ? (
                                                 <>
                                                     <div className='grid grid-cols-1 gap-1'>
-                                                        <h4 className='text-red text-lg font-bold'>Informasi Konfirmasi Dana</h4>
+                                                        <h4 className='text-red text-lg font-bold'>Informasi Konfirmasi Donasi</h4>
                                                         <p className="bg-green-600 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap w-fit">Sudah Dikonfirmasi</p>
-                                                        <p className='text-xs'>Tanggal Penerimaan Dana: <b>{props.need.delivered_date ? new Date(props.need.delivered_date).toLocaleDateString("id-ID", options) : '-'}</b></p>
-                                                        <p className='text-xs'>Ucapan Terima Kasih: <b>{props.need.delivered_message ? props.need.delivered_message : '-'}</b></p>
+                                                        <p className='text-xs'>Dikonfirmasi Tanggal: <b>{props.donation.accepted_date ? new Date(props.donation.accepted_date).toLocaleDateString("id-ID", options) : '-'}</b></p>
+                                                        <p className='text-xs'>Oleh: <b>{props.donation.admin.name ? props.donation.admin.name : '-'}</b></p>
                                                     </div>
-                                                    {props.need.delivered_photo &&
+                                                    {props.donation.transfer_receipt &&
                                                         <div className='grid grid-cols-1 gap-1'>
                                                             <h4 className='text-red text-lg font-bold'>Foto Bukti Penerimaan Dana</h4>
                                                             <img className='w-full h-40 object-contain'
-                                                                 src={'/img/recipients/delivered_photo/' + props.need.delivered_photo}/>
+                                                                 src={'/img/donations/transfer_receipt/' + props.donation.transfer_receipt}/>
                                                         </div>
                                                     }
                                                 </>
@@ -89,39 +109,7 @@ export default function NeedsShow(props) {
                                             )}
                                         </div>
                                     </div>
-                                    {/*<Link href={route('needs.needs.add', props.need.id)}*/}
-                                    {/*      className='block text-center mt-4 w-full bg-red text-white text-sm px-5 py-3 rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>*/}
-                                    {/*    Tambah Kebutuhan*/}
-                                    {/*</Link>*/}
                                 </div>
-                            </div>
-                        </div>
-                        <div className='max-w-6xl mx-auto mt-4'>
-                            <div className='flex justify-between items-center'>
-                                <h4 className='text-red text-lg font-bold'>Riwayat Donasi</h4>
-                                <h5 className='text-red text-md'>{props.need.donations.length} Donasi</h5>
-                            </div>
-                            <div>
-                                {props.need.donations.length > 0 ? (
-                                    props.need.donations.map((donation, i) =>
-                                        <div className='shadow-lg rounded-lg p-4 flex gap-4'>
-                                            <div className="w-10 h-10">
-                                                <img className="w-full h-full rounded object-cover"
-                                                     src={donation.donor.photo ? '/img/donors/photo/' + donation.donor.photo : '/img/avatar-default.png'}/>
-                                            </div>
-                                            <div>
-                                                <h4 className='text-red text-base font-bold'>{donation.donor.name_alias ? donation.donor.name_alias : donation.donor.name}</h4>
-                                                <p className='text-xs'>Mendonasikan
-                                                    Sebesar <b>{'Rp' + formatter.format(donation.amount)}</b></p>
-                                                <p className='text-[0.65rem]'>{new Date(donation.transfer_date).toLocaleDateString("id-ID", options)}</p>
-                                            </div>
-                                        </div>
-                                    )
-                                ) : (
-                                    <div className='p-4 py-8 text-center text-gray-500'>
-                                        <h4>Belum ada Donasi!</h4>
-                                    </div>
-                                )}
                             </div>
                         </div>
                     </div>

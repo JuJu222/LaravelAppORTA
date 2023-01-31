@@ -22,7 +22,7 @@ class DonationController extends Controller
 
     public function show($id)
     {
-        $donation = Donation::query()->with(['donor', 'need.needCategory', 'need.recipient'])->find($id);
+        $donation = Donation::query()->with(['donor', 'need.needCategory', 'need.recipient', 'admin'])->find($id);
 
         return Inertia::render('Donations/DonationsShow', compact('donation'));
     }
@@ -30,6 +30,13 @@ class DonationController extends Controller
     public function create()
     {
         return Inertia::render('Donations/DonationsCreate');
+    }
+
+    public function edit($id)
+    {
+        $donation = Donation::query()->with(['donor', 'need.needCategory', 'need.recipient'])->find($id);
+
+        return Inertia::render('Donations/DonationsShow', compact('donation'));
     }
 
     public function accept($id)

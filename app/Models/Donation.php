@@ -27,4 +27,8 @@ class Donation extends Model
     public function need() {
         return $this->belongsTo(Need::class, 'need_id');
     }
+
+    public function admin() {
+        return $this->belongsTo(Admin::class, 'accepted_by_admin_id');
+    }
 }

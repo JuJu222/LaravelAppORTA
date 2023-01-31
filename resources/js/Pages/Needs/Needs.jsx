@@ -113,7 +113,7 @@ export default function NeedCategories(props) {
                                     <div className='flex gap-2 justify-end'>
                                         <Link href={route("needs.show", need.id)} className="flex items-center justify-center text-center">
                                             <button
-                                                className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition">
+                                                className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-50 focus:outline-none transition">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                      fill="currentColor" className="bi bi-eye-fill" viewBox="0 0 16 16">
                                                     <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
@@ -125,7 +125,7 @@ export default function NeedCategories(props) {
                                         <Link href={route("needs.edit", need.id)}
                                               className="flex items-center justify-center text-center">
                                             <button
-                                                className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition">
+                                                className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-50 focus:outline-none transition">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                      fill="currentColor" className="bi bi-pencil-fill"
                                                      viewBox="0 0 16 16">

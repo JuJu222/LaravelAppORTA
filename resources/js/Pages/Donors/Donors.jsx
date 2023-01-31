@@ -93,7 +93,7 @@ export default function Donors(props) {
                                     <div className='flex gap-2 justify-end'>
                                         <Link href={route("donors.show", donor.id)} className="flex items-center justify-center text-center">
                                             <button
-                                                className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition">
+                                                className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-50 focus:outline-none transition">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                      fill="currentColor" className="bi bi-eye-fill" viewBox="0 0 16 16">
                                                     <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
@@ -106,7 +106,7 @@ export default function Donors(props) {
                                             <>
                                                 <Link href={route("donors.edit", donor.id)} className="flex items-center justify-center text-center">
                                                     <button
-                                                        className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition">
+                                                        className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-50 focus:outline-none transition">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                              fill="currentColor" className="bi bi-pencil-fill"
                                                              viewBox="0 0 16 16">
@@ -131,7 +131,7 @@ export default function Donors(props) {
                                             <>
                                                 <div onClick={(e) => handleAccept(donor.id)} className="flex items-center justify-center text-center">
                                                     <button
-                                                        className="text-sm leading-none text-white py-3 px-5 bg-green-600 rounded hover:bg-green-700 focus:outline-none transition">
+                                                        className="text-sm leading-none text-white py-3 px-5 bg-green-600 rounded hover:bg-green-500 focus:outline-none transition">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                              fill="currentColor" className="bi bi-check-lg" viewBox="0 0 16 16">
                                                             <path

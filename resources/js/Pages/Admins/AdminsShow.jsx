@@ -41,7 +41,7 @@ export default function AdminsShow(props) {
                                             <div className='flex gap-4 mt-2 w-full'>
                                                 <Link href={route("admins.edit", props.admin.id)} className="flex items-center justify-center text-center w-full">
                                                     <button
-                                                        className="w-full h-full text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none transition flex justify-center items-center">
+                                                        className="w-full h-full text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-50 focus:outline-none transition flex justify-center items-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                              fill="currentColor" className="bi bi-pencil-fill"
                                                              viewBox="0 0 16 16">
