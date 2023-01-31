@@ -61,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
             Route::resource('admins', AdminController::class);
             Route::resource('needs', NeedController::class);
             Route::get('/donations', [DonationController::class, 'index'])->name('donations.index');
+            Route::get('/donations/{id}', [DonationController::class, 'show'])->name('donations.show');
             Route::get('/donations/create', [DonationController::class, 'create'])->name('donations.create');
             Route::post('/donations/{id}/accept', [DonationController::class, 'accept'])->name('donations.accept');
             Route::post('/donations/{id}/reject', [DonationController::class, 'reject'])->name('donations.reject');

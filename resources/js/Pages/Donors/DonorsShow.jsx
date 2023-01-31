@@ -98,7 +98,8 @@ export default function DonorsShow(props) {
                                             <img className="w-20 object-cover" src="/img/anak.png" alt="Sunset in the mountains" />
                                             <div className='w-full'>
                                                 <div className="px-3 py-3">
-                                                    <div className='flex gap-1 items-center pb-3'>
+                                                    <p className="text-gray-700 text-xs">{donation.donor.name} telah membantu {donation.need.recipient.name} sebanyak</p>
+                                                    <div className='flex gap-1 items-center pt-2 pb-3'>
                                                         <h4 className="font-bold text-red">{'Rp' + formatter.format(donation.amount)},-</h4>
                                                         <p className='text-xs text-black'>untuk {donation.need.need_category.category}</p>
                                                     </div>
@@ -107,9 +108,9 @@ export default function DonorsShow(props) {
                                                         <p className='text-xs text-red font-bold'>{donation.accepted_date ? 'Terverifikasi (' + donation.accepted_date + ')' : 'Belum Diverifikasi'}</p>
                                                     </div>
                                                 </div>
-                                                {donation.accepted_date ? (
+                                                {donation.need.delivered_date ? (
                                                     <div className='bg-red w-full px-3 py-1'>
-                                                        <p className='text-white text-sm text-center font-bold'>Lihat Pesan Anak</p>
+                                                        <p className='text-white text-sm text-center font-bold'>Lihat Ucapan Terima Kasih</p>
                                                     </div>
                                                 ) : (
                                                     ''
