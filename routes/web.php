@@ -64,6 +64,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/donations/{id}', [DonationController::class, 'show'])->name('donations.show');
             Route::get('/donations/{id}/edit', [DonationController::class, 'edit'])->name('donations.edit');
             Route::get('/donations/create', [DonationController::class, 'create'])->name('donations.create');
+            Route::post('/donations', [DonationController::class, 'create'])->name('donations.store');
             Route::post('/donations/{id}/accept', [DonationController::class, 'accept'])->name('donations.accept');
             Route::post('/donations/{id}/reject', [DonationController::class, 'reject'])->name('donations.reject');
             Route::resource('disabilities', DisabilityController::class);

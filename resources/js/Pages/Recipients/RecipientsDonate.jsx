@@ -71,7 +71,7 @@ export default function RecipientsDonate(props) {
                     <form onSubmit={handleSubmit} className='mt-6'>
                         <div className="mb-6">
                             <label htmlFor="bank_account"
-                                   className="block mb-2 text-sm font-medium text-gray-900 ">Nama Lengkap *</label>
+                                   className="block mb-2 text-sm font-medium text-gray-900 ">Nama Pemilik Rekening *</label>
                             <input type="text" id="bank_account" name="bank_account" onChange={handleChange}
                                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                    required={true}/>
@@ -84,8 +84,16 @@ export default function RecipientsDonate(props) {
                                    required={true} />
                         </div>
                         <div className="mb-6">
+                            <label htmlFor="transfer_date"
+                                   className="block mb-2 text-sm font-medium text-gray-900 ">Tanggal Transfer *</label>
+                            <input type="date" id="transfer_date" name="transfer_date" onChange={handleChange}
+                                   className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                   required={true} />
+                        </div>
+                        <div className="mb-6">
                             <label htmlFor="transfer_receipt"
                                    className="block mb-2 text-sm font-medium text-gray-900 ">Bukti Transfer *</label>
+                            {values.transfer_receipt &&  <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(values.transfer_receipt)} /> }
                             <input type="file" id="transfer_receipt" name="transfer_receipt" onChange={handleChange}
                                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                    required={true} />

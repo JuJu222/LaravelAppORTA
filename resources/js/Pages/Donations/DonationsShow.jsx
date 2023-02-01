@@ -82,8 +82,14 @@ export default function DonationsShow(props) {
                                                 <h4 className='text-red text-lg font-bold'>Informasi Donasi</h4>
                                                 <p className='text-xs'>Kebutuhan: <b>{props.donation.need.need_category.category ? props.donation.need.need_category.category : '-'}</b></p>
                                                 <p className='text-xs'>Nama Anak: <b>{props.donation.need.recipient.name ? props.donation.need.recipient.name : '-'}</b></p>
-                                                <p className='text-xs'>Kebutuhan: <b>{props.donation.donor.name ? props.donation.donor.name : '-'}</b></p>
-                                                <p className='text-xs'>Target Donasi: <b>{props.donation.donor.name ? props.donation.donor.name : '-'}</b></p>
+                                                <p className='text-xs'>Tanggal Transfer: <b>{props.donation.transfer_date ? new Date(props.donation.transfer_date).toLocaleDateString("id-ID", options) : '-'}</b></p>
+                                                <p className='text-xs'>Nama Pemilik Rekening: <b>{props.donation.bank_account ? props.donation.bank_account : '-'}</b></p>
+                                                <p className='text-xs'>Jumlah Donasi: <b>Rp{props.donation.amount ? formatter.format(props.donation.amount) : '-'}</b></p>
+                                            </div>
+                                            <div className='grid grid-cols-1 gap-1'>
+                                                <h4 className='text-red text-lg font-bold'>Foto Bukti Transfer</h4>
+                                                <img className='w-full h-40 object-contain'
+                                                     src={'/img/donations/transfer_receipt/' + props.donation.transfer_receipt}/>
                                             </div>
                                             {props.donation.accepted_date ? (
                                                 <>
@@ -93,13 +99,6 @@ export default function DonationsShow(props) {
                                                         <p className='text-xs'>Dikonfirmasi Tanggal: <b>{props.donation.accepted_date ? new Date(props.donation.accepted_date).toLocaleDateString("id-ID", options) : '-'}</b></p>
                                                         <p className='text-xs'>Oleh: <b>{props.donation.admin.name ? props.donation.admin.name : '-'}</b></p>
                                                     </div>
-                                                    {props.donation.transfer_receipt &&
-                                                        <div className='grid grid-cols-1 gap-1'>
-                                                            <h4 className='text-red text-lg font-bold'>Foto Bukti Penerimaan Dana</h4>
-                                                            <img className='w-full h-40 object-contain'
-                                                                 src={'/img/donations/transfer_receipt/' + props.donation.transfer_receipt}/>
-                                                        </div>
-                                                    }
                                                 </>
                                             ) : (
                                                 <div className='grid grid-cols-1 gap-1'>

@@ -3,17 +3,24 @@ import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import RecipientCardAdmin from "@/Components/RecipientCardAdmin";
 import {Link} from "@inertiajs/inertia-react";
+import Select from "react-select";
 
-export default function DonationsCreate(props) {
+export default function AdminsCreate(props) {
     const [values, setValues] = useState({
-        username: '',
-        password: '',
-        name: '',
-        email: '',
-        phone: '',
-        jabatan: '',
-        note: '',
+        amount: '',
+        due_date: '',
+        delivered_date: '',
+        delivered_message: '',
     })
+    let recipientOptions = [];
+    let needCategoryOptions = [];
+
+    for (const recipient of props.recipients) {
+        recipientOptions.push({value: recipient.id, label: recipient.name})
+    }
+    for (const needCategory of props.needCategories) {
+        needCategoryOptions.push({value: needCategory.id, label: needCategory.category})
+    }
 
     function handleChange(e) {
         const key = e.target.name;
@@ -33,63 +40,106 @@ export default function DonationsCreate(props) {
         }
     }
 
+    function handleSelectRecipientChange(e) {
+        setValues(values => ({
+            ...values,
+            ['recipient_id']: e.value,
+        }))
+    }
+
+    function handleSelectNeedCategoryChange(e) {
+        setValues(values => ({
+            ...values,
+            ['need_category_id']: e.value,
+        }))
+    }
+
     function handleSubmit(e) {
         e.preventDefault()
-        Inertia.post(route('admins.store'), values)
+        Inertia.post(route('needs.store'), values)
     }
 
     return (
         <Authenticated
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Tambah Admin</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Tambah Kebutuhan Anak</h2>}
         >
             <form onSubmit={handleSubmit}>
-                <h2 className='font-semibold text-lg mb-2'>Data Admin</h2>
                 <div className="grid gap-x-6 md:grid-cols-2">
                     <div className="mb-6">
-                        <label htmlFor="username"
-                               className="block mb-2 text-sm font-medium text-gray-900 ">Username *</label>
-                        <input type="text" id="username" name="username" onChange={handleChange} required={true}
+                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama Anak *</label>
+                        <Select options={recipientOptions} className='text-sm' name='name' onChange={handleSelectRecipientChange} required={true}
+                                styles={{
+                                    control: (baseStyles, state) => ({
+                                        ...baseStyles,
+                                        borderRadius: 8,
+                                        paddingTop: 2,
+                                        paddingBottom: 2
+                                    }),
+                                }}
+                                theme={(theme) => ({
+                                    ...theme,
+                                    borderRadius: 5,
+                                    colors: {
+                                        ...theme.colors,
+                                        primary25: '#efefef',
+                                        primary: 'red',
+                                    },
+                                })}
+                        />
+                    </div>
+                    <div className="mb-6">
+                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Kategori Kebutuhan *</label>
+                        <Select options={needCategoryOptions} className='text-sm' name='name' onChange={handleSelectNeedCategoryChange} required={true}
+                            styles={{
+                                control: (baseStyles, state) => ({
+                                    ...baseStyles,
+                                    borderRadius: 8,
+                                    paddingTop: 2,
+                                    paddingBottom: 2
+                                }),
+                            }}
+                            theme={(theme) => ({
+                                ...theme,
+                                borderRadius: 5,
+                                colors: {
+                                    ...theme.colors,
+                                    primary25: '#efefef',
+                                    primary: 'red',
+                                },
+                            })}
+                        />
+                    </div>
+                    <div className="mb-6">
+                        <label htmlFor="amount" className="block mb-2 text-sm font-medium text-gray-900 ">Jumlah Dana *</label>
+                        <input type="number" id="amount" name="amount" onChange={handleChange} required={true}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                         />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="password"
-                               className="block mb-2 text-sm font-medium text-gray-900 ">Password *</label>
-                        <input type="text" id="password" name="password" onChange={handleChange} required={true}
+                        <label htmlFor="due_date" className="block mb-2 text-sm font-medium text-gray-900 ">Batas Waktu *</label>
+                        <input type="date" id="due_date" name="due_date" onChange={handleChange} required={true}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                         />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama *</label>
-                        <input type="text" id="name" name="name" onChange={handleChange} required={true}
+                        <label htmlFor="delivered_date" className="block mb-2 text-sm font-medium text-gray-900 ">Tanggal Penerimaan Dana</label>
+                        <input type="date" id="delivered_date" name="delivered_date" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                         />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Email *</label>
-                        <input type="email" id="email" name="email" onChange={handleChange} required={true}
-                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                        <label htmlFor="delivered_message"
+                               className="block mb-2 text-sm font-medium text-gray-900 ">Ucapan Terima Kasih</label>
+                        <textarea name="delivered_message" onChange={handleChange} className='border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400'
                         />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 ">Nomor Telepon *</label>
-                        <input type="text" id="phone" name="phone" onChange={handleChange} required={true}
+                        <label htmlFor="delivered_photo" className="block mb-2 text-sm font-medium text-gray-900 ">Foto Bukti Penerimaan Dana</label>
+                        {values.delivered_photo &&  <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(values.delivered_photo)} /> }
+                        <input type="file" id="delivered_photo" name="delivered_photo" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                        />
-                    </div>
-                    <div className="mb-6">
-                        <label htmlFor="jabatan"
-                               className="block mb-2 text-sm font-medium text-gray-900 ">Jabatan *</label>
-                        <input type="text" id="jabatan" name="jabatan" onChange={handleChange} required={true}
-                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                        />
-                    </div>
-                    <div className="mb-6">
-                        <label htmlFor="note"
-                               className="block mb-2 text-sm font-medium text-gray-900 ">Catatan</label>
-                        <textarea name="note" onChange={handleChange} className='border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400'
                         />
                     </div>
                 </div>

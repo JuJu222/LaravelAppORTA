@@ -29,7 +29,7 @@ export default function NeedCard({need, recipientID, button}) {
                         <div className='h-6 bg-red' style={{"width": (need.collected / need.pivot.amount * 100) + '%'}}></div>
                     </div>
                     <div className='flex justify-between text-red text-xs font-bold mt-1'>
-                        <span>Rp. 0</span>
+                        <span>Rp0</span>
                         <span>Rp{formatter.format(need.pivot.amount)}</span>
                     </div>
                 </div>
