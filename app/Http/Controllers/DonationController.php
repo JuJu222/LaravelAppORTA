@@ -71,7 +71,7 @@ class DonationController extends Controller
         return Inertia::render('Donations/DonationsEdit', compact('donors', 'needs', 'admins', 'donation'));
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
         $donation = Donation::query()->find($id);
 
@@ -81,7 +81,6 @@ class DonationController extends Controller
             'amount' => $request->amount,
             'bank_account' => $request->bank_account,
             'transfer_date' => $request->transfer_date,
-            'transfer_receipt' => $name,
             'accepted_date' => $request->accepted_date !== '' ? $request->accepted_date : null,
             'accepted_by_admin_id' => $request->accepted_by_admin_id !== '' ? $request->accepted_by_admin_id : null,
         ]);
