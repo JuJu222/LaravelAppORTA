@@ -59,12 +59,16 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/donors/{id}/accept', [DonorController::class, 'accept'])->name('donors.accept');
             Route::post('/donors/{id}/reject', [DonorController::class, 'reject'])->name('donors.reject');
             Route::resource('admins', AdminController::class);
-            Route::resource('needs', NeedController::class);
+            Route::resource('needs', NeedController::class)->except([
+                'update'
+            ]);
+            Route::post('/needs/{id}/update', NeedController::class)->name('needs.update');
             Route::get('/donations', [DonationController::class, 'index'])->name('donations.index');
+            Route::get('/donations/create', [DonationController::class, 'create'])->name('donations.create');
+            Route::post('/donations/create', [DonationController::class, 'store'])->name('donations.store');
             Route::get('/donations/{id}', [DonationController::class, 'show'])->name('donations.show');
             Route::get('/donations/{id}/edit', [DonationController::class, 'edit'])->name('donations.edit');
-            Route::get('/donations/create', [DonationController::class, 'create'])->name('donations.create');
-            Route::post('/donations', [DonationController::class, 'create'])->name('donations.store');
+            Route::post('/donations/{id}/update', [DonationController::class, 'update'])->name('donations.update');
             Route::post('/donations/{id}/accept', [DonationController::class, 'accept'])->name('donations.accept');
             Route::post('/donations/{id}/reject', [DonationController::class, 'reject'])->name('donations.reject');
             Route::resource('disabilities', DisabilityController::class);

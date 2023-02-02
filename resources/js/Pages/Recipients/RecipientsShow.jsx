@@ -218,7 +218,7 @@ export default function RecipientsShow(props) {
                                                                 {donation.accepted_date ? (
                                                                     <p className="bg-green-600 text-white px-3 py-1.5 rounded-lg text-center text-[0.65rem] whitespace-nowrap w-fit">{donation.accepted_date}</p>
                                                                 ) : (
-                                                                    <p className="bg-red_dark text-white px-3 py-1.5 rounded-lg text-center text-[0.65rem] whitespace-nowrap w-fit">Belum Diverifikasi</p>
+                                                                    <p className="bg-red_dark text-white px-3 py-1.5 rounded-lg text-center text-[0.65rem] whitespace-nowrap w-fit">Belum Dikonfirmasi</p>
                                                                 )}
                                                             </div>
                                                         </div>
@@ -441,7 +441,7 @@ export default function RecipientsShow(props) {
                                                         {donation.accepted_date ? (
                                                             <p className="bg-green-600 text-white px-3 py-1.5 rounded-lg text-center text-[0.65rem] whitespace-nowrap w-fit">{donation.accepted_date}</p>
                                                         ) : (
-                                                            <p className="bg-red_dark text-white px-3 py-1.5 rounded-lg text-center text-[0.65rem] whitespace-nowrap w-fit">Belum Diverifikasi</p>
+                                                            <p className="bg-red_dark text-white px-3 py-1.5 rounded-lg text-center text-[0.65rem] whitespace-nowrap w-fit">Belum Dikonfirmasi</p>
                                                         )}
                                                     </div>
                                                 </div>

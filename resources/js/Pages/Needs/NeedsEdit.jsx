@@ -58,7 +58,7 @@ export default function AdminsCreate(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        Inertia.post(route('needs.store'), values)
+        Inertia.post(route('needs.update', props.need.id), values)
     }
 
     return (

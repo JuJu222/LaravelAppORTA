@@ -43,7 +43,7 @@ export default function Donations(props) {
                                                 </div>
                                                 <div className='flex gap-1 items-center'>
                                                     <p className="text-gray-700 text-xs">Status: </p>
-                                                    <p className='text-xs text-red font-bold'>{donation.accepted_date ? 'Terverifikasi (' + donation.accepted_date + ')' : 'Belum Diverifikasi'}</p>
+                                                    <p className='text-xs text-red font-bold'>{donation.accepted_date ? 'Sudah Dikonfirmasi (' + donation.accepted_date + ')' : 'Belum Dikonfirmasi'}</p>
                                                 </div>
                                             </div>
                                             {donation.need.delivered_date ? (
@@ -96,7 +96,7 @@ export default function Donations(props) {
                                             </div>
                                             <div className='flex gap-1 items-center'>
                                                 <p className="text-gray-700 text-xs">Status: </p>
-                                                <p className='text-xs text-red font-bold'>{donation.accepted_date ? 'Terverifikasi (' + donation.accepted_date + ')' : 'Belum Diverifikasi'}</p>
+                                                <p className='text-xs text-red font-bold'>{donation.accepted_date ? 'Sudah Dikonfirmasi (' + donation.accepted_date + ')' : 'Belum Dikonfirmasi'}</p>
                                             </div>
                                         </div>
                                     </div>

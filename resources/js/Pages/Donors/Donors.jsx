@@ -84,7 +84,7 @@ export default function Donors(props) {
                                             {donor.verified ? (
                                                 <p className="bg-green-600 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Aktif</p>
                                             ) : (
-                                                <p className="bg-yellow-500 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Menunggu Verifikasi</p>
+                                                <p className="bg-yellow-500 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Menunggu Konfirmasi</p>
                                             )}
                                         </div>
                                     </div>

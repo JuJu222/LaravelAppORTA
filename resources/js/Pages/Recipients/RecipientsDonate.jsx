@@ -92,7 +92,7 @@ export default function RecipientsDonate(props) {
                         </div>
                         <div className="mb-6">
                             <label htmlFor="transfer_receipt"
-                                   className="block mb-2 text-sm font-medium text-gray-900 ">Bukti Transfer *</label>
+                                   className="block mb-2 text-sm font-medium text-gray-900 ">Foto Bukti Transfer *</label>
                             {values.transfer_receipt &&  <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(values.transfer_receipt)} /> }
                             <input type="file" id="transfer_receipt" name="transfer_receipt" onChange={handleChange}
                                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"

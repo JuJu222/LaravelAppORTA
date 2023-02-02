@@ -107,7 +107,45 @@ class NeedController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $need = Need::query()->find($id);
+
+        $need->update([
+            'recipient_id' => $request->recipient_id,
+            'need_category_id' => $request->need_category_id,
+            'amount' => $request->amount,
+            'due_date' => $request->due_date,
+            'delivered_date' => $request->delivered_date !== '' ? $request->delivered_date : null,
+            'delivered_message' => $request->delivered_message !== '' ? $request->delivered_message : null,
+        ]);
+
+        if ($request->hasfile('delivered_photo')) {
+            $this->validate($request, [
+                'delivered_photo' => 'mimes:jpeg,png,bmp,tiff',
+            ]);
+            $file = $request->file('delivered_photo');
+            $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+            $file->move(public_path() . '/img/recipients/delivered_photo/', $name);
+            $need->update([
+                'delivered_photo' => $name,
+            ]);
+        }
+
+        if ($request->hasfile('delivered_photo')) {
+            $this->validate($request, [
+                'delivered_photo' => 'mimes:jpeg,png,bmp,tiff',
+            ]);
+
+            File::delete(public_path('/img/recipients/delivered_photo/' . $need->delivered_photo));
+
+            $file = $request->file('delivered_photo');
+            $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+            $file->move(public_path() . '/img/recipients/delivered_photo/', $name);
+            $need->update([
+                'delivered_photo' => $name,
+            ]);
+        }
+
+        return Redirect::route('needs.index');
     }
 
     /**

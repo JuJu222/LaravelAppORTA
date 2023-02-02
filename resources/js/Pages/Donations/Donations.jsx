@@ -60,7 +60,7 @@ export default function Donations(props) {
                             <th className="font-bold text-left pl-12">Penerima</th>
                             <th className="font-bold text-left pl-12">Kebutuhan</th>
                             <th className="font-bold text-left pl-12">Jumlah</th>
-                            <th className="font-bold text-left pl-12">Tanggal Verifikasi</th>
+                            <th className="font-bold text-left pl-12">Tanggal Konfirmasi</th>
                         </tr>
                         </thead>
                         <tbody className="w-full">
@@ -108,7 +108,7 @@ export default function Donations(props) {
                                             {donation.accepted_date ? (
                                                 <p className="bg-green-600 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">{donation.accepted_date}</p>
                                             ) : (
-                                                <p className="bg-red_dark text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Belum Diverifikasi</p>
+                                                <p className="bg-red_dark text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Belum Dikonfirmasi</p>
                                             )}
                                         </div>
                                     </div>
