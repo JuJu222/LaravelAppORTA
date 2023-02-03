@@ -62,7 +62,7 @@ Route::middleware(['auth'])->group(function () {
             Route::resource('needs', NeedController::class)->except([
                 'update'
             ]);
-            Route::post('/needs/{id}/update', NeedController::class)->name('needs.update');
+            Route::post('/needs/{id}/update', [NeedController::class, 'update'])->name('needs.update');
             Route::get('/donations', [DonationController::class, 'index'])->name('donations.index');
             Route::get('/donations/create', [DonationController::class, 'create'])->name('donations.create');
             Route::post('/donations/create', [DonationController::class, 'store'])->name('donations.store');
