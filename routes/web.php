@@ -67,6 +67,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/donations/create', [DonationController::class, 'create'])->name('donations.create');
             Route::post('/donations/create', [DonationController::class, 'store'])->name('donations.store');
             Route::get('/donations/{id}', [DonationController::class, 'show'])->name('donations.show');
+            Route::delete('/donations/{id}', [DonationController::class, 'destroy'])->name('donations.destroy');
             Route::get('/donations/{id}/edit', [DonationController::class, 'edit'])->name('donations.edit');
             Route::post('/donations/{id}/update', [DonationController::class, 'update'])->name('donations.update');
             Route::post('/donations/{id}/accept', [DonationController::class, 'accept'])->name('donations.accept');

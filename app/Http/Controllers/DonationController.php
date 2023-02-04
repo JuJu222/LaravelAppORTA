@@ -10,6 +10,7 @@ use App\Models\Recipient;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -99,6 +100,19 @@ class DonationController extends Controller
                 'transfer_receipt' => $name,
             ]);
         }
+
+        return Redirect::route('donations.index');
+    }
+
+    public function destroy($id)
+    {
+        $donation = Donation::query()->find($id);
+
+        if ($donation->delivered_photo) {
+            File::delete(public_path('/img/donations/transfer_receipt/' . $donation->transfer_receipt));
+        }
+
+        $donation->delete();
 
         return Redirect::route('donations.index');
     }

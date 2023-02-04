@@ -167,7 +167,7 @@ export default function DonationsEdit(props) {
                                      src={'/img/donations/transfer_receipt/' + props.donation.transfer_receipt}/>
                             )
                         )}
-                        <input type="file" id="transfer_receipt" name="transfer_receipt" onChange={handleChange} required={true}
+                        <input type="file" id="transfer_receipt" name="transfer_receipt" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                         />
                     </div>

@@ -26,7 +26,7 @@ export default function NeedCategories(props) {
                     <div className="flex items-center justify-between">
                         <input type="text" id="username" name="username"
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Cari wali anak"/>
+                               placeholder="Cari kebutuhan anak"/>
                         <Link href={route("needs.create")}>
                             <button
                                 className="inline-flex ml-4 sm:mt-0 items-start justify-start px-5 py-2.5 bg-red hover:bg-red_hover transition focus:outline-none rounded">

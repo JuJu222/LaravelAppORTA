@@ -10,7 +10,7 @@ export default function DonationsShow(props) {
     const options = {year: 'numeric', month: 'long', day: 'numeric'}
 
     function handleDelete(id) {
-        Inertia.delete(route("needs.destroy", id));
+        Inertia.delete(route("donations.destroy", id));
     }
 
     return (

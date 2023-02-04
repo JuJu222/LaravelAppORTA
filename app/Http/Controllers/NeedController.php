@@ -122,18 +122,6 @@ class NeedController extends Controller
             $this->validate($request, [
                 'delivered_photo' => 'mimes:jpeg,png,bmp,tiff',
             ]);
-            $file = $request->file('delivered_photo');
-            $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
-            $file->move(public_path() . '/img/recipients/delivered_photo/', $name);
-            $need->update([
-                'delivered_photo' => $name,
-            ]);
-        }
-
-        if ($request->hasfile('delivered_photo')) {
-            $this->validate($request, [
-                'delivered_photo' => 'mimes:jpeg,png,bmp,tiff',
-            ]);
 
             File::delete(public_path('/img/recipients/delivered_photo/' . $need->delivered_photo));
 
