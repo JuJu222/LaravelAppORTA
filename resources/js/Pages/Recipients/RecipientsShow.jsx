@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Link} from "@inertiajs/inertia-react";
 import RecipientCard from "@/Components/RecipientCard";
 import BottomNavbar from "@/Components/BottomNavbar";
 import NeedCard from "@/Components/NeedCard";
+import DeleteConrifmation from "@/Components/DeleteConrifmation";
 
 export default function RecipientsShow(props) {
     const formatter = new Intl.NumberFormat('de-DE');
-    const options = {year: 'numeric', month: 'long', day: 'numeric'}
+    const options = {year: 'numeric', month: 'long', day: 'numeric'};
+    const [showModal,setShowModal] = useState(false);
+    const [modalData,setModalData] = useState({});
 
     const today = new Date();
     const birthDate = new Date(props.recipient.birthdate);
@@ -20,6 +23,12 @@ export default function RecipientsShow(props) {
 
     function handleDelete(id) {
         Inertia.delete(route("recipients.destroy", id));
+        setShowModal(false);
+    }
+
+    function confirmDelete(id, message) {
+        setModalData({id: id, message: message});
+        setShowModal(true);
     }
 
     if (props.auth.user.role_id == 1) {
@@ -102,7 +111,7 @@ export default function RecipientsShow(props) {
                                                         </button>
                                                     </Link>
                                                     <div className="flex items-center justify-center text-center w-full">
-                                                        <button onClick={(e) => handleDelete(recipient.id)}
+                                                        <button onClick={(e) => confirmDelete(props.recipient.id, props.recipient.name)}
                                                                 className="w-full h-full text-sm leading-none text-white py-3 px-5 bg-red rounded transition hover:bg-red_hover focus:outline-none flex justify-center items-center">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                                  fill="currentColor" className="bi bi-trash3-fill"
@@ -249,6 +258,7 @@ export default function RecipientsShow(props) {
                         </div>
                     </div>
                 </div>
+                <DeleteConrifmation showModal={showModal} setShowModal={setShowModal} modalData={modalData} handleDelete={handleDelete}></DeleteConrifmation>
             </Authenticated>
         )
     } else {
@@ -325,7 +335,7 @@ export default function RecipientsShow(props) {
                                                 </button>
                                             </Link>
                                             <div className="flex items-center justify-center text-center w-full">
-                                                <button onClick={(e) => handleDelete(recipient.id)}
+                                                <button onClick={(e) => confirmDelete(props.recipient.id, props.recipient.name)}
                                                         className="w-full h-full text-sm leading-none text-white py-3 px-5 bg-red rounded transition hover:bg-red_hover focus:outline-none flex justify-center items-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                          fill="currentColor" className="bi bi-trash3-fill"

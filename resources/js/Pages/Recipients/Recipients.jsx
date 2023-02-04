@@ -3,9 +3,12 @@ import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Link} from "@inertiajs/inertia-react";
 import RecipientCardAdmin from "@/Components/RecipientCardAdmin";
+import DeleteConrifmation from "@/Components/DeleteConrifmation";
 
 export default function Recipients(props) {
     const [filteredItems, setFilteredItems] = useState(props.recipients);
+    const [showModal,setShowModal] = useState(false)
+    const [modalData,setModalData] = useState({})
 
     React.useEffect(() => {
         setFilteredItems(props.recipients);
@@ -25,6 +28,12 @@ export default function Recipients(props) {
 
     function handleDelete(id) {
         Inertia.delete(route("recipients.destroy", id));
+        setShowModal(false);
+    }
+
+    function confirmDelete(id, message) {
+        setModalData({id: id, message: message});
+        setShowModal(true);
     }
 
     return (
@@ -139,7 +148,7 @@ export default function Recipients(props) {
                                             </button>
                                         </Link>
                                         <div className="flex items-center justify-center text-center">
-                                            <button onClick={(e) => handleDelete(recipient.id)}
+                                            <button onClick={(e) => confirmDelete(recipient.id, recipient.name)}
                                                     className="text-sm leading-none text-white py-3 px-5 bg-red rounded transition hover:bg-red_hover focus:outline-none">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                      fill="currentColor" className="bi bi-trash3-fill"
@@ -157,6 +166,7 @@ export default function Recipients(props) {
                     </table>
                 </div>
             </div>
+            <DeleteConrifmation showModal={showModal} setShowModal={setShowModal} modalData={modalData} handleDelete={handleDelete}></DeleteConrifmation>
         </Authenticated>
     );
 }
