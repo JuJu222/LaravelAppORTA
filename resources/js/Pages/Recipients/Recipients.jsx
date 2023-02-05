@@ -75,6 +75,7 @@ export default function Recipients(props) {
                             <th className="font-bold text-left pl-12">Penerima</th>
                             <th className="font-bold text-left pl-12">Usia</th>
                             <th className="font-bold text-left pl-12">Disabilitas</th>
+                            <th className="font-bold text-left pl-12">Wali/Orang Tua</th>
                             <th className="font-bold text-left pl-12">Status</th>
                         </tr>
                         </thead>
@@ -107,6 +108,17 @@ export default function Recipients(props) {
                                             <p className="font-medium">
                                                 {recipient.disabilities.map((disability, i) =>
                                                     disability.disability + (i !== recipient.disabilities.length - 1 ? ', ' : '')
+                                                )}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td className="pl-12">
+                                    <div className="flex items-center">
+                                        <div>
+                                            <p className="font-medium">
+                                                {recipient.parents.map((parent, i) =>
+                                                    parent.name + (i !== recipient.parents.length - 1 ? ', ' : '')
                                                 )}
                                             </p>
                                         </div>

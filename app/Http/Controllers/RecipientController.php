@@ -28,7 +28,7 @@ class RecipientController extends Controller
      */
     public function index()
     {
-        $recipients = Recipient::query()->with(['disabilities'])->get();
+        $recipients = Recipient::query()->with(['disabilities', 'parents'])->get();
 
         return Inertia::render('Recipients/Recipients', compact('recipients'));
     }

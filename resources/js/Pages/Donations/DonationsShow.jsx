@@ -1,23 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Link} from "@inertiajs/inertia-react";
 import BottomNavbar from "@/Components/BottomNavbar";
 import NeedCard from "@/Components/NeedCard";
+import DeleteConrifmation from "@/Components/DeleteConrifmation";
 
 export default function DonationsShow(props) {
     const formatter = new Intl.NumberFormat('de-DE');
     const options = {year: 'numeric', month: 'long', day: 'numeric'}
+    const [showModal,setShowModal] = useState(false);
+    const [modalData,setModalData] = useState({});
 
     function handleDelete(id) {
         Inertia.delete(route("donations.destroy", id));
+        setShowModal(false);
+    }
+
+    function confirmDelete(id, message) {
+        setModalData({id: id, message: message});
+        setShowModal(true);
     }
 
     return (
         <Authenticated
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Informasi Kebutuhan Anak</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Informasi Donasi</h2>}
         >
             <div className="w-full sm:px-6 xl:px-0">
                 <div className='pb-20'>
@@ -43,7 +52,7 @@ export default function DonationsShow(props) {
                                                     </button>
                                                 </Link>
                                                 <div className="flex items-center justify-center text-center w-full">
-                                                    <button onClick={(e) => handleDelete(props.donation.id)}
+                                                    <button onClick={(e) => confirmDelete(props.donation.id, new Date(props.donation.transfer_date).toLocaleDateString("id-ID", options) + ' | ' + props.donation.donor.name + ' -> ' + props.donation.need.recipient.name + ' (' + props.donation.need.need_category.category + ')')}
                                                             className="w-full h-full text-sm leading-none text-white py-3 px-5 bg-red rounded transition hover:bg-red_hover focus:outline-none flex justify-center items-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                              fill="currentColor" className="bi bi-trash3-fill"
@@ -114,6 +123,7 @@ export default function DonationsShow(props) {
                     </div>
                 </div>
             </div>
+            <DeleteConrifmation showModal={showModal} setShowModal={setShowModal} modalData={modalData} handleDelete={handleDelete}></DeleteConrifmation>
         </Authenticated>
     );
 }
