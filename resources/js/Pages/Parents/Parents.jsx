@@ -30,7 +30,7 @@ export default function Parents(props) {
         <Authenticated
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Wali Anak</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Orang Tua/Wali Anak</h2>}
         >
             <div className="w-full sm:px-6 xl:px-0">
                 <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">

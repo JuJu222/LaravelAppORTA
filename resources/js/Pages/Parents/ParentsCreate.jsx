@@ -31,57 +31,57 @@ export default function ParentsCreate(props) {
         <Authenticated
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Tambah Wali Anak</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Tambah Orang Tua/Wali Anak</h2>}
         >
             <form onSubmit={handleSubmit}>
                 <div className="grid gap-x-6 md:grid-cols-2">
                     <div className="mb-6">
-                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
-                        <input type="text" id="name" name="name" onChange={handleChange}
+                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama *</label>
+                        <input type="text" id="name" name="name" onChange={handleChange} required={true}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Description" />
+                        />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="nik" className="block mb-2 text-sm font-medium text-gray-900 ">NIK</label>
-                        <input type="text" id="nik" name="nik" onChange={handleChange}
+                        <label htmlFor="nik" className="block mb-2 text-sm font-medium text-gray-900 ">NIK *</label>
+                        <input type="text" id="nik" name="nik" onChange={handleChange} required={true}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Description" />
+                        />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="birthplace" className="block mb-2 text-sm font-medium text-gray-900 ">Birthplace</label>
-                        <input type="text" id="birthplace" name="birthplace" onChange={handleChange}
+                        <label htmlFor="birthplace" className="block mb-2 text-sm font-medium text-gray-900 ">Tempat Lahir *</label>
+                        <input type="text" id="birthplace" name="birthplace" onChange={handleChange} required={true}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Description" />
+                        />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="birthdate" className="block mb-2 text-sm font-medium text-gray-900 ">Birthdate</label>
-                        <input type="date" id="birthdate" name="birthdate" onChange={handleChange}
+                        <label htmlFor="birthdate" className="block mb-2 text-sm font-medium text-gray-900 ">Tanggal Lahir *</label>
+                        <input type="date" id="birthdate" name="birthdate" onChange={handleChange} required={true}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Description" />
+                        />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="occupation" className="block mb-2 text-sm font-medium text-gray-900 ">Occupation</label>
-                        <input type="text" id="occupation" name="occupation" onChange={handleChange}
+                        <input type="text" id="occupation" name="occupation" onChange={handleChange} required={true}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Description" />
+                        />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="address" className="block mb-2 text-sm font-medium text-gray-900 ">Address</label>
-                        <input type="text" id="address" name="address" onChange={handleChange}
+                        <input type="text" id="address" name="address" onChange={handleChange} required={true}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Description" />
+                        />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 ">Phone</label>
-                        <input type="text" id="phone" name="phone" onChange={handleChange}
+                        <input type="text" id="phone" name="phone" onChange={handleChange} required={true}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Description" />
+                        />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="ktp_image" className="block mb-2 text-sm font-medium text-gray-900 ">KTP Image</label>
-                        <input type="text" id="ktp_image" name="ktp_image" onChange={handleChange}
+                        <input type="text" id="ktp_image" name="ktp_image" onChange={handleChange} required={true}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="KTP Image" />
+                        />
                     </div>
                 </div>
                 <button type="submit"

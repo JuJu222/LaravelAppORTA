@@ -75,7 +75,7 @@ export default function Recipients(props) {
                             <th className="font-bold text-left pl-12">Penerima</th>
                             <th className="font-bold text-left pl-12">Usia</th>
                             <th className="font-bold text-left pl-12">Disabilitas</th>
-                            <th className="font-bold text-left pl-12">Wali/Orang Tua</th>
+                            <th className="font-bold text-left pl-12">Orang Tua/Wali</th>
                             <th className="font-bold text-left pl-12">Status</th>
                         </tr>
                         </thead>
