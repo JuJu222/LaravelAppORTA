@@ -4,6 +4,13 @@ import Authenticated from "@/Layouts/AuthenticatedLayout";
 
 export default function ParentsCreate(props) {
     const [values, setValues] = useState({
+        name: '',
+        nik: '',
+        birthplace: '',
+        birthdate: '',
+        occupation: '',
+        address: '',
+        phone: '',
     })
 
     function handleChange(e) {

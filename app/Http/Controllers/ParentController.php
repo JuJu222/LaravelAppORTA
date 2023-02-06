@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ParentModel;
+use App\Models\Relationship;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -16,7 +17,13 @@ class ParentController extends Controller
      */
     public function index()
     {
-        $parents = ParentModel::query()->get();
+        $parents = ParentModel::query()->with('recipients')->get();
+
+        foreach ($parents as $parent) {
+            foreach ($parent->recipients as $recipient) {
+                $recipient['relationship'] = Relationship::query()->find($recipient->pivot->relationship_id)->relationship;
+            }
+        }
 
         return Inertia::render('Parents/Parents', compact('parents'));
     }

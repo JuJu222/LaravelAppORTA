@@ -30,6 +30,12 @@ class RecipientController extends Controller
     {
         $recipients = Recipient::query()->with(['disabilities', 'parents'])->get();
 
+        foreach ($recipients as $recipient) {
+            foreach ($recipient->parents as $parent) {
+                $parent['relationship'] = Relationship::query()->find($parent->pivot->relationship_id)->relationship;
+            }
+        }
+
         return Inertia::render('Recipients/Recipients', compact('recipients'));
     }
 

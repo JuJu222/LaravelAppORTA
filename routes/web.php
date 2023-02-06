@@ -54,8 +54,9 @@ Route::middleware(['auth'])->group(function () {
                 'index', 'show', 'update'
             ]);
             Route::resource('donors', DonorController::class)->except([
-                'show', 'edit', 'update'
+                'update'
             ]);
+            Route::post('/donors/{id}/update', [DonorController::class, 'update'])->name('donors.update');
             Route::post('/donors/{id}/accept', [DonorController::class, 'accept'])->name('donors.accept');
             Route::post('/donors/{id}/reject', [DonorController::class, 'reject'])->name('donors.reject');
             Route::resource('admins', AdminController::class);
@@ -81,9 +82,6 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('role:1,2')->group(function () {
         Route::resource('recipients', RecipientController::class)->only([
             'index'
-        ]);
-        Route::resource('donors', DonorController::class)->only([
-            'show', 'edit', 'update'
         ]);
         Route::get('/recipients/{recipientID}/donate/{needID}', [RecipientController::class, 'addDonation'])->name('recipients.donate.add');
         Route::post('/recipients/{recipientID}/donate/{needID}', [RecipientController::class, 'storeDonation'])->name('recipients.donate.store');

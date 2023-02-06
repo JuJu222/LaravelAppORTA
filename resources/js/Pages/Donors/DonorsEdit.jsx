@@ -35,7 +35,7 @@ export default function DonorsEdit(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        Inertia.post(route('donors.store'), values)
+        Inertia.post(route('donors.update', props.donor.id), values)
     }
 
     return (
@@ -54,10 +54,10 @@ export default function DonorsEdit(props) {
                                required={true} />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Password *</label>
+                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Password (kosongkan bila tidak ingin mengubah password lama)</label>
                         <input type="text" id="password" name="password" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               required={true} />
+                               />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama *</label>

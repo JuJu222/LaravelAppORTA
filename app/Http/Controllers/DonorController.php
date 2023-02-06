@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Donation;
 use App\Models\Donor;
+use App\Models\Photo;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -65,17 +66,10 @@ class DonorController extends Controller
             'email' => $request->input('email'),
             'address' => $request->input('address'),
             'city' => $request->input('city'),
-            'note' => $request->input('note'),
+            'note' => $request->input('note') !== '' ? $request->input('note') : null,
+            'name_alias' => $request->input('name_alias') !== '' ? $request->input('name_alias') : null,
             'verified' => true,
         ]);
-
-        if ($request->has('name_alias')) {
-            if ($request->input('name_alias') != '') {
-                $donor->update([
-                    'name_alias' => $request->input('name_alias'),
-                ]);
-            }
-        }
 
         if ($request->hasfile('photo')) {
             $this->validate($request, [
@@ -117,7 +111,7 @@ class DonorController extends Controller
     public function edit($id)
     {
         $donor = Donor::query()->find($id);
-        $user = User::query()->find($donor->user_id)->first();
+        $user = User::query()->find($donor->user_id);
 
         return Inertia::render('Donors/DonorsEdit', compact('donor', 'user'));
     }
@@ -131,21 +125,59 @@ class DonorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Donor::query()->find($id)->update([
+        $donor = Donor::query()->find($id);
+
+        $donor->update([
             'name' => $request->input('name'),
-            'name_alias' => $request->input('name_alias'),
-            'ktp' => $request->input('ktp'),
             'phone' => $request->input('phone'),
             'email' => $request->input('email'),
             'address' => $request->input('address'),
             'city' => $request->input('city'),
-            'note' => $request->input('note'),
-            'photo' => $request->input('photo'),
+            'note' => $request->input('note') !== '' ? $request->input('note') : null,
+            'name_alias' => $request->input('name_alias') !== '' ? $request->input('name_alias') : null,
+            'verified' => true,
         ]);
-        User::query()->where('role_id', 2)->where('user_id', $id)->update([
-            'username' => $request->input('username'),
-            'password' => bcrypt($request->input('password')),
-        ]);
+
+        if ($request->password == '') {
+            User::query()->find($donor->user_id)->update([
+                'username' => $request->input('username'),
+            ]);
+        } else {
+            User::query()->find($donor->user_id)->update([
+                'username' => $request->input('username'),
+                'password' => bcrypt($request->input('password')),
+            ]);
+        }
+
+        if ($request->hasfile('ktp')) {
+            $this->validate($request, [
+                'ktp' => 'mimes:jpeg,png,bmp,tiff',
+            ]);
+
+            File::delete(public_path('/img/donors/ktp/' . $donor->ktp));
+
+            $file = $request->file('ktp');
+            $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+            $file->move(public_path() . '/img/donors/ktp/', $name);
+            $donor->update([
+                'ktp' => $name,
+            ]);
+        }
+
+        if ($request->hasfile('photo')) {
+            $this->validate($request, [
+                'photo' => 'mimes:jpeg,png,bmp,tiff',
+            ]);
+
+            File::delete(public_path('/img/donors/photo/' . $donor->photo));
+
+            $file = $request->file('photo');
+            $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+            $file->move(public_path() . '/img/donors/photo/', $name);
+            $donor->update([
+                'photo' => $name,
+            ]);
+        }
 
         return Redirect::route('donors.index');
     }

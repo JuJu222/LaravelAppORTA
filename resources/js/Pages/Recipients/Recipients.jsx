@@ -118,7 +118,7 @@ export default function Recipients(props) {
                                         <div>
                                             <p className="font-medium">
                                                 {recipient.parents.map((parent, i) =>
-                                                    parent.name + (i !== recipient.parents.length - 1 ? ', ' : '')
+                                                    parent.name + ` (${parent.relationship})` + (i !== recipient.parents.length - 1 ? ', ' : '')
                                                 )}
                                             </p>
                                         </div>

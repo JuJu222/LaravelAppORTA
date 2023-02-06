@@ -25,4 +25,9 @@ class ParentModel extends Model
     {
         return $this->belongsToMany(Disability::class, 'disabilities_parents', 'parent_id', 'disability_id');
     }
+
+    public function recipients()
+    {
+        return $this->belongsToMany(Recipient::class, 'recipients_parents', 'parent_id', 'recipient_id')->withPivot(['relationship_id']);
+    }
 }

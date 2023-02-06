@@ -4,6 +4,15 @@ import Authenticated from "@/Layouts/AuthenticatedLayout";
 
 export default function DonorsCreate(props) {
     const [values, setValues] = useState({
+        username: '',
+        password: '',
+        name: '',
+        name_alias: '',
+        phone: '',
+        email: '',
+        address: '',
+        city: '',
+        note: '',
     })
 
     function handleChange(e) {
@@ -60,7 +69,7 @@ export default function DonorsCreate(props) {
                         <label htmlFor="name_alias" className="block mb-2 text-sm font-medium text-gray-900 ">Nama Alias</label>
                         <input type="text" id="name_alias" name="name_alias" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               required={true} />
+                               />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 ">Nomor Telepon *</label>
