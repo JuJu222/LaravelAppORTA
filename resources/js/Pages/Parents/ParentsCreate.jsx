@@ -88,16 +88,8 @@ export default function ParentsCreate(props) {
                     </div>
                     <div className="mb-6">
                         <label htmlFor="ktp" className="block mb-2 text-sm font-medium text-gray-900 ">Foto KTP *</label>
-                        {values.ktp ? (
-                            <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
-                                 src={URL.createObjectURL(values.ktp)}/>
-                        ) : (
-                            props.donor.ktp && (
-                                <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
-                                     src={'/img/parents/ktp/' + props.parent.ktp}/>
-                            )
-                        )}
-                        <input type="file" id="ktp" name="ktp" onChange={handleChange}
+                        {values.ktp &&  <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(values.ktp)} /> }
+                        <input type="file" id="ktp" name="ktp" onChange={handleChange} required={true}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                         />
                     </div>

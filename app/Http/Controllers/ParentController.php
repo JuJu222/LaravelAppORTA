@@ -121,13 +121,13 @@ class ParentController extends Controller
                 'ktp' => 'mimes:jpeg,png,bmp,tiff',
             ]);
 
-            File::delete(public_path('/img/parents/ktp/' . $parent->ktp));
+            File::delete(public_path('/img/parents/ktp/' . $parent->ktp_image));
 
             $file = $request->file('ktp');
             $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
             $file->move(public_path() . '/img/parents/ktp/', $name);
             $parent->update([
-                'ktp' => $name,
+                'ktp_image' => $name,
             ]);
         }
 

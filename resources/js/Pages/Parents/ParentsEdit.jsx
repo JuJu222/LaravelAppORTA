@@ -92,9 +92,9 @@ export default function ParentsEdit(props) {
                             <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
                                  src={URL.createObjectURL(values.ktp)}/>
                         ) : (
-                            props.donor.ktp && (
+                            props.parent.ktp_image && (
                                 <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
-                                     src={'/img/donors/ktp/' + props.donor.ktp}/>
+                                     src={'/img/parents/ktp/' + props.parent.ktp_image}/>
                             )
                         )}
                         <input type="file" id="ktp" name="ktp" onChange={handleChange}

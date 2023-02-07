@@ -75,7 +75,10 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/donations/{id}/reject', [DonationController::class, 'reject'])->name('donations.reject');
             Route::resource('disabilities', DisabilityController::class);
             Route::resource('need_categories', NeedCategoryController::class);
-            Route::resource('parents', ParentController::class);
+            Route::resource('parents', ParentController::class)->except([
+                'update'
+            ]);
+            Route::post('/parents/{id}/update', [ParentController::class, 'update'])->name('parents.update');
         });
 //    });
 
