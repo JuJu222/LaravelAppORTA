@@ -5,19 +5,19 @@ import {Link} from "@inertiajs/inertia-react";
 import BottomNavbar from "@/Components/BottomNavbar";
 import NeedCard from "@/Components/NeedCard";
 
-export default function AdminsShow(props) {
+export default function ParentsShow(props) {
     const formatter = new Intl.NumberFormat('de-DE');
     const options = {year: 'numeric', month: 'long', day: 'numeric'}
 
     function handleDelete(id) {
-        Inertia.delete(route("admins.destroy", id));
+        Inertia.delete(route("parents.destroy", id));
     }
 
     return (
         <Authenticated
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Admin</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Informasi Orang Tua/Wali</h2>}
         >
             <div className="w-full sm:px-6 xl:px-0">
                 <div className='pb-20'>
@@ -34,12 +34,12 @@ export default function AdminsShow(props) {
                                 </div>
                                 <div className='grow md:pt-4'>
                                     <div className='flex flex-row justify-between'>
-                                        <h2 className='text-red text-2xl font-bold'>{props.admin.name}</h2>
+                                        <h2 className='text-red text-2xl font-bold'>{props.parent.name}</h2>
                                     </div>
                                     {props.auth.user.role_id == 1 &&
                                         <>
                                             <div className='flex gap-4 mt-2 w-full'>
-                                                <Link href={route("admins.edit", props.admin.id)} className="flex items-center justify-center text-center w-full">
+                                                <Link href={route("parents.edit", props.parent.id)} className="flex items-center justify-center text-center w-full">
                                                     <button
                                                         className="w-full h-full text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-50 focus:outline-none transition flex justify-center items-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -51,7 +51,7 @@ export default function AdminsShow(props) {
                                                     </button>
                                                 </Link>
                                                 <div className="flex items-center justify-center text-center w-full">
-                                                    <button onClick={(e) => handleDelete(props.admin.id)}
+                                                    <button onClick={(e) => handleDelete(props.parent.id)}
                                                             className="w-full h-full text-sm leading-none text-white py-3 px-5 bg-red rounded transition hover:bg-red_hover focus:outline-none flex justify-center items-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                              fill="currentColor" className="bi bi-trash3-fill"
@@ -67,19 +67,16 @@ export default function AdminsShow(props) {
                                     <div>
                                         <div className="grid grid-cols-1 divide-y gap-3 border border-black rounded-lg p-4 mt-4">
                                             <div className='grid grid-cols-1 gap-1'>
-                                                <h4 className='text-red text-lg font-bold'>Informasi Admin</h4>
-                                                {props.auth.user.role_id == 1 &&
-                                                    <p className='text-xs'>Username: {props.admin.user.username}</p>
-                                                }
-                                                <p className='text-xs'>Nama: {props.admin.name ? props.admin.name : '-'}</p>
-                                                <p className='text-xs'>Email: {props.admin.email ? props.admin.email : '-'}</p>
-                                                <p className='text-xs'>Nomor Telepon: {props.admin.phone ? props.admin.phone : '-'}</p>
-                                                <p className='text-xs'>Jabatan: {props.admin.jabatan ? props.admin.jabatan : '-'}</p>
-                                                <p className='text-xs'>Catatan: {props.admin.note ? props.admin.note : '-'}</p>
+                                                <h4 className='text-red text-lg font-bold'>Informasi Orang Tua/Wali</h4>
+                                                <p className='text-xs'>Nama: {props.parent.name ? props.parent.name : '-'}</p>
+                                                <p className='text-xs'>Email: {props.parent.email ? props.parent.email : '-'}</p>
+                                                <p className='text-xs'>Nomor Telepon: {props.parent.phone ? props.parent.phone : '-'}</p>
+                                                <p className='text-xs'>Jabatan: {props.parent.jabatan ? props.parent.jabatan : '-'}</p>
+                                                <p className='text-xs'>Catatan: {props.parent.note ? props.parent.note : '-'}</p>
                                             </div>
                                         </div>
                                     </div>
-                                    {/*<Link href={route('admins.needs.add', props.admin.id)}*/}
+                                    {/*<Link href={route('parents.needs.add', props.parent.id)}*/}
                                     {/*      className='block text-center mt-4 w-full bg-red text-white text-sm px-5 py-3 rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>*/}
                                     {/*    Tambah Kebutuhan*/}
                                     {/*</Link>*/}

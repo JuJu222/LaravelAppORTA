@@ -79,7 +79,7 @@ class ParentController extends Controller
     {
         $parent = ParentModel::query()->find($id);
 
-        return Inertia::render('Parents/ParentsEdit', compact('parent'));
+        return Inertia::render('Parents/ParentsShow', compact('parent'));
     }
 
     /**

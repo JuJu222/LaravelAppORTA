@@ -30,7 +30,7 @@ export default function Parents(props) {
         <Authenticated
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Orang Tua/Wali Anak</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Orang Tua/Wali</h2>}
         >
             <div className="w-full sm:px-6 xl:px-0">
                 <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
@@ -51,6 +51,7 @@ export default function Parents(props) {
                         <tr className="h-16 w-full text-sm leading-none text-gray-800">
                             <th className="font-bold text-left pl-4">No.</th>
                             <th className="font-bold text-left pl-12">Nama</th>
+                            <th className="font-bold text-left pl-12">Anak</th>
                         </tr>
                         </thead>
                         <tbody className="w-full">
@@ -66,6 +67,17 @@ export default function Parents(props) {
                                                 <img className="w-full h-full rounded object-cover" src='/img/avatar-default.png' />
                                             </div>
                                             <p className="font-medium ml-4">{admin.name}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td className="pl-12">
+                                    <div className="flex items-center">
+                                        <div>
+                                            <p className="font-medium">
+                                                {admin.recipients.map((recipient, i) =>
+                                                    recipient.name + (i !== admin.recipients.length - 1 ? ', ' : '')
+                                                )}
+                                            </p>
                                         </div>
                                     </div>
                                 </td>
