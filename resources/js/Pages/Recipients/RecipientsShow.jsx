@@ -197,7 +197,7 @@ export default function RecipientsShow(props) {
                                                 <p className='text-xs'>Tempat Lahir: {parent.birthplace}</p>
                                                 <p className='text-xs'>Tanggal
                                                     Lahir: {new Date(parent.birthdate).toLocaleDateString("id-ID", options)}</p>
-                                                <p className='text-xs'>Pekerjaan: {parent.occupation}</p>
+                                                <p className='text-xs'>Profesi: {parent.occupation}</p>
                                                 <p className='text-xs'>Alamat Tinggal: {parent.address}</p>
                                                 <p className='text-xs'>Nomor Telepon: {parent.phone}</p>
                                             </div>
@@ -421,7 +421,7 @@ export default function RecipientsShow(props) {
                                         <p className='text-xs'>Tempat Lahir: {parent.birthplace}</p>
                                         <p className='text-xs'>Tanggal
                                             Lahir: {new Date(parent.birthdate).toLocaleDateString("id-ID", options)}</p>
-                                        <p className='text-xs'>Pekerjaan: {parent.occupation}</p>
+                                        <p className='text-xs'>Profesi: {parent.occupation}</p>
                                         <p className='text-xs'>Alamat Tinggal: {parent.address}</p>
                                         <p className='text-xs'>Nomor Telepon: {parent.phone}</p>
                                     </div>

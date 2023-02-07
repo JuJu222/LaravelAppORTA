@@ -69,7 +69,7 @@ export default function ParentsEdit(props) {
                         />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="occupation" className="block mb-2 text-sm font-medium text-gray-900 ">Pekerjaan *</label>
+                        <label htmlFor="occupation" className="block mb-2 text-sm font-medium text-gray-900 ">Profesi *</label>
                         <input type="text" id="occupation" name="occupation" onChange={handleChange} required={true} defaultValue={props.parent.occupation}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                         />

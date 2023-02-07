@@ -69,10 +69,17 @@ export default function ParentsShow(props) {
                                             <div className='grid grid-cols-1 gap-1'>
                                                 <h4 className='text-red text-lg font-bold'>Informasi Orang Tua/Wali</h4>
                                                 <p className='text-xs'>Nama: {props.parent.name ? props.parent.name : '-'}</p>
-                                                <p className='text-xs'>Email: {props.parent.email ? props.parent.email : '-'}</p>
+                                                <p className='text-xs'>NIK: {props.parent.nik ? props.parent.nik : '-'}</p>
+                                                <p className='text-xs'>Tempat Lahir: {props.parent.birthplace ? props.parent.birthplace : '-'}</p>
+                                                <p className='text-xs'>Tanggal Lahir: {props.parent.birthdate ? props.parent.birthdate : '-'}</p>
+                                                <p className='text-xs'>Profesi: {props.parent.occupation ? props.parent.occupation : '-'}</p>
+                                                <p className='text-xs'>Alamat: {props.parent.address ? props.parent.address : '-'}</p>
                                                 <p className='text-xs'>Nomor Telepon: {props.parent.phone ? props.parent.phone : '-'}</p>
-                                                <p className='text-xs'>Jabatan: {props.parent.jabatan ? props.parent.jabatan : '-'}</p>
-                                                <p className='text-xs'>Catatan: {props.parent.note ? props.parent.note : '-'}</p>
+                                            </div>
+                                            <div className='grid grid-cols-1 gap-1'>
+                                                <h4 className='text-red text-lg font-bold'>Foto KTP</h4>
+                                                <img className='w-full h-40 object-contain'
+                                                     src={'/img/parents/ktp/' + props.parent.ktp_image}/>
                                             </div>
                                         </div>
                                     </div>
