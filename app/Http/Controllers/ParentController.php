@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\ParentModel;
 use App\Models\Relationship;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -46,7 +48,14 @@ class ParentController extends Controller
      */
     public function store(Request $request)
     {
-        ParentModel::query()->create([
+        $this->validate($request, [
+            'ktp' => 'mimes:jpeg,png,bmp,tiff',
+        ]);
+        $file = $request->file('ktp');
+        $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+        $file->move(public_path() . '/img/parents/ktp/', $name);
+
+        $parent = ParentModel::query()->create([
             'name' => $request->name,
             'nik' => $request->nik,
             'birthplace' => $request->birthplace,
@@ -54,10 +63,10 @@ class ParentController extends Controller
             'occupation' => $request->occupation,
             'address' => $request->address,
             'phone' => $request->phone,
-            'ktp_image' => $request->ktp_image,
+            'ktp_image' => $name,
         ]);
 
-        return Redirect::route('recipients.index');
+        return Redirect::route('parents.index');
     }
 
     /**
@@ -68,7 +77,9 @@ class ParentController extends Controller
      */
     public function show($id)
     {
-        //
+        $parent = ParentModel::query()->find($id);
+
+        return Inertia::render('Parents/ParentsEdit', compact('parent'));
     }
 
     /**
@@ -79,7 +90,9 @@ class ParentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $parent = ParentModel::query()->find($id);
+
+        return Inertia::render('Parents/ParentsEdit', compact('parent'));
     }
 
     /**
@@ -91,7 +104,34 @@ class ParentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $parent = ParentModel::query()->find($id);
+
+        $parent->update([
+            'name' => $request->name,
+            'nik' => $request->nik,
+            'birthplace' => $request->birthplace,
+            'birthdate' => $request->birthdate,
+            'occupation' => $request->occupation,
+            'address' => $request->address,
+            'phone' => $request->phone,
+        ]);
+
+        if ($request->hasfile('ktp')) {
+            $this->validate($request, [
+                'ktp' => 'mimes:jpeg,png,bmp,tiff',
+            ]);
+
+            File::delete(public_path('/img/parents/ktp/' . $parent->ktp));
+
+            $file = $request->file('ktp');
+            $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+            $file->move(public_path() . '/img/parents/ktp/', $name);
+            $parent->update([
+                'ktp' => $name,
+            ]);
+        }
+
+        return Redirect::route('parents.index');
     }
 
     /**
@@ -102,6 +142,14 @@ class ParentController extends Controller
      */
     public function destroy($id)
     {
+        $parent = ParentModel::query()->find($id);
+
+        if ($parent->ktp) {
+            File::delete(public_path('/img/parents/ktp/' . $parent->ktp));
+        }
+
+        $parent->delete();
+
         return Redirect::route('parents.index');
     }
 }
