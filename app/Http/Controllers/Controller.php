@@ -43,19 +43,19 @@ class Controller extends BaseController
         if (Auth::user()->role_id == 1) {
             $donations = Donation::query()->whereHas('need', function ($query) {
                 return $query->where('donor_id', '=', Auth::user()->donor->id);
-            })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
+            })->with(['donor', 'need.needCategory', 'need.recipient.photos.type'])->get();
 
             return Inertia::render('Donations', compact('donations'));
         } else if (Auth::user()->role_id == 2) {
             $donations = Donation::query()->whereHas('need', function ($query) {
                 return $query->where('donor_id', '=', Auth::user()->donor->id);
-            })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
+            })->with(['donor', 'need.needCategory', 'need.recipient.photos.type'])->get();
 
             return Inertia::render('Donations', compact('donations'));
         } else {
             $donations = Donation::query()->whereHas('need', function ($query) {
                 return $query->where('recipient_id', '=', Auth::user()->recipient->id);
-            })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
+            })->with(['donor', 'need.needCategory', 'need.recipient.photos.type'])->get();
 
             return Inertia::render('Donations', compact('donations'));
         }

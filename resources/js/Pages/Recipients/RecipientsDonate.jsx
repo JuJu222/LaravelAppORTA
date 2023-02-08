@@ -42,14 +42,26 @@ export default function RecipientsDonate(props) {
         <div className='pb-20'>
             <div className='w-full md:hidden'>
                 <div>
-                    <img className='h-52 w-full object-cover' src="/img/anak.png" alt=""/>
+                    {props.recipient.photos.map((photo, i) => {
+                        if (photo.type.type === 'primary') {
+                            return (
+                                <img className="h-52 w-full object-cover" src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/avatar-default.png'}  />
+                            )
+                        }
+                    })}
                 </div>
             </div>
             <div className='w-full px-4'>
                 <div className='max-w-6xl mx-auto mt-4'>
                     <div className='md:flex md:flex-row md:gap-5'>
                         <div className='hidden md:block'>
-                            <img className='h-96 w-auto object-cover rounded-lg' src="/img/anak.png" alt=""/>
+                            {props.recipient.photos.map((photo, i) => {
+                                if (photo.type.type === 'primary') {
+                                    return (
+                                        <img className="h-96 w-auto object-cover rounded-lg" src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/avatar-default.png'}  />
+                                    )
+                                }
+                            })}
                         </div>
                         <div className='grow md:pt-4'>
                             <div className='flex flex-row justify-between'>

@@ -67,7 +67,13 @@ export default function RecipientsMessage(props) {
                     <div className='max-w-6xl mx-auto mt-4'>
                         <div className='md:flex md:flex-row md:gap-5'>
                             <div className='hidden md:block'>
-                                <img className='h-96 w-auto object-cover rounded-lg' src="/img/anak.png" alt=""/>
+                                {props.recipient.photos.map((photo, i) => {
+                                    if (photo.type.type === 'primary') {
+                                        return (
+                                            <img className='h-96 w-auto object-cover rounded-lg' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                        )
+                                    }
+                                })}
                             </div>
                             <div className='grow md:pt-4'>
                                 <h2 className='text-base'>Terima Kasih,</h2>
@@ -78,7 +84,7 @@ export default function RecipientsMessage(props) {
                             <p className='text-sm leading-relaxed'>Karena <b>anda</b>, donasi untuk <b>{props.need.need_category.category}</b> kepada <b>{props.recipient.name}</b> terkumpul <b className='text-red'>{'Rp' + formatter.format(props.need.collected)}</b></p>
                         </div>
                         <div className='max-w-6xl mx-auto mt-4'>
-                            <img className='rounded-xl shadow-md mx-auto object-cover' src="/img/anak.png" alt=""/>
+                            <img className='rounded-xl shadow-md mx-auto object-cover' src={'/img/recipients/delivered_photo/' + props.need.delivered_photo} alt=""/>
                         </div>
                         <div className='max-w-6xl mx-auto mt-4'>
                             <h4 className='text-red font-bold text-lg'>{props.recipient.name}</h4>

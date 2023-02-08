@@ -97,7 +97,7 @@ class DonorController extends Controller
         $donor = Donor::query()->with('user')->find($id);
         $donations = Donation::query()->whereHas('need', function ($query) use ($donor) {
             return $query->where('donor_id', '=', $donor->id);
-        })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
+        })->with(['donor', 'need.needCategory', 'need.recipient.photos.type'])->get();
 
         return Inertia::render('Donors/DonorsShow', compact('donor', 'donations'));
     }

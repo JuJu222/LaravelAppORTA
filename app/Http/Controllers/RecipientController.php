@@ -78,7 +78,7 @@ class RecipientController extends Controller
     }
 
     public function addDonation($recipientID, $needID) {
-        $recipient = Recipient::query()->with(['parents', 'disabilities', 'needs'])->find($recipientID);
+        $recipient = Recipient::query()->with(['parents', 'disabilities', 'needs', 'photos.type'])->find($recipientID);
         $need = $recipient->needs()->where('needs.id', $needID)->first();
 
         $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)
@@ -489,7 +489,7 @@ class RecipientController extends Controller
             $need = Need::query()->where('id', $donation->need_id)->with('needCategory')->first();
             $need['collected'] = Donation::query()->where('need_id', $donation->need_id)
                 ->whereNotNull('accepted_date')->sum('amount');
-            $recipient = Recipient::query()->find($need->recipient_id);
+            $recipient = Recipient::query()->with('photos.type')->find($need->recipient_id);
 
             return Inertia::render('RecipientsMessage', compact('donor', 'need', 'recipient', 'donation'));
         } else {
