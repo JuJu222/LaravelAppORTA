@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import {Link} from "@inertiajs/inertia-react";
 import Select from "react-select";
 
 export default function DonationsCreate(props) {

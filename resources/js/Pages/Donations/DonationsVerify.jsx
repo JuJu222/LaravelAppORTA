@@ -1,8 +1,5 @@
-import React, {useState} from 'react';
-import {Inertia} from "@inertiajs/inertia";
-import Authenticated from "@/Layouts/AuthenticatedLayout";
+import React from 'react';
 import {Link} from "@inertiajs/inertia-react";
-import RecipientCard from "@/Components/RecipientCard";
 import BottomNavbar from "@/Components/BottomNavbar";
 import NeedCard from "@/Components/NeedCard";
 

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {Link} from "@inertiajs/inertia-react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
+
 function Welcome() {
     const [menu, setMenu] = useState(false);
     return (

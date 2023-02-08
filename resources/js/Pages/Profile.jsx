@@ -1,6 +1,5 @@
 import React from 'react';
-import {Head, Link} from '@inertiajs/inertia-react';
-import RecipientCard from "@/Components/RecipientCard";
+import {Link} from '@inertiajs/inertia-react';
 import BottomNavbar from "@/Components/BottomNavbar";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 

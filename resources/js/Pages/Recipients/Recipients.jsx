@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Link} from "@inertiajs/inertia-react";
-import RecipientCardAdmin from "@/Components/RecipientCardAdmin";
 import DeleteConrifmation from "@/Components/DeleteConrifmation";
 
 export default function Recipients(props) {

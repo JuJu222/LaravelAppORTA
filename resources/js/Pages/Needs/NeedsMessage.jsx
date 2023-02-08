@@ -1,12 +1,7 @@
 import React, {useState} from 'react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import {Head, Link} from '@inertiajs/inertia-react';
-import RecipientCard from "@/Components/RecipientCard";
 import BottomNavbar from "@/Components/BottomNavbar";
 import ApplicationLogo from "@/Components/ApplicationLogo";
-import RecipientCardAdmin from "@/Components/RecipientCardAdmin";
 import NeedCard from "@/Components/NeedCard";
-import RecipientNeedCard from "@/Components/RecipientNeedCard";
 import {Inertia} from "@inertiajs/inertia";
 
 export default function Home(props) {

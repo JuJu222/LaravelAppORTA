@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Link} from "@inertiajs/inertia-react";

@@ -1,10 +1,7 @@
 import React from 'react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import {Head, Link} from '@inertiajs/inertia-react';
-import RecipientCard from "@/Components/RecipientCard";
+import {Link} from '@inertiajs/inertia-react';
 import BottomNavbar from "@/Components/BottomNavbar";
 import ApplicationLogo from "@/Components/ApplicationLogo";
-import RecipientCardAdmin from "@/Components/RecipientCardAdmin";
 
 export default function DonorsNotVerified(props) {
     return (

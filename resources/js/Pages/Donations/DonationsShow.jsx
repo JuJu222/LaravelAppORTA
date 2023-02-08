@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Link} from "@inertiajs/inertia-react";
-import BottomNavbar from "@/Components/BottomNavbar";
-import NeedCard from "@/Components/NeedCard";
 import DeleteConrifmation from "@/Components/DeleteConrifmation";
 
 export default function DonationsShow(props) {

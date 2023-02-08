@@ -1,6 +1,5 @@
 import React from 'react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import {Head, Link} from '@inertiajs/inertia-react';
+import {Link} from '@inertiajs/inertia-react';
 import {Inertia} from "@inertiajs/inertia";
 
 export default function RecipientCard({recipient}) {

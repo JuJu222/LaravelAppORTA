@@ -2,8 +2,6 @@ import React from 'react';
 import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Link} from "@inertiajs/inertia-react";
-import BottomNavbar from "@/Components/BottomNavbar";
-import NeedCard from "@/Components/NeedCard";
 
 export default function NeedsShow(props) {
     const formatter = new Intl.NumberFormat('de-DE');

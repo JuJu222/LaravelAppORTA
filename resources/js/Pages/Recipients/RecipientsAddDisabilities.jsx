@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import RecipientCardAdmin from "@/Components/RecipientCardAdmin";
 import {Link} from "@inertiajs/inertia-react";
 
 export default function DisabilitiesCreate(props) {

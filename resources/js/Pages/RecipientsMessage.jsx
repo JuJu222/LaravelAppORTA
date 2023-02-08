@@ -1,10 +1,6 @@
 import React from 'react';
-import {Inertia} from "@inertiajs/inertia";
-import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Link} from "@inertiajs/inertia-react";
-import RecipientCard from "@/Components/RecipientCard";
 import BottomNavbar from "@/Components/BottomNavbar";
-import NeedCard from "@/Components/NeedCard";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 
 export default function RecipientsMessage(props) {
