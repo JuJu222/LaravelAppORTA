@@ -52,8 +52,8 @@ export default function NeedCategories(props) {
                             <th className="font-bold text-left pl-12">Nama Anak</th>
                             <th className="font-bold text-left pl-12">Kebutuhan</th>
                             <th className="font-bold text-left pl-12">Target Donasi</th>
+                            <th className="font-bold text-left pl-12">Donasi Terkumpul</th>
                             <th className="font-bold text-left pl-12">Batas Waktu</th>
-                            <th className="font-bold text-left pl-12">Jumlah Donasi</th>
                             <th className="font-bold text-left pl-12">Status Penerimaan Dana</th>
                         </tr>
                         </thead>
@@ -87,14 +87,14 @@ export default function NeedCategories(props) {
                                 <td className="pl-12">
                                     <div className="flex items-center">
                                         <div>
-                                            <p className="font-medium">{new Date(need.due_date).toLocaleDateString("id-ID", options)}</p>
+                                            <p className="font-medium">{'Rp' + formatter.format(need.collected)}</p>
                                         </div>
                                     </div>
                                 </td>
                                 <td className="pl-12">
                                     <div className="flex items-center">
                                         <div>
-                                            <p className="font-medium">{need.donations.length}</p>
+                                            <p className="font-medium">{new Date(need.due_date).toLocaleDateString("id-ID", options)}</p>
                                         </div>
                                     </div>
                                 </td>

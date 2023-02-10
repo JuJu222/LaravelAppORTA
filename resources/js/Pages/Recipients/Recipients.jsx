@@ -3,15 +3,24 @@ import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Link} from "@inertiajs/inertia-react";
 import DeleteConrifmation from "@/Components/DeleteConrifmation";
+import Select from "react-select";
 
 export default function Recipients(props) {
     const [filteredItems, setFilteredItems] = useState(props.recipients);
     const [showModal,setShowModal] = useState(false)
     const [modalData,setModalData] = useState({})
+    const [filter, setFilter] = useState({name: '', status: ''})
 
     React.useEffect(() => {
         setFilteredItems(props.recipients);
     }, [props.recipients])
+
+    React.useEffect(() => {
+        const results = props.recipients.filter(item => {
+            return item.name.toLowerCase().includes(filter.name.toLowerCase()) && (item.is_active ? 'true' : 'false').includes(filter.status.toString().toLowerCase());
+        })
+        setFilteredItems(results);
+    }, [filter])
 
     function handleFilter(e) {
         const results = props.recipients.filter(item => {
@@ -44,9 +53,31 @@ export default function Recipients(props) {
             <div className="w-full sm:px-6 xl:px-0">
                 <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
                     <div className="flex items-center justify-between">
-                        <input type="text" id="username" name="username" onChange={handleFilter}
-                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Cari anak" />
+                        <div className='flex items-center justify-between w-full gap-2'>
+                            <input type="text" onChange={(e) => setFilter(filter => ({...filter, name: e.target.value}))}
+                                   className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                   placeholder="Cari nama anak"/>
+                            <Select options={[{value: true, label: 'Aktif'}, {value: false, label: 'Tidak Aktif'}]} isClearable={true}
+                                    className='text-sm w-full' name='name' required={true} placeholder='Cari status anak' onChange={(e) => setFilter(filter => ({...filter, status: e ? e.value : ''}))}
+                                    styles={{
+                                        control: (baseStyles, state) => ({
+                                            ...baseStyles,
+                                            borderRadius: 8,
+                                            paddingTop: 2,
+                                            paddingBottom: 2
+                                        }),
+                                    }}
+                                    theme={(theme) => ({
+                                        ...theme,
+                                        borderRadius: 5,
+                                        colors: {
+                                            ...theme.colors,
+                                            primary25: '#efefef',
+                                            primary: 'red',
+                                        },
+                                    })}
+                            />
+                        </div>
                         <Link href={route("recipients.create")}>
                             <button className="inline-flex ml-4 sm:mt-0 items-start justify-start px-5 py-2.5 bg-red hover:bg-red_hover transition focus:outline-none rounded">
                                 <p className="text-xl font-medium leading-none text-white">+</p>

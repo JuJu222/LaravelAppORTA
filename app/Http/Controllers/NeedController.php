@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Donation;
 use App\Models\Need;
 use App\Models\NeedCategory;
 use App\Models\Recipient;
@@ -21,6 +22,10 @@ class NeedController extends Controller
     public function index()
     {
         $needs = Need::query()->with(['needCategory', 'recipient', 'donations'])->get();
+        foreach ($needs as $need) {
+            $need['collected'] = Donation::query()->where('need_id', $need->id)
+                ->whereNotNull('accepted_date')->sum('amount');
+        }
 
         return Inertia::render('Needs/Needs', compact('needs'));
     }

@@ -32,7 +32,6 @@ export default function Register() {
         } else {
             setData(event.target.name, event.target.files[0]);
         }
-        console.log(data)
     };
 
     const submit = (e) => {

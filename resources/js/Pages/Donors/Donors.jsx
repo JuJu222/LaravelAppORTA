@@ -18,7 +18,6 @@ export default function Donors(props) {
     }, [props.donors])
 
     React.useEffect(() => {
-        console.log(filter)
         const results = props.donors.filter(item => {
             return item.name.toLowerCase().includes(filter.name.toLowerCase()) && (item.verified ? 'true' : 'false').includes(filter.status.toString().toLowerCase());
         })

@@ -8,6 +8,7 @@ export default function Donations(props) {
     const [filteredItems, setFilteredItems] = useState(props.donations);
     const [filter, setFilter] = useState({donor: '', recipient: '', amount: ''})
     const [sort, setSort] = useState({amount: null})
+    const options = {year: 'numeric', month: 'long', day: 'numeric'}
 
     React.useEffect(() => {
         setFilteredItems(props.donations);
@@ -116,7 +117,7 @@ export default function Donations(props) {
                                 <td className="pl-12">
                                     <div className="flex items-center">
                                         <div>
-                                            <p className="font-medium">{donation.transfer_date}</p>
+                                            <p className="font-medium">{new Date(donation.transfer_date).toLocaleDateString("id-ID", options)}</p>
                                         </div>
                                     </div>
                                 </td>
