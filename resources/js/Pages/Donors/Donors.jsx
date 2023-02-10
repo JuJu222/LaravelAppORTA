@@ -8,6 +8,7 @@ export default function Donors(props) {
     const [filteredItems, setFilteredItems] = useState(props.donors);
     const [showModal,setShowModal] = useState(false)
     const [modalData,setModalData] = useState({})
+    const formatter = new Intl.NumberFormat('de-DE');
 
     React.useEffect(() => {
         setFilteredItems(props.donors);
@@ -68,6 +69,8 @@ export default function Donors(props) {
                         <tr className="h-16 w-full text-sm leading-none text-gray-800">
                             <th className="font-bold text-left pl-4">No.</th>
                             <th className="font-bold text-left pl-12">Penerima</th>
+                            <th className="font-bold text-left pl-12">Total Donasi (Terkonfirmasi)</th>
+                            <th className="font-bold text-left pl-12">Total Donasi (Semua)</th>
                             <th className="font-bold text-left pl-12">Status</th>
                         </tr>
                         </thead>
@@ -85,6 +88,16 @@ export default function Donors(props) {
                                             </div>
                                             <p className="font-medium ml-4">{donor.name}</p>
                                         </div>
+                                    </div>
+                                </td>
+                                <td className="pl-12">
+                                    <div className="flex items-center">
+                                        <p className="font-medium">{'Rp' + formatter.format(donor.real_sum)}</p>
+                                    </div>
+                                </td>
+                                <td className="pl-12">
+                                    <div className="flex items-center">
+                                        <p className="font-medium">{'Rp' + formatter.format(donor.sum)}</p>
                                     </div>
                                 </td>
                                 <td className="pl-12">

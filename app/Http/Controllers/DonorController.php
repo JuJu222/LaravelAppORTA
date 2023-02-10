@@ -23,6 +23,12 @@ class DonorController extends Controller
     public function index()
     {
         $donors = Donor::query()->get();
+        foreach ($donors as $donor) {
+            $donor['sum'] = Donation::query()->where('donor_id', $donor->id)
+                ->sum('amount');
+            $donor['real_sum'] = Donation::query()->where('donor_id', $donor->id)
+                ->whereNotNull('accepted_date')->sum('amount');
+        }
 
         return Inertia::render('Donors/Donors', compact('donors'));
     }
