@@ -72,7 +72,6 @@ export default function Recipients(props) {
                         <tr className="h-16 w-full text-sm leading-none text-gray-800">
                             <th className="font-bold text-left pl-4">No.</th>
                             <th className="font-bold text-left pl-12">Penerima</th>
-                            <th className="font-bold text-left pl-12">Usia</th>
                             <th className="font-bold text-left pl-12">Disabilitas</th>
                             <th className="font-bold text-left pl-12">Orang Tua/Wali</th>
                             <th className="font-bold text-left pl-12">Status</th>
@@ -91,13 +90,6 @@ export default function Recipients(props) {
                                                 <img className="w-full h-full rounded object-cover" src="/img/anak.png" />
                                             </div>
                                             <p className="font-medium ml-4">{recipient.name}</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td className="pl-12">
-                                    <div className="flex items-center">
-                                        <div>
-                                            <p className="font-medium">{recipient.birthdate}</p>
                                         </div>
                                     </div>
                                 </td>

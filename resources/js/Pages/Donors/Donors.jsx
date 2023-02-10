@@ -3,28 +3,51 @@ import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Link} from "@inertiajs/inertia-react";
 import DeleteConrifmation from "@/Components/DeleteConrifmation";
+import Select from "react-select";
 
 export default function Donors(props) {
     const [filteredItems, setFilteredItems] = useState(props.donors);
     const [showModal,setShowModal] = useState(false)
     const [modalData,setModalData] = useState({})
     const formatter = new Intl.NumberFormat('de-DE');
+    const [filter, setFilter] = useState({name: '', status: ''})
+    const [sort, setSort] = useState({sum: null, real_sum: null})
 
     React.useEffect(() => {
         setFilteredItems(props.donors);
     }, [props.donors])
 
-    function handleFilter(e) {
+    React.useEffect(() => {
+        console.log(filter)
         const results = props.donors.filter(item => {
-            if (e.target.value === '') {
-                return true
-            } else {
-                // return item.name.toLowerCase().includes(e.target.value.toLowerCase()) || item.birthdate.toLowerCase().includes(e.target.value.toLowerCase());
-                return item.name.toLowerCase().includes(e.target.value.toLowerCase());
-            }
+            return item.name.toLowerCase().includes(filter.name.toLowerCase()) && (item.verified ? 'true' : 'false').includes(filter.status.toString().toLowerCase());
         })
         setFilteredItems(results);
-    }
+    }, [filter])
+
+    React.useEffect(() => {
+        if (sort.sum === true) {
+            const results = [...filteredItems].sort(function(a, b) { return b.sum - a.sum })
+            setSort(sort => ({...sort, real_sum: null}))
+            setFilteredItems(results);
+        } else if (sort.sum === false) {
+            const results = [...filteredItems].sort(function(a, b) { return a.sum - b.sum })
+            setSort(sort => ({...sort, real_sum: null}))
+            setFilteredItems(results);
+        }
+    }, [sort.sum])
+
+    React.useEffect(() => {
+        if (sort.real_sum === true) {
+            const results = [...filteredItems].sort(function(a, b) { return b.real_sum - a.real_sum })
+            setSort(sort => ({...sort, sum: null}))
+            setFilteredItems(results);
+        } else if (sort.real_sum === false) {
+            const results = [...filteredItems].sort(function(a, b) { return a.real_sum - b.real_sum })
+            setSort(sort => ({...sort, sum: null}))
+            setFilteredItems(results);
+        }
+    }, [sort.real_sum])
 
     function handleDelete(id) {
         Inertia.delete(route("donors.destroy", id));
@@ -53,9 +76,31 @@ export default function Donors(props) {
             <div className="w-full sm:px-6 xl:px-0">
                 <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
                     <div className="flex items-center justify-between">
-                        <input type="text" id="filter" name="filter" onChange={handleFilter}
-                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Cari wali anak" />
+                        <div className='flex items-center justify-between w-full gap-2'>
+                            <input type="text" onChange={(e) => setFilter(filter => ({...filter, name: e.target.value}))}
+                                   className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                   placeholder="Cari nama donor"/>
+                            <Select options={[{value: true, label: 'Aktif'}, {value: false, label: 'Menunggu Konfirmasi'}]} isClearable={true}
+                                    className='text-sm w-full' name='name' required={true} placeholder='Cari status donor' onChange={(e) => setFilter(filter => ({...filter, status: e ? e.value : ''}))}
+                                    styles={{
+                                        control: (baseStyles, state) => ({
+                                            ...baseStyles,
+                                            borderRadius: 8,
+                                            paddingTop: 2,
+                                            paddingBottom: 2
+                                        }),
+                                    }}
+                                    theme={(theme) => ({
+                                        ...theme,
+                                        borderRadius: 5,
+                                        colors: {
+                                            ...theme.colors,
+                                            primary25: '#efefef',
+                                            primary: 'red',
+                                        },
+                                    })}
+                            />
+                        </div>
                         <Link href={route("donors.create")}>
                             <button className="inline-flex ml-4 sm:mt-0 items-start justify-start px-5 py-2.5 bg-red hover:bg-red_hover transition focus:outline-none rounded">
                                 <p className="text-xl font-medium leading-none text-white">+</p>
@@ -69,8 +114,60 @@ export default function Donors(props) {
                         <tr className="h-16 w-full text-sm leading-none text-gray-800">
                             <th className="font-bold text-left pl-4">No.</th>
                             <th className="font-bold text-left pl-12">Penerima</th>
-                            <th className="font-bold text-left pl-12">Total Donasi (Terkonfirmasi)</th>
-                            <th className="font-bold text-left pl-12">Total Donasi (Semua)</th>
+                            <th className="font-bold text-left pl-12 cursor-pointer" onClick={(e) => setSort(sort => ({...sort, real_sum: !sort.real_sum}))}>
+                                <div className='flex gap-0.5'>
+                                    <span>Total Donasi (Terkonfirmasi)</span>
+                                    <span>
+                                    {sort.real_sum != null ? (
+                                        sort.real_sum === true ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" className="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                            </svg>
+                                        ) : (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" className="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                            </svg>
+                                        )) : (
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" className="bi bi-caret-down" viewBox="0 0 16 16">
+                                            <path
+                                                d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                                        </svg>
+                                    )}
+                                </span>
+                                </div>
+                            </th>
+                            <th className="font-bold text-left pl-12 cursor-pointer" onClick={(e) => setSort(sort => ({...sort, sum: !sort.sum}))}>
+                                <div className='flex gap-0.5'>
+                                    <span>Total Donasi (Semua)</span>
+                                    <span>
+                                    {sort.sum != null ? (
+                                        sort.sum === true ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" className="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                            </svg>
+                                        ) : (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" className="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                            </svg>
+                                        )) : (
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" className="bi bi-caret-down" viewBox="0 0 16 16">
+                                            <path
+                                                d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                                        </svg>
+                                    )}
+                                </span>
+                                </div>
+                            </th>
                             <th className="font-bold text-left pl-12">Status</th>
                         </tr>
                         </thead>

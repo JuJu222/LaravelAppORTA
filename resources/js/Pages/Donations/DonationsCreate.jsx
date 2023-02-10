@@ -81,7 +81,7 @@ export default function DonationsCreate(props) {
                 <div className="grid gap-x-6 md:grid-cols-2">
                     <div className="mb-6">
                         <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama Donor *</label>
-                        <Select options={donorOptions} className='text-sm' name='name' onChange={handleSelectDonorChange} required={true}
+                        <Select options={donorOptions} className='text-sm' name='name' onChange={handleSelectDonorChange} required={true} placeholder='Pilih'
                                 styles={{
                                     control: (baseStyles, state) => ({
                                         ...baseStyles,
@@ -103,7 +103,7 @@ export default function DonationsCreate(props) {
                     </div>
                     <div className="mb-6">
                         <label htmlFor="need" className="block mb-2 text-sm font-medium text-gray-900 ">Kebutuhan *</label>
-                        <Select options={needOptions} className='text-sm' name='need' onChange={handleSelectNeedChange} required={true}
+                        <Select options={needOptions} className='text-sm' name='need' onChange={handleSelectNeedChange} required={true} placeholder='Pilih'
                             styles={{
                                 control: (baseStyles, state) => ({
                                     ...baseStyles,
@@ -156,7 +156,7 @@ export default function DonationsCreate(props) {
                     </div>
                     <div className="mb-6">
                         <label htmlFor="accepted_by_admin" className="block mb-2 text-sm font-medium text-gray-900 ">Dikonfirmasi Oleh</label>
-                        <Select options={adminOptions} className='text-sm' name='accepted_by_admin' onChange={handleSelectAdminChange}
+                        <Select options={adminOptions} className='text-sm' name='accepted_by_admin' onChange={handleSelectAdminChange} placeholder='Pilih'
                                 styles={{
                                     control: (baseStyles, state) => ({
                                         ...baseStyles,

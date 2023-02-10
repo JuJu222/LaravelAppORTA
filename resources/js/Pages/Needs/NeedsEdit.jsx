@@ -69,7 +69,7 @@ export default function AdminsCreate(props) {
                 <div className="grid gap-x-6 md:grid-cols-2">
                     <div className="mb-6">
                         <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama Anak *</label>
-                        <Select options={recipientOptions} className='text-sm' name='name' onChange={handleSelectRecipientChange} required={true}
+                        <Select options={recipientOptions} className='text-sm' name='name' onChange={handleSelectRecipientChange} required={true} placeholder='Pilih'
                                 styles={{
                                     control: (baseStyles, state) => ({
                                         ...baseStyles,
@@ -98,7 +98,7 @@ export default function AdminsCreate(props) {
                     </div>
                     <div className="mb-6">
                         <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Kategori Kebutuhan *</label>
-                        <Select options={needCategoryOptions} className='text-sm' name='name' onChange={handleSelectNeedCategoryChange} required={true}
+                        <Select options={needCategoryOptions} className='text-sm' name='name' onChange={handleSelectNeedCategoryChange} required={true} placeholder='Pilih'
                             styles={{
                                 control: (baseStyles, state) => ({
                                     ...baseStyles,

@@ -25,11 +25,9 @@ export default function Donations(props) {
     React.useEffect(() => {
         if (sort.amount === true) {
             const results = [...filteredItems].sort(function(a, b) { return b.amount - a.amount })
-
             setFilteredItems(results);
         } else if (sort.amount === false) {
             const results = [...filteredItems].sort(function(a, b) { return a.amount - b.amount })
-
             setFilteredItems(results);
         }
     }, [sort])
@@ -54,10 +52,10 @@ export default function Donations(props) {
                         <div className='flex items-center justify-between w-full gap-2'>
                             <input type="text" onChange={(e) => setFilter(filter => ({...filter, recipient: e.target.value}))}
                                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                   placeholder="Cari anak"/>
+                                   placeholder="Cari nama anak"/>
                             <input type="text" onChange={(e) => setFilter(filter => ({...filter, donor: e.target.value}))}
                                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                   placeholder="Cari donor"/>
+                                   placeholder="Cari nama donor"/>
                             <input type="number" onChange={(e) => setFilter(filter => ({...filter, amount: e.target.value}))}
                                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                    placeholder="Cari jumlah donasi"/>
@@ -79,7 +77,7 @@ export default function Donations(props) {
                             <th className="font-bold text-left pl-12">Donor</th>
                             <th className="font-bold text-left pl-12">Penerima</th>
                             <th className="font-bold text-left pl-12">Kebutuhan</th>
-                            <th className="font-bold text-left pl-12" onClick={(e) => setSort(sort => ({...sort, amount: !sort.amount}))}>
+                            <th className="font-bold text-left pl-12 cursor-pointer" onClick={(e) => setSort(sort => ({...sort, amount: !sort.amount}))}>
                                 <div className='flex gap-0.5'>
                                     <span>Jumlah</span>
                                     <span>
