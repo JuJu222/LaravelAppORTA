@@ -24,13 +24,14 @@ export default function Donations(props) {
 
     React.useEffect(() => {
         if (sort.amount === true) {
-            const results = filteredItems.sort(function(a, b) { return a.amount - b.amount })
+            const results = [...filteredItems].sort(function(a, b) { return b.amount - a.amount })
+
             setFilteredItems(results);
         } else if (sort.amount === false) {
-            const results = filteredItems.sort(function(a, b) { return b.amount - a.amount })
+            const results = [...filteredItems].sort(function(a, b) { return a.amount - b.amount })
+
             setFilteredItems(results);
         }
-        console.log(sort)
     }, [sort])
 
     function handleAccept(id) {
