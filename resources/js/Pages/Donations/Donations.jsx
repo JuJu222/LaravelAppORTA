@@ -6,8 +6,8 @@ import {Link} from "@inertiajs/inertia-react";
 export default function Donations(props) {
     const formatter = new Intl.NumberFormat('de-DE');
     const [filteredItems, setFilteredItems] = useState(props.donations);
-    const [recipientQuery, setRecipientQuery] = useState('');
-    const [donorQuery, setDonorQuery] = useState('');
+    const [filter, setFilter] = useState({donor: '', recipient: '', amount: ''})
+    const [sort, setSort] = useState({amount: null})
 
     React.useEffect(() => {
         setFilteredItems(props.donations);
@@ -15,10 +15,23 @@ export default function Donations(props) {
 
     React.useEffect(() => {
         const results = props.donations.filter(item => {
-            return item.donor.name.toLowerCase().includes(donorQuery.toLowerCase()) && item.need.recipient.name.toLowerCase().includes(recipientQuery.toLowerCase());
+            return item.donor.name.toLowerCase().includes(filter.donor.toLowerCase()) &&
+                item.need.recipient.name.toLowerCase().includes(filter.recipient.toLowerCase()) &&
+                item.amount.toString().toLowerCase().includes(filter.amount.toLowerCase());
         })
         setFilteredItems(results);
-    }, [recipientQuery, donorQuery])
+    }, [filter])
+
+    React.useEffect(() => {
+        if (sort.amount === true) {
+            const results = filteredItems.sort(function(a, b) { return a.amount - b.amount })
+            setFilteredItems(results);
+        } else if (sort.amount === false) {
+            const results = filteredItems.sort(function(a, b) { return b.amount - a.amount })
+            setFilteredItems(results);
+        }
+        console.log(sort)
+    }, [sort])
 
     function handleAccept(id) {
         Inertia.post(route("donations.accept", id));
@@ -38,15 +51,19 @@ export default function Donations(props) {
                 <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
                     <div className="flex items-center justify-between">
                         <div className='flex items-center justify-between w-full gap-2'>
-                            <input type="text" id="username" name="username" onChange={(e) => setRecipientQuery(e.target.value)}
+                            <input type="text" onChange={(e) => setFilter(filter => ({...filter, recipient: e.target.value}))}
                                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                   placeholder="Cari anak" />
-                            <input type="text" id="username" name="username" onChange={(e) => setDonorQuery(e.target.value)}
+                                   placeholder="Cari anak"/>
+                            <input type="text" onChange={(e) => setFilter(filter => ({...filter, donor: e.target.value}))}
                                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                   placeholder="Cari donor" />
+                                   placeholder="Cari donor"/>
+                            <input type="number" onChange={(e) => setFilter(filter => ({...filter, amount: e.target.value}))}
+                                   className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                   placeholder="Cari jumlah donasi"/>
                         </div>
                         <Link href={route("donations.create")}>
-                            <button className="inline-flex ml-4 sm:mt-0 items-start justify-start px-5 py-2.5 bg-red hover:bg-red_hover transition focus:outline-none rounded">
+                            <button
+                                className="inline-flex ml-4 sm:mt-0 items-start justify-start px-5 py-2.5 bg-red hover:bg-red_hover transition focus:outline-none rounded">
                                 <p className="text-xl font-medium leading-none text-white">+</p>
                             </button>
                         </Link>
@@ -61,7 +78,33 @@ export default function Donations(props) {
                             <th className="font-bold text-left pl-12">Donor</th>
                             <th className="font-bold text-left pl-12">Penerima</th>
                             <th className="font-bold text-left pl-12">Kebutuhan</th>
-                            <th className="font-bold text-left pl-12">Jumlah</th>
+                            <th className="font-bold text-left pl-12" onClick={(e) => setSort(sort => ({...sort, amount: !sort.amount}))}>
+                                <div className='flex gap-0.5'>
+                                    <span>Jumlah</span>
+                                    <span>
+                                    {sort.amount != null ? (
+                                        sort.amount === true ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" className="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                            </svg>
+                                        ) : (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" className="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                            </svg>
+                                        )) : (
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" className="bi bi-caret-down" viewBox="0 0 16 16">
+                                            <path
+                                                d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                                        </svg>
+                                    )}
+                                </span>
+                                </div>
+                            </th>
                             <th className="font-bold text-left pl-12">Tanggal Konfirmasi</th>
                         </tr>
                         </thead>
@@ -110,14 +153,16 @@ export default function Donations(props) {
                                             {donation.accepted_date ? (
                                                 <p className="bg-green-600 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">{donation.accepted_date}</p>
                                             ) : (
-                                                <p className="bg-red_dark text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Belum Dikonfirmasi</p>
+                                                <p className="bg-red_dark text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Belum
+                                                    Dikonfirmasi</p>
                                             )}
                                         </div>
                                     </div>
                                 </td>
                                 <td className="pl-12 pr-4">
                                     <div className='flex gap-2 justify-end'>
-                                        <Link href={route("donations.show", donation.id)} className="flex items-center justify-center text-center">
+                                        <Link href={route("donations.show", donation.id)}
+                                              className="flex items-center justify-center text-center">
                                             <button
                                                 className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-50 focus:outline-none transition">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -128,7 +173,8 @@ export default function Donations(props) {
                                                 </svg>
                                             </button>
                                         </Link>
-                                        <Link href={route("donations.edit", donation.id)} className="flex items-center justify-center text-center">
+                                        <Link href={route("donations.edit", donation.id)}
+                                              className="flex items-center justify-center text-center">
                                             <button
                                                 className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-50 focus:outline-none transition">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -139,7 +185,8 @@ export default function Donations(props) {
                                                 </svg>
                                             </button>
                                         </Link>
-                                        <div onClick={(e) => handleAccept(donation.id)} className="flex items-center justify-center text-center">
+                                        <div onClick={(e) => handleAccept(donation.id)}
+                                             className="flex items-center justify-center text-center">
                                             <button
                                                 className="text-sm leading-none text-white py-3 px-5 bg-green-600 rounded hover:bg-green-500 focus:outline-none transition">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
