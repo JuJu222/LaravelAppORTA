@@ -17,7 +17,7 @@ export default function DeleteConrifmation({showModal, setShowModal, modalData, 
                                 </svg>
                             </div>
                             <h1 className="text-center text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Konfirmasi Penghapusan Data</h1>
-                            <p className="mb-5 text-sm text-gray-600 text-center font-normal">Apakah anda yakin mau menghapus data {modalData.message}?</p>
+                            <p className="mb-5 text-sm text-gray-600 text-center font-normal">Apakah anda yakin mau menghapus data "{modalData.message}"?</p>
                             <div className="flex items-center justify-center w-full">
                                 <button className="focus:outline-none transition duration-150 ease-in-out hover:bg-red_hover bg-red rounded text-white px-4 sm:px-8 py-2 text-xs sm:text-sm" onClick={()=>handleDelete(modalData.id)}>Hapus</button>
                                 <button className="ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:bg-gray-50 rounded px-8 py-2 text-sm" onClick={()=>setShowModal(!showModal)} >

@@ -1,11 +1,55 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Link} from "@inertiajs/inertia-react";
+import Select from "react-select";
+import DeleteConrifmation from "@/Components/DeleteConrifmation";
 
 export default function NeedCategories(props) {
+    const [filteredItems, setFilteredItems] = useState(props.needs);
+    const [showModal,setShowModal] = useState(false)
+    const [modalData,setModalData] = useState({})
     const formatter = new Intl.NumberFormat('de-DE');
     const options = {year: 'numeric', month: 'long', day: 'numeric'}
+    const [filter, setFilter] = useState({recipient: '', need: '', status: ''})
+    const [sort, setSort] = useState({amount: null, collected: null})
+
+    React.useEffect(() => {
+        setFilteredItems(props.needs);
+    }, [props.needs])
+
+    React.useEffect(() => {
+        const results = props.needs.filter(item => {
+            return item.recipient.name.toLowerCase().includes(filter.recipient.toLowerCase())
+                && item.need_category.category.toLowerCase().includes(filter.need.toLowerCase())
+                && (item.delivered_date ? 'true' : 'false').includes(filter.status.toString().toLowerCase());
+        })
+        setFilteredItems(results);
+    }, [filter])
+
+    React.useEffect(() => {
+        if (sort.amount === true) {
+            const results = [...filteredItems].sort(function(a, b) { return b.amount - a.amount })
+            setSort(sort => ({...sort, collected: null}))
+            setFilteredItems(results);
+        } else if (sort.amount === false) {
+            const results = [...filteredItems].sort(function(a, b) { return a.amount - b.amount })
+            setSort(sort => ({...sort, collected: null}))
+            setFilteredItems(results);
+        }
+    }, [sort.amount])
+
+    React.useEffect(() => {
+        if (sort.collected === true) {
+            const results = [...filteredItems].sort(function(a, b) { return b.collected - a.collected })
+            setSort(sort => ({...sort, amount: null}))
+            setFilteredItems(results);
+        } else if (sort.collected === false) {
+            const results = [...filteredItems].sort(function(a, b) { return a.collected - b.collected })
+            setSort(sort => ({...sort, amount: null}))
+            setFilteredItems(results);
+        }
+    }, [sort.collected])
 
     function handleCreate() {
         Inertia.get(route("needs.create"));
@@ -13,6 +57,12 @@ export default function NeedCategories(props) {
 
     function handleDelete(id) {
         Inertia.delete(route("needs.destroy", id));
+        setShowModal(false);
+    }
+
+    function confirmDelete(id, message) {
+        setModalData({id: id, message: message});
+        setShowModal(true);
     }
 
     return (
@@ -24,9 +74,34 @@ export default function NeedCategories(props) {
             <div className="w-full sm:px-6 xl:px-0">
                 <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
                     <div className="flex items-center justify-between">
-                        <input type="text" id="username" name="username"
-                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               placeholder="Cari kebutuhan anak"/>
+                        <div className='flex items-center justify-between w-full gap-2'>
+                            <input type="text" onChange={(e) => setFilter(filter => ({...filter, recipient: e.target.value}))}
+                                   className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                   placeholder="Cari nama anak"/>
+                            <input type="text" onChange={(e) => setFilter(filter => ({...filter, need: e.target.value}))}
+                                   className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                   placeholder="Cari kebutuhan anak"/>
+                            <Select options={[{value: true, label: 'Sudah Dikonfirmasi'}, {value: false, label: 'Belum Dikonfirmasi'}]} isClearable={true}
+                                    className='text-sm w-full' name='name' required={true} placeholder='Cari status penerimaan dana' onChange={(e) => setFilter(filter => ({...filter, status: e ? e.value : ''}))}
+                                    styles={{
+                                        control: (baseStyles, state) => ({
+                                            ...baseStyles,
+                                            borderRadius: 8,
+                                            paddingTop: 2,
+                                            paddingBottom: 2
+                                        }),
+                                    }}
+                                    theme={(theme) => ({
+                                        ...theme,
+                                        borderRadius: 5,
+                                        colors: {
+                                            ...theme.colors,
+                                            primary25: '#efefef',
+                                            primary: 'red',
+                                        },
+                                    })}
+                            />
+                        </div>
                         <Link href={route("needs.create")}>
                             <button
                                 className="inline-flex ml-4 sm:mt-0 items-start justify-start px-5 py-2.5 bg-red hover:bg-red_hover transition focus:outline-none rounded">
@@ -51,14 +126,66 @@ export default function NeedCategories(props) {
                             <th className="font-bold text-left pl-4">No.</th>
                             <th className="font-bold text-left pl-12">Nama Anak</th>
                             <th className="font-bold text-left pl-12">Kebutuhan</th>
-                            <th className="font-bold text-left pl-12">Target Donasi</th>
-                            <th className="font-bold text-left pl-12">Donasi Terkumpul</th>
+                            <th className="font-bold text-left pl-12 cursor-pointer" onClick={(e) => setSort(sort => ({...sort, amount: !sort.amount}))}>
+                                <div className='flex gap-0.5'>
+                                    <span>Target Donasi</span>
+                                    <span>
+                                    {sort.amount != null ? (
+                                        sort.amount === true ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" className="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                            </svg>
+                                        ) : (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" className="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                            </svg>
+                                        )) : (
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" className="bi bi-caret-down" viewBox="0 0 16 16">
+                                            <path
+                                                d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                                        </svg>
+                                    )}
+                                </span>
+                                </div>
+                            </th>
+                            <th className="font-bold text-left pl-12 cursor-pointer" onClick={(e) => setSort(sort => ({...sort, collected: !sort.collected}))}>
+                                <div className='flex gap-0.5'>
+                                    <span>Donasi Terkumpul</span>
+                                    <span>
+                                    {sort.collected != null ? (
+                                        sort.collected === true ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" className="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                            </svg>
+                                        ) : (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" className="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                            </svg>
+                                        )) : (
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" className="bi bi-caret-down" viewBox="0 0 16 16">
+                                            <path
+                                                d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                                        </svg>
+                                    )}
+                                </span>
+                                </div>
+                            </th>
                             <th className="font-bold text-left pl-12">Batas Waktu</th>
                             <th className="font-bold text-left pl-12">Status Penerimaan Dana</th>
                         </tr>
                         </thead>
                         <tbody className="w-full">
-                        {props.needs.map((need, i) =>
+                        {filteredItems.map((need, i) =>
                             <tr className="h-20 text-sm leading-none text-gray-800 bg-white border-b border-t border-gray-100">
                                 <td className="pl-4">
                                     <p className="text-sm font-medium leading-none text-gray-800">{i + 1}</p>
@@ -135,7 +262,7 @@ export default function NeedCategories(props) {
                                             </button>
                                         </Link>
                                         <div className="flex items-center justify-center text-center">
-                                            <button onClick={(e) => handleDelete(need.id)}
+                                            <button onClick={(e) => confirmDelete(need.id, need.recipient.name + ' - ' + need.need_category.category)}
                                                     className="text-sm leading-none text-white py-3 px-5 bg-red rounded transition hover:bg-red_hover focus:outline-none">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                      fill="currentColor" className="bi bi-trash3-fill"
@@ -153,6 +280,7 @@ export default function NeedCategories(props) {
                     </table>
                 </div>
             </div>
+            <DeleteConrifmation showModal={showModal} setShowModal={setShowModal} modalData={modalData} handleDelete={handleDelete}></DeleteConrifmation>
         </Authenticated>
     );
 }
