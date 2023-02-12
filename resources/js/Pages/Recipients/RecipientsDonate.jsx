@@ -113,7 +113,7 @@ export default function RecipientsDonate(props) {
                     </form>
                 </div>
             </div>
-            <BottomNavbar></BottomNavbar>
+            <BottomNavbar auth={props.auth}></BottomNavbar>
         </div>
     );
 }

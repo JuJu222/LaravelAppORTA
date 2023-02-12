@@ -48,7 +48,7 @@ export default function RecipientsDonate(props) {
                     </Link>
                 </div>
             </div>
-            <BottomNavbar></BottomNavbar>
+            <BottomNavbar auth={props.auth}></BottomNavbar>
         </div>
     );
 }

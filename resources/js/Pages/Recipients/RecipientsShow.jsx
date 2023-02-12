@@ -212,7 +212,7 @@ export default function RecipientsShow(props) {
                                         {props.donations.length > 0 ? (
                                             props.donations.map((donation, i) =>
                                                 <>
-                                                    {props.auth.user.role_id === 1 ? (
+                                                    {props.auth.user.role_id == 1 ? (
                                                         <div className='shadow-lg rounded-lg p-4 flex gap-4'>
                                                             <div className="w-10 h-10">
                                                                 <img className="w-full h-full rounded object-cover"
@@ -436,7 +436,7 @@ export default function RecipientsShow(props) {
                                 {props.donations.length > 0 ? (
                                     props.donations.map((donation, i) =>
                                         <>
-                                            {props.auth.user.role_id === 1 ? (
+                                            {props.auth.user.role_id == 1 ? (
                                                 <div className='shadow-lg rounded-lg p-4 flex gap-4'>
                                                     <div className="w-10 h-10">
                                                         <img className="w-full h-full rounded object-cover"
@@ -479,7 +479,7 @@ export default function RecipientsShow(props) {
                         </div>
                     </div>
                 </div>
-                <BottomNavbar></BottomNavbar>
+                <BottomNavbar auth={props.auth}></BottomNavbar>
             </div>
         )
     }

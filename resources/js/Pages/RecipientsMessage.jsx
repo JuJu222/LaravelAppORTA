@@ -64,7 +64,7 @@ export default function RecipientsMessage(props) {
                         </Link>
                     </div>
                 </div>
-                <BottomNavbar></BottomNavbar>
+                <BottomNavbar auth={props.auth}></BottomNavbar>
             </div>
         );
     } else {
@@ -115,7 +115,7 @@ export default function RecipientsMessage(props) {
                         </Link>
                     </div>
                 </div>
-                <BottomNavbar></BottomNavbar>
+                <BottomNavbar auth={props.auth}></BottomNavbar>
             </div>
         );
     }

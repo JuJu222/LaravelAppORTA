@@ -65,7 +65,7 @@ export default function Home(props) {
                         </div>
                     </div>
                 </div>
-                <BottomNavbar></BottomNavbar>
+                <BottomNavbar auth={props.auth}></BottomNavbar>
             </div>
         );
     } else if (props.donor) {
@@ -128,7 +128,7 @@ export default function Home(props) {
                         </div>
                     </div>
                 </div>
-                <BottomNavbar></BottomNavbar>
+                <BottomNavbar auth={props.auth}></BottomNavbar>
             </div>
         );
     } else {
@@ -191,7 +191,7 @@ export default function Home(props) {
                         </div>
                     </div>
                 </div>
-                <BottomNavbar></BottomNavbar>
+                <BottomNavbar auth={props.auth}></BottomNavbar>
             </div>
         );
     }

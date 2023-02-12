@@ -63,7 +63,7 @@ export default function DonorThankYou(props) {
                     </Link>
                 </div>
             </div>
-            <BottomNavbar></BottomNavbar>
+            <BottomNavbar auth={props.auth}></BottomNavbar>
         </div>
     );
 }

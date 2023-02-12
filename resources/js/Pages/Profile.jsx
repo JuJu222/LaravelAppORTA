@@ -70,7 +70,7 @@ export default function Profile(props) {
                         </Link>
                     </div>
                 </div>
-                <BottomNavbar></BottomNavbar>
+                <BottomNavbar auth={props.auth}></BottomNavbar>
             </div>
         );
     } else {
@@ -131,7 +131,7 @@ export default function Profile(props) {
                         </Link>
                     </div>
                 </div>
-                <BottomNavbar></BottomNavbar>
+                <BottomNavbar auth={props.auth}></BottomNavbar>
             </div>
         );
     }

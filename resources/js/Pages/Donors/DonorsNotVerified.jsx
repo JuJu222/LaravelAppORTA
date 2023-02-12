@@ -25,7 +25,7 @@ export default function DonorsNotVerified(props) {
                     </Link>
                 </div>
             </div>
-            <BottomNavbar></BottomNavbar>
+            <BottomNavbar auth={props.auth}></BottomNavbar>
         </div>
     );
 }

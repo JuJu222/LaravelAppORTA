@@ -108,7 +108,7 @@ export default function Home(props) {
                     </div>
                 </div>
             </div>
-            <BottomNavbar></BottomNavbar>
+            <BottomNavbar auth={props.auth}></BottomNavbar>
         </div>
     );
 }

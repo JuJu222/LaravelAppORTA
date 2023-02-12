@@ -70,7 +70,7 @@ export default function Donations(props) {
                         </div>
                     </div>
                 </div>
-                <BottomNavbar></BottomNavbar>
+                <BottomNavbar auth={props.auth}></BottomNavbar>
             </div>
         );
     } else {
@@ -121,7 +121,7 @@ export default function Donations(props) {
                         </div>
                     </div>
                 </div>
-                <BottomNavbar></BottomNavbar>
+                <BottomNavbar auth={props.auth}></BottomNavbar>
             </div>
         );
     }
