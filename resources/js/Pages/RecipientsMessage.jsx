@@ -6,19 +6,31 @@ import ApplicationLogo from "@/Components/ApplicationLogo";
 export default function RecipientsMessage(props) {
     const formatter = new Intl.NumberFormat('de-DE');
 
-    if (props.need.delivered_date) {
+    if (!props.need.delivered_date) {
         return (
             <div className='pb-20'>
                 <div className='w-full md:hidden'>
                     <div>
-                        <img className='h-52 w-full object-cover' src="/img/anak.png" alt=""/>
+                        {props.recipient.photos.map((photo, i) => {
+                            if (photo.type.type === 'primary') {
+                                return (
+                                    <img className='h-52 w-full object-cover' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                )
+                            }
+                        })}
                     </div>
                 </div>
                 <div className='w-full px-4'>
                     <div className='max-w-6xl mx-auto mt-4'>
                         <div className='md:flex md:flex-row md:gap-5'>
                             <div className='hidden md:block'>
-                                <img className='h-96 w-auto object-cover rounded-lg' src="/img/anak.png" alt=""/>
+                                {props.recipient.photos.map((photo, i) => {
+                                    if (photo.type.type === 'primary') {
+                                        return (
+                                            <img className='h-96 w-auto object-cover rounded-lg' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                        )
+                                    }
+                                })}
                             </div>
                             <div className='grow md:pt-4'>
                                 <h2 className='text-base'>Terima Kasih,</h2>
@@ -60,7 +72,13 @@ export default function RecipientsMessage(props) {
             <div className='pb-20'>
                 <div className='w-full md:hidden'>
                     <div>
-                        <img className='h-52 w-full object-cover' src="/img/anak.png" alt=""/>
+                        {props.recipient.photos.map((photo, i) => {
+                            if (photo.type.type === 'primary') {
+                                return (
+                                    <img className='h-52 w-full object-cover' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                )
+                            }
+                        })}
                     </div>
                 </div>
                 <div className='w-full px-4'>

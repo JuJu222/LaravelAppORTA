@@ -94,8 +94,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('recipients', RecipientController::class)->only([
             'show'
         ]);
-        Route::get('/donasi/{id}/verifikasi', [DonationController::class, 'showVerification'])->name('donation.verification.show');
-        Route::post('/donasi/{id}/verifikasi', [DonationController::class, 'verify'])->name('donation.verification.verify');
+//        Route::get('/donasi/{id}/verifikasi', [DonationController::class, 'showVerification'])->name('donation.verification.show');
+//        Route::post('/donasi/{id}/verifikasi', [DonationController::class, 'verify'])->name('donation.verification.verify');
         Route::get('/beranda', [Controller::class, 'home'])->name('home');
         Route::get('/donasi', [Controller::class, 'donations']);
         Route::get('/profil', [Controller::class, 'profile']);

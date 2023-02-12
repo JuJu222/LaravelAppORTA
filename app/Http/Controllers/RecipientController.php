@@ -28,7 +28,7 @@ class RecipientController extends Controller
      */
     public function index()
     {
-        $recipients = Recipient::query()->with(['disabilities', 'parents'])->get();
+        $recipients = Recipient::query()->with(['disabilities', 'parents', 'photos.type'])->get();
 
         foreach ($recipients as $recipient) {
             foreach ($recipient->parents as $parent) {
@@ -234,7 +234,7 @@ class RecipientController extends Controller
 
     public function storeDonation(Request $request, $recipientID, $needID)
     {
-        $recipient = Recipient::query()->find($recipientID);
+        $recipient = Recipient::query()->with('photos.type')->find($recipientID);
         $donor = Donor::query()->where('user_id', Auth::id())->first();
 
         $this->validate($request, [

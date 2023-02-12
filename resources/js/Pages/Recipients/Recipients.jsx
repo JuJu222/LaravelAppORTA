@@ -118,7 +118,13 @@ export default function Recipients(props) {
                                     <div className="flex items-center">
                                         <div className='flex items-center'>
                                             <div className="w-10 h-10">
-                                                <img className="w-full h-full rounded object-cover" src="/img/anak.png" />
+                                                {recipient.photos.map((photo, i) => {
+                                                    if (photo.type.type === 'primary') {
+                                                        return (
+                                                            <img className="w-full h-full rounded object-cover" src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/avatar-default.png'}  />
+                                                        )
+                                                    }
+                                                })}
                                             </div>
                                             <p className="font-medium ml-4">{recipient.name}</p>
                                         </div>
