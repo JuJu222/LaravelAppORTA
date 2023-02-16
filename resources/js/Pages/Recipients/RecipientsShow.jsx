@@ -148,8 +148,7 @@ export default function RecipientsShow(props) {
                                                     <p className='text-xs'>Alamat: {props.recipient.address}</p>
                                                     <p className='text-xs'>Kota: {props.recipient.city}</p>
                                                     <p className='text-xs'>Nomor Telepon: {props.recipient.phone}</p>
-                                                    <p className='text-xs'>Birth
-                                                        Certificate: {props.recipient.birth_certificate}</p>
+                                                    <p className='text-xs'>Akta Kelahiran: {props.recipient.birth_certificate}</p>
                                                     <p className='text-xs'>Kartu Keluarga: {props.recipient.kartu_keluarga}</p>
                                                     <p className='text-xs'>Catatan: {props.recipient.note}</p>
                                                 </div>
@@ -372,8 +371,7 @@ export default function RecipientsShow(props) {
                                             <p className='text-xs'>Alamat: {props.recipient.address}</p>
                                             <p className='text-xs'>Kota: {props.recipient.city}</p>
                                             <p className='text-xs'>Nomor Telepon: {props.recipient.phone}</p>
-                                            <p className='text-xs'>Birth
-                                                Certificate: {props.recipient.birth_certificate}</p>
+                                            <p className='text-xs'>Akta Kelahiran: {props.recipient.birth_certificate}</p>
                                             <p className='text-xs'>Kartu Keluarga: {props.recipient.kartu_keluarga}</p>
                                             <p className='text-xs'>Catatan: {props.recipient.note}</p>
                                         </div>

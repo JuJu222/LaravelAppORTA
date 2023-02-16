@@ -73,4 +73,30 @@ class Controller extends BaseController
             return Inertia::render('Profile', compact('recipient'));
         }
     }
+
+    function profileEdit() {
+        if (Auth::user()->role_id == 1) {
+            $admin = Admin::query()->where('user_id', Auth::id())->first();
+            return Inertia::render('Profile', compact('admin'));
+        } else if (Auth::user()->role_id == 2) {
+            $donor = Donor::query()->where('user_id', Auth::id())->first();
+            return Inertia::render('Profile', compact('donor'));
+        } else {
+            $recipient = Recipient::query()->where('user_id', Auth::id())->first();
+            return Inertia::render('Profile', compact('recipient'));
+        }
+    }
+
+    function profileUpdate() {
+        if (Auth::user()->role_id == 1) {
+            $admin = Admin::query()->where('user_id', Auth::id())->first();
+            return Inertia::render('Profile', compact('admin'));
+        } else if (Auth::user()->role_id == 2) {
+            $donor = Donor::query()->where('user_id', Auth::id())->first();
+            return Inertia::render('Profile', compact('donor'));
+        } else {
+            $recipient = Recipient::query()->where('user_id', Auth::id())->first();
+            return Inertia::render('Profile', compact('recipient'));
+        }
+    }
 }
