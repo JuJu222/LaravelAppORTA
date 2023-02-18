@@ -112,8 +112,7 @@ export default function Profile(props) {
                             </div>
                             <div className='py-5'>
                                 <h5 className='font-bold text-xs'>KTP</h5>
-                                <img className='w-full h-40 object-contain'
-                                     src={'/img/donors/ktp/' + props.donor.ktp}/>
+                                <img className='w-full h-40 object-contain' src={'/img/donors/ktp/' + props.donor.ktp}/>
                             </div>
                             <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Nomor Telepon</h5>
@@ -177,55 +176,55 @@ export default function Profile(props) {
                             </div>
                             <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Jenis Kelamin</h5>
-                                <p className='text-center text-sm'>{props.recipient.nik ? props.recipient.nik : '-'}</p>
+                                <p className='text-center text-sm'>{props.recipient.gender ? props.recipient.gender : '-'}</p>
                             </div>
                             <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Tempat Lahir</h5>
-                                <p className='text-center text-sm'>{props.recipient.nik ? props.recipient.nik : '-'}</p>
+                                <p className='text-center text-sm'>{props.recipient.birthplace ? props.recipient.birthplace : '-'}</p>
                             </div>
                             <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Tanggal Lahir</h5>
-                                <p className='text-center text-sm'>{props.recipient.nik ? props.recipient.nik : '-'}</p>
+                                <p className='text-center text-sm'>{props.recipient.birthdate ? props.recipient.birthdate : '-'}</p>
                             </div>
                             <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Alamat</h5>
-                                <p className='text-center text-sm'>{props.recipient.nik ? props.recipient.nik : '-'}</p>
+                                <p className='text-center text-sm'>{props.recipient.address ? props.recipient.address : '-'}</p>
                             </div>
                             <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Kota</h5>
-                                <p className='text-center text-sm'>{props.recipient.nik ? props.recipient.nik : '-'}</p>
+                                <p className='text-center text-sm'>{props.recipient.city ? props.recipient.city : '-'}</p>
                             </div>
                             <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Nomor Telepon</h5>
-                                <p className='text-center text-sm'>{props.recipient.nik ? props.recipient.nik : '-'}</p>
+                                <p className='text-center text-sm'>{props.recipient.phone ? props.recipient.phone : '-'}</p>
                             </div>
                             <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Akta Kelahiran</h5>
-                                <p className='text-center text-sm'>{props.recipient.nik ? props.recipient.nik : '-'}</p>
+                                <img className='w-full h-40 object-contain' src={'/img/recipients/birth_certificate/' + props.recipient.birth_certificate}/>
                             </div>
                             <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Kartu Keluarga</h5>
-                                <p className='text-center text-sm'>{props.recipient.nik ? props.recipient.nik : '-'}</p>
+                                <img className='w-full h-40 object-contain' src={'/img/recipients/kartu_keluarga/' + props.recipient.kartu_keluarga}/>
                             </div>
                             <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Catatan</h5>
-                                <p className='text-center text-sm'>{props.recipient.nik ? props.recipient.nik : '-'}</p>
+                                <p className='text-center text-sm'>{props.recipient.note ? props.recipient.note : '-'}</p>
                             </div>
                             <div className='py-5'>
-                                <h5 className='font-bold text-xs'>Nomor Telepon</h5>
-                                <p className='text-center text-sm'>{props.recipient.nik ? props.recipient.nik : '-'}</p>
+                                <h5 className='font-bold text-xs'>Jumlah Saudara</h5>
+                                <p className='text-center text-sm'>{props.recipient.siblings ? props.recipient.siblings : '-'}</p>
                             </div>
                             <div className='py-5'>
-                                <h5 className='font-bold text-xs'>Nomor Telepon</h5>
-                                <p className='text-center text-sm'>{props.recipient.nik ? props.recipient.nik : '-'}</p>
+                                <h5 className='font-bold text-xs'>Anak ke</h5>
+                                <p className='text-center text-sm'>{props.recipient.child_no ? props.recipient.child_no : '-'}</p>
                             </div>
                             <div className='py-5'>
-                                <h5 className='font-bold text-xs'>Nomor Telepon</h5>
-                                <p className='text-center text-sm'>{props.recipient.nik ? props.recipient.nik : '-'}</p>
+                                <h5 className='font-bold text-xs'>Nama Sekolah</h5>
+                                <p className='text-center text-sm'>{props.recipient.school ? props.recipient.school : '-'}</p>
                             </div>
                             <div className='py-5'>
-                                <h5 className='font-bold text-xs'>Nomor Telepon</h5>
-                                <p className='text-center text-sm'>{props.recipient.nik ? props.recipient.nik : '-'}</p>
+                                <h5 className='font-bold text-xs'>Kelas</h5>
+                                <p className='text-center text-sm'>{props.recipient.class ? props.recipient.class : '-'}</p>
                             </div>
                             {/*<div className='py-5'>*/}
                             {/*    <h5 className='font-bold text-xs'>Nama Alias</h5>*/}
