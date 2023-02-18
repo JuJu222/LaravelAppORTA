@@ -77,13 +77,13 @@ class Controller extends BaseController
     function profileEdit() {
         if (Auth::user()->role_id == 1) {
             $admin = Admin::query()->where('user_id', Auth::id())->first();
-            return Inertia::render('Profile', compact('admin'));
+            return Inertia::render('ProfileEdit', compact('admin'));
         } else if (Auth::user()->role_id == 2) {
             $donor = Donor::query()->where('user_id', Auth::id())->first();
-            return Inertia::render('Profile', compact('donor'));
+            return Inertia::render('ProfileEdit', compact('donor'));
         } else {
             $recipient = Recipient::query()->where('user_id', Auth::id())->first();
-            return Inertia::render('Profile', compact('recipient'));
+            return Inertia::render('ProfileEdit', compact('recipient'));
         }
     }
 

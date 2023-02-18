@@ -99,8 +99,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/beranda', [Controller::class, 'home'])->name('home');
         Route::get('/donasi', [Controller::class, 'donations']);
         Route::get('/profil', [Controller::class, 'profile']);
-        Route::get('/profil/ubah', [Controller::class, 'profileEdit']);
-        Route::post('/profil/ubah', [Controller::class, 'profileUpdate']);
+        Route::get('/profil/ubah', [Controller::class, 'profileEdit'])->name('profile.edit');
+        Route::post('/profil/ubah', [Controller::class, 'profileUpdate'])->name('profile.update');
         Route::get('/needs/{id}/message', [RecipientController::class, 'showMessage'])->name('needs.message.show');
         Route::post('/needs/{id}/message', [RecipientController::class, 'postMessage'])->name('needs.message.post');
     });
