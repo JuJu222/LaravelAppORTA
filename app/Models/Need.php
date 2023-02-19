@@ -29,4 +29,9 @@ class Need extends Model
     public function donations() {
         return $this->hasMany(Donation::class, 'need_id');
     }
+
+    public function status()
+    {
+        return $this->belongsToMany(Status::class, 'need_logs', 'need_id', 'status_id')->withPivot(['status_date']);
+    }
 }
