@@ -98,7 +98,7 @@ Route::middleware(['auth'])->group(function () {
 //        Route::post('/donasi/{id}/verifikasi', [DonationController::class, 'verify'])->name('donation.verification.verify');
         Route::get('/beranda', [Controller::class, 'home'])->name('home');
         Route::get('/donasi', [Controller::class, 'donations']);
-        Route::get('/profil', [Controller::class, 'profile']);
+        Route::get('/profil', [Controller::class, 'profile'])->name('profile');
         Route::get('/profil/ubah', [Controller::class, 'profileEdit'])->name('profile.edit');
         Route::post('/profil/ubah', [Controller::class, 'profileUpdate'])->name('profile.update');
         Route::get('/needs/{id}/message', [RecipientController::class, 'showMessage'])->name('needs.message.show');

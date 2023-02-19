@@ -12,6 +12,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class Controller extends BaseController
@@ -76,7 +77,7 @@ class Controller extends BaseController
 
     function profileEdit() {
         if (Auth::user()->role_id == 1) {
-            $admin = Admin::query()->where('user_id', Auth::id())->first();
+            $admin = Admin::query()->where('user_id', Auth::id())->with('user')->first();
             return Inertia::render('ProfileEdit', compact('admin'));
         } else if (Auth::user()->role_id == 2) {
             $donor = Donor::query()->where('user_id', Auth::id())->first();
@@ -89,8 +90,27 @@ class Controller extends BaseController
 
     function profileUpdate() {
         if (Auth::user()->role_id == 1) {
-            $admin = Admin::query()->where('user_id', Auth::id())->first();
-            return Inertia::render('Profile', compact('admin'));
+            $admin = Admin::query()->find($id);
+            $admin->update([
+                'name' => $request->input('name'),
+                'phone' => $request->input('phone'),
+                'email' => $request->input('email'),
+                'jabatan' => $request->input('jabatan'),
+                'note' => $request->input('note') !== '' ? $request->input('note') : null,
+            ]);
+
+            if ($request->password == '') {
+                User::query()->find($admin->user_id)->update([
+                    'username' => $request->input('username'),
+                ]);
+            } else {
+                User::query()->find($admin->user_id)->update([
+                    'username' => $request->input('username'),
+                    'password' => bcrypt($request->input('password')),
+                ]);
+            }
+
+            return Redirect::route('profile');
         } else if (Auth::user()->role_id == 2) {
             $donor = Donor::query()->where('user_id', Auth::id())->first();
             return Inertia::render('Profile', compact('donor'));
