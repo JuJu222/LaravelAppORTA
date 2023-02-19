@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -83,15 +84,15 @@ class Controller extends BaseController
             $admin = Admin::query()->where('user_id', Auth::id())->with('user')->first();
             return Inertia::render('ProfileEdit', compact('admin'));
         } else if (Auth::user()->role_id == 2) {
-            $donor = Donor::query()->where('user_id', Auth::id())->first();
+            $donor = Donor::query()->where('user_id', Auth::id())->with('user')->first();
             return Inertia::render('ProfileEdit', compact('donor'));
         } else {
-            $recipient = Recipient::query()->where('user_id', Auth::id())->first();
+            $recipient = Recipient::query()->where('user_id', Auth::id())->with('user')->first();
             return Inertia::render('ProfileEdit', compact('recipient'));
         }
     }
 
-    function profileUpdate() {
+    function profileUpdate(Request $request) {
         if (Auth::user()->role_id == 1) {
             $admin = Admin::query()->where('user_id', Auth::id())->first();
             $admin->update([

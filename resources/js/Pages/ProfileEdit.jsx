@@ -125,6 +125,163 @@ export default function Profile(props) {
         const [values, setValues] = useState({
             username: props.user.username,
             password: '',
+            name: props.donor.name,
+            name_alias: props.donor.name_alias ? props.donor.name_alias : '',
+            phone: props.donor.phone,
+            email: props.donor.email,
+            address: props.donor.address,
+            city: props.donor.city,
+            note: props.donor.note ? props.donor.note : '',
+        });
+        let initials = props.donor.name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase()
+
+        function handleChange(e) {
+            const key = e.target.name;
+
+            if (e.target.type === 'file') {
+                if (e.target.files.length === 1) {
+                    const file = e.target.files[0]
+
+                    setValues(values => ({
+                        ...values,
+                        [key]: file
+                    }))
+                } else {
+                    const file = e.target.files
+
+                    setValues(values => ({
+                        ...values,
+                        [key]: file
+                    }))
+                }
+            } else {
+                const value = e.target.value
+                setValues(values => ({
+                    ...values,
+                    [key]: value,
+                }))
+            }
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault()
+            Inertia.post(route('profile.update'), values)
+        }
+
+        return (
+            <div className='pb-20'>
+                <div className='bg-red w-full px-4 pt-4'>
+                    <div className='max-w-6xl mx-auto'>
+                        <div className='flex items-center gap-5'>
+                            <ApplicationLogo white={true} className="block h-9 w-auto"></ApplicationLogo>
+                        </div>
+                        <div className='flex justify-center w-full py-5'>
+                            <div className='flex items-center justify-center bg-white text-gray-500 text-center rounded-full text-4xl font-bold w-32 h-32'>
+                                {initials}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='w-full h-1/3 px-4 pt-4'>
+                    <div className='max-w-6xl mx-auto'>
+                        <form onSubmit={handleSubmit} className='mt-6'>
+                            <div className="mb-6">
+                                <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 ">Username *</label>
+                                <input type="text" id="username" name="username" onChange={handleChange} defaultValue={props.user.username}
+                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                       required={true} />
+                            </div>
+                            <div className="mb-6">
+                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Password (kosongkan bila tidak ingin mengubah password lama)</label>
+                                <input type="text" id="password" name="password" onChange={handleChange}
+                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                />
+                            </div>
+                            <div className="mb-6">
+                                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama *</label>
+                                <input type="text" id="name" name="name" onChange={handleChange} defaultValue={props.donor.name}
+                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                       required={true} />
+                            </div>
+                            <div className="mb-6">
+                                <label htmlFor="name_alias" className="block mb-2 text-sm font-medium text-gray-900 ">Nama Alias</label>
+                                <input type="text" id="name_alias" name="name_alias" onChange={handleChange} defaultValue={props.donor.name_alias}
+                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                />
+                            </div>
+                            <div className="mb-6">
+                                <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 ">Nomor Telepon *</label>
+                                <input type="text" id="phone" name="phone" onChange={handleChange} defaultValue={props.donor.phone}
+                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                       required={true} />
+                            </div>
+                            <div className="mb-6">
+                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Email *</label>
+                                <input type="email" id="email" name="email" onChange={handleChange} defaultValue={props.donor.email}
+                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                       required={true} />
+                            </div>
+                            <div className="mb-6">
+                                <label htmlFor="address" className="block mb-2 text-sm font-medium text-gray-900 ">Alamat *</label>
+                                <input type="text" id="address" name="address" onChange={handleChange} defaultValue={props.donor.address}
+                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                       required={true} />
+                            </div>
+                            <div className="mb-6">
+                                <label htmlFor="city" className="block mb-2 text-sm font-medium text-gray-900 ">Kota *</label>
+                                <input type="text" id="city" name="city" onChange={handleChange} defaultValue={props.donor.city}
+                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                       required={true} />
+                            </div>
+                            <div className="mb-6">
+                                <label htmlFor="ktp" className="block mb-2 text-sm font-medium text-gray-900 ">Foto KTP *</label>
+                                {values.ktp ? (
+                                    <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
+                                         src={URL.createObjectURL(values.ktp)}/>
+                                ) : (
+                                    props.donor.ktp && (
+                                        <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
+                                             src={'/img/donors/ktp/' + props.donor.ktp}/>
+                                    )
+                                )}
+                                <input type="file" id="ktp" name="ktp" onChange={handleChange}
+                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                />
+                            </div>
+                            <div className="mb-6">
+                                <label htmlFor="photo" className="block mb-2 text-sm font-medium text-gray-900 ">Foto Profil</label>
+                                {values.photo ? (
+                                    <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
+                                         src={URL.createObjectURL(values.photo)}/>
+                                ) : (
+                                    props.donor.photo && (
+                                        <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
+                                             src={'/img/donors/photo/' + props.donor.photo}/>
+                                    )
+                                )}
+                                <input type="file" id="photo" name="photo" onChange={handleChange}
+                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                />
+                            </div>
+                            <div className="mb-6">
+                                <label htmlFor="note"
+                                       className="block mb-2 text-sm font-medium text-gray-900 ">Catatan</label>
+                                <textarea name="note" onChange={handleChange} defaultValue={props.donor.note} className='border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400'
+                                />
+                            </div>
+                            <button type="submit"
+                                    className="text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Submit
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <BottomNavbar auth={props.auth}></BottomNavbar>
+            </div>
+        );
+    } else {
+        const [values, setValues] = useState({
+            username: props.user.username,
+            password: '',
             name: props.recipient.name,
             nik: props.recipient.nik,
             gender: props.recipient.gender,
@@ -140,7 +297,7 @@ export default function Profile(props) {
             note: props.recipient.note ? props.recipient.note : '',
             is_active: props.recipient.is_active,
         });
-        let initials = props.admin.name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase()
+        let initials = props.recipient.name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase()
         let secondaryExists = false;
 
         for (const photo of props.recipient.photos) {
@@ -441,122 +598,6 @@ export default function Profile(props) {
                                 <input type="file" id="photos" name="photos" onChange={handleChange} multiple
                                        className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                        required={false}/>
-                            </div>
-                            <button type="submit"
-                                    className="text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Submit
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                <BottomNavbar auth={props.auth}></BottomNavbar>
-            </div>
-        );
-    } else {
-        const [values, setValues] = useState({
-            username: props.admin.user.username,
-            password: '',
-            name: props.admin.name,
-            email: props.admin.email,
-            phone: props.admin.phone,
-            jabatan: props.admin.jabatan,
-            note: props.admin.note ? props.admin.note : '',
-        });
-        let initials = props.admin.name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase()
-
-        function handleChange(e) {
-            const key = e.target.name;
-
-            if (e.target.type === 'file') {
-                if (e.target.files.length === 1) {
-                    const file = e.target.files[0]
-
-                    setValues(values => ({
-                        ...values,
-                        [key]: file
-                    }))
-                } else {
-                    const file = e.target.files
-
-                    setValues(values => ({
-                        ...values,
-                        [key]: file
-                    }))
-                }
-            } else {
-                const value = e.target.value
-                setValues(values => ({
-                    ...values,
-                    [key]: value,
-                }))
-            }
-        }
-
-        function handleSubmit(e) {
-            e.preventDefault()
-            Inertia.post(route('profile.update'), values)
-        }
-
-        return (
-            <div className='pb-20'>
-                <div className='bg-red w-full px-4 pt-4'>
-                    <div className='max-w-6xl mx-auto'>
-                        <div className='flex items-center gap-5'>
-                            <ApplicationLogo white={true} className="block h-9 w-auto"></ApplicationLogo>
-                        </div>
-                        <div className='flex justify-center w-full py-5'>
-                            <div className='flex items-center justify-center bg-white text-gray-500 text-center rounded-full text-4xl font-bold w-32 h-32'>
-                                {initials}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className='w-full h-1/3 px-4 pt-4'>
-                    <div className='max-w-6xl mx-auto'>
-                        <form onSubmit={handleSubmit} className='mt-6'>
-                            <div className="mb-6">
-                                <label htmlFor="username"
-                                       className="block mb-2 text-sm font-medium text-gray-900 ">Username *</label>
-                                <input type="text" id="username" name="username" onChange={handleChange} defaultValue={props.admin.user.username} required={true}
-                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                />
-                            </div>
-                            <div className="mb-6">
-                                <label htmlFor="password"
-                                       className="block mb-2 text-sm font-medium text-gray-900 ">Password (kosongkan bila tidak ingin mengubah password lama)</label>
-                                <input type="text" id="password" name="password" onChange={handleChange}
-                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                />
-                            </div>
-                            <div className="mb-6">
-                                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama *</label>
-                                <input type="text" id="name" name="name" onChange={handleChange} defaultValue={props.admin.name} required={true}
-                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                />
-                            </div>
-                            <div className="mb-6">
-                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Email *</label>
-                                <input type="email" id="email" name="email" onChange={handleChange} defaultValue={props.admin.email} required={true}
-                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                />
-                            </div>
-                            <div className="mb-6">
-                                <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 ">Nomor Telepon *</label>
-                                <input type="text" id="phone" name="phone" onChange={handleChange} defaultValue={props.admin.phone} required={true}
-                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                />
-                            </div>
-                            <div className="mb-6">
-                                <label htmlFor="jabatan"
-                                       className="block mb-2 text-sm font-medium text-gray-900 ">Jabatan *</label>
-                                <input type="text" id="jabatan" name="jabatan" onChange={handleChange} defaultValue={props.admin.jabatan} required={true}
-                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                />
-                            </div>
-                            <div className="mb-6">
-                                <label htmlFor="jabatan"
-                                       className="block mb-2 text-sm font-medium text-gray-900 ">Catatan</label>
-                                <textarea name="note" onChange={handleChange} defaultValue={props.admin.note} className='border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400'
-                                />
                             </div>
                             <button type="submit"
                                     className="text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Submit
