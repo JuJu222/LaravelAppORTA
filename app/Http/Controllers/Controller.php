@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\Donation;
 use App\Models\Donor;
+use App\Models\Photo;
 use App\Models\Recipient;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -90,7 +93,7 @@ class Controller extends BaseController
 
     function profileUpdate() {
         if (Auth::user()->role_id == 1) {
-            $admin = Admin::query()->find($id);
+            $admin = Admin::query()->where('user_id', Auth::id())->first();
             $admin->update([
                 'name' => $request->input('name'),
                 'phone' => $request->input('phone'),
@@ -113,10 +116,198 @@ class Controller extends BaseController
             return Redirect::route('profile');
         } else if (Auth::user()->role_id == 2) {
             $donor = Donor::query()->where('user_id', Auth::id())->first();
-            return Inertia::render('Profile', compact('donor'));
+
+            $donor->update([
+                'name' => $request->input('name'),
+                'phone' => $request->input('phone'),
+                'email' => $request->input('email'),
+                'address' => $request->input('address'),
+                'city' => $request->input('city'),
+                'note' => $request->input('note') !== '' ? $request->input('note') : null,
+                'name_alias' => $request->input('name_alias') !== '' ? $request->input('name_alias') : null,
+                'verified' => true,
+            ]);
+
+            if ($request->password == '') {
+                User::query()->find($donor->user_id)->update([
+                    'username' => $request->input('username'),
+                ]);
+            } else {
+                User::query()->find($donor->user_id)->update([
+                    'username' => $request->input('username'),
+                    'password' => bcrypt($request->input('password')),
+                ]);
+            }
+
+            if ($request->hasfile('ktp')) {
+                $this->validate($request, [
+                    'ktp' => 'mimes:jpeg,png,bmp,tiff',
+                ]);
+
+                File::delete(public_path('/img/donors/ktp/' . $donor->ktp));
+
+                $file = $request->file('ktp');
+                $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+                $file->move(public_path() . '/img/donors/ktp/', $name);
+                $donor->update([
+                    'ktp' => $name,
+                ]);
+            }
+
+            if ($request->hasfile('photo')) {
+                $this->validate($request, [
+                    'photo' => 'mimes:jpeg,png,bmp,tiff',
+                ]);
+
+                File::delete(public_path('/img/donors/photo/' . $donor->photo));
+
+                $file = $request->file('photo');
+                $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+                $file->move(public_path() . '/img/donors/photo/', $name);
+                $donor->update([
+                    'photo' => $name,
+                ]);
+            }
+
+            return Redirect::route('profile');
         } else {
             $recipient = Recipient::query()->where('user_id', Auth::id())->first();
-            return Inertia::render('Profile', compact('recipient'));
+
+            $recipient->update([
+                'name' => $request->input('name'),
+                'nik' => $request->input('nik'),
+                'gender' => $request->input('gender'),
+                'birthplace' => $request->input('birthplace'),
+                'birthdate' => $request->input('birthdate'),
+                'school' => $request->input('school'),
+                'class' => $request->input('class'),
+                'siblings' => $request->input('siblings'),
+                'child_no' => $request->input('child_no'),
+                'address' => $request->input('address'),
+                'city' => $request->input('city'),
+                'phone' => $request->input('phone'),
+                'note' => $request->input('note') !== '' ? $request->input('note') : null,
+                'is_active' => $request->input('is_active'),
+            ]);
+
+            if ($request->password == '') {
+                User::query()->find($recipient->user_id)->update([
+                    'username' => $request->input('username'),
+                ]);
+            } else {
+                User::query()->find($recipient->user_id)->update([
+                    'username' => $request->input('username'),
+                    'password' => bcrypt($request->input('password')),
+                ]);
+            }
+
+            if ($request->hasfile('birth_certificate')) {
+                $this->validate($request, [
+                    'birth_certificate' => 'mimes:jpeg,png,bmp,tiff',
+                ]);
+
+                File::delete(public_path('/img/recipients/birth_certificate/' . $recipient->birth_certificate));
+
+                $file = $request->file('birth_certificate');
+                $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+                $file->move(public_path() . '/img/recipients/birth_certificate/', $name);
+                $recipient->update([
+                    'birth_certificate' => $name,
+                ]);
+            }
+
+            if ($request->hasfile('kartu_keluarga')) {
+                $this->validate($request, [
+                    'kartu_keluarga' => 'mimes:jpeg,png,bmp,tiff',
+                ]);
+
+                File::delete(public_path('/img/recipients/kartu_keluarga/' . $recipient->kartu_keluarga));
+
+                $file = $request->file('kartu_keluarga');
+                $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+                $file->move(public_path() . '/img/recipients/kartu_keluarga/', $name);
+                $recipient->update([
+                    'kartu_keluarga' => $name,
+                ]);
+            }
+
+            if ($request->hasfile('primary_photo')) {
+                $this->validate($request, [
+                    'primary_photo' => 'mimes:jpeg,png,bmp,tiff',
+                ]);
+
+                foreach ($recipient->photos as $photo) {
+                    if ($photo->type->type === 'primary') {
+                        $photo = Photo::query()->find($photo->id);
+
+                        File::delete(public_path('/img/recipients/photos/' . $photo->photo_url));
+                        $photo->delete();
+                    }
+                }
+
+                $file = $request->file('primary_photo');
+                $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+                $file->move(public_path() . '/img/recipients/photos/', $name);
+                Photo::query()->create([
+                    'title' => '',
+                    'photo_url' => $name,
+                    'photo_type_id' => 1,
+                    'recipient_id' => $recipient->id,
+                ]);
+            }
+
+            if ($request->hasFile('photos')) {
+                if (is_array($request->file('photos'))) {
+                    foreach ($request->file('photos') as $file) {
+//                    $this->validate($request, [
+//                        'photos.*' => 'mimes:jpeg,png,bmp,tiff',
+//                    ]);
+
+                        foreach ($recipient->photos as $photo) {
+                            if ($photo->type->type === 'secondary') {
+                                $photo = Photo::query()->find($photo->id);
+
+                                File::delete(public_path('/img/recipients/photos/' . $photo->photo_url));
+                                $photo->delete();
+                            }
+                        }
+
+                        $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+                        $file->move(public_path() . '/img/recipients/photos/', $name);
+                        Photo::query()->create([
+                            'title' => '',
+                            'photo_url' => $name,
+                            'photo_type_id' => 2,
+                            'recipient_id' => $recipient->id,
+                        ]);
+                    }
+                } else {
+                    $this->validate($request, [
+                        'photos' => 'mimes:jpeg,png,bmp,tiff',
+                    ]);
+
+                    foreach ($recipient->photos as $photo) {
+                        if ($photo->type->type === 'secondary') {
+                            $photo = Photo::query()->find($photo->id);
+
+                            File::delete(public_path('/img/recipients/photos/' . $photo->photo_url));
+                            $photo->delete();
+                        }
+                    }
+
+                    $file = $request->file('photos');
+                    $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+                    $file->move(public_path() . '/img/recipients/photos/', $name);
+                    Photo::query()->create([
+                        'title' => '',
+                        'photo_url' => $name,
+                        'photo_type_id' => 2,
+                        'recipient_id' => $recipient->id,
+                    ]);
+                }
+            }
+
+            return Redirect::route('profile');
         }
     }
 }
