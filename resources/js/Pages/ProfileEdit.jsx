@@ -123,7 +123,7 @@ export default function Profile(props) {
         );
     } else if (props.donor) {
         const [values, setValues] = useState({
-            username: props.user.username,
+            username: props.donor.user.username,
             password: '',
             name: props.donor.name,
             name_alias: props.donor.name_alias ? props.donor.name_alias : '',
@@ -187,7 +187,7 @@ export default function Profile(props) {
                         <form onSubmit={handleSubmit} className='mt-6'>
                             <div className="mb-6">
                                 <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 ">Username *</label>
-                                <input type="text" id="username" name="username" onChange={handleChange} defaultValue={props.user.username}
+                                <input type="text" id="username" name="username" onChange={handleChange} defaultValue={props.donor.user.username}
                                        className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                        required={true} />
                             </div>
@@ -280,7 +280,7 @@ export default function Profile(props) {
         );
     } else {
         const [values, setValues] = useState({
-            username: props.user.username,
+            username: props.recipient.user.username,
             password: '',
             name: props.recipient.name,
             nik: props.recipient.nik,
@@ -360,7 +360,7 @@ export default function Profile(props) {
                                 <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 ">Username
                                     *</label>
                                 <input type="text" id="username" name="username" onChange={handleChange}
-                                       defaultValue={props.user.username}
+                                       defaultValue={props.recipient.user.username}
                                        className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                        required={true}/>
                             </div>

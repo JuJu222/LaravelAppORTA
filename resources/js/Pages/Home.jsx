@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from '@inertiajs/inertia-react';
 import RecipientCard from "@/Components/RecipientCard";
 import BottomNavbar from "@/Components/BottomNavbar";
@@ -6,8 +6,21 @@ import ApplicationLogo from "@/Components/ApplicationLogo";
 import RecipientNeedCard from "@/Components/RecipientNeedCard";
 
 export default function Home(props) {
-    //TODO filter
     if (props.admin) {
+        const [filteredItems, setFilteredItems] = useState(props.recipients);
+        const [filter, setFilter] = useState({name: ''})
+
+        React.useEffect(() => {
+            setFilteredItems(props.recipients);
+        }, [props.recipients])
+
+        React.useEffect(() => {
+            const results = props.recipients.filter(item => {
+                return item.name.toLowerCase().includes(filter.name.toLowerCase());
+            })
+            setFilteredItems(results);
+        }, [filter])
+
         return (
             <div className='pb-20'>
                 <div className='bg-red w-full px-4 pt-4'>
@@ -35,12 +48,14 @@ export default function Home(props) {
                                         name
                                         id
                                         placeholder="Cari nama anak"
+                                        onChange={(e) => setFilter(filter => ({...filter, name: e.target.value}))}
                                     />
                                 </div>
                             </div>
                         </div>
                         <Link href={route('donations.index')} as="button"
-                              className="mt-4 text-red w-full transition bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Dasbor Admin</Link>
+                              className="mt-4 text-red w-full transition bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Dasbor
+                            Admin</Link>
                         <div className='flex justify-between items-end mt-5'>
                             <div className='h-fit my-auto pb-5'>
                                 <h2 className='text-2xl text-white font-bold'>Halo, {props.admin.name}</h2>
@@ -58,7 +73,7 @@ export default function Home(props) {
                             <h2 className='text-red font-bold mt-2'>Yuk, mari kita bantu anak-anak!</h2>
                             <p className='text-xs mt-1'>Klik salah satu anak untuk membantu</p>
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
-                                {props.recipients.map((recipient, i) =>
+                                {filteredItems.map((recipient, i) =>
                                     <RecipientCard recipient={recipient}></RecipientCard>
                                 )}
                             </div>
@@ -69,6 +84,20 @@ export default function Home(props) {
             </div>
         );
     } else if (props.donor) {
+        const [filteredItems, setFilteredItems] = useState(props.recipients);
+        const [filter, setFilter] = useState({name: ''})
+
+        React.useEffect(() => {
+            setFilteredItems(props.recipients);
+        }, [props.recipients])
+
+        React.useEffect(() => {
+            const results = props.recipients.filter(item => {
+                return item.name.toLowerCase().includes(filter.name.toLowerCase());
+            })
+            setFilteredItems(results);
+        }, [filter])
+
         return (
             <div className='pb-20'>
                 <div className='bg-red w-full px-4 pt-4'>
@@ -96,6 +125,7 @@ export default function Home(props) {
                                         name
                                         id
                                         placeholder="Cari nama anak"
+                                        onChange={(e) => setFilter(filter => ({...filter, name: e.target.value}))}
                                     />
                                 </div>
                             </div>
@@ -104,9 +134,11 @@ export default function Home(props) {
                             <div className='h-fit my-auto pb-4'>
                                 <h2 className='text-2xl text-white font-bold'>Halo, {props.donor.name}</h2>
                                 {props.donor.donation_count > 0 ? (
-                                    <p className='text-white text-sm mt-2'>Anda telah berhasil membantu anak-anak sebanyak <h6>{props.donor.donation_count} Kali</h6></p>
+                                    <p className='text-white text-sm mt-2'>Anda telah berhasil membantu anak-anak
+                                        sebanyak <h6>{props.donor.donation_count} Kali</h6></p>
                                 ) : (
-                                    <p className='text-white text-sm mt-2'>Ayo bantu anak-anak kami dengan donasi anda!</p>
+                                    <p className='text-white text-sm mt-2'>Ayo bantu anak-anak kami dengan donasi
+                                        anda!</p>
                                 )}
                             </div>
                             <div>
@@ -121,7 +153,7 @@ export default function Home(props) {
                             <h2 className='text-red font-bold mt-2'>Yuk, mari kita bantu anak-anak!</h2>
                             <p className='text-xs mt-1'>Klik salah satu anak untuk membantu</p>
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
-                                {props.recipients.map((recipient, i) =>
+                                {filteredItems.map((recipient, i) =>
                                     <RecipientCard recipient={recipient}></RecipientCard>
                                 )}
                             </div>
@@ -132,6 +164,20 @@ export default function Home(props) {
             </div>
         );
     } else {
+        const [filteredItems, setFilteredItems] = useState(props.recipient.needs);
+        const [filter, setFilter] = useState({category: ''})
+
+        React.useEffect(() => {
+            setFilteredItems(props.recipient.needs);
+        }, [props.recipient.needs])
+
+        React.useEffect(() => {
+            const results = props.recipient.needs.filter(item => {
+                return item.category.toLowerCase().includes(filter.category.toLowerCase());
+            })
+            setFilteredItems(results);
+        }, [filter])
+
         return (
             <div className='pb-20'>
                 <div className='bg-red w-full px-4 pt-4'>
@@ -158,7 +204,8 @@ export default function Home(props) {
                                         type="text"
                                         name
                                         id
-                                        placeholder="Cari nama anak"
+                                        placeholder="Cari kebutuhan"
+                                        onChange={(e) => setFilter(filter => ({...filter, category: e.target.value}))}
                                     />
                                 </div>
                             </div>
@@ -184,7 +231,7 @@ export default function Home(props) {
                             <h2 className='text-red font-bold mt-2'>Cek kebutuhan donasi anda di sini!</h2>
                             <p className='text-xs mt-1'>Jangan lupa untuk mengkonfirmasi penerimaan dana donasi</p>
                             <div className="grid grid-cols-1 gap-3">
-                                {props.recipient.needs.map((need, i) =>
+                                {filteredItems.map((need, i) =>
                                     <RecipientNeedCard need={need} recipientID={props.recipient.id} button={true}/>
                                 )}
                             </div>

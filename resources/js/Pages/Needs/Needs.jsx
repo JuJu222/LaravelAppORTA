@@ -7,8 +7,8 @@ import DeleteConrifmation from "@/Components/DeleteConrifmation";
 
 export default function NeedCategories(props) {
     const [filteredItems, setFilteredItems] = useState(props.needs);
-    const [showModal,setShowModal] = useState(false)
-    const [modalData,setModalData] = useState({})
+    const [showModal, setShowModal] = useState(false)
+    const [modalData, setModalData] = useState({})
     const formatter = new Intl.NumberFormat('de-DE');
     const options = {year: 'numeric', month: 'long', day: 'numeric'}
     const [filter, setFilter] = useState({recipient: '', need: '', status: ''})
@@ -29,11 +29,15 @@ export default function NeedCategories(props) {
 
     React.useEffect(() => {
         if (sort.amount === true) {
-            const results = [...filteredItems].sort(function(a, b) { return b.amount - a.amount })
+            const results = [...filteredItems].sort(function (a, b) {
+                return b.amount - a.amount
+            })
             setSort(sort => ({...sort, collected: null}))
             setFilteredItems(results);
         } else if (sort.amount === false) {
-            const results = [...filteredItems].sort(function(a, b) { return a.amount - b.amount })
+            const results = [...filteredItems].sort(function (a, b) {
+                return a.amount - b.amount
+            })
             setSort(sort => ({...sort, collected: null}))
             setFilteredItems(results);
         }
@@ -41,11 +45,15 @@ export default function NeedCategories(props) {
 
     React.useEffect(() => {
         if (sort.collected === true) {
-            const results = [...filteredItems].sort(function(a, b) { return b.collected - a.collected })
+            const results = [...filteredItems].sort(function (a, b) {
+                return b.collected - a.collected
+            })
             setSort(sort => ({...sort, amount: null}))
             setFilteredItems(results);
         } else if (sort.collected === false) {
-            const results = [...filteredItems].sort(function(a, b) { return a.collected - b.collected })
+            const results = [...filteredItems].sort(function (a, b) {
+                return a.collected - b.collected
+            })
             setSort(sort => ({...sort, amount: null}))
             setFilteredItems(results);
         }
@@ -75,14 +83,21 @@ export default function NeedCategories(props) {
                 <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
                     <div className="flex items-center justify-between">
                         <div className='flex items-center justify-between w-full gap-2'>
-                            <input type="text" onChange={(e) => setFilter(filter => ({...filter, recipient: e.target.value}))}
+                            <input type="text"
+                                   onChange={(e) => setFilter(filter => ({...filter, recipient: e.target.value}))}
                                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                    placeholder="Cari nama anak"/>
-                            <input type="text" onChange={(e) => setFilter(filter => ({...filter, need: e.target.value}))}
+                            <input type="text"
+                                   onChange={(e) => setFilter(filter => ({...filter, need: e.target.value}))}
                                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                    placeholder="Cari kebutuhan anak"/>
-                            <Select options={[{value: true, label: 'Sudah Dikonfirmasi'}, {value: false, label: 'Belum Dikonfirmasi'}]} isClearable={true}
-                                    className='text-sm w-full' name='name' required={true} placeholder='Cari status penerimaan dana' onChange={(e) => setFilter(filter => ({...filter, status: e ? e.value : ''}))}
+                            <Select options={[{value: true, label: 'Sudah Dikonfirmasi'}, {
+                                value: false,
+                                label: 'Belum Dikonfirmasi'
+                            }]} isClearable={true}
+                                    className='text-sm w-full' name='name' required={true}
+                                    placeholder='Cari status penerimaan dana'
+                                    onChange={(e) => setFilter(filter => ({...filter, status: e ? e.value : ''}))}
                                     styles={{
                                         control: (baseStyles, state) => ({
                                             ...baseStyles,
@@ -126,20 +141,23 @@ export default function NeedCategories(props) {
                             <th className="font-bold text-left pl-4">No.</th>
                             <th className="font-bold text-left pl-12">Nama Anak</th>
                             <th className="font-bold text-left pl-12">Kebutuhan</th>
-                            <th className="font-bold text-left pl-12 cursor-pointer" onClick={(e) => setSort(sort => ({...sort, amount: !sort.amount}))}>
+                            <th className="font-bold text-left pl-12 cursor-pointer"
+                                onClick={(e) => setSort(sort => ({...sort, amount: !sort.amount}))}>
                                 <div className='flex gap-0.5'>
                                     <span>Target Donasi</span>
                                     <span>
                                     {sort.amount != null ? (
                                         sort.amount === true ? (
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                 fill="currentColor" className="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                                 fill="currentColor" className="bi bi-caret-up-fill"
+                                                 viewBox="0 0 16 16">
                                                 <path
                                                     d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
                                             </svg>
                                         ) : (
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                 fill="currentColor" className="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                                 fill="currentColor" className="bi bi-caret-down-fill"
+                                                 viewBox="0 0 16 16">
                                                 <path
                                                     d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
                                             </svg>
@@ -153,20 +171,23 @@ export default function NeedCategories(props) {
                                 </span>
                                 </div>
                             </th>
-                            <th className="font-bold text-left pl-12 cursor-pointer" onClick={(e) => setSort(sort => ({...sort, collected: !sort.collected}))}>
+                            <th className="font-bold text-left pl-12 cursor-pointer"
+                                onClick={(e) => setSort(sort => ({...sort, collected: !sort.collected}))}>
                                 <div className='flex gap-0.5'>
                                     <span>Donasi Terkumpul</span>
                                     <span>
                                     {sort.collected != null ? (
                                         sort.collected === true ? (
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                 fill="currentColor" className="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                                 fill="currentColor" className="bi bi-caret-up-fill"
+                                                 viewBox="0 0 16 16">
                                                 <path
                                                     d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
                                             </svg>
                                         ) : (
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                 fill="currentColor" className="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                                 fill="currentColor" className="bi bi-caret-down-fill"
+                                                 viewBox="0 0 16 16">
                                                 <path
                                                     d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
                                             </svg>
@@ -182,6 +203,7 @@ export default function NeedCategories(props) {
                             </th>
                             <th className="font-bold text-left pl-12">Batas Waktu</th>
                             <th className="font-bold text-left pl-12">Status Penerimaan Dana</th>
+                            <th className="font-bold text-left pl-12">Status Kebutuhan</th>
                         </tr>
                         </thead>
                         <tbody className="w-full">
@@ -229,16 +251,34 @@ export default function NeedCategories(props) {
                                     <div className="flex items-center">
                                         <div>
                                             {need.delivered_date ? (
-                                                <p className="bg-green-600 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Sudah Dikonfirmasi</p>
+                                                <p className="bg-green-600 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Sudah
+                                                    Dikonfirmasi</p>
                                             ) : (
-                                                <p className="bg-red_dark text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Belum Dikonfirmasi</p>
+                                                <p className="bg-red_dark text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Belum
+                                                    Dikonfirmasi</p>
+                                            )}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td className="pl-12">
+                                    <div className="flex items-center">
+                                        <div>
+                                            {need.status[need.status.length - 1].id === 1 ? (
+                                                <p className="bg-lime-600 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">{need.status[need.status.length - 1].status}</p>
+                                            ) : (
+                                                need.status[need.status.length - 1].id === 2 ? (
+                                                    <p className="bg-red_dark text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">{need.status[need.status.length - 1].status}</p>
+                                                ) : (
+                                                    <p className="bg-green-600 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">{need.status[need.status.length - 1].status}</p>
+                                                )
                                             )}
                                         </div>
                                     </div>
                                 </td>
                                 <td className="pl-12 pr-4">
                                     <div className='flex gap-2 justify-end'>
-                                        <Link href={route("needs.show", need.id)} className="flex items-center justify-center text-center">
+                                        <Link href={route("needs.show", need.id)}
+                                              className="flex items-center justify-center text-center">
                                             <button
                                                 className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-50 focus:outline-none transition">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -262,8 +302,9 @@ export default function NeedCategories(props) {
                                             </button>
                                         </Link>
                                         <div className="flex items-center justify-center text-center">
-                                            <button onClick={(e) => confirmDelete(need.id, need.recipient.name + ' - ' + need.need_category.category)}
-                                                    className="text-sm leading-none text-white py-3 px-5 bg-red rounded transition hover:bg-red_hover focus:outline-none">
+                                            <button
+                                                onClick={(e) => confirmDelete(need.id, need.recipient.name + ' - ' + need.need_category.category)}
+                                                className="text-sm leading-none text-white py-3 px-5 bg-red rounded transition hover:bg-red_hover focus:outline-none">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                      fill="currentColor" className="bi bi-trash3-fill"
                                                      viewBox="0 0 16 16">
@@ -280,7 +321,8 @@ export default function NeedCategories(props) {
                     </table>
                 </div>
             </div>
-            <DeleteConrifmation showModal={showModal} setShowModal={setShowModal} modalData={modalData} handleDelete={handleDelete}></DeleteConrifmation>
+            <DeleteConrifmation showModal={showModal} setShowModal={setShowModal} modalData={modalData}
+                                handleDelete={handleDelete}></DeleteConrifmation>
         </Authenticated>
     );
 }

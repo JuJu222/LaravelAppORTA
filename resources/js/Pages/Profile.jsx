@@ -71,7 +71,7 @@ export default function Profile(props) {
                             {/*    <p className='text-center text-sm'>{props.donor.note ? props.donor.note : '-'}</p>*/}
                             {/*</div>*/}
                         </div>
-                        <Link href={route('profile.edit')} method="post" as="button"
+                        <Link href={route('profile.edit')} as="button"
                               className="mt-3 text-red hover:text-white w-full transition hover:bg-red_hover border border-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-4 text-center">Ubah Profil
                         </Link>
                         <Link href={route('logout')} method="post" as="button"
@@ -135,7 +135,7 @@ export default function Profile(props) {
                                 <p className='text-center text-sm'>{props.donor.note ? props.donor.note : '-'}</p>
                             </div>
                         </div>
-                        <Link href={route('profile.edit')} method="post" as="button"
+                        <Link href={route('profile.edit')} as="button"
                               className="mt-3 text-red hover:text-white w-full transition hover:bg-red_hover border border-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-4 text-center">Ubah Profil
                         </Link>
                         <Link href={route('logout')} method="post" as="button"
@@ -255,7 +255,7 @@ export default function Profile(props) {
                             {/*    <p className='text-center text-sm'>{props.donor.note ? props.donor.note : '-'}</p>*/}
                             {/*</div>*/}
                         </div>
-                        <Link href={route('profile.edit')} method="post" as="button"
+                        <Link href={route('profile.edit')} as="button"
                               className="mt-3 text-red hover:text-white w-full transition hover:bg-red_hover border border-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-4 text-center">Ubah Profil
                         </Link>
                         <Link href={route('logout')} method="post" as="button"

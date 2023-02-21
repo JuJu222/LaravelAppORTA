@@ -8,18 +8,23 @@ export default function AdminsCreate(props) {
         need_category_id: props.need.need_category_id,
         recipient_id: props.need.recipient_id,
         amount: props.need.amount,
+        status_id: props.need.status[props.need.status.length - 1].id,
         due_date: props.need.due_date,
         delivered_date: props.need.delivered_date ? props.need.delivered_date : '',
         delivered_message: props.need.delivered_message ? props.need.delivered_message : '',
     })
     let recipientOptions = [];
     let needCategoryOptions = [];
+    let statusOptions = [];
 
     for (const recipient of props.recipients) {
         recipientOptions.push({value: recipient.id, label: recipient.name})
     }
     for (const needCategory of props.needCategories) {
         needCategoryOptions.push({value: needCategory.id, label: needCategory.category})
+    }
+    for (const status of props.status) {
+        statusOptions.push({value: status.id, label: status.status})
     }
 
     function handleChange(e) {
@@ -51,6 +56,13 @@ export default function AdminsCreate(props) {
         setValues(values => ({
             ...values,
             ['need_category_id']: e.value,
+        }))
+    }
+
+    function handleSelectStatusChange(e) {
+        setValues(values => ({
+            ...values,
+            ['status_id']: e.value,
         }))
     }
 
@@ -135,6 +147,35 @@ export default function AdminsCreate(props) {
                         <label htmlFor="due_date" className="block mb-2 text-sm font-medium text-gray-900 ">Batas Waktu *</label>
                         <input type="date" id="due_date" name="due_date" onChange={handleChange} required={true} defaultValue={props.need.due_date}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                        />
+                    </div>
+                    <div className="mb-6">
+                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Status *</label>
+                        <Select options={statusOptions} className='text-sm' name='name' onChange={handleSelectStatusChange} required={true} placeholder='Pilih'
+                                styles={{
+                                    control: (baseStyles, state) => ({
+                                        ...baseStyles,
+                                        borderRadius: 8,
+                                        paddingTop: 2,
+                                        paddingBottom: 2
+                                    }),
+                                }}
+                                theme={(theme) => ({
+                                    ...theme,
+                                    borderRadius: 5,
+                                    colors: {
+                                        ...theme.colors,
+                                        primary25: '#efefef',
+                                        primary: 'red',
+                                    },
+                                })}
+                                defaultValue={() => {
+                                    for (const [i, status] of props.status.entries()) {
+                                        if (status.id === props.need.status[props.need.status.length - 1].id) {
+                                            return statusOptions[i]
+                                        }
+                                    }
+                                }}
                         />
                     </div>
                     <div className="mb-6">

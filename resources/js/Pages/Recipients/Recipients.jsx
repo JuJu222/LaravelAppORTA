@@ -22,18 +22,6 @@ export default function Recipients(props) {
         setFilteredItems(results);
     }, [filter])
 
-    function handleFilter(e) {
-        const results = props.recipients.filter(item => {
-            if (e.target.value === '') {
-                return true
-            } else {
-                // return item.name.toLowerCase().includes(e.target.value.toLowerCase()) || item.birthdate.toLowerCase().includes(e.target.value.toLowerCase());
-                return item.name.toLowerCase().includes(e.target.value.toLowerCase());
-            }
-        })
-        setFilteredItems(results);
-    }
-
     function handleDelete(id) {
         Inertia.delete(route("recipients.destroy", id));
         setShowModal(false);

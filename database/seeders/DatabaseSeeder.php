@@ -31,7 +31,9 @@ class DatabaseSeeder extends Seeder
             RecipientDisabilitySeeder::class,
             ParentDisabilitySeeder::class,
             PhotoTypeSeeder::class,
-            PhotoSeeder::class
+            PhotoSeeder::class,
+            StatusSeeder::class,
+            NeedLogSeeder::class
         ]);
     }
 }

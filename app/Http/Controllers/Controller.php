@@ -87,7 +87,7 @@ class Controller extends BaseController
             $donor = Donor::query()->where('user_id', Auth::id())->with('user')->first();
             return Inertia::render('ProfileEdit', compact('donor'));
         } else {
-            $recipient = Recipient::query()->where('user_id', Auth::id())->with('user')->first();
+            $recipient = Recipient::query()->where('user_id', Auth::id())->with(['user', 'photos.type'])->first();
             return Inertia::render('ProfileEdit', compact('recipient'));
         }
     }

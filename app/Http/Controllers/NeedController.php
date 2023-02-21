@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Donation;
 use App\Models\Need;
 use App\Models\NeedCategory;
+use App\Models\NeedLog;
 use App\Models\Recipient;
+use App\Models\Status;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -21,7 +23,7 @@ class NeedController extends Controller
      */
     public function index()
     {
-        $needs = Need::query()->with(['needCategory', 'recipient', 'donations'])->get();
+        $needs = Need::query()->with(['needCategory', 'recipient', 'donations', 'status'])->get();
         foreach ($needs as $need) {
             $need['collected'] = Donation::query()->where('need_id', $need->id)
                 ->whereNotNull('accepted_date')->sum('amount');
@@ -39,8 +41,9 @@ class NeedController extends Controller
     {
         $recipients = Recipient::query()->get();
         $needCategories = NeedCategory::query()->get();
+        $status = Status::query()->get();
 
-        return Inertia::render('Needs/NeedsCreate', compact('recipients', 'needCategories'));
+        return Inertia::render('Needs/NeedsCreate', compact('recipients', 'needCategories', 'status'));
     }
 
     /**
@@ -58,6 +61,12 @@ class NeedController extends Controller
             'due_date' => $request->due_date,
             'delivered_date' => $request->delivered_date !== '' ? $request->delivered_date : null,
             'delivered_message' => $request->delivered_message !== '' ? $request->delivered_message : null,
+        ]);
+
+        NeedLog::query()->create([
+            'need_id' => $need->id,
+            'status_id' => $request->status_id,
+            'status_date' => Carbon::now(),
         ]);
 
         if ($request->hasfile('delivered_photo')) {
@@ -96,11 +105,12 @@ class NeedController extends Controller
      */
     public function edit($id)
     {
-        $need = Need::query()->find($id);
+        $need = Need::query()->with('status')->find($id);
         $recipients = Recipient::query()->get();
         $needCategories = NeedCategory::query()->get();
+        $status = Status::query()->get();
 
-        return Inertia::render('Needs/NeedsEdit', compact('need', 'recipients', 'needCategories'));
+        return Inertia::render('Needs/NeedsEdit', compact('need', 'recipients', 'needCategories', 'status'));
     }
 
     /**
@@ -112,7 +122,7 @@ class NeedController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $need = Need::query()->find($id);
+        $need = Need::query()->with('status')->find($id);
 
         $need->update([
             'recipient_id' => $request->recipient_id,
@@ -122,6 +132,14 @@ class NeedController extends Controller
             'delivered_date' => $request->delivered_date !== '' ? $request->delivered_date : null,
             'delivered_message' => $request->delivered_message !== '' ? $request->delivered_message : null,
         ]);
+
+        if ($need->status->last()->id != $request->status_id) {
+            NeedLog::query()->create([
+                'need_id' => $need->id,
+                'status_id' => $request->status_id,
+                'status_date' => Carbon::now(),
+            ]);
+        }
 
         if ($request->hasfile('delivered_photo')) {
             $this->validate($request, [
@@ -149,7 +167,11 @@ class NeedController extends Controller
      */
     public function destroy($id)
     {
-        $need = Need::query()->find($id);
+        $need = Need::query()->with('status')->find($id);
+
+        if ($need->status()->exists()) {
+            NeedLog::query()->where('need_id', $id)->delete();
+        }
 
         if ($need->delivered_photo) {
             File::delete(public_path('/img/recipients/delivered_photo/' . $need->delivered_photo));
