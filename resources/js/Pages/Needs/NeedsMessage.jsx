@@ -40,7 +40,7 @@ export default function Home(props) {
                     <div className='flex items-center gap-5'>
                         <ApplicationLogo white={true} className="block h-9 w-auto"></ApplicationLogo>
                     </div>
-                    <div className='flex justify-between items-end mt-5'>
+                    <div className='flex justify-between items-end mt-5 md:px-32'>
                         <div className='h-fit my-auto pb-4'>
                             <h2 className='text-md text-white font-bold'>Ucapkan Rasa Terima Kasih Anda</h2>
                             {/*{props.donor.donation_count > 0 ? (*/}
@@ -50,7 +50,7 @@ export default function Home(props) {
                             {/*)}*/}
                         </div>
                         <div>
-                            <img src="/img/home_element1.png" alt="" className='max-h-[20rem]'/>
+                            <img src="/img/home_element1.png" alt="" className='max-h-[12rem]'/>
                         </div>
                     </div>
                 </div>

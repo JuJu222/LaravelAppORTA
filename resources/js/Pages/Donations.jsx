@@ -15,12 +15,12 @@ export default function Donations(props) {
                         <div className='flex items-center gap-5'>
                             <ApplicationLogo white={true} className="block h-9 w-auto"></ApplicationLogo>
                         </div>
-                        <div className='flex justify-between items-end mt-5'>
+                        <div className='flex justify-between items-end mt-5 md:px-32'>
                             <div className='h-fit my-auto pb-5'>
                                 <p className='text-white text-sm mt-2'>Anda telah berhasil membantu anak-anak sebanyak <h6>{props.donations.length} Kali</h6></p>
                             </div>
                             <div>
-                                <img src="/img/home_element1.png" alt="" className='max-h-[20rem]'/>
+                                <img src="/img/home_element1.png" alt="" className='max-h-[12rem]'/>
                             </div>
                         </div>
                     </div>
@@ -81,12 +81,12 @@ export default function Donations(props) {
                         <div className='flex items-center gap-5'>
                             <ApplicationLogo white={true} className="block h-9 w-auto"></ApplicationLogo>
                         </div>
-                        <div className='flex justify-between items-end mt-5'>
+                        <div className='flex justify-between items-end mt-5 md:px-32'>
                             <div className='h-fit my-auto pb-5'>
                                 <p className='text-white text-sm mt-2'>Anda telah menerima <h6>{props.donations.length} donasi</h6></p>
                             </div>
                             <div>
-                                <img src="/img/home_element1.png" alt="" className='max-h-[20rem]'/>
+                                <img src="/img/home_element1.png" alt="" className='max-h-[12rem]'/>
                             </div>
                         </div>
                     </div>
