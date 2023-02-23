@@ -11,6 +11,7 @@ export default function NeedCard({need, recipientID, button}) {
                 <div className='flex flex-col flex-grow'>
                     <div className='mt-1'>
                         <p className='text-red font-bold text-lg'>{need.category}</p>
+                        {need.status[props.need.status.length - 1].id}
                         <p className='text-xs mt-1'>Sampai <b>{new Date(need.pivot.due_date).toLocaleDateString("id-ID", options)}</b></p>
                         <p className='text-xs mt-1'>Donasi Tersisa: <b>
                             {need.pivot.amount - need.collected <= 0 ? (
