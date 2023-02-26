@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\Donation;
 use App\Models\Donor;
+use App\Models\Need;
 use App\Models\Photo;
 use App\Models\Recipient;
 use App\Models\User;
@@ -39,6 +40,7 @@ class Controller extends BaseController
             foreach ($recipient->needs as $need) {
                 $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)
                     ->whereNotNull('accepted_date')->sum('amount');
+                $need['status'] = Need::query()->find($need->id)->status;
             }
             return Inertia::render('Home', compact('recipients', 'recipient'));
         }

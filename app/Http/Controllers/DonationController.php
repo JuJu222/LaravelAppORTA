@@ -145,16 +145,17 @@ class DonationController extends Controller
         return Redirect::back();
     }
 
-    public function showVerification($id)
-    {
-        $donation = Donation::query()->with(['donor', 'need.needCategory', 'need.recipient'])->find($id);
-        $recipient = Recipient::query()->with(['parents', 'disabilities', 'needs'])->find($donation->need->recipient->id);
-        $need = $recipient->needs()->where('needs.id', $donation->need->id)->first();
-        $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)
-            ->whereNotNull('accepted_date')->sum('amount');
-
-        return Inertia::render('Donations/DonationsVerify', compact('donation', 'need'));
-    }
+//    public function showVerification($id)
+//    {
+//        $donation = Donation::query()->with(['donor', 'need.needCategory', 'need.recipient'])->find($id);
+//        $recipient = Recipient::query()->with(['parents', 'disabilities', 'needs'])->find($donation->need->recipient->id);
+//        $need = $recipient->needs()->where('needs.id', $donation->need->id)->first();
+//        $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)
+//            ->whereNotNull('accepted_date')->sum('amount');
+//        $need['status'] = Need::query()->find($need->id)->status;
+//
+//        return Inertia::render('Donations/DonationsVerify', compact('donation', 'need'));
+//    }
 
     public function verify($id)
     {

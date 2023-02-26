@@ -11,15 +11,48 @@ export default function RecipientNeedCard({need, recipientID, button}) {
                 <div className='flex flex-col flex-grow'>
                     <div className='mt-1'>
                         <p className='text-red font-bold text-lg'>{need.category}</p>
-                        <p className='text-xs mt-1'>Sampai <b>{new Date(need.pivot.due_date).toLocaleDateString("id-ID", options)}</b></p>
-                        <p className='text-xs mt-1'>Donasi Tersisa: <b>
-                            {need.pivot.amount - need.collected <= 0 ? (
-                                'Dana Terpenuhi'
+                        {need.status[need.status.length - 1].id === 1 ? (
+                            <>
+                                <p className='text-xs mt-1'>Sampai <b>{new Date(need.pivot.due_date).toLocaleDateString("id-ID", options)}</b>
+                                </p>
+                                <p className='text-xs mt-1'>Donasi Tersisa: <b>
+                                    {need.pivot.amount - need.collected <= 0 ? (
+                                        'Dana Terpenuhi'
+                                    ) : (
+                                        'Rp' + formatter.format(need.pivot.amount - need.collected)
+                                    )}
+                                </b>
+                                </p>
+                            </>
+                        ) : (
+                            need.status[need.status.length - 1].id === 2 ? (
+                                <>
+                                    <p className='text-xs mt-1'>Donasi <b>Telah Ditutup</b>
+                                    </p>
+                                    <p className='text-xs mt-1'>Donasi Tersisa: <b>
+                                        {need.pivot.amount - need.collected <= 0 ? (
+                                            'Dana Terpenuhi'
+                                        ) : (
+                                            'Rp' + formatter.format(need.pivot.amount - need.collected)
+                                        )}
+                                    </b>
+                                    </p>
+                                </>
                             ) : (
-                                'Rp' + formatter.format(need.pivot.amount - need.collected)
-                            )}
-                        </b>
-                        </p>
+                                <>
+                                    <p className='text-xs mt-1'>Donasi <b>Telah Disalurkan</b>
+                                    </p>
+                                    <p className='text-xs mt-1'>Donasi Tersisa: <b>
+                                        {need.pivot.amount - need.collected <= 0 ? (
+                                            'Dana Terpenuhi'
+                                        ) : (
+                                            'Rp' + formatter.format(need.pivot.amount - need.collected)
+                                        )}
+                                    </b>
+                                    </p>
+                                </>
+                            )
+                        )}
                     </div>
                 </div>
             </div>

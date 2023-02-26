@@ -11,23 +11,56 @@ export default function NeedCard({need, recipientID, button}) {
                 <div className='flex flex-col flex-grow'>
                     <div className='mt-1'>
                         <p className='text-red font-bold text-lg'>{need.category}</p>
-                        {need.status[props.need.status.length - 1].id}
-                        <p className='text-xs mt-1'>Sampai <b>{new Date(need.pivot.due_date).toLocaleDateString("id-ID", options)}</b></p>
-                        <p className='text-xs mt-1'>Donasi Tersisa: <b>
-                            {need.pivot.amount - need.collected <= 0 ? (
-                                'Dana Terpenuhi'
+                        {need.status[need.status.length - 1].id === 1 ? (
+                            <>
+                                <p className='text-xs mt-1'>Sampai <b>{new Date(need.pivot.due_date).toLocaleDateString("id-ID", options)}</b>
+                                </p>
+                                <p className='text-xs mt-1'>Donasi Tersisa: <b>
+                                    {need.pivot.amount - need.collected <= 0 ? (
+                                        'Dana Terpenuhi'
+                                    ) : (
+                                        'Rp' + formatter.format(need.pivot.amount - need.collected)
+                                    )}
+                                </b>
+                                </p>
+                            </>
+                        ) : (
+                            need.status[need.status.length - 1].id === 2 ? (
+                                <>
+                                    <p className='text-xs mt-1'>Donasi <b>Telah Ditutup</b>
+                                    </p>
+                                    <p className='text-xs mt-1'>Donasi Tersisa: <b>
+                                        {need.pivot.amount - need.collected <= 0 ? (
+                                            'Dana Terpenuhi'
+                                        ) : (
+                                            'Rp' + formatter.format(need.pivot.amount - need.collected)
+                                        )}
+                                    </b>
+                                    </p>
+                                </>
                             ) : (
-                                'Rp' + formatter.format(need.pivot.amount - need.collected)
-                            )}
-                            </b>
-                        </p>
+                                <>
+                                    <p className='text-xs mt-1'>Donasi <b>Telah Disalurkan</b>
+                                    </p>
+                                    <p className='text-xs mt-1'>Donasi Tersisa: <b>
+                                        {need.pivot.amount - need.collected <= 0 ? (
+                                            'Dana Terpenuhi'
+                                        ) : (
+                                            'Rp' + formatter.format(need.pivot.amount - need.collected)
+                                        )}
+                                    </b>
+                                    </p>
+                                </>
+                            )
+                        )}
                     </div>
                 </div>
             </div>
             <div className='flex w-full'>
                 <div className='w-full'>
                     <div className="w-full h-6 bg-white rounded-full mt-2 overflow-clip border border-red">
-                        <div className='h-6 bg-red' style={{"width": (need.collected / need.pivot.amount * 100) + '%'}}></div>
+                        <div className='h-6 bg-red'
+                             style={{"width": (need.collected / need.pivot.amount * 100) + '%'}}></div>
                     </div>
                     <div className='flex justify-between text-red text-xs font-bold mt-1'>
                         <span>Rp0</span>
@@ -36,13 +69,23 @@ export default function NeedCard({need, recipientID, button}) {
                 </div>
                 <div>
                     {button ? (
-                        <Link href={route('recipients.donate.add', [recipientID, need.pivot.id])}
-                              className='flex items-center mt-1 ml-3'>
-                            <button
-                                className='bg-red text-white text-xs px-5 py-3 rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>
-                                Bantu Sekarang
-                            </button>
-                        </Link>
+                        need.status[need.status.length - 1].id === 1 ? (
+                            <Link href={route('recipients.donate.add', [recipientID, need.pivot.id])}
+                                  className='flex items-center mt-1 ml-3'>
+                                <button
+                                    className='bg-red text-white text-xs px-5 py-3 rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>
+                                    Bantu Sekarang
+                                </button>
+                            </Link>
+                        ) : (
+                            <div
+                                className='flex items-center mt-1 ml-3'>
+                                <div
+                                    className='bg-gray-200 text-gray-400 text-xs px-5 py-3 rounded-2xl font-bold text-center'>
+                                    Bantu Sekarang
+                                </div>
+                            </div>
+                        )
                     ) : (
                         ''
                     )}
