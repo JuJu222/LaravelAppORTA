@@ -80,7 +80,7 @@ class RecipientController extends Controller
     public function addDonation($recipientID, $needID) {
         $recipient = Recipient::query()->with(['parents', 'disabilities', 'needs', 'photos.type'])->find($recipientID);
         $need = $recipient->needs()->where('needs.id', $needID)->first();
-        $need['status'] = Need::query()->find($need->id)->status;
+        $need['status'] = Need::query()->find($need->pivot->id)->status;
 
         $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)
             ->whereNotNull('accepted_date')->sum('amount');
@@ -267,7 +267,7 @@ class RecipientController extends Controller
     {
         $recipient = Recipient::query()->with(['parents.disabilities', 'disabilities', 'needs', 'photos.type'])->find($id);
         foreach ($recipient->needs as $need) {
-            $need['status'] = Need::query()->find($need->id)->status;
+            $need['status'] = Need::query()->find($need->pivot->id)->status;
         }
         $recipients = Recipient::query()->with(['parents', 'disabilities'])->limit(3)->get();
         if (Auth::user()->role_id == 1) {
@@ -499,7 +499,7 @@ class RecipientController extends Controller
         } else {
             $recipient = Recipient::query()->where('user_id', Auth::id())->first();
             $need = $recipient->needs()->where('needs.id', $id)->first();
-            $need['status'] = Need::query()->find($need->id)->status;
+            $need['status'] = Need::query()->find($need->pivot->id)->status;
             $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)
                 ->whereNotNull('accepted_date')->sum('amount');
 

@@ -30,7 +30,7 @@ export default function Home(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        Inertia.post(route('needs.message.post', props.need.id), values)
+        Inertia.post(route('needs.message.post', props.need.pivot.id), values)
     }
 
     return (

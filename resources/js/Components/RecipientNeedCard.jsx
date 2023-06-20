@@ -63,7 +63,7 @@ export default function RecipientNeedCard({need, recipientID, button}) {
                              style={{"width": (need.collected / need.pivot.amount * 100) + '%'}}></div>
                     </div>
                     <div className='flex justify-between text-red text-xs font-bold mt-1'>
-                        <span>Rp0</span>
+                        <span>Rp{formatter.format(need.collected)}</span>
                         <span>Rp{formatter.format(need.pivot.amount)}</span>
                     </div>
                 </div>
@@ -79,13 +79,19 @@ export default function RecipientNeedCard({need, recipientID, button}) {
                             </button>
                         </Link>
                     ) : (
-                        <Link href={route('needs.message.post', need.pivot.id)}
-                              className='flex items-center mt-1'>
-                            <button
-                                className='bg-red text-white text-xs px-5 py-3 w-full rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>
-                                Konfirmasi Penerimaan Dana
-                            </button>
-                        </Link>
+                        <>
+                            {need.status[need.status.length - 1].id === 3 ? (
+                                <Link href={route('needs.message.post', need.pivot.id)}
+                                      className='flex items-center mt-1'>
+                                    <button
+                                        className='bg-red text-white text-xs px-5 py-3 w-full rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>
+                                        Konfirmasi Penerimaan Dana
+                                    </button>
+                                </Link>
+                            ) : (
+                                ''
+                            )}
+                        </>
                     )
                 ) : (
                     ''

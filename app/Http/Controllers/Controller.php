@@ -25,7 +25,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     function home() {
-        $recipients = Recipient::query()->with(['parents', 'disabilities', 'photos.type'])->get();
+        $recipients = Recipient::query()->where('is_active', true)->with(['parents', 'disabilities', 'photos.type'])->get();
 
         if (Auth::user()->role_id == 1) {
             $admin = Admin::query()->where('user_id', Auth::id())->first();
@@ -40,7 +40,7 @@ class Controller extends BaseController
             foreach ($recipient->needs as $need) {
                 $need['collected'] = Donation::query()->where('need_id', $need->pivot->id)
                     ->whereNotNull('accepted_date')->sum('amount');
-                $need['status'] = Need::query()->find($need->id)->status;
+                $need['status'] = Need::query()->find($need->pivot->id)->status;
             }
             return Inertia::render('Home', compact('recipients', 'recipient'));
         }
@@ -48,11 +48,7 @@ class Controller extends BaseController
 
     function donations() {
         if (Auth::user()->role_id == 1) {
-            $donations = Donation::query()->whereHas('need', function ($query) {
-                return $query->where('donor_id', '=', Auth::user()->donor->id);
-            })->with(['donor', 'need.needCategory', 'need.recipient.photos.type'])->get();
-
-            return Inertia::render('Donations', compact('donations'));
+            return Redirect::back();
         } else if (Auth::user()->role_id == 2) {
             $donations = Donation::query()->whereHas('need', function ($query) {
                 return $query->where('donor_id', '=', Auth::user()->donor->id);

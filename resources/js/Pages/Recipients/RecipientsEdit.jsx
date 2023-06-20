@@ -106,7 +106,7 @@ export default function DisabilitiesCreate(props) {
                             <li className="w-full border-b border-gray-300 sm:border-b-0 sm:border-r">
                                 <div className="flex items-center pl-3">
                                     <input id="gender_laki_laki" type="radio" value="laki-laki" name="gender"
-                                           onChange={handleChange} checked={props.recipient.gender === 'laki-laki'}
+                                           onChange={handleChange} defaultChecked={props.recipient.gender === 'laki-laki'}
                                            required={true}
                                            className="w-4 h-4 text-red bg-gray-100 border-gray-300 focus:ring-red focus:ring-2"/>
                                     <label htmlFor="gender_laki_laki"
@@ -116,7 +116,7 @@ export default function DisabilitiesCreate(props) {
                             <li className="w-full">
                                 <div className="flex items-center pl-3">
                                     <input id="gender_perempuan" type="radio" value="perempuan" name="gender"
-                                           onChange={handleChange} checked={props.recipient.gender === 'perempuan'}
+                                           onChange={handleChange} defaultChecked={props.recipient.gender === 'perempuan'}
                                            required={true}
                                            className="w-4 h-4 text-red bg-gray-100 border-gray-300 focus:ring-red focus:ring-2"/>
                                     <label htmlFor="gender_perempuan"
@@ -241,7 +241,7 @@ export default function DisabilitiesCreate(props) {
                             <li className="w-full border-b border-gray-300 sm:border-b-0 sm:border-r">
                                 <div className="flex items-center pl-3">
                                     <input id="is_active_aktif" type="radio" value="1" name="is_active"
-                                           onChange={handleChange} checked={props.recipient.is_active === 1}
+                                           onChange={handleChange} defaultChecked={props.recipient.is_active === 1}
                                            required={true}
                                            className="w-4 h-4 text-red bg-gray-100 border-gray-300 focus:ring-red focus:ring-2"/>
                                     <label htmlFor="is_active_aktif"
@@ -251,7 +251,7 @@ export default function DisabilitiesCreate(props) {
                             <li className="w-full">
                                 <div className="flex items-center pl-3">
                                     <input id="is_active_tidak_aktif" type="radio" value="0" name="is_active"
-                                           onChange={handleChange} checked={props.recipient.is_active === 0}
+                                           onChange={handleChange} defaultChecked={props.recipient.is_active === 0}
                                            required={true}
                                            className="w-4 h-4 text-red bg-gray-100 border-gray-300 focus:ring-red focus:ring-2"/>
                                     <label htmlFor="is_active_tidak_aktif"

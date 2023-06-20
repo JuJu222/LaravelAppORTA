@@ -178,32 +178,38 @@ export default function AdminsCreate(props) {
                                 }}
                         />
                     </div>
-                    <div className="mb-6">
-                        <label htmlFor="delivered_date" className="block mb-2 text-sm font-medium text-gray-900 ">Tanggal Penerimaan Dana</label>
-                        <input type="date" id="delivered_date" name="delivered_date" onChange={handleChange} defaultValue={props.need.delivered_date}
-                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                        />
-                    </div>
-                    <div className="mb-6">
-                        <label htmlFor="delivered_message"
-                               className="block mb-2 text-sm font-medium text-gray-900 ">Ucapan Terima Kasih</label>
-                        <textarea name="delivered_message" onChange={handleChange} defaultValue={props.need.delivered_message} className='border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400'
-                        />
-                    </div>
-                    <div className="mb-6">
-                        <label htmlFor="delivered_photo" className="block mb-2 text-sm font-medium text-gray-900 ">Foto Bukti Penerimaan Dana</label>
-                        {values.delivered_photo ? (
-                            <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(values.delivered_photo)} />
-                        ) : (
-                            props.need.delivered_photo && (
-                                <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
-                                     src={'/img/recipients/delivered_photo/' + props.need.delivered_photo}/>
-                            )
-                        )}
-                        <input type="file" id="delivered_photo" name="delivered_photo" onChange={handleChange}
-                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                        />
-                    </div>
+                    {props.need.delivered_date ? (
+                        <>
+                            <div className="mb-6">
+                                <label htmlFor="delivered_date" className="block mb-2 text-sm font-medium text-gray-900 ">Tanggal Penerimaan Dana</label>
+                                <input type="date" id="delivered_date" name="delivered_date" onChange={handleChange} defaultValue={props.need.delivered_date}
+                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                />
+                            </div>
+                            <div className="mb-6">
+                                <label htmlFor="delivered_message"
+                                       className="block mb-2 text-sm font-medium text-gray-900 ">Ucapan Terima Kasih</label>
+                                <textarea name="delivered_message" onChange={handleChange} defaultValue={props.need.delivered_message} className='border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400'
+                                />
+                            </div>
+                            <div className="mb-6">
+                                <label htmlFor="delivered_photo" className="block mb-2 text-sm font-medium text-gray-900 ">Foto Bukti Penerimaan Dana</label>
+                                {values.delivered_photo ? (
+                                    <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(values.delivered_photo)} />
+                                ) : (
+                                    props.need.delivered_photo && (
+                                        <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
+                                             src={'/img/recipients/delivered_photo/' + props.need.delivered_photo}/>
+                                    )
+                                )}
+                                <input type="file" id="delivered_photo" name="delivered_photo" onChange={handleChange}
+                                       className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                                />
+                            </div>
+                        </>
+                    ) : (
+                        ''
+                    )}
                 </div>
                 <button type="submit"
                         className="text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Submit
