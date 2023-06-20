@@ -26,20 +26,6 @@ function Welcome() {
                             <ApplicationLogo white={false} className="w-14 h-14" />
                         </div>
                         <div className="flex items-center text-white text-base font-medium">
-                            <ul className="flex items-center pr-3 xl:pr-12">
-                                <li className="cursor-pointer hover:text-gray-300 ease-in">
-                                    <a href="javascript:void(0)" className="focus:outline-none focus:ring-2 focus:ring-white">Home</a>
-                                </li>
-                                <li className="pl-3 lg:pl-5 xl:pl-8 cursor-pointer hover:text-gray-300 ease-in">
-                                    <a href="javascript:void(0)" className="focus:outline-none focus:ring-2 focus:ring-white">About Us</a>
-                                </li>
-                                <li className="pl-3 lg:pl-5 xl:pl-8 cursor-pointer hover:text-gray-300 ease-in">
-                                    <a href="javascript:void(0)" className="focus:outline-none focus:ring-2 focus:ring-white">Pricing</a>
-                                </li>
-                                <li className="pl-3 lg:pl-5 xl:pl-8 cursor-pointer hover:text-gray-300 ease-in">
-                                    <a href="javascript:void(0)" className="focus:outline-none focus:ring-2 focus:ring-white">Resources</a>
-                                </li>
-                            </ul>
                             <Link href={route('login')} className="px-6 py-3 bg-red hover:bg-red_hover text-white text-base font-medium rounded-lg flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red">
                                 Masuk
                                 <img className="ml-4" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/large_typography_with_gradient_and_glass_effect_Svg5.svg" alt="arrow" />
