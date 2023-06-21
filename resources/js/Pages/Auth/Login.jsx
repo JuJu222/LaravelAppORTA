@@ -21,7 +21,7 @@ export default function Login({ status, canResetPassword }) {
     }, []);
 
     const onHandleChange = (event) => {
-        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+        setData(event.target.name, event.target.type == 'checkbox' ? event.target.checked : event.target.value);
     };
 
     const submit = (e) => {

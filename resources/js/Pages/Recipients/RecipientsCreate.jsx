@@ -25,8 +25,8 @@ export default function DisabilitiesCreate(props) {
     function handleChange(e) {
         const key = e.target.name;
 
-        if (e.target.type === 'file') {
-            if (e.target.files.length === 1) {
+        if (e.target.type == 'file') {
+            if (e.target.files.length == 1) {
                 const file = e.target.files[0]
 
                 setValues(values => ({
@@ -188,7 +188,7 @@ export default function DisabilitiesCreate(props) {
                         <label htmlFor="photos" className="block mb-2 text-sm font-medium text-gray-900 ">Foto Pendamping</label>
                         {values.photos &&
                             <div className='p-2 w-full h-40 border border-gray-300 rounded-lg mb-2 flex'>
-                                {values.photos.length === undefined ? (
+                                {values.photos.length == undefined ? (
                                     <img className='object-contain w-full h-full' src={URL.createObjectURL(values.photos)} />
                                 ) : (
                                     Array.from(values.photos).map(img =>

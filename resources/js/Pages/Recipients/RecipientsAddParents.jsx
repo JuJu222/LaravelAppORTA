@@ -20,7 +20,7 @@ export default function RecipientsAddParents(props) {
         let parentExists = false;
 
         for (const selectedParent of selectedParents) {
-            if (selectedParent.id === parent.id) {
+            if (selectedParent.id == parent.id) {
                 parentExists = true;
             }
         }
@@ -77,7 +77,7 @@ export default function RecipientsAddParents(props) {
                     </div>
                     <h3 className='font-semibold text-md mb-2'>Wali Anak yang Telah Dipilih</h3>
                     <div className='mt-2 max-h-[20rem] overflow-auto px-1'>
-                        {selectedParents.length === 0 ? (
+                        {selectedParents.length == 0 ? (
                             <p className="font-medium text-gray-500 text-center leading-none my-12">Belum Ada Wali Anak yang Dipilih!</p>
                         ) : (
                             selectedParents.map((parent, i) =>
@@ -92,7 +92,7 @@ export default function RecipientsAddParents(props) {
                                                 <select id="role" name="role" onChange={(e) => handleSelectRelationship(e, i)} className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block p-2.5 pr-10 placeholder-gray-400"
                                                         required>
                                                     {props.relationships.map((item, i) =>
-                                                        <option selected={parent.pivot.relationship_id === item.id} value={item.id}>{item.relationship}</option>
+                                                        <option selected={parent.pivot.relationship_id == item.id} value={item.id}>{item.relationship}</option>
                                                     )}
                                                 </select>
                                             </div>

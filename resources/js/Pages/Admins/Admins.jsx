@@ -25,7 +25,7 @@ export default function Admins(props) {
 
     function handleFilter(e) {
         const results = props.admins.filter(item => {
-            if (e.target.value === '') {
+            if (e.target.value == '') {
                 return true
             } else {
                 // return item.name.toLowerCase().includes(e.target.value.toLowerCase()) || item.birthdate.toLowerCase().includes(e.target.value.toLowerCase());

@@ -11,7 +11,7 @@ export default function NeedCard({need, recipientID, button}) {
                 <div className='flex flex-col flex-grow'>
                     <div className='mt-1'>
                         <p className='text-red font-bold text-lg'>{need.category}</p>
-                        {need.status[need.status.length - 1].id === 1 ? (
+                        {need.status[need.status.length - 1].id == 1 ? (
                             <>
                                 <p className='text-xs mt-1'>Sampai <b>{new Date(need.pivot.due_date).toLocaleDateString("id-ID", options)}</b>
                                 </p>
@@ -25,7 +25,7 @@ export default function NeedCard({need, recipientID, button}) {
                                 </p>
                             </>
                         ) : (
-                            need.status[need.status.length - 1].id === 2 ? (
+                            need.status[need.status.length - 1].id == 2 ? (
                                 <>
                                     <p className='text-xs mt-1'>Donasi <b>Telah Ditutup</b>
                                     </p>
@@ -69,7 +69,7 @@ export default function NeedCard({need, recipientID, button}) {
                 </div>
                 <div>
                     {button ? (
-                        need.status[need.status.length - 1].id === 1 ? (
+                        need.status[need.status.length - 1].id == 1 ? (
                             <Link href={route('recipients.donate.add', [recipientID, need.pivot.id])}
                                   className='flex items-center mt-1 ml-3'>
                                 <button

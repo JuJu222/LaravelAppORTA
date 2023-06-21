@@ -20,8 +20,8 @@ export default function Profile(props) {
         function handleChange(e) {
             const key = e.target.name;
 
-            if (e.target.type === 'file') {
-                if (e.target.files.length === 1) {
+            if (e.target.type == 'file') {
+                if (e.target.files.length == 1) {
                     const file = e.target.files[0]
 
                     setValues(values => ({
@@ -138,8 +138,8 @@ export default function Profile(props) {
         function handleChange(e) {
             const key = e.target.name;
 
-            if (e.target.type === 'file') {
-                if (e.target.files.length === 1) {
+            if (e.target.type == 'file') {
+                if (e.target.files.length == 1) {
                     const file = e.target.files[0]
 
                     setValues(values => ({
@@ -301,7 +301,7 @@ export default function Profile(props) {
         let secondaryExists = false;
 
         for (const photo of props.recipient.photos) {
-            if (photo.type.type === 'secondary') {
+            if (photo.type.type == 'secondary') {
                 secondaryExists = true;
             }
         }
@@ -309,8 +309,8 @@ export default function Profile(props) {
         function handleChange(e) {
             const key = e.target.name;
 
-            if (e.target.type === 'file') {
-                if (e.target.files.length === 1) {
+            if (e.target.type == 'file') {
+                if (e.target.files.length == 1) {
                     const file = e.target.files[0]
 
                     setValues(values => ({
@@ -391,7 +391,7 @@ export default function Profile(props) {
                                     <li className="w-full border-b border-gray-300 sm:border-b-0 sm:border-r">
                                         <div className="flex items-center pl-3">
                                             <input id="gender_laki_laki" type="radio" value="laki-laki" name="gender"
-                                                   onChange={handleChange} defaultChecked={props.recipient.gender === 'laki-laki'}
+                                                   onChange={handleChange} defaultChecked={props.recipient.gender == 'laki-laki'}
                                                    required={true}
                                                    className="w-4 h-4 text-red bg-gray-100 border-gray-300 focus:ring-red focus:ring-2"/>
                                             <label htmlFor="gender_laki_laki"
@@ -401,7 +401,7 @@ export default function Profile(props) {
                                     <li className="w-full">
                                         <div className="flex items-center pl-3">
                                             <input id="gender_perempuan" type="radio" value="perempuan" name="gender"
-                                                   onChange={handleChange} defaultChecked={props.recipient.gender === 'perempuan'}
+                                                   onChange={handleChange} defaultChecked={props.recipient.gender == 'perempuan'}
                                                    required={true}
                                                    className="w-4 h-4 text-red bg-gray-100 border-gray-300 focus:ring-red focus:ring-2"/>
                                             <label htmlFor="gender_perempuan"
@@ -526,7 +526,7 @@ export default function Profile(props) {
                                     <li className="w-full border-b border-gray-300 sm:border-b-0 sm:border-r">
                                         <div className="flex items-center pl-3">
                                             <input id="is_active_aktif" type="radio" value="1" name="is_active"
-                                                   onChange={handleChange} defaultChecked={props.recipient.is_active === 1}
+                                                   onChange={handleChange} defaultChecked={props.recipient.is_active == 1}
                                                    required={true}
                                                    className="w-4 h-4 text-red bg-gray-100 border-gray-300 focus:ring-red focus:ring-2"/>
                                             <label htmlFor="is_active_aktif"
@@ -536,7 +536,7 @@ export default function Profile(props) {
                                     <li className="w-full">
                                         <div className="flex items-center pl-3">
                                             <input id="is_active_tidak_aktif" type="radio" value="0" name="is_active"
-                                                   onChange={handleChange} defaultChecked={props.recipient.is_active === 0}
+                                                   onChange={handleChange} defaultChecked={props.recipient.is_active == 0}
                                                    required={true}
                                                    className="w-4 h-4 text-red bg-gray-100 border-gray-300 focus:ring-red focus:ring-2"/>
                                             <label htmlFor="is_active_tidak_aktif"
@@ -554,7 +554,7 @@ export default function Profile(props) {
                                          src={URL.createObjectURL(values.primary_photo)}/>
                                 ) : (
                                     props.recipient.photos.map((photo, i) => {
-                                        if (photo.type.type === 'primary') {
+                                        if (photo.type.type == 'primary') {
                                             return (
                                                 <img
                                                     className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
@@ -572,7 +572,7 @@ export default function Profile(props) {
                                     Pendamping</label>
                                 {values.photos ? (
                                     <div className='p-2 w-full h-40 border border-gray-300 rounded-lg mb-2 flex'>
-                                        {values.photos.length === undefined ? (
+                                        {values.photos.length == undefined ? (
                                             <img className='object-contain w-full h-full'
                                                  src={URL.createObjectURL(values.photos)}/>
                                         ) : (
@@ -585,7 +585,7 @@ export default function Profile(props) {
                                     secondaryExists && (
                                         <div className='p-2 w-full h-40 border border-gray-300 rounded-lg mb-2 flex'>
                                             {props.recipient.photos.map((photo, i) => {
-                                                if (photo.type.type === 'secondary') {
+                                                if (photo.type.type == 'secondary') {
                                                     return (
                                                         <img className='object-contain w-full h-full'
                                                              src={'/img/recipients/photos/' + photo.photo_url}/>

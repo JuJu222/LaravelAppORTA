@@ -20,7 +20,7 @@ export default function DisabilitiesCreate(props) {
         let disabilityExists = false;
 
         for (const selectedDisability of selectedDisabilities) {
-            if (selectedDisability.id === disability.id) {
+            if (selectedDisability.id == disability.id) {
                 disabilityExists = true;
             }
         }
@@ -71,7 +71,7 @@ export default function DisabilitiesCreate(props) {
                     </div>
                     <h3 className='font-semibold text-md mb-2'>Disabilitas yang Telah Dipilih</h3>
                     <div className='mt-2 max-h-[20rem] overflow-auto px-1'>
-                        {selectedDisabilities.length === 0 ? (
+                        {selectedDisabilities.length == 0 ? (
                             <p className="font-medium text-gray-500 text-center leading-none my-12">Belum Ada Disabilitas yang Dipilih!</p>
                         ) : (
                             selectedDisabilities.map((disability, i) =>

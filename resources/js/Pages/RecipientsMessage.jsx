@@ -12,7 +12,7 @@ export default function RecipientsMessage(props) {
                 <div className='w-full md:hidden'>
                     <div>
                         {props.recipient.photos.map((photo, i) => {
-                            if (photo.type.type === 'primary') {
+                            if (photo.type.type == 'primary') {
                                 return (
                                     <img className='h-52 w-full object-cover' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                 )
@@ -25,7 +25,7 @@ export default function RecipientsMessage(props) {
                         <div className='md:flex md:flex-row md:gap-5'>
                             <div className='hidden md:block'>
                                 {props.recipient.photos.map((photo, i) => {
-                                    if (photo.type.type === 'primary') {
+                                    if (photo.type.type == 'primary') {
                                         return (
                                             <img className='h-96 w-auto object-cover rounded-lg' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                         )
@@ -73,7 +73,7 @@ export default function RecipientsMessage(props) {
                 <div className='w-full md:hidden'>
                     <div>
                         {props.recipient.photos.map((photo, i) => {
-                            if (photo.type.type === 'primary') {
+                            if (photo.type.type == 'primary') {
                                 return (
                                     <img className='h-52 w-full object-cover' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                 )
@@ -86,7 +86,7 @@ export default function RecipientsMessage(props) {
                         <div className='md:flex md:flex-row md:gap-5'>
                             <div className='hidden md:block'>
                                 {props.recipient.photos.map((photo, i) => {
-                                    if (photo.type.type === 'primary') {
+                                    if (photo.type.type == 'primary') {
                                         return (
                                             <img className='h-96 w-auto object-cover rounded-lg' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                         )

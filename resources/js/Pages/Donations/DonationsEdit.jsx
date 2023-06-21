@@ -30,7 +30,7 @@ export default function DonationsEdit(props) {
     function handleChange(e) {
         const key = e.target.name;
 
-        if (e.target.type === 'file') {
+        if (e.target.type == 'file') {
             const file = e.target.files[0]
             setValues(values => ({
                 ...values,
@@ -101,7 +101,7 @@ export default function DonationsEdit(props) {
                                 })}
                                 defaultValue={() => {
                                     for (const [i, donor] of props.donors.entries()) {
-                                        if (donor.id === props.donation.donor_id) {
+                                        if (donor.id == props.donation.donor_id) {
                                             return donorOptions[i]
                                         }
                                     }
@@ -130,7 +130,7 @@ export default function DonationsEdit(props) {
                             })}
                             defaultValue={() => {
                                 for (const [i, need] of props.needs.entries()) {
-                                    if (need.id === props.donation.need_id) {
+                                    if (need.id == props.donation.need_id) {
                                         return needOptions[i]
                                     }
                                 }
@@ -198,7 +198,7 @@ export default function DonationsEdit(props) {
                                 })}
                                 defaultValue={() => {
                                     for (const [i, admin] of props.admins.entries()) {
-                                        if (admin.id === props.donation.accepted_by_admin_id) {
+                                        if (admin.id == props.donation.accepted_by_admin_id) {
                                             return adminOptions[i]
                                         }
                                     }

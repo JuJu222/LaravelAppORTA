@@ -16,7 +16,7 @@ export default function Disabilities(props) {
 
     function handleFilter(e) {
         const results = props.disabilities.filter(item => {
-            if (e.target.value === '') {
+            if (e.target.value == '') {
                 return true
             } else {
                 return item.disability.toLowerCase().includes(e.target.value.toLowerCase()) || item.description.toLowerCase().includes(e.target.value.toLowerCase());

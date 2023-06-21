@@ -30,7 +30,7 @@ export default function AdminsCreate(props) {
     function handleChange(e) {
         const key = e.target.name;
 
-        if (e.target.type === 'file') {
+        if (e.target.type == 'file') {
             const file = e.target.files[0]
             setValues(values => ({
                 ...values,
@@ -101,7 +101,7 @@ export default function AdminsCreate(props) {
                                 })}
                                 defaultValue={() => {
                                     for (const [i, recipient] of props.recipients.entries()) {
-                                        if (recipient.id === props.need.recipient_id) {
+                                        if (recipient.id == props.need.recipient_id) {
                                             return recipientOptions[i]
                                         }
                                     }
@@ -130,7 +130,7 @@ export default function AdminsCreate(props) {
                             })}
                             defaultValue={() => {
                                 for (const [i, needCategory] of props.needCategories.entries()) {
-                                    if (needCategory.id === props.need.need_category_id) {
+                                    if (needCategory.id == props.need.need_category_id) {
                                         return needCategoryOptions[i]
                                     }
                                 }
@@ -171,7 +171,7 @@ export default function AdminsCreate(props) {
                                 })}
                                 defaultValue={() => {
                                     for (const [i, status] of props.status.entries()) {
-                                        if (status.id === props.need.status[props.need.status.length - 1].id) {
+                                        if (status.id == props.need.status[props.need.status.length - 1].id) {
                                             return statusOptions[i]
                                         }
                                     }

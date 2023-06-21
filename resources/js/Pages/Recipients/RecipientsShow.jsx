@@ -16,7 +16,7 @@ export default function RecipientsShow(props) {
     const birthDate = new Date(props.recipient.birthdate);
     let age = today.getFullYear() - birthDate.getFullYear();
     const m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    if (m < 0 || (m == 0 && today.getDate() < birthDate.getDate())) {
         age--;
     }
 
@@ -42,7 +42,7 @@ export default function RecipientsShow(props) {
                         <div className='w-full md:hidden'>
                             <div>
                                 {props.recipient.photos.map((photo, i) => {
-                                    if (photo.type.type === 'primary') {
+                                    if (photo.type.type == 'primary') {
                                         return (
                                             <img className='h-52 w-full object-cover' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                         )
@@ -50,7 +50,7 @@ export default function RecipientsShow(props) {
                                 })}
                                 <div className='flex gap-2 mt-2 mx-2'>
                                     {props.recipient.photos.map((photo, i) => {
-                                        if (photo.type.type === 'secondary') {
+                                        if (photo.type.type == 'secondary') {
                                             return (
                                                 <img className='h-20 w-auto object-cover rounded-lg' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                             )
@@ -64,7 +64,7 @@ export default function RecipientsShow(props) {
                                 <div className='md:flex md:flex-row md:gap-5'>
                                     <div className='hidden md:block'>
                                         {props.recipient.photos.map((photo, i) => {
-                                            if (photo.type.type === 'primary') {
+                                            if (photo.type.type == 'primary') {
                                                 return (
                                                     <img className='h-96 w-full object-cover rounded-lg' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                                 )
@@ -72,7 +72,7 @@ export default function RecipientsShow(props) {
                                         })}
                                         <div className='flex gap-2 mt-2'>
                                             {props.recipient.photos.map((photo, i) => {
-                                                if (photo.type.type === 'secondary') {
+                                                if (photo.type.type == 'secondary') {
                                                     return (
                                                         <img className='h-32 w-auto object-cover rounded-lg' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                                     )
@@ -185,7 +185,7 @@ export default function RecipientsShow(props) {
                                                 <p className='text-xs'>{parent.relationship} dari {props.recipient.name}</p>
                                                 <p className='text-xs'>Disabilitas:&nbsp;
                                                     {parent.disabilities.map((disability, i) =>
-                                                        i === parent.disabilities.length - 1 ? (
+                                                        i == parent.disabilities.length - 1 ? (
                                                             disability.disability
                                                         ) : (
                                                             disability.disability + ', '
@@ -265,7 +265,7 @@ export default function RecipientsShow(props) {
                 <div className='w-full md:hidden'>
                     <div>
                         {props.recipient.photos.map((photo, i) => {
-                            if (photo.type.type === 'primary') {
+                            if (photo.type.type == 'primary') {
                                 return (
                                     <img className='h-52 w-full object-cover' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                 )
@@ -273,7 +273,7 @@ export default function RecipientsShow(props) {
                         })}
                         <div className='flex gap-2 mt-2 mx-2'>
                             {props.recipient.photos.map((photo, i) => {
-                                if (photo.type.type === 'secondary') {
+                                if (photo.type.type == 'secondary') {
                                     return (
                                         <img className='h-20 w-auto object-cover rounded-lg' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                     )
@@ -287,7 +287,7 @@ export default function RecipientsShow(props) {
                         <div className='md:flex md:flex-row md:gap-5'>
                             <div className='hidden md:block'>
                                 {props.recipient.photos.map((photo, i) => {
-                                    if (photo.type.type === 'primary') {
+                                    if (photo.type.type == 'primary') {
                                         return (
                                             <img className='h-96 w-full object-cover rounded-lg' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                         )
@@ -295,7 +295,7 @@ export default function RecipientsShow(props) {
                                 })}
                                 <div className='flex gap-2 mt-2'>
                                     {props.recipient.photos.map((photo, i) => {
-                                        if (photo.type.type === 'secondary') {
+                                        if (photo.type.type == 'secondary') {
                                             return (
                                                 <img className='h-32 w-auto object-cover rounded-lg' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                             )
@@ -408,7 +408,7 @@ export default function RecipientsShow(props) {
                                         <p className='text-xs'>{parent.relationship} dari {props.recipient.name}</p>
                                         <p className='text-xs'>Disabilitas:&nbsp;
                                             {parent.disabilities.map((disability, i) =>
-                                                i === parent.disabilities.length - 1 ? (
+                                                i == parent.disabilities.length - 1 ? (
                                                     disability.disability
                                                 ) : (
                                                     disability.disability + ', '

@@ -6,7 +6,7 @@ export default function RecipientCard({recipient}) {
     const birthDate = new Date(recipient.birthdate);
     let age = today.getFullYear() - birthDate.getFullYear();
     const m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    if (m < 0 || (m == 0 && today.getDate() < birthDate.getDate())) {
         age--;
     }
 
@@ -14,7 +14,7 @@ export default function RecipientCard({recipient}) {
         <Link className='flex justify-center' href={route('recipients.show', recipient.id)}>
             <div className="max-w-sm rounded-lg overflow-hidden shadow-lg hover:scale-[102%] transition bg-white w-full">
                 {recipient.photos.map((photo, i) => {
-                    if (photo.type.type === 'primary') {
+                    if (photo.type.type == 'primary') {
                         return (
                             <img className="w-full h-40 sm:h-52 md:h-60 object-cover" src={'/img/recipients/photos/' + photo.photo_url} alt="recipient.name" />
                         )

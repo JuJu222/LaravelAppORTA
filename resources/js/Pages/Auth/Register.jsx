@@ -28,7 +28,7 @@ export default function Register() {
 
     const onHandleChange = (event) => {
         if (event.target.type !== 'file') {
-            setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+            setData(event.target.name, event.target.type == 'checkbox' ? event.target.checked : event.target.value);
         } else {
             setData(event.target.name, event.target.files[0]);
         }

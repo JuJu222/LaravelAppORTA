@@ -107,7 +107,7 @@ export default function Recipients(props) {
                                         <div className='flex items-center'>
                                             <div className="w-10 h-10">
                                                 {recipient.photos.map((photo, i) => {
-                                                    if (photo.type.type === 'primary') {
+                                                    if (photo.type.type == 'primary') {
                                                         return (
                                                             <img className="w-full h-full rounded object-cover" src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/avatar-default.png'}  />
                                                         )
@@ -143,7 +143,7 @@ export default function Recipients(props) {
                                 <td className="pl-12">
                                     <div className="flex items-center">
                                         <div>
-                                            {recipient.is_active === 1 ? (
+                                            {recipient.is_active == 1 ? (
                                                 <p className="bg-green-600 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Aktif</p>
                                             ) : (
                                                 <p className="bg-red_dark text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">Tidak Aktif</p>

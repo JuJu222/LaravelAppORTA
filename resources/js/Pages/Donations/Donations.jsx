@@ -24,10 +24,10 @@ export default function Donations(props) {
     }, [filter])
 
     React.useEffect(() => {
-        if (sort.amount === true) {
+        if (sort.amount == true) {
             const results = [...filteredItems].sort(function(a, b) { return b.amount - a.amount })
             setFilteredItems(results);
-        } else if (sort.amount === false) {
+        } else if (sort.amount == false) {
             const results = [...filteredItems].sort(function(a, b) { return a.amount - b.amount })
             setFilteredItems(results);
         }
@@ -83,7 +83,7 @@ export default function Donations(props) {
                                     <span>Jumlah</span>
                                     <span>
                                     {sort.amount != null ? (
-                                        sort.amount === true ? (
+                                        sort.amount == true ? (
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                  fill="currentColor" className="bi bi-caret-up-fill" viewBox="0 0 16 16">
                                                 <path

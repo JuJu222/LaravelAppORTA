@@ -20,7 +20,7 @@ export default function NeedsCreate(props) {
         let needExists = false;
 
         for (const selectedNeed of selectedNeeds) {
-            if (selectedNeed.id === need.id) {
+            if (selectedNeed.id == need.id) {
                 needExists = true;
             }
         }
@@ -83,7 +83,7 @@ export default function NeedsCreate(props) {
                     </div>
                     <h3 className='font-semibold text-md mb-2'>Kebutuhan yang Telah Dipilih</h3>
                     <div className='mt-2 max-h-[20rem] overflow-auto px-1'>
-                        {selectedNeeds.length === 0 ? (
+                        {selectedNeeds.length == 0 ? (
                             <p className="font-medium text-gray-500 text-center leading-none my-12">Belum Ada Kebutuhan yang Dipilih!</p>
                         ) : (
                             selectedNeeds.map((need, i) =>

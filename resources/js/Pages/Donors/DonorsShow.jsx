@@ -96,7 +96,7 @@ export default function DonorsShow(props) {
                                         {props.donations.map((donation, i) =>
                                         <div className="w-full flex rounded-lg overflow-hidden shadow-lg hover:scale-[102%] transition bg-white">
                                             {donation.need.recipient.photos.map((photo, i) => {
-                                                if (photo.type.type === 'primary') {
+                                                if (photo.type.type == 'primary') {
                                                     return (
                                                         <img className="w-20 object-cover" src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/avatar-default.png'}  />
                                                     )

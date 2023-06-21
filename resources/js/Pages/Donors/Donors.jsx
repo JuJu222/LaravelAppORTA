@@ -25,11 +25,11 @@ export default function Donors(props) {
     }, [filter])
 
     React.useEffect(() => {
-        if (sort.sum === true) {
+        if (sort.sum == true) {
             const results = [...filteredItems].sort(function(a, b) { return b.sum - a.sum })
             setSort(sort => ({...sort, real_sum: null}))
             setFilteredItems(results);
-        } else if (sort.sum === false) {
+        } else if (sort.sum == false) {
             const results = [...filteredItems].sort(function(a, b) { return a.sum - b.sum })
             setSort(sort => ({...sort, real_sum: null}))
             setFilteredItems(results);
@@ -37,11 +37,11 @@ export default function Donors(props) {
     }, [sort.sum])
 
     React.useEffect(() => {
-        if (sort.real_sum === true) {
+        if (sort.real_sum == true) {
             const results = [...filteredItems].sort(function(a, b) { return b.real_sum - a.real_sum })
             setSort(sort => ({...sort, sum: null}))
             setFilteredItems(results);
-        } else if (sort.real_sum === false) {
+        } else if (sort.real_sum == false) {
             const results = [...filteredItems].sort(function(a, b) { return a.real_sum - b.real_sum })
             setSort(sort => ({...sort, sum: null}))
             setFilteredItems(results);
@@ -118,7 +118,7 @@ export default function Donors(props) {
                                     <span>Total Donasi (Terkonfirmasi)</span>
                                     <span>
                                     {sort.real_sum != null ? (
-                                        sort.real_sum === true ? (
+                                        sort.real_sum == true ? (
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                  fill="currentColor" className="bi bi-caret-up-fill" viewBox="0 0 16 16">
                                                 <path
@@ -145,7 +145,7 @@ export default function Donors(props) {
                                     <span>Total Donasi (Semua)</span>
                                     <span>
                                     {sort.sum != null ? (
-                                        sort.sum === true ? (
+                                        sort.sum == true ? (
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                  fill="currentColor" className="bi bi-caret-up-fill" viewBox="0 0 16 16">
                                                 <path

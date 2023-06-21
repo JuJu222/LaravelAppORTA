@@ -28,13 +28,13 @@ export default function NeedCategories(props) {
     }, [filter])
 
     React.useEffect(() => {
-        if (sort.amount === true) {
+        if (sort.amount == true) {
             const results = [...filteredItems].sort(function (a, b) {
                 return b.amount - a.amount
             })
             setSort(sort => ({...sort, collected: null}))
             setFilteredItems(results);
-        } else if (sort.amount === false) {
+        } else if (sort.amount == false) {
             const results = [...filteredItems].sort(function (a, b) {
                 return a.amount - b.amount
             })
@@ -44,13 +44,13 @@ export default function NeedCategories(props) {
     }, [sort.amount])
 
     React.useEffect(() => {
-        if (sort.collected === true) {
+        if (sort.collected == true) {
             const results = [...filteredItems].sort(function (a, b) {
                 return b.collected - a.collected
             })
             setSort(sort => ({...sort, amount: null}))
             setFilteredItems(results);
-        } else if (sort.collected === false) {
+        } else if (sort.collected == false) {
             const results = [...filteredItems].sort(function (a, b) {
                 return a.collected - b.collected
             })
@@ -147,7 +147,7 @@ export default function NeedCategories(props) {
                                     <span>Target Donasi</span>
                                     <span>
                                     {sort.amount != null ? (
-                                        sort.amount === true ? (
+                                        sort.amount == true ? (
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                  fill="currentColor" className="bi bi-caret-up-fill"
                                                  viewBox="0 0 16 16">
@@ -177,7 +177,7 @@ export default function NeedCategories(props) {
                                     <span>Donasi Terkumpul</span>
                                     <span>
                                     {sort.collected != null ? (
-                                        sort.collected === true ? (
+                                        sort.collected == true ? (
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                  fill="currentColor" className="bi bi-caret-up-fill"
                                                  viewBox="0 0 16 16">
@@ -263,10 +263,10 @@ export default function NeedCategories(props) {
                                 <td className="pl-12">
                                     <div className="flex items-center">
                                         <div>
-                                            {need.status[need.status.length - 1].id === 1 ? (
+                                            {need.status[need.status.length - 1].id == 1 ? (
                                                 <p className="bg-lime-600 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">{need.status[need.status.length - 1].status}</p>
                                             ) : (
-                                                need.status[need.status.length - 1].id === 2 ? (
+                                                need.status[need.status.length - 1].id == 2 ? (
                                                     <p className="bg-red_dark text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">{need.status[need.status.length - 1].status}</p>
                                                 ) : (
                                                     <p className="bg-green-600 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap">{need.status[need.status.length - 1].status}</p>

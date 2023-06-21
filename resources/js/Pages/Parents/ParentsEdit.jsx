@@ -16,7 +16,7 @@ export default function ParentsEdit(props) {
     function handleChange(e) {
         const key = e.target.name;
 
-        if (e.target.type === 'file') {
+        if (e.target.type == 'file') {
             const file = e.target.files[0]
             setValues(values => ({
                 ...values,
