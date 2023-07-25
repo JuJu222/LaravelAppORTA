@@ -22,5 +22,17 @@ class RelationshipSeeder extends Seeder
         DB::table('relationships')->insert([
             'relationship' => 'Ayah'
         ]);
+
+        DB::table('relationships')->insert([
+            'relationship' => 'Paman'
+        ]);
+
+        DB::table('relationships')->insert([
+            'relationship' => 'Bibi'
+        ]);
+
+        DB::table('relationships')->insert([
+            'relationship' => 'Lainnya'
+        ]);
     }
 }
