@@ -34,7 +34,7 @@ export default function Authenticated({ auth, header, children }) {
                                     Anak
                                 </NavLink>
                                 <NavLink href={route('donors.index')} active={window.location.href.includes(route('donors.index'))}>
-                                    Donor
+                                    Donatur
                                 </NavLink>
                                 <NavLink href={route('admins.index')} active={window.location.href.includes(route('admins.index'))}>
                                     Admin
@@ -119,7 +119,7 @@ export default function Authenticated({ auth, header, children }) {
                             Anak
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('donors.index')} active={window.location.href.includes(route('donors.index'))}>
-                            Donor
+                            Donatur
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('admins.index')} active={window.location.href.includes(route('admins.index'))}>
                             Admin

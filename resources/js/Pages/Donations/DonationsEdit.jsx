@@ -80,7 +80,7 @@ export default function DonationsEdit(props) {
             <form onSubmit={handleSubmit}>
                 <div className="grid gap-x-6 md:grid-cols-2">
                     <div className="mb-6">
-                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama Donor *</label>
+                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama Donatur *</label>
                         <Select options={donorOptions} className='text-sm' name='name' onChange={handleSelectDonorChange} required={true} placeholder='Pilih'
                                 styles={{
                                     control: (baseStyles, state) => ({

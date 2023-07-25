@@ -70,7 +70,7 @@ export default function Donors(props) {
         <Authenticated
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Donor</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Donatur</h2>}
         >
             <div className="w-full sm:px-6 xl:px-0">
                 <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
@@ -78,9 +78,9 @@ export default function Donors(props) {
                         <div className='flex items-center justify-between w-full gap-2'>
                             <input type="text" onChange={(e) => setFilter(filter => ({...filter, name: e.target.value}))}
                                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                   placeholder="Cari nama donor"/>
+                                   placeholder="Cari nama donatur"/>
                             <Select options={[{value: true, label: 'Aktif'}, {value: false, label: 'Menunggu Konfirmasi'}]} isClearable={true}
-                                    className='text-sm w-full' name='name' required={true} placeholder='Cari status donor' onChange={(e) => setFilter(filter => ({...filter, status: e ? e.value : ''}))}
+                                    className='text-sm w-full' name='name' required={true} placeholder='Cari status donatur' onChange={(e) => setFilter(filter => ({...filter, status: e ? e.value : ''}))}
                                     styles={{
                                         control: (baseStyles, state) => ({
                                             ...baseStyles,

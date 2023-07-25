@@ -56,7 +56,7 @@ export default function Donations(props) {
                                    placeholder="Cari nama anak"/>
                             <input type="text" onChange={(e) => setFilter(filter => ({...filter, donor: e.target.value}))}
                                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                   placeholder="Cari nama donor"/>
+                                   placeholder="Cari nama donatur"/>
                             <input type="number" onChange={(e) => setFilter(filter => ({...filter, amount: e.target.value}))}
                                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                    placeholder="Cari jumlah donasi"/>
@@ -75,7 +75,7 @@ export default function Donations(props) {
                         <tr className="h-16 w-full text-sm leading-none text-gray-800">
                             <th className="font-bold text-left pl-4">No.</th>
                             <th className="font-bold text-left pl-12">Tanggal Transfer</th>
-                            <th className="font-bold text-left pl-12">Donor</th>
+                            <th className="font-bold text-left pl-12">Donatur</th>
                             <th className="font-bold text-left pl-12">Penerima</th>
                             <th className="font-bold text-left pl-12">Kebutuhan</th>
                             <th className="font-bold text-left pl-12 cursor-pointer" onClick={(e) => setSort(sort => ({...sort, amount: !sort.amount}))}>

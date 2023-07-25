@@ -14,7 +14,7 @@ export default function DonorsShow(props) {
         <Authenticated
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Donor</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Donatur</h2>}
         >
             <div className="w-full sm:px-6 xl:px-0">
                 <div className='pb-20'>
@@ -64,7 +64,7 @@ export default function DonorsShow(props) {
                                     <div>
                                         <div className="grid grid-cols-1 divide-y gap-3 border border-black rounded-lg p-4 mt-4">
                                             <div className='grid grid-cols-1 gap-1'>
-                                                <h4 className='text-red text-lg font-bold'>Informasi Donor</h4>
+                                                <h4 className='text-red text-lg font-bold'>Informasi Donatur</h4>
                                                 {props.auth.user.role_id == 1 &&
                                                     <p className='text-xs'>Username: {props.donor.user.username}</p>
                                                 }
