@@ -153,14 +153,14 @@ export default function RecipientsShow(props) {
                                                     <p className='text-xs'>Catatan: {props.recipient.note}</p>
                                                 </div>
                                                 <div className='grid grid-cols-1 gap-1'>
-                                                    <h4 className='text-red text-lg font-bold'>Informasi Keluarga</h4>
-                                                    <p className='text-xs'>Jumlah Saudara: {props.recipient.siblings}</p>
-                                                    <p className='text-xs'>Anak ke: {props.recipient.child_no}</p>
-                                                </div>
-                                                <div className='grid grid-cols-1 gap-1'>
                                                     <h4 className='text-red text-lg font-bold'>Informasi Pendidikan</h4>
                                                     <p className='text-xs'>Nama Sekolah: {props.recipient.school}</p>
                                                     <p className='text-xs'>Kelas: {props.recipient.class}</p>
+                                                </div>
+                                                <div className='grid grid-cols-1 gap-1'>
+                                                    <h4 className='text-red text-lg font-bold'>Informasi Keluarga</h4>
+                                                    <p className='text-xs'>Jumlah Saudara: {props.recipient.siblings}</p>
+                                                    <p className='text-xs'>Anak ke: {props.recipient.child_no}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -169,12 +169,6 @@ export default function RecipientsShow(props) {
                                         {/*    Tambah Kebutuhan*/}
                                         {/*</Link>*/}
                                     </div>
-                                </div>
-                                <div className='max-w-6xl mx-auto mt-4'>
-                                    <h4 className='text-red text-lg font-bold'>Pilihan Donasi</h4>
-                                    {props.recipient.needs.map((need, i) =>
-                                        <NeedCard need={need} recipientID={props.recipient.id} button={true}/>
-                                    )}
                                 </div>
                                 <div className='max-w-6xl mx-auto mt-4'>
                                     <h4 className='text-red text-lg font-bold'>Wali atau Orang Tua</h4>
@@ -201,6 +195,12 @@ export default function RecipientsShow(props) {
                                             </div>
                                         )}
                                     </div>
+                                </div>
+                                <div className='max-w-6xl mx-auto mt-4'>
+                                    <h4 className='text-red text-lg font-bold'>Pilihan Donasi</h4>
+                                    {props.recipient.needs.map((need, i) =>
+                                        <NeedCard need={need} recipientID={props.recipient.id} button={true}/>
+                                    )}
                                 </div>
                                 <div className='max-w-6xl mx-auto mt-4'>
                                     <div className='flex justify-between items-center'>
@@ -376,14 +376,14 @@ export default function RecipientsShow(props) {
                                             <p className='text-xs'>Catatan: {props.recipient.note}</p>
                                         </div>
                                         <div className='grid grid-cols-1 gap-1'>
-                                            <h4 className='text-red text-lg font-bold'>Informasi Keluarga</h4>
-                                            <p className='text-xs'>Jumlah Saudara: {props.recipient.siblings}</p>
-                                            <p className='text-xs'>Anak ke: {props.recipient.child_no}</p>
-                                        </div>
-                                        <div className='grid grid-cols-1 gap-1'>
                                             <h4 className='text-red text-lg font-bold'>Informasi Pendidikan</h4>
                                             <p className='text-xs'>Nama Sekolah: {props.recipient.school}</p>
                                             <p className='text-xs'>Kelas: {props.recipient.class}</p>
+                                        </div>
+                                        <div className='grid grid-cols-1 gap-1'>
+                                            <h4 className='text-red text-lg font-bold'>Informasi Keluarga</h4>
+                                            <p className='text-xs'>Jumlah Saudara: {props.recipient.siblings}</p>
+                                            <p className='text-xs'>Anak ke: {props.recipient.child_no}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -392,12 +392,6 @@ export default function RecipientsShow(props) {
                                 {/*    Tambah Kebutuhan*/}
                                 {/*</Link>*/}
                             </div>
-                        </div>
-                        <div className='max-w-6xl mx-auto mt-4'>
-                            <h4 className='text-red text-lg font-bold'>Pilihan Donasi</h4>
-                            {props.recipient.needs.map((need, i) =>
-                                <NeedCard need={need} recipientID={props.recipient.id} button={true}/>
-                            )}
                         </div>
                         <div className='max-w-6xl mx-auto mt-4'>
                             <h4 className='text-red text-lg font-bold'>Wali atau Orang Tua</h4>
@@ -424,6 +418,12 @@ export default function RecipientsShow(props) {
                                     </div>
                                 )}
                             </div>
+                        </div>
+                        <div className='max-w-6xl mx-auto mt-4'>
+                            <h4 className='text-red text-lg font-bold'>Pilihan Donasi</h4>
+                            {props.recipient.needs.map((need, i) =>
+                                <NeedCard need={need} recipientID={props.recipient.id} button={true}/>
+                            )}
                         </div>
                         <div className='max-w-6xl mx-auto mt-4'>
                             <div className='flex justify-between items-center'>

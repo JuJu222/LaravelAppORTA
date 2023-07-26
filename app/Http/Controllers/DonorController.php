@@ -51,13 +51,6 @@ class DonorController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'ktp' => 'mimes:jpeg,png,bmp,tiff',
-        ]);
-        $file = $request->file('ktp');
-        $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
-        $file->move(public_path() . '/img/donors/ktp/', $name);
-
         $user = User::query()->create([
             'username' => $request->input('username'),
             'role_id' => 2,
@@ -67,15 +60,26 @@ class DonorController extends Controller
         $donor = Donor::query()->create([
             'user_id' => $user->id,
             'name' => $request->input('name'),
-            'ktp' => $name,
             'phone' => $request->input('phone'),
             'email' => $request->input('email'),
-            'address' => $request->input('address'),
+            'address' => $request->input('address') !== '' ? $request->input('address') : null,
             'city' => $request->input('city'),
             'note' => $request->input('note') !== '' ? $request->input('note') : null,
             'name_alias' => $request->input('name_alias') !== '' ? $request->input('name_alias') : null,
             'verified' => true,
         ]);
+
+        if ($request->hasfile('ktp')) {
+            $this->validate($request, [
+                'ktp' => 'mimes:jpeg,png,bmp,tiff',
+            ]);
+            $file = $request->file('ktp');
+            $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+            $file->move(public_path() . '/img/donors/ktp/', $name);
+            $donor->update([
+                'ktp' => $name,
+            ]);
+        }
 
         if ($request->hasfile('photo')) {
             $this->validate($request, [

@@ -159,7 +159,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel forInput="address" value="Alamat *" />
+                    <InputLabel forInput="address" value="Alamat" />
 
                     <TextInput
                         type="text"
@@ -167,7 +167,6 @@ export default function Register() {
                         value={data.address}
                         className="mt-1 block w-full"
                         handleChange={onHandleChange}
-                        required
                     />
                 </div>
 
@@ -179,7 +178,6 @@ export default function Register() {
                         name="ktp"
                         className="mt-1 block w-full px-4 py-4"
                         handleChange={onHandleChange}
-                        required
                     />
                 </div>
 

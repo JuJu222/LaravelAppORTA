@@ -18,10 +18,10 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('name');
             $table->string('name_alias')->nullable();
-            $table->string('ktp');
+            $table->string('ktp')->nullable();
             $table->string('phone');
             $table->string('email');
-            $table->text('address');
+            $table->text('address')->nullable();
             $table->string('city');
             $table->text('note')->nullable();
             $table->string('photo')->nullable();

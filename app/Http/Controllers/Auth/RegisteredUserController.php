@@ -47,24 +47,28 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $this->validate($request, [
-            'ktp' => 'mimes:jpeg,png,bmp,tiff',
-        ]);
-        $file = $request->file('ktp');
-        $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
-        $file->move(public_path() . '/img/donors/ktp/', $name);
-
         $donor = Donor::query()->create([
             'user_id' => $user->id,
             'name' => $request->name,
             'name_alias' => $request->name_alias !== '' ? $request->name_alias : null,
             'phone' => $request->phone,
             'email' => $request->email,
-            'address' => $request->address,
+            'address' => $request->address !== '' ? $request->address : null,
             'city' => $request->city,
             'note' => $request->note,
-            'ktp' => $name
         ]);
+
+        if ($request->hasfile('ktp')) {
+            $this->validate($request, [
+                'ktp' => 'mimes:jpeg,png,bmp,tiff',
+            ]);
+            $file = $request->file('ktp');
+            $name = Carbon::now()->format('Ymd-His') . '-' . $file->getClientOriginalName();
+            $file->move(public_path() . '/img/donors/ktp/', $name);
+            $donor->update([
+                'ktp' => $name,
+            ]);
+        }
 
         if ($request->hasfile('photo')) {
             $this->validate($request, [

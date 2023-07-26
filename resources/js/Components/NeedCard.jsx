@@ -82,7 +82,7 @@ export default function NeedCard({need, recipientID, button}) {
                                 className='flex items-center mt-1 ml-3'>
                                 <div
                                     className='bg-gray-200 text-gray-400 text-xs px-5 py-3 rounded-2xl font-bold text-center'>
-                                    Bantu Sekarang
+                                    Telah Ditutup
                                 </div>
                             </div>
                         )

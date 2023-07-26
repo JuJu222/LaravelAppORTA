@@ -60,7 +60,7 @@ export default function DonorsCreate(props) {
                                required={true} />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama *</label>
+                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama/Lembaga *</label>
                         <input type="text" id="name" name="name" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                required={true} />
@@ -84,21 +84,21 @@ export default function DonorsCreate(props) {
                                required={true} />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="address" className="block mb-2 text-sm font-medium text-gray-900 ">Alamat *</label>
-                        <input type="text" id="address" name="address" onChange={handleChange}
-                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               required={true} />
-                    </div>
-                    <div className="mb-6">
                         <label htmlFor="city" className="block mb-2 text-sm font-medium text-gray-900 ">Kota *</label>
                         <input type="text" id="city" name="city" onChange={handleChange}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                required={true} />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="ktp" className="block mb-2 text-sm font-medium text-gray-900 ">Foto KTP *</label>
+                        <label htmlFor="address" className="block mb-2 text-sm font-medium text-gray-900 ">Alamat</label>
+                        <input type="text" id="address" name="address" onChange={handleChange}
+                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                               required={false} />
+                    </div>
+                    <div className="mb-6">
+                        <label htmlFor="ktp" className="block mb-2 text-sm font-medium text-gray-900 ">Foto KTP</label>
                         {values.ktp &&  <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(values.ktp)} /> }
-                        <input type="file" id="ktp" name="ktp" onChange={handleChange} required={true}
+                        <input type="file" id="ktp" name="ktp" onChange={handleChange} required={false}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                />
                     </div>

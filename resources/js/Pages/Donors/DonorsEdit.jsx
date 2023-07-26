@@ -60,7 +60,7 @@ export default function DonorsEdit(props) {
                                />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama *</label>
+                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Nama/Lembaga *</label>
                         <input type="text" id="name" name="name" onChange={handleChange} defaultValue={props.donor.name}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                required={true} />

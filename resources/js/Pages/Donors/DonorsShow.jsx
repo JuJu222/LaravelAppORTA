@@ -68,7 +68,7 @@ export default function DonorsShow(props) {
                                                 {props.auth.user.role_id == 1 &&
                                                     <p className='text-xs'>Username: {props.donor.user.username}</p>
                                                 }
-                                                <p className='text-xs'>Nama: {props.donor.name ? props.donor.name : '-'}</p>
+                                                <p className='text-xs'>Nama/Lembaga: {props.donor.name ? props.donor.name : '-'}</p>
                                                 <p className='text-xs'>Nama Alias: {props.donor.name_alias ? props.donor.name_alias : '-'}</p>
                                                 <p className='text-xs'>Nomor Telepon: {props.donor.phone ? props.donor.phone : '-'}</p>
                                                 <p className='text-xs'>Email: {props.donor.email ? props.donor.email : '-'}</p>

@@ -78,7 +78,7 @@ export default function Donors(props) {
                         <div className='flex items-center justify-between w-full gap-2'>
                             <input type="text" onChange={(e) => setFilter(filter => ({...filter, name: e.target.value}))}
                                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                                   placeholder="Cari nama donatur"/>
+                                   placeholder="Cari nama/lembaga donatur"/>
                             <Select options={[{value: true, label: 'Aktif'}, {value: false, label: 'Menunggu Konfirmasi'}]} isClearable={true}
                                     className='text-sm w-full' name='name' required={true} placeholder='Cari status donatur' onChange={(e) => setFilter(filter => ({...filter, status: e ? e.value : ''}))}
                                     styles={{
@@ -112,7 +112,7 @@ export default function Donors(props) {
                         <thead>
                         <tr className="h-16 w-full text-sm leading-none text-gray-800">
                             <th className="font-bold text-left pl-4">No.</th>
-                            <th className="font-bold text-left pl-12">Penerima</th>
+                            <th className="font-bold text-left pl-12">Nama/Lembaga</th>
                             <th className="font-bold text-left pl-12 cursor-pointer" onClick={(e) => setSort(sort => ({...sort, real_sum: !sort.real_sum}))}>
                                 <div className='flex gap-0.5'>
                                     <span>Total Donasi (Terkonfirmasi)</span>
