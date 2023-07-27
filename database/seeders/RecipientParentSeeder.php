@@ -22,6 +22,12 @@ class RecipientParentSeeder extends Seeder
         ]);
 
         DB::table('recipients_parents')->insert([
+            'recipient_id' => 1,
+            'parent_id' => 2,
+            'relationship_id' => 2,
+        ]);
+
+        DB::table('recipients_parents')->insert([
             'recipient_id' => 2,
             'parent_id' => 2,
             'relationship_id' => 2,

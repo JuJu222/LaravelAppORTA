@@ -68,12 +68,12 @@ export default function NeedsShow(props) {
                                                     <div className='grid grid-cols-1 gap-1'>
                                                         <h4 className='text-red text-lg font-bold'>Informasi Konfirmasi Dana</h4>
                                                         <p className="bg-green-600 text-white px-4 py-2 rounded-lg text-center text-xs whitespace-nowrap w-fit">Sudah Dikonfirmasi</p>
-                                                        <p className='text-xs'>Tanggal Penerimaan Dana: <b>{props.need.delivered_date ? new Date(props.need.delivered_date).toLocaleDateString("id-ID", options) : '-'}</b></p>
+                                                        <p className='text-xs'>Tanggal Penyaluran Dana: <b>{props.need.delivered_date ? new Date(props.need.delivered_date).toLocaleDateString("id-ID", options) : '-'}</b></p>
                                                         <p className='text-xs'>Ucapan Terima Kasih: <b>{props.need.delivered_message ? props.need.delivered_message : '-'}</b></p>
                                                     </div>
                                                     {props.need.delivered_photo &&
                                                         <div className='grid grid-cols-1 gap-1'>
-                                                            <h4 className='text-red text-lg font-bold'>Foto Bukti Penerimaan Dana</h4>
+                                                            <h4 className='text-red text-lg font-bold'>Foto Bukti Penyaluran Dana</h4>
                                                             <img className='w-full h-40 object-contain'
                                                                  src={'/img/recipients/delivered_photo/' + props.need.delivered_photo}/>
                                                         </div>

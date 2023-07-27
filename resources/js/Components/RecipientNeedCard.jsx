@@ -85,7 +85,7 @@ export default function RecipientNeedCard({need, recipientID, button}) {
                                       className='flex items-center mt-1'>
                                     <button
                                         className='bg-red text-white text-xs px-5 py-3 w-full rounded-2xl font-bold shadow-lg hover:bg-red_hover transition'>
-                                        Konfirmasi Penerimaan Dana
+                                        Konfirmasi Penyaluran Dana
                                     </button>
                                 </Link>
                             ) : (

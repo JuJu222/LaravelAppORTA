@@ -181,7 +181,7 @@ export default function AdminsCreate(props) {
                     {props.need.delivered_date ? (
                         <>
                             <div className="mb-6">
-                                <label htmlFor="delivered_date" className="block mb-2 text-sm font-medium text-gray-900 ">Tanggal Penerimaan Dana</label>
+                                <label htmlFor="delivered_date" className="block mb-2 text-sm font-medium text-gray-900 ">Tanggal Penyaluran Dana</label>
                                 <input type="date" id="delivered_date" name="delivered_date" onChange={handleChange} defaultValue={props.need.delivered_date}
                                        className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                 />
@@ -193,7 +193,7 @@ export default function AdminsCreate(props) {
                                 />
                             </div>
                             <div className="mb-6">
-                                <label htmlFor="delivered_photo" className="block mb-2 text-sm font-medium text-gray-900 ">Foto Bukti Penerimaan Dana</label>
+                                <label htmlFor="delivered_photo" className="block mb-2 text-sm font-medium text-gray-900 ">Foto Bukti Penyaluran Dana</label>
                                 {values.delivered_photo ? (
                                     <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2' src={URL.createObjectURL(values.delivered_photo)} />
                                 ) : (

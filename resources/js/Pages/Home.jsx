@@ -257,7 +257,7 @@ export default function Home(props) {
                     <div className='max-w-6xl mx-auto'>
                         <div>
                             <h2 className='text-red font-bold mt-2'>Cek kebutuhan donasi anda di sini!</h2>
-                            <p className='text-xs mt-1'>Jangan lupa untuk mengkonfirmasi penerimaan dana donasi</p>
+                            <p className='text-xs mt-1'>Jangan lupa untuk mengkonfirmasi penyaluran dana donasi</p>
                             <div className="grid grid-cols-1 gap-3">
                                 {filteredItems.map((need, i) =>
                                     <RecipientNeedCard need={need} recipientID={props.recipient.id} button={true}/>

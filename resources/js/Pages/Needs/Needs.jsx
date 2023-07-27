@@ -96,7 +96,7 @@ export default function NeedCategories(props) {
                                 label: 'Belum Dikonfirmasi'
                             }]} isClearable={true}
                                     className='text-sm w-full' name='name' required={true}
-                                    placeholder='Cari status penerimaan dana'
+                                    placeholder='Cari status penyaluran dana'
                                     onChange={(e) => setFilter(filter => ({...filter, status: e ? e.value : ''}))}
                                     styles={{
                                         control: (baseStyles, state) => ({
@@ -202,7 +202,7 @@ export default function NeedCategories(props) {
                                 </div>
                             </th>
                             <th className="font-bold text-left pl-12">Batas Waktu</th>
-                            <th className="font-bold text-left pl-12">Status Penerimaan Dana</th>
+                            <th className="font-bold text-left pl-12">Status Penyaluran Dana</th>
                             <th className="font-bold text-left pl-12">Status Kebutuhan</th>
                         </tr>
                         </thead>

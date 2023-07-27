@@ -25,8 +25,13 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     function home() {
-        $recipients = Recipient::query()->where('is_active', true)->with(['parents', 'disabilities', 'photos.type'])->get();
-
+        $recipients = Recipient::query()->where('is_active', true)->with(['needs', 'parents', 'disabilities', 'photos.type'])->get();
+        foreach ($recipients as $recipient) {
+            foreach ($recipient->needs as $need) {
+                $need['status'] = Need::query()->find($need->pivot->id)->status;
+            }
+        }
+        return $recipients;
         if (Auth::user()->role_id == 1) {
             $admin = Admin::query()->where('user_id', Auth::id())->first();
             return Inertia::render('Home', compact('recipients', 'admin'));
