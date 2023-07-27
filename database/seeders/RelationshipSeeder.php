@@ -32,6 +32,18 @@ class RelationshipSeeder extends Seeder
         ]);
 
         DB::table('relationships')->insert([
+            'relationship' => 'Kakek'
+        ]);
+
+        DB::table('relationships')->insert([
+            'relationship' => 'Nenek'
+        ]);
+
+        DB::table('relationships')->insert([
+            'relationship' => 'Saudara'
+        ]);
+
+        DB::table('relationships')->insert([
             'relationship' => 'Lainnya'
         ]);
     }

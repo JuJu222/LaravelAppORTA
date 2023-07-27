@@ -363,17 +363,13 @@ export default function RecipientsShow(props) {
                                     <div className="grid grid-cols-1 divide-y gap-3 border border-black rounded-lg p-4">
                                         <div className='grid grid-cols-1 gap-1'>
                                             <h4 className='text-red text-lg font-bold'>Informasi Pribadi</h4>
-                                            <p className='text-xs'>NIK: {props.recipient.nik}</p>
                                             <p className='text-xs'>Jenis Kelamin: {props.recipient.gender}</p>
                                             <p className='text-xs'>Tempat Lahir: {props.recipient.birthplace}</p>
                                             <p className='text-xs'>Tanggal
                                                 Lahir: {new Date(props.recipient.birthdate).toLocaleDateString("id-ID", options)}</p>
-                                            <p className='text-xs'>Alamat: {props.recipient.address}</p>
-                                            <p className='text-xs'>Kota: {props.recipient.city}</p>
-                                            <p className='text-xs'>Nomor Telepon: {props.recipient.phone}</p>
-                                            <p className='text-xs'>Akta Kelahiran: {props.recipient.birth_certificate}</p>
-                                            <p className='text-xs'>Kartu Keluarga: {props.recipient.kartu_keluarga}</p>
-                                            <p className='text-xs'>Catatan: {props.recipient.note}</p>
+                                            {props.recipient.note && props.recipient.note != '' && (
+                                                <p className='text-xs'>Catatan: {props.recipient.note}</p>
+                                            )}
                                         </div>
                                         <div className='grid grid-cols-1 gap-1'>
                                             <h4 className='text-red text-lg font-bold'>Informasi Pendidikan</h4>
@@ -427,14 +423,14 @@ export default function RecipientsShow(props) {
                         </div>
                         <div className='max-w-6xl mx-auto mt-4'>
                             <div className='flex justify-between items-center'>
-                                <h4 className='text-red text-lg font-bold'>Riwayat Donasi</h4>
+                                <h4 className='text-red text-lg font-bold'>Riwayat Donasi Saya</h4>
                                 <h5 className='text-red text-md'>{props.donations.length} Donasi</h5>
                             </div>
                             <div>
                                 {props.donations.length > 0 ? (
                                     props.donations.map((donation, i) =>
                                         <>
-                                            {props.auth.user.role_id == 1 ? (
+                                            {props.auth.user.role_id >= 1 ? (
                                                 <div className='shadow-lg rounded-lg p-4 flex gap-4'>
                                                     <div className="w-10 h-10">
                                                         <img className="w-full h-full rounded object-cover"

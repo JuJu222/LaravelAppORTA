@@ -107,6 +107,13 @@ export default function RecipientsDonate(props) {
                                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                                    required={true} />
                         </div>
+                        <div className="mb-6 flex gap-2">
+                            <input type="checkbox" id="agreement" name="agreement"
+                                   className="border border-gray-300 text-red text-sm rounded-lg focus:ring-red focus:border-red block p-2.5 placeholder-gray-400"
+                                   required={true} />
+                            <label htmlFor="agreement"
+                                   className="block mb-2 text-sm font-medium text-gray-900 ">* I accept the Checkbox terms and conditions..</label>
+                        </div>
                         <button type="submit"
                                 className="text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Submit
                         </button>

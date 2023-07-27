@@ -274,6 +274,10 @@ class RecipientController extends Controller
             $donations = Donation::query()->whereHas('need', function ($query) use ($id) {
                 return $query->where('recipient_id', '=', $id);
             })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
+        } else if (Auth::user()->role_id == 2) {
+            $donations = Donation::query()->where('donor_id', Auth::id())->whereHas('need', function ($query) use ($id) {
+                return $query->where('recipient_id', '=', $id);
+            })->with(['donor', 'need.needCategory', 'need.recipient'])->get();
         } else {
             $donations = Donation::query()->whereNotNull('accepted_date')->whereHas('need', function ($query) use ($id) {
                 return $query->where('recipient_id', '=', $id);
