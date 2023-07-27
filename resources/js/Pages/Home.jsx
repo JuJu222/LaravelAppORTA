@@ -8,6 +8,7 @@ import RecipientNeedCard from "@/Components/RecipientNeedCard";
 export default function Home(props) {
     if (props.admin) {
         const [filteredItems, setFilteredItems] = useState(props.recipients);
+        const [filteredItems2, setFilteredItems2] = useState(props.recipientsInactive);
         const [filter, setFilter] = useState({name: ''})
 
         React.useEffect(() => {
@@ -15,10 +16,19 @@ export default function Home(props) {
         }, [props.recipients])
 
         React.useEffect(() => {
+            setFilteredItems2(props.recipientsInactive);
+        }, [props.recipientsInactive])
+
+        React.useEffect(() => {
             const results = props.recipients.filter(item => {
                 return item.name.toLowerCase().includes(filter.name.toLowerCase());
             })
             setFilteredItems(results);
+
+            const results2 = props.recipientsInactive.filter(item => {
+                return item.name.toLowerCase().includes(filter.name.toLowerCase());
+            })
+            setFilteredItems2(results2);
         }, [filter])
 
         return (
@@ -80,6 +90,15 @@ export default function Home(props) {
                                 )}
                             </div>
                         </div>
+                        <div>
+                            <h2 className='text-red font-bold mt-4'>Anak-anak yang sudah terbantu</h2>
+                            <p className='text-xs mt-1'>Anak-anak dengan donasi yang telah terpenuhi</p>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
+                                {filteredItems2.map((recipient, i) =>
+                                    <RecipientCard recipient={recipient}></RecipientCard>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <nav id="bottom-navigation" className="block fixed inset-x-0 bottom-0 z-10 bg-red shadow">
@@ -109,6 +128,7 @@ export default function Home(props) {
         );
     } else if (props.donor) {
         const [filteredItems, setFilteredItems] = useState(props.recipients);
+        const [filteredItems2, setFilteredItems2] = useState(props.recipientsInactive);
         const [filter, setFilter] = useState({name: ''})
 
         React.useEffect(() => {
@@ -116,10 +136,19 @@ export default function Home(props) {
         }, [props.recipients])
 
         React.useEffect(() => {
+            setFilteredItems2(props.recipientsInactive);
+        }, [props.recipientsInactive])
+
+        React.useEffect(() => {
             const results = props.recipients.filter(item => {
                 return item.name.toLowerCase().includes(filter.name.toLowerCase());
             })
             setFilteredItems(results);
+
+            const results2 = props.recipientsInactive.filter(item => {
+                return item.name.toLowerCase().includes(filter.name.toLowerCase());
+            })
+            setFilteredItems2(results2);
         }, [filter])
 
         return (
@@ -180,6 +209,15 @@ export default function Home(props) {
                             <p className='text-xs mt-1'>Klik salah satu anak untuk membantu</p>
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
                                 {filteredItems.map((recipient, i) =>
+                                    <RecipientCard recipient={recipient}></RecipientCard>
+                                )}
+                            </div>
+                        </div>
+                        <div>
+                            <h2 className='text-red font-bold mt-4'>Anak-anak yang sudah terbantu</h2>
+                            <p className='text-xs mt-1'>Anak-anak dengan donasi yang telah terpenuhi</p>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
+                                {filteredItems2.map((recipient, i) =>
                                     <RecipientCard recipient={recipient}></RecipientCard>
                                 )}
                             </div>

@@ -26,20 +26,33 @@ class Controller extends BaseController
 
     function home() {
         $recipients = Recipient::query()->where('is_active', true)->with(['needs', 'parents', 'disabilities', 'photos.type'])->get();
+
+        $recipientsActive = array();
+        $recipientsInactive = array();
         foreach ($recipients as $recipient) {
+            $isActive = false;
             foreach ($recipient->needs as $need) {
                 $need['status'] = Need::query()->find($need->pivot->id)->status;
+                if ($need['status'][count($need['status'])- 1]['id'] == 1) {
+                    $isActive = true;
+                }
+            }
+            if ($isActive) {
+                $recipientsActive[] = $recipient;
+            } else {
+                $recipientsInactive[] = $recipient;
             }
         }
-        return $recipients;
+        $recipients = $recipientsActive;
+
         if (Auth::user()->role_id == 1) {
             $admin = Admin::query()->where('user_id', Auth::id())->first();
-            return Inertia::render('Home', compact('recipients', 'admin'));
+            return Inertia::render('Home', compact('recipients', 'recipientsInactive', 'admin'));
         } else if (Auth::user()->role_id == 2) {
             $donor = Donor::query()->where('user_id', Auth::id())->first();
             $donor['donation_count'] = Donation::query()->where('donor_id', $donor->id)
                 ->whereNotNull('accepted_date')->count();
-            return Inertia::render('Home', compact('recipients', 'donor'));
+            return Inertia::render('Home', compact('recipients', 'recipientsInactive', 'donor'));
         } else {
             $recipient = Recipient::query()->where('user_id', Auth::id())->with('needs')->first();
             foreach ($recipient->needs as $need) {

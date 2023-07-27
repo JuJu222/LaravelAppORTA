@@ -75,6 +75,16 @@ export default function RecipientsDonate(props) {
                                 )}
                             </div>
                             <NeedCard need={props.need} recipientID={props.recipient.id} button={false}/>
+                            <div className='mt-8'>
+                                <h4 className='text-red font-bold text-lg'>Informasi Rekening ORTA Indonesia:</h4>
+                                <div className='flex gap-4 mt-2'>
+                                    <img className='w-auto h-12' src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bank_Central_Asia.svg/2560px-Bank_Central_Asia.svg.png" alt="BCA"/>
+                                    <div>
+                                        <p>5120356978</p>
+                                        <p>Aurelia Agatha Sylvie</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <form onSubmit={handleSubmit} className='mt-6'>
@@ -112,7 +122,7 @@ export default function RecipientsDonate(props) {
                                    className="border border-gray-300 text-red text-sm rounded-lg focus:ring-red focus:border-red block p-2.5 placeholder-gray-400"
                                    required={true} />
                             <label htmlFor="agreement"
-                                   className="block mb-2 text-sm font-medium text-gray-900 ">* I accept the Checkbox terms and conditions..</label>
+                                   className="block mb-2 text-sm font-medium text-gray-900 ">* Dengan ini saya mengetahui dan menerima bahwa terdapat biaya management fee sebesar 10% yang akan dipotong dari sumbangan saya.</label>
                         </div>
                         <button type="submit"
                                 className="text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Submit

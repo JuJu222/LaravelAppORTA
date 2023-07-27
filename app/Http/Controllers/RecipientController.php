@@ -412,10 +412,8 @@ class RecipientController extends Controller
 
                     foreach ($recipient->photos as $photo) {
                         if ($photo->type->type === 'secondary') {
-                            $photo = Photo::query()->find($photo->id);
-
                             File::delete(public_path('/img/recipients/photos/' . $photo->photo_url));
-                            $photo->delete();
+                            Photo::query()->where('id', $photo->id)->delete();
                         }
                     }
 
@@ -435,10 +433,8 @@ class RecipientController extends Controller
 
                 foreach ($recipient->photos as $photo) {
                     if ($photo->type->type === 'secondary') {
-                        $photo = Photo::query()->find($photo->id);
-
                         File::delete(public_path('/img/recipients/photos/' . $photo->photo_url));
-                        $photo->delete();
+                        Photo::query()->where('id', $photo->id)->delete();
                     }
                 }
 
