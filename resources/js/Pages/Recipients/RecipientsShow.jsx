@@ -157,6 +157,7 @@ export default function RecipientsShow(props) {
                                                     <p className='text-xs'>Kota: {props.recipient.city}</p>
                                                     <p className='text-xs'>Nomor Telepon: {props.recipient.phone}</p>
                                                     <p className='text-xs'>Akta Kelahiran: {props.recipient.birth_certificate}</p>
+                                                    <img className='w-full h-40 object-contain' src={'/img/recipients/birth_certificate/' + props.recipient.birth_certificate}/>
                                                     <p className='text-xs'>Kartu Keluarga: {props.recipient.kartu_keluarga}</p>
                                                     <p className='text-xs'>Catatan: {props.recipient.note}</p>
                                                 </div>
