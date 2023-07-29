@@ -156,10 +156,17 @@ export default function RecipientsShow(props) {
                                                     <p className='text-xs'>Alamat: {props.recipient.address}</p>
                                                     <p className='text-xs'>Kota: {props.recipient.city}</p>
                                                     <p className='text-xs'>Nomor Telepon: {props.recipient.phone}</p>
-                                                    <p className='text-xs'>Akta Kelahiran: {props.recipient.birth_certificate}</p>
-                                                    <img className='w-full h-40 object-contain' src={'/img/recipients/birth_certificate/' + props.recipient.birth_certificate}/>
-                                                    <p className='text-xs'>Kartu Keluarga: {props.recipient.kartu_keluarga}</p>
-                                                    <p className='text-xs'>Catatan: {props.recipient.note}</p>
+                                                    <p className='text-xs'>Akta Kelahiran:</p>
+                                                    <a href={'/img/recipients/birth_certificate/' + props.recipient.birth_certificate} target="_blank">
+                                                        <img className='w-full h-20 object-contain' src={'/img/recipients/birth_certificate/' + props.recipient.birth_certificate} alt=''/>
+                                                    </a>
+                                                    <p className='text-xs'>Kartu Keluarga:</p>
+                                                    <a href={'/img/recipients/kartu_keluarga/' + props.recipient.kartu_keluarga} target="_blank">
+                                                        <img className='w-full h-20 object-contain' src={'/img/recipients/kartu_keluarga/' + props.recipient.kartu_keluarga} alt=''/>
+                                                    </a>
+                                                    {props.recipient.note && props.recipient.note != '' && (
+                                                        <p className='text-xs'>Catatan: {props.recipient.note}</p>
+                                                    )}
                                                 </div>
                                                 <div className='grid grid-cols-1 gap-1'>
                                                     <h4 className='text-red text-lg font-bold'>Informasi Pendidikan</h4>

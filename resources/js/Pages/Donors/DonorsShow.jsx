@@ -36,7 +36,7 @@ export default function DonorsShow(props) {
                                     {props.auth.user.role_id == 1 &&
                                         <>
                                             <div className='flex gap-4 mt-2 w-full'>
-                                                <Link href={route("admins.edit", props.donor.id)} className="flex items-center justify-center text-center w-full">
+                                                <Link href={route("donors.edit", props.donor.id)} className="flex items-center justify-center text-center w-full">
                                                     <button
                                                         className="w-full h-full text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-50 focus:outline-none transition flex justify-center items-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -76,11 +76,14 @@ export default function DonorsShow(props) {
                                                 <p className='text-xs'>Alamat: {props.donor.address ? props.donor.address : '-'}</p>
                                                 <p className='text-xs'>Catatan: {props.donor.note ? props.donor.note : '-'}</p>
                                             </div>
-                                            <div className='grid grid-cols-1 gap-1'>
-                                                <h4 className='text-red text-lg font-bold'>Foto KTP</h4>
-                                                <img className='w-full h-40 object-contain'
-                                                     src={'/img/donors/ktp/' + props.donor.ktp}/>
-                                            </div>
+                                            {props.donor.ktp && (
+                                                <div className='grid grid-cols-1 gap-1'>
+                                                    <h4 className='text-red text-lg font-bold'>Foto KTP</h4>
+                                                    <a href={'/img/donors/ktp/' + props.donor.ktp} target="_blank">
+                                                        <img className='w-full h-40 object-contain' src={'/img/donors/ktp/' + props.donor.ktp}/>
+                                                    </a>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                     {/*<Link href={route('admins.needs.add', props.donor.id)}*/}

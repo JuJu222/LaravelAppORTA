@@ -19,7 +19,7 @@ class DonorSeeder extends Seeder
             'user_id' => 2,
             'name' => 'Donor 1',
             'name_alias' => 'Alias',
-            'ktp' => 'KTP',
+            'ktp' => 'ktp.png',
             'email' => 'donor@gmail.com',
             'address' => 'Jl. Donor Address',
             'city' => 'Surabaya',
