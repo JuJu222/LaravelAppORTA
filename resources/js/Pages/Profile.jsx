@@ -110,10 +110,12 @@ export default function Profile(props) {
                                 <h5 className='font-bold text-xs'>Nama Alias</h5>
                                 <p className='text-center text-sm'>{props.donor.name_alias ? props.donor.name_alias : '-'}</p>
                             </div>
-                            <div className='py-5'>
-                                <h5 className='font-bold text-xs'>KTP</h5>
-                                <img className='w-full h-40 object-contain' src={'/img/donors/ktp/' + props.donor.ktp}/>
-                            </div>
+                            {props.donor.ktp && (
+                                <div className='py-5'>
+                                    <h5 className='font-bold text-xs'>KTP</h5>
+                                    <img className='w-full h-40 object-contain' src={'/img/donors/ktp/' + props.donor.ktp}/>
+                                </div>
+                            )}
                             <div className='py-5'>
                                 <h5 className='font-bold text-xs'>Nomor Telepon</h5>
                                 <p className='text-center text-sm'>{props.donor.phone ? props.donor.phone : '-'}</p>
