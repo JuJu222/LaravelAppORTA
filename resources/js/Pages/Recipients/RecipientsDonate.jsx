@@ -54,7 +54,7 @@ export default function RecipientsDonate(props) {
             <div className='w-full px-4'>
                 <div className='max-w-6xl mx-auto mt-4'>
                     <div className='md:flex md:flex-row md:gap-5'>
-                        <div className='hidden md:block'>
+                        <div className='hidden md:block md:w-1/2'>
                             {props.recipient.photos.map((photo, i) => {
                                 if (photo.type.type == 'primary') {
                                     return (
@@ -63,7 +63,7 @@ export default function RecipientsDonate(props) {
                                 }
                             })}
                         </div>
-                        <div className='grow md:pt-4'>
+                        <div className='grow md:pt-4 md:w-1/2'>
                             <div className='flex flex-row justify-between'>
                                 <h2 className='text-red text-2xl font-bold'>{props.recipient.name}</h2>
                                 <h3 className='text-red text-2xl'>{age} tahun</h3>

@@ -21,10 +21,10 @@ export default function RecipientsDonate(props) {
             <div className='w-full px-4'>
                 <div className='max-w-6xl mx-auto mt-4'>
                     <div className='md:flex md:flex-row md:gap-5'>
-                        <div className='hidden md:block'>
+                        <div className='hidden md:block md:w-1/2'>
                             <img className='h-96 w-auto object-cover rounded-lg' src="/img/anak.png" alt=""/>
                         </div>
-                        <div className='grow md:pt-4'>
+                        <div className='grow md:pt-4 md:w-1/2'>
                             <NeedCard need={props.need} recipientID={props.donation.need.recipient.id} button={false}/>
                         </div>
                     </div>

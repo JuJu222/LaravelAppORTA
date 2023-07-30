@@ -26,10 +26,10 @@ export default function DonorsShow(props) {
                     <div className='w-full px-4'>
                         <div className='max-w-6xl mx-auto mt-4'>
                             <div className='md:flex md:flex-row md:gap-5'>
-                                <div className='hidden md:block'>
+                                <div className='hidden md:block md:w-1/2'>
                                     <img className='h-96 w-full object-cover' src={'/img/avatar-default.png'} alt=""/>
                                 </div>
-                                <div className='grow md:pt-4'>
+                                <div className='grow md:pt-4 md:w-1/2'>
                                     <div className='flex flex-row justify-between'>
                                         <h2 className='text-red text-2xl font-bold'>{props.donor.name}</h2>
                                     </div>

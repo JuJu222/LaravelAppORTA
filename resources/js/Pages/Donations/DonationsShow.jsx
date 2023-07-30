@@ -31,7 +31,7 @@ export default function DonationsShow(props) {
                     <div className='w-full px-4'>
                         <div className='max-w-6xl mx-auto mt-4'>
                             <div className='md:flex md:flex-row md:gap-5'>
-                                <div className='grow md:pt-4'>
+                                <div className='grow md:pt-4 md:w-1/2'>
                                     <div className='flex flex-row justify-between'>
                                         <h2 className='text-red text-2xl font-bold'>{new Date(props.donation.transfer_date).toLocaleDateString("id-ID", options)} | {props.donation.donor.name} -> {props.donation.need.recipient.name} ({props.donation.need.need_category.category})</h2>
                                     </div>

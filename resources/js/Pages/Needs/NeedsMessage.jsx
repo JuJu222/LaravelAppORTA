@@ -59,7 +59,7 @@ export default function Home(props) {
                 <div className='max-w-6xl mx-auto'>
                     <div>
                         <div className="grid grid-cols-1 gap-5">
-                            <div className='grow md:pt-4'>
+                            <div className='grow md:pt-4 md:w-1/2'>
                                 <NeedCard need={props.need} recipientID={props.recipient.id} button={false}/>
                                 {props.need.pivot.delivered_date ? (
                                     <>
