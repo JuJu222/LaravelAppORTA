@@ -23,7 +23,7 @@ class ParentSeeder extends Seeder
             'occupation' => 'Ibu Rumah Tangga',
             'address' => 'Jl. Ahmad Yani',
             'phone' => '082131393218',
-            'ktp_image' => '',
+            'ktp_image' => 'ktp.png',
         ]);
 
         DB::table('parents')->insert([

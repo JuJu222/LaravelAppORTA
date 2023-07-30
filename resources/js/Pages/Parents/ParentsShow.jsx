@@ -74,11 +74,13 @@ export default function ParentsShow(props) {
                                                 <p className='text-xs'>Alamat: {props.parent.address ? props.parent.address : '-'}</p>
                                                 <p className='text-xs'>Nomor Telepon: {props.parent.phone ? props.parent.phone : '-'}</p>
                                             </div>
-                                            <div className='grid grid-cols-1 gap-1'>
-                                                <h4 className='text-red text-lg font-bold'>Foto KTP</h4>
-                                                <img className='w-full h-40 object-contain'
-                                                     src={'/img/parents/ktp/' + props.parent.ktp_image}/>
-                                            </div>
+                                            {props.parent.ktp_image && (
+                                                <div className='grid grid-cols-1 gap-1'>
+                                                    <h4 className='text-red text-lg font-bold'>Foto KTP</h4>
+                                                    <img className='w-full h-40 object-contain'
+                                                         src={'/img/parents/ktp/' + props.parent.ktp_image}/>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                     {/*<Link href={route('parents.needs.add', props.parent.id)}*/}
