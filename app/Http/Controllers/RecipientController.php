@@ -265,7 +265,7 @@ class RecipientController extends Controller
      */
     public function show($id)
     {
-        $recipient = Recipient::query()->with(['parents.disabilities', 'disabilities', 'needs', 'photos.type'])->find($id);
+        $recipient = Recipient::query()->with(['parents.disabilities', 'parents.photos.type', 'disabilities', 'needs', 'photos.type'])->find($id);
         foreach ($recipient->needs as $need) {
             $need['status'] = Need::query()->find($need->pivot->id)->status;
         }

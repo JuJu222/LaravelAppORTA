@@ -14,6 +14,7 @@ class Photo extends Model
         'photo_url',
         'photo_type_id',
         'recipient_id',
+        'parent_id',
     ];
 
     public function type()

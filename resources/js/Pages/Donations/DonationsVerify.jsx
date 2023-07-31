@@ -13,9 +13,9 @@ export default function RecipientsDonate(props) {
 
     return (
         <div className='pb-20'>
-            <div className='w-full md:hidden'>
+            <div className='w-full md:hidden p-2'>
                 <div>
-                    <img className='h-52 w-full object-cover' src="/img/anak.png" alt=""/>
+                    <img className='h-52 w-full object-cover rounded-lg' src="/img/anak.png" alt=""/>
                 </div>
             </div>
             <div className='w-full px-4'>

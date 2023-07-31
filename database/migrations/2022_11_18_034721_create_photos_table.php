@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('photo_url');
             $table->foreignId('photo_type_id');
-            $table->foreignId('recipient_id');
+            $table->foreignId('recipient_id')->nullable();
+            $table->foreignId('parent_id')->nullable();
             $table->timestamps();
 
             $table->foreign('photo_type_id')
@@ -27,6 +28,10 @@ return new class extends Migration
                 ->onUpdate('cascade');
             $table->foreign('recipient_id')
                 ->references('id')->on('recipients')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign('parent_id')
+                ->references('id')->on('parents')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

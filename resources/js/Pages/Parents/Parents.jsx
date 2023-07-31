@@ -55,18 +55,29 @@ export default function Parents(props) {
                         </tr>
                         </thead>
                         <tbody className="w-full">
-                        {filteredItems.map((admin, i) =>
+                        {filteredItems.map((parent, i) =>
                             <tr className="h-20 text-sm leading-none text-gray-800 bg-white border-b border-t border-gray-100">
                                 <td className="pl-4">
+                                    {}
                                     <p className="text-sm font-medium leading-none text-gray-800">{i + 1}</p>
                                 </td>
                                 <td className="pl-12">
                                     <div className="flex items-center">
                                         <div className='flex items-center'>
                                             <div className="w-10 h-10">
-                                                <img className="w-full h-full rounded object-cover" src='/img/avatar-default.png' />
+                                                {parent.photos.length != 0 ? (
+                                                    parent.photos.map((photo, i) => {
+                                                        if (photo.type.type == 'primary') {
+                                                            return (
+                                                                <img className="w-full h-full rounded object-cover" src={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/avatar-default.png'}  />
+                                                            )
+                                                        }
+                                                    })
+                                                ) : (
+                                                    <img className="w-full h-full rounded object-cover" src={'/img/avatar-default.png'} />
+                                                )}
                                             </div>
-                                            <p className="font-medium ml-4">{admin.name}</p>
+                                            <p className="font-medium ml-4">{parent.name}</p>
                                         </div>
                                     </div>
                                 </td>
@@ -74,8 +85,8 @@ export default function Parents(props) {
                                     <div className="flex items-center">
                                         <div>
                                             <p className="font-medium">
-                                                {admin.recipients.map((recipient, i) =>
-                                                    recipient.name + (i !== admin.recipients.length - 1 ? ', ' : '')
+                                                {parent.recipients.map((recipient, i) =>
+                                                    recipient.name + (i !== parent.recipients.length - 1 ? ', ' : '')
                                                 )}
                                             </p>
                                         </div>
@@ -83,7 +94,7 @@ export default function Parents(props) {
                                 </td>
                                 <td className="pl-12 pr-4">
                                     <div className='flex gap-2 justify-end'>
-                                        <Link href={route("parents.show", admin.id)} className="flex items-center justify-center text-center">
+                                        <Link href={route("parents.show", parent.id)} className="flex items-center justify-center text-center">
                                             <button
                                                 className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-50 focus:outline-none transition">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -94,7 +105,7 @@ export default function Parents(props) {
                                                 </svg>
                                             </button>
                                         </Link>
-                                        <Link href={route("parents.edit", admin.id)} className="flex items-center justify-center text-center">
+                                        <Link href={route("parents.edit", parent.id)} className="flex items-center justify-center text-center">
                                             <button
                                                 className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-50 focus:outline-none transition">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -106,7 +117,7 @@ export default function Parents(props) {
                                             </button>
                                         </Link>
                                         <div className="flex items-center justify-center text-center">
-                                            <button onClick={(e) => handleDelete(admin.id)}
+                                            <button onClick={(e) => handleDelete(parent.id)}
                                                     className="text-sm leading-none text-white py-3 px-5 bg-red rounded transition hover:bg-red_hover focus:outline-none">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                      fill="currentColor" className="bi bi-trash3-fill"

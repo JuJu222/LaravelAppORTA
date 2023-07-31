@@ -19,9 +19,9 @@ export default function AdminsShow(props) {
         >
             <div className="w-full sm:px-6 xl:px-0">
                 <div className='pb-20'>
-                    <div className='w-full md:hidden'>
+                    <div className='w-full md:hidden p-2'>
                         <div>
-                            <img className='h-52 w-full object-cover' src={'/img/avatar-default.png'} alt=""/>
+                            <img className='h-52 w-full object-cover rounded-lg' src={'/img/avatar-default.png'} alt=""/>
                         </div>
                     </div>
                     <div className='w-full px-4'>

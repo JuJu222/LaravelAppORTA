@@ -19,16 +19,54 @@ export default function ParentsShow(props) {
         >
             <div className="w-full sm:px-6 xl:px-0">
                 <div className='pb-20'>
-                    <div className='w-full md:hidden'>
+                    <div className='w-full md:hidden p-2'>
                         <div>
-                            <img className='h-52 w-full object-cover' src={'/img/avatar-default.png'} alt=""/>
+                            {props.parent.photos.map((photo, i) => {
+                                if (photo.type.type == 'primary') {
+                                    return (
+                                        <a href={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} target="_blank">
+                                            <img className='h-52 w-full object-cover rounded-lg' src={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                        </a>
+                                    )
+                                }
+                            })}
+                            <div className='flex gap-2 mt-2'>
+                                {props.parent.photos.map((photo, i) => {
+                                    if (photo.type.type == 'secondary') {
+                                        return (
+                                            <a href={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} target="_blank">
+                                                <img className='h-20 w-auto object-cover rounded-lg' src={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                            </a>
+                                        )
+                                    }
+                                })}
+                            </div>
                         </div>
                     </div>
                     <div className='w-full px-4'>
                         <div className='max-w-6xl mx-auto mt-4'>
                             <div className='md:flex md:flex-row md:gap-5'>
                                 <div className='hidden md:block md:w-1/2'>
-                                    <img className='h-96 w-full object-cover' src={'/img/avatar-default.png'} alt=""/>
+                                    {props.parent.photos.map((photo, i) => {
+                                        if (photo.type.type == 'primary') {
+                                            return (
+                                                <a href={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} target="_blank">
+                                                    <img className='h-96 w-full object-cover rounded-lg' src={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                                </a>
+                                            )
+                                        }
+                                    })}
+                                    <div className='flex gap-2 mt-2'>
+                                        {props.parent.photos.map((photo, i) => {
+                                            if (photo.type.type == 'secondary') {
+                                                return (
+                                                    <a href={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} target="_blank">
+                                                        <img className='h-32 w-auto object-cover rounded-lg' src={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                                    </a>
+                                                )
+                                            }
+                                        })}
+                                    </div>
                                 </div>
                                 <div className='grow md:pt-4 md:w-1/2'>
                                     <div className='flex flex-row justify-between'>
@@ -77,8 +115,9 @@ export default function ParentsShow(props) {
                                             {props.parent.ktp_image && (
                                                 <div className='grid grid-cols-1 gap-1'>
                                                     <h4 className='text-red text-lg font-bold'>Foto KTP</h4>
-                                                    <img className='w-full h-40 object-contain'
-                                                         src={'/img/parents/ktp/' + props.parent.ktp_image}/>
+                                                    <a href={'/img/parents/ktp/' + props.parent.ktp_image} target="_blank">
+                                                        <img className='w-full h-40 object-contain' src={'/img/parents/ktp/' + props.parent.ktp_image}/>
+                                                    </a>
                                                 </div>
                                             )}
                                         </div>

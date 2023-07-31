@@ -9,12 +9,12 @@ export default function RecipientsMessage(props) {
     if (!props.need.delivered_date) {
         return (
             <div className='pb-20'>
-                <div className='w-full md:hidden'>
+                <div className='w-full md:hidden p-2'>
                     <div>
                         {props.recipient.photos.map((photo, i) => {
                             if (photo.type.type == 'primary') {
                                 return (
-                                    <img className='h-52 w-full object-cover' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                    <img className='h-52 w-full object-cover rounded-lg' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                 )
                             }
                         })}
@@ -70,12 +70,12 @@ export default function RecipientsMessage(props) {
     } else {
         return (
             <div className='pb-20'>
-                <div className='w-full md:hidden'>
+                <div className='w-full md:hidden p-2'>
                     <div>
                         {props.recipient.photos.map((photo, i) => {
                             if (photo.type.type == 'primary') {
                                 return (
-                                    <img className='h-52 w-full object-cover' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                    <img className='h-52 w-full object-cover rounded-lg' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                 )
                             }
                         })}

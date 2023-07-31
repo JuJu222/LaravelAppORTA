@@ -30,4 +30,9 @@ class ParentModel extends Model
     {
         return $this->belongsToMany(Recipient::class, 'recipients_parents', 'parent_id', 'recipient_id')->withPivot(['relationship_id']);
     }
+
+    public function photos()
+    {
+        return $this->hasMany(Photo::class, 'parent_id');
+    }
 }

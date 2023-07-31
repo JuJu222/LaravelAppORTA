@@ -39,18 +39,18 @@ export default function RecipientsShow(props) {
             >
                 <div className="w-full sm:px-6 xl:px-0">
                     <div className='pb-20'>
-                        <div className='w-full md:hidden'>
+                        <div className='w-full md:hidden p-2'>
                             <div>
                                 {props.recipient.photos.map((photo, i) => {
                                     if (photo.type.type == 'primary') {
                                         return (
                                             <a href={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} target="_blank">
-                                                <img className='h-52 w-full object-cover' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                                <img className='h-72 w-full object-cover rounded-lg' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                             </a>
                                         )
                                     }
                                 })}
-                                <div className='flex gap-2 mt-2 mx-2'>
+                                <div className='flex gap-2 mt-2'>
                                     {props.recipient.photos.map((photo, i) => {
                                         if (photo.type.type == 'secondary') {
                                             return (
@@ -210,7 +210,28 @@ export default function RecipientsShow(props) {
                                                     <p className='text-xs'>Alamat Tinggal: {parent.address}</p>
                                                     <p className='text-xs'>Nomor Telepon: {parent.phone}</p>
                                                 </div>
-                                                    <img className='sm:max-h-36 w-auto mt-4 object-contain' src={'/img/avatar-default.png'} alt=""/>
+                                                <div className='sm:w-1/4'>
+                                                    {parent.photos.map((photo, i) => {
+                                                        if (photo.type.type == 'primary') {
+                                                            return (
+                                                                <a href={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} target="_blank">
+                                                                    <img className='sm:max-h-40 max-h-80 w-full mt-4 object-cover rounded' src={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                                                </a>
+                                                            )
+                                                        }
+                                                    })}
+                                                    <div className='flex gap-2 mt-2'>
+                                                        {parent.photos.map((photo, i) => {
+                                                            if (photo.type.type == 'secondary') {
+                                                                return (
+                                                                    <a href={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} target="_blank">
+                                                                        <img className='sm:max-h-36 max-h-76 w-auto object-contain rounded' src={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                                                    </a>
+                                                                )
+                                                            }
+                                                        })}
+                                                    </div>
+                                                </div>
                                             </div>
                                         )}
                                     </div>
@@ -281,18 +302,18 @@ export default function RecipientsShow(props) {
     } else {
         return (
             <div className='pb-20'>
-                <div className='w-full md:hidden'>
+                <div className='w-full md:hidden p-2'>
                     <div>
                         {props.recipient.photos.map((photo, i) => {
                             if (photo.type.type == 'primary') {
                                 return (
                                     <a href={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} target="_blank">
-                                        <img className='h-52 w-full object-cover' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                        <img className='h-72 w-full object-cover rounded-lg' src={photo.photo_url ? '/img/recipients/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
                                     </a>
                                 )
                             }
                         })}
-                        <div className='flex gap-2 mt-2 mx-2'>
+                        <div className='flex gap-2 mt-2'>
                             {props.recipient.photos.map((photo, i) => {
                                 if (photo.type.type == 'secondary') {
                                     return (
@@ -420,22 +441,46 @@ export default function RecipientsShow(props) {
                             <h4 className='text-red text-lg font-bold'>Wali atau Orang Tua</h4>
                             <div className="grid grid-cols-1 divide-y gap-3 border border-black rounded-lg px-4 pb-4">
                                 {props.recipient.parents.map((parent, i) =>
-                                    <div className='grid grid-cols-1 gap-1'>
-                                        <h4 className='text-red text-base font-bold mt-2'>{parent.name}</h4>
-                                        <p className='text-xs'>Hubungan: {parent.relationship}</p>
-                                        <p className='text-xs'>Disabilitas:&nbsp;
-                                            {parent.disabilities.map((disability, i) =>
-                                                i == parent.disabilities.length - 1 ? (
-                                                    disability.disability
-                                                ) : (
-                                                    disability.disability + ', '
-                                                )
-                                            )}
-                                        </p>
-                                        <p className='text-xs'>Tempat Lahir: {parent.birthplace}</p>
-                                        <p className='text-xs'>Tanggal
-                                            Lahir: {new Date(parent.birthdate).toLocaleDateString("id-ID", options)}</p>
-                                        <p className='text-xs'>Profesi: {parent.occupation}</p>
+                                    <div className='flex justify-between items-center flex-col sm:flex-row'>
+                                        <div className='grid grid-cols-1 gap-1 w-full sm:w-fit'>
+                                            <h4 className='text-red text-base font-bold mt-2'>{parent.name}</h4>
+                                            <p className='text-xs'>Hubungan: {parent.relationship}</p>
+                                            <p className='text-xs'>Disabilitas:&nbsp;
+                                                {parent.disabilities.map((disability, i) =>
+                                                    i == parent.disabilities.length - 1 ? (
+                                                        disability.disability
+                                                    ) : (
+                                                        disability.disability + ', '
+                                                    )
+                                                )}
+                                            </p>
+                                            <p className='text-xs'>Tempat Lahir: {parent.birthplace}</p>
+                                            <p className='text-xs'>Tanggal
+                                                Lahir: {new Date(parent.birthdate).toLocaleDateString("id-ID", options)}</p>
+                                            <p className='text-xs'>Profesi: {parent.occupation}</p>
+                                        </div>
+                                        <div className='sm:w-1/4'>
+                                            {parent.photos.map((photo, i) => {
+                                                if (photo.type.type == 'primary') {
+                                                    return (
+                                                        <a href={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} target="_blank">
+                                                            <img className='sm:max-h-40 max-h-80 w-full mt-4 object-cover rounded' src={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                                        </a>
+                                                    )
+                                                }
+                                            })}
+                                            <div className='flex gap-2 mt-2'>
+                                                {parent.photos.map((photo, i) => {
+                                                    if (photo.type.type == 'secondary') {
+                                                        return (
+                                                            <a href={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} target="_blank">
+                                                                <img className='sm:max-h-36 max-h-76 w-auto object-contain rounded' src={photo.photo_url ? '/img/parents/photos/' + photo.photo_url : '/img/anak.png'} alt=""/>
+                                                            </a>
+                                                        )
+                                                    }
+                                                })}
+                                            </div>
+                                        </div>
                                     </div>
                                 )}
                             </div>

@@ -84,20 +84,28 @@ export default function Home(props) {
                         <div>
                             <h2 className='text-red font-bold mt-2'>Yuk, mari kita bantu anak-anak!</h2>
                             <p className='text-xs mt-1'>Klik salah satu anak untuk membantu</p>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
-                                {filteredItems.map((recipient, i) =>
-                                    <RecipientCard recipient={recipient}></RecipientCard>
+                                {filteredItems.length != 0 ? (
+                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
+                                        {filteredItems.map((recipient, i) =>
+                                            <RecipientCard recipient={recipient}></RecipientCard>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <p className='w-full text-center py-20 text-sm text-gray-400'>Anak Tidak Ditemukan!</p>
                                 )}
-                            </div>
                         </div>
                         <div>
                             <h2 className='text-red font-bold mt-4'>Anak-anak yang sudah terbantu</h2>
                             <p className='text-xs mt-1'>Anak-anak dengan donasi yang telah terpenuhi</p>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
-                                {filteredItems2.map((recipient, i) =>
-                                    <RecipientCard recipient={recipient}></RecipientCard>
-                                )}
-                            </div>
+                            {filteredItems2.length != 0 ? (
+                                <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
+                                    {filteredItems2.map((recipient, i) =>
+                                        <RecipientCard recipient={recipient}></RecipientCard>
+                                    )}
+                                </div>
+                            ) : (
+                                <p className='w-full text-center py-20 text-sm text-gray-400'>Anak Tidak Ditemukan!</p>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -207,20 +215,28 @@ export default function Home(props) {
                         <div>
                             <h2 className='text-red font-bold mt-2'>Yuk, mari kita bantu anak-anak!</h2>
                             <p className='text-xs mt-1'>Klik salah satu anak untuk membantu</p>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
-                                {filteredItems.map((recipient, i) =>
-                                    <RecipientCard recipient={recipient}></RecipientCard>
-                                )}
-                            </div>
+                            {filteredItems.length != 0 ? (
+                                <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
+                                    {filteredItems.map((recipient, i) =>
+                                        <RecipientCard recipient={recipient}></RecipientCard>
+                                    )}
+                                </div>
+                            ) : (
+                                <p className='w-full text-center py-20 text-sm text-gray-400'>Anak Tidak Ditemukan!</p>
+                            )}
                         </div>
                         <div>
                             <h2 className='text-red font-bold mt-4'>Anak-anak yang sudah terbantu</h2>
                             <p className='text-xs mt-1'>Anak-anak dengan donasi yang telah terpenuhi</p>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
-                                {filteredItems2.map((recipient, i) =>
-                                    <RecipientCard recipient={recipient}></RecipientCard>
-                                )}
-                            </div>
+                            {filteredItems2.length != 0 ? (
+                                <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-4">
+                                    {filteredItems2.map((recipient, i) =>
+                                        <RecipientCard recipient={recipient}></RecipientCard>
+                                    )}
+                                </div>
+                            ) : (
+                                <p className='w-full text-center py-20 text-sm text-gray-400'>Anak Tidak Ditemukan!</p>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -296,11 +312,15 @@ export default function Home(props) {
                         <div>
                             <h2 className='text-red font-bold mt-2'>Cek kebutuhan donasi anda di sini!</h2>
                             <p className='text-xs mt-1'>Jangan lupa untuk mengkonfirmasi penyaluran dana donasi</p>
-                            <div className="grid grid-cols-1 gap-3">
-                                {filteredItems.map((need, i) =>
-                                    <RecipientNeedCard need={need} recipientID={props.recipient.id} button={true}/>
-                                )}
-                            </div>
+                            {filteredItems.length != 0 ? (
+                                <div className="grid grid-cols-1 gap-3">
+                                    {filteredItems.map((need, i) =>
+                                        <RecipientNeedCard need={need} recipientID={props.recipient.id} button={true}/>
+                                    )}
+                                </div>
+                            ) : (
+                                <p className='w-full text-center py-20 text-sm text-gray-400'>Belum ada Kebutuhan Donasi!</p>
+                            )}
                         </div>
                     </div>
                 </div>

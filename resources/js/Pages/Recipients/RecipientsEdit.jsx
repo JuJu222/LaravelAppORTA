@@ -262,26 +262,26 @@ export default function DisabilitiesCreate(props) {
                         </ul>
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="primary_photo" className="block mb-2 text-sm font-medium text-gray-900 ">Foto
-                            Utama *</label>
-                        {values.primary_photo ? (
-                            <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
-                                 src={URL.createObjectURL(values.primary_photo)}/>
-                        ) : (
-                            props.recipient.photos.map((photo, i) => {
-                                if (photo.type.type == 'primary') {
-                                    return (
-                                        <img
-                                            className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
-                                            src={'/img/recipients/photos/' + photo.photo_url}/>
-                                    )
-                                }
-                            })
-                        )}
-                        <input type="file" id="primary_photo" name="primary_photo" onChange={handleChange}
-                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
-                               />
-                    </div>
+                    <label htmlFor="primary_photo" className="block mb-2 text-sm font-medium text-gray-900 ">Foto
+                        Utama *</label>
+                    {values.primary_photo ? (
+                        <img className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
+                             src={URL.createObjectURL(values.primary_photo)}/>
+                    ) : (
+                        props.recipient.photos.map((photo, i) => {
+                            if (photo.type.type == 'primary') {
+                                return (
+                                    <img
+                                        className='p-2 w-full h-40 object-contain border border-gray-300 rounded-lg mb-2'
+                                        src={'/img/recipients/photos/' + photo.photo_url}/>
+                                )
+                            }
+                        })
+                    )}
+                    <input type="file" id="primary_photo" name="primary_photo" onChange={handleChange}
+                           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                    />
+                </div>
                     <div className="mb-6">
                         <label htmlFor="photos" className="block mb-2 text-sm font-medium text-gray-900 ">Foto
                             Pendamping</label>
