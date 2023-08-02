@@ -27,6 +27,7 @@ class Recipient extends Model
         'kartu_keluarga',
         'note',
         'is_active',
+        'youtube_url',
     ];
 
     public function user()

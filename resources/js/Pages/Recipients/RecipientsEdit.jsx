@@ -18,6 +18,7 @@ export default function DisabilitiesCreate(props) {
         address: props.recipient.address,
         city: props.recipient.city,
         phone: props.recipient.phone,
+        youtube_url: props.recipient.youtube_url,
         note: props.recipient.note ? props.recipient.note : '',
         is_active: props.recipient.is_active,
     })
@@ -233,6 +234,13 @@ export default function DisabilitiesCreate(props) {
                                defaultValue={props.recipient.note}
                                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
                         />
+                    </div>
+                    <div className="mb-6">
+                        <label htmlFor="youtube_url" className="block mb-2 text-sm font-medium text-gray-900 ">Link Video Youtube</label>
+                        <input type="text" id="youtube_url" name="youtube_url" onChange={handleChange}
+                               defaultValue={props.recipient.youtube_url}
+                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                               required={false}/>
                     </div>
                     <div className="mb-6">
                         <label htmlFor="is_active" className="block mb-2 text-sm font-medium text-gray-900 ">Status

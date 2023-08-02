@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Inertia} from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Link} from "@inertiajs/inertia-react";
@@ -10,6 +10,7 @@ export default function RecipientsShow(props) {
     const formatter = new Intl.NumberFormat('de-DE');
     const options = {year: 'numeric', month: 'long', day: 'numeric'};
     const [showModal,setShowModal] = useState(false);
+    const [showVideo,setShowVideo] = useState(false);
     const [modalData,setModalData] = useState({});
 
     const today = new Date();
@@ -29,6 +30,20 @@ export default function RecipientsShow(props) {
         setModalData({id: id, message: message});
         setShowModal(true);
     }
+
+    function youtube_parser(url){
+        let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+        let match = url.match(regExp);
+        return (match&&match[7].length==11)? match[7] : false;
+    }
+
+    useEffect(() => {
+        if (showVideo) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+    },[showVideo])
 
     if (props.auth.user.role_id == 1) {
         return (
@@ -60,6 +75,23 @@ export default function RecipientsShow(props) {
                                             )
                                         }
                                     })}
+                                    {props.recipient.youtube_url && (
+                                        <div className='relative cursor-pointer' onClick={e => setShowVideo(true)}>
+                                            <img className='w-20 h-20 object-cover rounded-lg' src={"https://img.youtube.com/vi/" + youtube_parser(props.recipient.youtube_url) + "/0.jpg"} />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" className="absolute w-full h-full top-0 left-0 p-[30%] text-white"
+                                                 viewBox="0 0 16 16">
+                                                <path
+                                                    d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                                            </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" className="absolute w-full h-full top-0 left-0 p-[30%] text-red drop-shadow"
+                                                 viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm6.79-6.907A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+                                            </svg>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -86,6 +118,23 @@ export default function RecipientsShow(props) {
                                                     )
                                                 }
                                             })}
+                                            {props.recipient.youtube_url && (
+                                                <div className='relative cursor-pointer' onClick={e => setShowVideo(true)}>
+                                                    <img className='h-32 w-32 object-cover rounded-lg' src={"https://img.youtube.com/vi/" + youtube_parser(props.recipient.youtube_url) + "/0.jpg"} />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                         fill="currentColor" className="absolute w-full h-full top-0 left-0 p-[30%] text-white"
+                                                         viewBox="0 0 16 16">
+                                                        <path
+                                                            d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                                                    </svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                         fill="currentColor" className="absolute w-full h-full top-0 left-0 p-[30%] text-red drop-shadow"
+                                                         viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm6.79-6.907A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+                                                    </svg>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                     <div className='grow md:pt-4 md:w-1/2'>
@@ -296,6 +345,16 @@ export default function RecipientsShow(props) {
                         </div>
                     </div>
                 </div>
+                {showVideo && (
+                    <div className='fixed top-0 left-0 w-full h-full bg-black-opaque' onClick={e => setShowVideo(false)}>
+                        <div className='w-screen h-screen sm:px-[20%] sm:py-[7%] px-[2%] py-[50%]'>
+                            <iframe src={"https://www.youtube.com/embed/" + youtube_parser(props.recipient.youtube_url)} className='w-full h-full'
+                                    title="YouTube video player" frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowFullScreen></iframe>
+                        </div>
+                    </div>
+                )}
                 <DeleteConrifmation showModal={showModal} setShowModal={setShowModal} modalData={modalData} handleDelete={handleDelete}></DeleteConrifmation>
             </Authenticated>
         )
@@ -323,6 +382,23 @@ export default function RecipientsShow(props) {
                                     )
                                 }
                             })}
+                            {props.recipient.youtube_url && (
+                                <div className='relative cursor-pointer' onClick={e => setShowVideo(true)}>
+                                    <img className='w-20 h-20 object-cover rounded-lg' src={"https://img.youtube.com/vi/" + youtube_parser(props.recipient.youtube_url) + "/0.jpg"} />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                         fill="currentColor" className="absolute w-full h-full top-0 left-0 p-[30%] text-white"
+                                         viewBox="0 0 16 16">
+                                        <path
+                                            d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                         fill="currentColor" className="absolute w-full h-full top-0 left-0 p-[30%] text-red drop-shadow"
+                                         viewBox="0 0 16 16">
+                                        <path
+                                            d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm6.79-6.907A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+                                    </svg>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -349,6 +425,23 @@ export default function RecipientsShow(props) {
                                             )
                                         }
                                     })}
+                                    {props.recipient.youtube_url && (
+                                        <div className='relative cursor-pointer' onClick={e => setShowVideo(true)}>
+                                            <img className='h-32 w-32 object-cover rounded-lg' src={"https://img.youtube.com/vi/" + youtube_parser(props.recipient.youtube_url) + "/0.jpg"} />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" className="absolute w-full h-full top-0 left-0 p-[30%] text-white"
+                                                 viewBox="0 0 16 16">
+                                                <path
+                                                    d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                                            </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" className="absolute w-full h-full top-0 left-0 p-[30%] text-red drop-shadow"
+                                                 viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm6.79-6.907A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+                                            </svg>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                             <div className='grow md:pt-4 md:w-1/2'>
@@ -543,7 +636,19 @@ export default function RecipientsShow(props) {
                         </div>
                     </div>
                 </div>
-                <BottomNavbar auth={props.auth}></BottomNavbar>
+                {showVideo && (
+                    <div className='fixed top-0 left-0 w-full h-full bg-black-opaque' onClick={e => setShowVideo(false)}>
+                        <div className='w-screen h-screen sm:px-[20%] sm:py-[7%] px-[2%] py-[50%]'>
+                            <iframe src={"https://www.youtube.com/embed/" + youtube_parser(props.recipient.youtube_url)} className='w-full h-full'
+                                    title="YouTube video player" frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowFullScreen></iframe>
+                        </div>
+                    </div>
+                )}
+                {!showVideo && (
+                    <BottomNavbar auth={props.auth}></BottomNavbar>
+                )}
             </div>
         )
     }

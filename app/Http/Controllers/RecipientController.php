@@ -118,6 +118,7 @@ class RecipientController extends Controller
             'city' => $request->input('city'),
             'phone' => $request->input('phone'),
             'note' => $request->input('note') !== '' ? $request->input('note') : null,
+            'youtube_url' => $request->input('youtube_url') !== '' ? $request->input('youtube_url') : null,
             'is_active' => $request->input('is_active'),
         ]);
 
@@ -334,6 +335,7 @@ class RecipientController extends Controller
             'city' => $request->input('city'),
             'phone' => $request->input('phone'),
             'note' => $request->input('note') !== '' ? $request->input('note') : null,
+            'youtube_url' => $request->input('youtube_url') !== '' ? $request->input('youtube_url') : null,
             'is_active' => $request->input('is_active'),
         ]);
 

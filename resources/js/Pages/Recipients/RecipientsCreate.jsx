@@ -18,6 +18,7 @@ export default function DisabilitiesCreate(props) {
         city: '',
         phone: '',
         note: '',
+        youtube_url: '',
         gender: 'laki-laki',
         is_active: 1
     })
@@ -202,6 +203,12 @@ export default function DisabilitiesCreate(props) {
                                required={false} />
                     </div>
                     <div className="mb-6">
+                        <label htmlFor="youtube_url" className="block mb-2 text-sm font-medium text-gray-900 ">Link Video Youtube</label>
+                        <input type="text" id="youtube_url" name="youtube_url" onChange={handleChange}
+                               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400"
+                               required={false} />
+                    </div>
+                    <div className="mb-6">
                         <label htmlFor="is_active" className="block mb-2 text-sm font-medium text-gray-900 ">Status *</label>
                         <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-300 sm:flex">
                             <li className="w-full border-b border-gray-300 sm:border-b-0 sm:border-r">
@@ -222,12 +229,12 @@ export default function DisabilitiesCreate(props) {
                             </li>
                         </ul>
                     </div>
-                    <div className="mb-6">
-                        <label htmlFor="note"
-                               className="block mb-2 text-sm font-medium text-gray-900 ">Catatan</label>
-                        <textarea name="note" onChange={handleChange} className='border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400'
-                        />
-                    </div>
+                </div>
+                <div className="mb-6">
+                    <label htmlFor="note"
+                           className="block mb-2 text-sm font-medium text-gray-900 ">Catatan</label>
+                    <textarea name="note" onChange={handleChange} className='border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 placeholder-gray-400'
+                    />
                 </div>
                 <button type="submit"
                         className="text-white w-full transition bg-red hover:bg-red_hover focus:ring-4 focus:outline-none focus:ring-pink font-bold rounded-lg text-sm px-5 py-3 text-center">Submit
